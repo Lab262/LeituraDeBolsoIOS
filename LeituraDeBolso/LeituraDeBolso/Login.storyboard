@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="SYN-SO-o9u">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="7fT-K0-sSQ">
+            <objects>
+                <viewController id="SYN-SO-o9u" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="szs-kH-2Co"/>
+                        <viewControllerLayoutGuide type="bottom" id="Y2e-kA-qTc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WMn-l3-IfL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo_leitura" translatesAutoresizingMaskIntoConstraints="NO" id="Mtf-he-8r3">
+                                <rect key="frame" x="85" y="114" width="207" height="71"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpu-dB-yEH" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
+                                <rect key="frame" x="60" y="260" width="256" height="50"/>
+                                <color key="backgroundColor" red="0.38823529411764707" green="0.14901960784313725" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7p-3E-FFI" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
+                                <rect key="frame" x="60" y="330" width="256" height="50"/>
+                                <color key="backgroundColor" red="0.10588235294117647" green="0.85882352941176465" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BdP-Si-H5a" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
+                                <rect key="frame" x="60" y="400" width="256" height="50"/>
+                                <color key="backgroundColor" red="0.30196078431372547" green="0.50980392156862742" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_facebook" translatesAutoresizingMaskIntoConstraints="NO" id="g7g-zO-Aix">
+                                <rect key="frame" x="92" y="408" width="15" height="33"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g9f-3g-UR8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="205.5" y="266.5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icon_facebook" width="17" height="34"/>
+        <image name="logo_leitura" width="207" height="71"/>
+    </resources>
+</document>

@@ -18,6 +18,11 @@
 		D448B3C61D6E9B9400F3DF51 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B3C51D6E9B9400F3DF51 /* RoundedButton.swift */; };
 		D448B3C91D6EA11E00F3DF51 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B3C71D6EA11E00F3DF51 /* UIViewExtension.swift */; };
 		D448B3CA1D6EA11E00F3DF51 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B3C81D6EA11E00F3DF51 /* TextFieldExtension.swift */; };
+		D4E8CA2D1D73EC0300C82F0A /* ReadingDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA2C1D73EC0300C82F0A /* ReadingDayViewController.swift */; };
+		D4E8CA311D73ECA300C82F0A /* HeadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA301D73ECA300C82F0A /* HeadingTableViewCell.swift */; };
+		D4E8CA341D73EDA000C82F0A /* Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA331D73EDA000C82F0A /* Reading.swift */; };
+		D4E8CA361D73EF9500C82F0A /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA351D73EF9500C82F0A /* ContentTableViewCell.swift */; };
+		D4E8CA381D73F08800C82F0A /* ButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA371D73F08800C82F0A /* ButtonsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +51,11 @@
 		D448B3C51D6E9B9400F3DF51 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		D448B3C71D6EA11E00F3DF51 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		D448B3C81D6EA11E00F3DF51 /* TextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
+		D4E8CA2C1D73EC0300C82F0A /* ReadingDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingDayViewController.swift; sourceTree = "<group>"; };
+		D4E8CA301D73ECA300C82F0A /* HeadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingTableViewCell.swift; sourceTree = "<group>"; };
+		D4E8CA331D73EDA000C82F0A /* Reading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reading.swift; sourceTree = "<group>"; };
+		D4E8CA351D73EF9500C82F0A /* ContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
+		D4E8CA371D73F08800C82F0A /* ButtonsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +97,7 @@
 		D448B39C1D6E8EA500F3DF51 /* LeituraDeBolso */ = {
 			isa = PBXGroup;
 			children = (
+				D4E8CA2B1D73EBB800C82F0A /* Read */,
 				D4E8CA291D73E1F700C82F0A /* Resources */,
 				D448B3C41D6E9B6800F3DF51 /* Extensions */,
 				D448B3C01D6E988100F3DF51 /* Login */,
@@ -149,6 +160,50 @@
 			children = (
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		D4E8CA2B1D73EBB800C82F0A /* Read */ = {
+			isa = PBXGroup;
+			children = (
+				D4E8CA391D73F0F200C82F0A /* Control */,
+				D4E8CA321D73ED7300C82F0A /* Model */,
+				D4E8CA2E1D73EC8000C82F0A /* View */,
+			);
+			name = Read;
+			sourceTree = "<group>";
+		};
+		D4E8CA2E1D73EC8000C82F0A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D4E8CA2F1D73EC8900C82F0A /* Cell */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		D4E8CA2F1D73EC8900C82F0A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D4E8CA301D73ECA300C82F0A /* HeadingTableViewCell.swift */,
+				D4E8CA351D73EF9500C82F0A /* ContentTableViewCell.swift */,
+				D4E8CA371D73F08800C82F0A /* ButtonsTableViewCell.swift */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		D4E8CA321D73ED7300C82F0A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D4E8CA331D73EDA000C82F0A /* Reading.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		D4E8CA391D73F0F200C82F0A /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				D4E8CA2C1D73EC0300C82F0A /* ReadingDayViewController.swift */,
+			);
+			name = Control;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,12 +308,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4E8CA311D73ECA300C82F0A /* HeadingTableViewCell.swift in Sources */,
 				D448B3C91D6EA11E00F3DF51 /* UIViewExtension.swift in Sources */,
+				D4E8CA341D73EDA000C82F0A /* Reading.swift in Sources */,
 				D448B3A61D6E8EA500F3DF51 /* LeituraDeBolso.xcdatamodeld in Sources */,
 				D448B3A01D6E8EA500F3DF51 /* ViewController.swift in Sources */,
 				D448B3CA1D6EA11E00F3DF51 /* TextFieldExtension.swift in Sources */,
 				D448B39E1D6E8EA500F3DF51 /* AppDelegate.swift in Sources */,
 				D448B3C61D6E9B9400F3DF51 /* RoundedButton.swift in Sources */,
+				D4E8CA2D1D73EC0300C82F0A /* ReadingDayViewController.swift in Sources */,
+				D4E8CA381D73F08800C82F0A /* ButtonsTableViewCell.swift in Sources */,
+				D4E8CA361D73EF9500C82F0A /* ContentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -87,6 +87,7 @@
 		D448B39C1D6E8EA500F3DF51 /* LeituraDeBolso */ = {
 			isa = PBXGroup;
 			children = (
+				D4E8CA291D73E1F700C82F0A /* Resources */,
 				D448B3C41D6E9B6800F3DF51 /* Extensions */,
 				D448B3C01D6E988100F3DF51 /* Login */,
 				D448B39D1D6E8EA500F3DF51 /* AppDelegate.swift */,
@@ -133,6 +134,21 @@
 				D448B3C81D6EA11E00F3DF51 /* TextFieldExtension.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		D4E8CA291D73E1F700C82F0A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D4E8CA2A1D73E20500C82F0A /* Fonts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		D4E8CA2A1D73E20500C82F0A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

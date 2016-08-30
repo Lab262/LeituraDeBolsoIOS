@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Titulo da navigation bar
         UINavigationBar.appearance().titleTextAttributes =
             ([NSFontAttributeName: UIFont(name: "Quicksand-Bold", size: 20)!,
-                NSForegroundColorAttributeName: UIColor.readingWhiteColor()])
+                NSForegroundColorAttributeName: UIColor.whiteColor()])
         
     }
 

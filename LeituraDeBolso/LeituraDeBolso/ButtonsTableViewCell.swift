@@ -37,8 +37,13 @@ class ButtonsTableViewCell: UITableViewCell {
         if !self.likeButton.selected {
             self.likeButton.selected = true
             
+            self.likeButton.selectedButtonWithImage(UIImage(named: "button_likeRead_active")!)
+            
+            
         } else {
             self.likeButton.selected = false
+            
+              self.likeButton.selectedButtonWithImage(UIImage(named: "button_likeRead_inactive")!)
         }
         
     }

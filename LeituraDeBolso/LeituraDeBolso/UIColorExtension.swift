@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    
+    //Pragma MARK : - Functions
     class func colorWithHexString(hex:String) -> UIColor {
         var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
         
@@ -34,6 +34,32 @@ extension UIColor {
         
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
     }
+    
+    public func hexString(includeAlpha: Bool) -> String {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        self.getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        if (includeAlpha) {
+            return String(format: "#%02X%02X%02X%02X", Int(r * 255), Int(g * 255), Int(b * 255), Int(a * 255))
+        } else {
+            return String(format: "#%02X%02X%02X", Int(r * 255), Int(g * 255), Int(b * 255))
+        }
+    }
+    
+    class func getColorWithNameFromUserDefaults(colorName: String) -> UIColor {
+        
+        if let color = NSUserDefaults.standardUserDefaults().objectForKey(colorName) as? UIColor{
+            return color
+        } else {
+            return .whiteColor()
+        }
+    }
+    
+
+    //Pragma MARK : - Constants
 
     
     class func readingPurpleColor()->UIColor{
@@ -45,11 +71,19 @@ extension UIColor {
         return colorWithHexString("1BDBAD")
         
     }
-    
-    class func readingWhiteColor()->UIColor{
-        return colorWithHexString("F2F2F2")
-        
+
+    class var backgroundColor: UIColor {
+        get {
+            return getColorWithNameFromUserDefaults("backgroundColor")
+        }
+        set {
+            let hexString = newValue.hexString(true)
+             NSUserDefaults.standardUserDefaults().setObject(hexString, forKey: "backgroundColor")
+        }
     }
+    
+    
+    
     
     
 }

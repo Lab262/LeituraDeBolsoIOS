@@ -20,7 +20,7 @@ class ReadingDayViewController: UIViewController {
         self.readingDay?.duration = "21 min"
         self.readingDay?.title = "As Cronicas de Gelo e Fogo, A Fúria dos Reis, A Tormenta de Espadas"
         
-        self.readingDay?.text = "O que eu não entendo é tipo, quando a gente aponta um monte de retrocesso e ações neo liberais que vieram no governo dela, quando a gente cita que direitos das minorias foram negociados com bancada evangélica, que vidas indígenas foram negociadas com ruralistas, essas paradas aí - essas coisas que todo mundo sabe e tal - as pessoas chegam com uns - Ah, mas negociar faz parte do jogo político. Ah, mas é isso mesmo, se ela não resolvesse ceder e manter os esquemas com as elites ela nunca se manteria no poder. Ah, mas é isso mesmo, tem que dizer uma coisa pra um grupo e outra pro outro - cede e tira - política é isso. - Ah, mas negociar faz parte do jogo político. Ah, mas é isso mesmo, se ela não resolvesse ceder e manter os esquemas com as elites ela nunca se manteria no poder. Ah, mas é isso mesmo, tem que dizer uma coisa pra um grupo e outra pro outro - cede e tira - política é isso."
+        self.readingDay?.text = "The majestic Rocky Mountains are a major tourist location in the western United States. Visitors can participate in a quantity of activities, including hiking, skiing, snowboarding, mountain biking, & plenty of more. The Rockies are home to several campgrounds, ghost towns, gold prospecting sites, & national parks. a quantity of the biggest tourist attractions in the Rockies are Pike’s Peak & Royal Gorge. There are several world famous national parks in the Rockies, including Yellowstone, Rocky Mountain, Grand Teton, & Glacier.\n \nThe legendary Rocky Mountains stretch from old Mexico up through the United States & into Canada. The Rocky Mountains are over 3000 miles long, spanning parts of california, Colorado, Idaho, Montana, & Wyoming before continuing into Canada. Stories of early adventurers like Lewis & Clark exploring the Rocky Mountains are legendary."
         
         self.readingDay?.author = "DULCINO DE MORAIS VIEIRA COSTA SMADI"
         
@@ -43,6 +43,10 @@ class ReadingDayViewController: UIViewController {
     }
     
     func shareReading (sender: UIButton) {
+        
+        sender.selectedButtonWithImage()
+        
+        
         
         
     }

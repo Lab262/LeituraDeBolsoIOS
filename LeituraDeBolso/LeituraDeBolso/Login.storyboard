@@ -23,6 +23,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpu-dB-yEH" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
                                 <rect key="frame" x="60" y="260" width="256" height="50"/>
                                 <color key="backgroundColor" red="0.38823529411764707" green="0.14901960784313725" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <segue destination="BOm-ib-9Md" kind="show" id="RzS-R6-8mc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7p-3E-FFI" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
                                 <rect key="frame" x="60" y="330" width="256" height="50"/>
@@ -62,6 +65,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g9f-3g-UR8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1111.5" y="265.5"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="0Pl-g9-xvT">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="BOm-ib-9Md" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gQW-wN-XDe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1447" y="316"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ab7-yq-JIe">

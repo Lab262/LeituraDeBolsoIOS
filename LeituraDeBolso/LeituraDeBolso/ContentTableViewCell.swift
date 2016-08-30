@@ -30,6 +30,7 @@ class ContentTableViewCell: UITableViewCell {
         
         self.authorReadingLabel.text = reading?.author
         self.contentReadingLabel.text = reading?.text
+        
     }
 
 }

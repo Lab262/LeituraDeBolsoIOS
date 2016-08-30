@@ -16,8 +16,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+    
+        self.setupBarsAppearance()
+        
         return true
+    }
+    
+
+    func setupBarsAppearance(){
+        
+        //Cor dos placeholders
+        UILabel.appearanceWhenContainedInInstancesOfClasses([UITextField.self]).textColor = UIColor.readingBlueColor()
+        
+        //Cor e fonte da navigation bar
+        UINavigationBar.appearance().translucent = false
+        
+        UINavigationBar.appearance().tintColor = UIColor.blueColor()
+        
+        //Titulo da navigation bar
+        UINavigationBar.appearance().titleTextAttributes =
+            ([NSFontAttributeName: UIFont(name: "Quicksand-Bold", size: 20)!,
+                NSForegroundColorAttributeName: UIColor.readingWhiteColor()])
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {

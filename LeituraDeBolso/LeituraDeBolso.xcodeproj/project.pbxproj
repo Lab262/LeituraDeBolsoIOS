@@ -23,6 +23,19 @@
 		D4E8CA341D73EDA000C82F0A /* Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA331D73EDA000C82F0A /* Reading.swift */; };
 		D4E8CA361D73EF9500C82F0A /* ContentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA351D73EF9500C82F0A /* ContentTableViewCell.swift */; };
 		D4E8CA381D73F08800C82F0A /* ButtonsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA371D73F08800C82F0A /* ButtonsTableViewCell.swift */; };
+		D4E8CA3E1D750FD800C82F0A /* ABeeZee-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA3C1D750FD800C82F0A /* ABeeZee-Italic.otf */; };
+		D4E8CA3F1D750FD800C82F0A /* ABeeZee-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA3D1D750FD800C82F0A /* ABeeZee-Regular.otf */; };
+		D4E8CA441D7510C000C82F0A /* Comfortaa_Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA411D7510C000C82F0A /* Comfortaa_Bold.ttf */; };
+		D4E8CA451D7510C000C82F0A /* Comfortaa_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA421D7510C000C82F0A /* Comfortaa_Regular.ttf */; };
+		D4E8CA461D7510C000C82F0A /* Comfortaa_Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA431D7510C000C82F0A /* Comfortaa_Thin.ttf */; };
+		D4E8CA501D75110000C82F0A /* Quicksand_Dash.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA491D75110000C82F0A /* Quicksand_Dash.otf */; };
+		D4E8CA511D75110000C82F0A /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA4A1D75110000C82F0A /* Quicksand-Bold.otf */; };
+		D4E8CA521D75110000C82F0A /* Quicksand-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA4B1D75110000C82F0A /* Quicksand-BoldItalic.otf */; };
+		D4E8CA531D75110000C82F0A /* Quicksand-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA4C1D75110000C82F0A /* Quicksand-Italic.otf */; };
+		D4E8CA541D75110000C82F0A /* Quicksand-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA4D1D75110000C82F0A /* Quicksand-Light.otf */; };
+		D4E8CA551D75110000C82F0A /* Quicksand-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA4E1D75110000C82F0A /* Quicksand-LightItalic.otf */; };
+		D4E8CA561D75110000C82F0A /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CA4F1D75110000C82F0A /* Quicksand-Regular.otf */; };
+		D4E8CA581D752B8200C82F0A /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA571D752B8200C82F0A /* UIColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +69,19 @@
 		D4E8CA331D73EDA000C82F0A /* Reading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reading.swift; sourceTree = "<group>"; };
 		D4E8CA351D73EF9500C82F0A /* ContentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTableViewCell.swift; sourceTree = "<group>"; };
 		D4E8CA371D73F08800C82F0A /* ButtonsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonsTableViewCell.swift; sourceTree = "<group>"; };
+		D4E8CA3C1D750FD800C82F0A /* ABeeZee-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ABeeZee-Italic.otf"; sourceTree = "<group>"; };
+		D4E8CA3D1D750FD800C82F0A /* ABeeZee-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ABeeZee-Regular.otf"; sourceTree = "<group>"; };
+		D4E8CA411D7510C000C82F0A /* Comfortaa_Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Comfortaa_Bold.ttf; sourceTree = "<group>"; };
+		D4E8CA421D7510C000C82F0A /* Comfortaa_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Comfortaa_Regular.ttf; sourceTree = "<group>"; };
+		D4E8CA431D7510C000C82F0A /* Comfortaa_Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Comfortaa_Thin.ttf; sourceTree = "<group>"; };
+		D4E8CA491D75110000C82F0A /* Quicksand_Dash.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Quicksand_Dash.otf; sourceTree = "<group>"; };
+		D4E8CA4A1D75110000C82F0A /* Quicksand-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.otf"; sourceTree = "<group>"; };
+		D4E8CA4B1D75110000C82F0A /* Quicksand-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-BoldItalic.otf"; sourceTree = "<group>"; };
+		D4E8CA4C1D75110000C82F0A /* Quicksand-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Italic.otf"; sourceTree = "<group>"; };
+		D4E8CA4D1D75110000C82F0A /* Quicksand-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Light.otf"; sourceTree = "<group>"; };
+		D4E8CA4E1D75110000C82F0A /* Quicksand-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-LightItalic.otf"; sourceTree = "<group>"; };
+		D4E8CA4F1D75110000C82F0A /* Quicksand-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.otf"; sourceTree = "<group>"; };
+		D4E8CA571D752B8200C82F0A /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +169,7 @@
 				D448B3C51D6E9B9400F3DF51 /* RoundedButton.swift */,
 				D448B3C71D6EA11E00F3DF51 /* UIViewExtension.swift */,
 				D448B3C81D6EA11E00F3DF51 /* TextFieldExtension.swift */,
+				D4E8CA571D752B8200C82F0A /* UIColorExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -158,6 +185,9 @@
 		D4E8CA2A1D73E20500C82F0A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				D4E8CA481D7510E400C82F0A /* quicksand */,
+				D4E8CA471D7510C300C82F0A /* Comfortaa */,
+				D4E8CA401D7510A100C82F0A /* abeezee */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -204,6 +234,39 @@
 				D4E8CA2C1D73EC0300C82F0A /* ReadingDayViewController.swift */,
 			);
 			name = Control;
+			sourceTree = "<group>";
+		};
+		D4E8CA401D7510A100C82F0A /* abeezee */ = {
+			isa = PBXGroup;
+			children = (
+				D4E8CA3C1D750FD800C82F0A /* ABeeZee-Italic.otf */,
+				D4E8CA3D1D750FD800C82F0A /* ABeeZee-Regular.otf */,
+			);
+			name = abeezee;
+			sourceTree = "<group>";
+		};
+		D4E8CA471D7510C300C82F0A /* Comfortaa */ = {
+			isa = PBXGroup;
+			children = (
+				D4E8CA411D7510C000C82F0A /* Comfortaa_Bold.ttf */,
+				D4E8CA421D7510C000C82F0A /* Comfortaa_Regular.ttf */,
+				D4E8CA431D7510C000C82F0A /* Comfortaa_Thin.ttf */,
+			);
+			name = Comfortaa;
+			sourceTree = "<group>";
+		};
+		D4E8CA481D7510E400C82F0A /* quicksand */ = {
+			isa = PBXGroup;
+			children = (
+				D4E8CA491D75110000C82F0A /* Quicksand_Dash.otf */,
+				D4E8CA4A1D75110000C82F0A /* Quicksand-Bold.otf */,
+				D4E8CA4B1D75110000C82F0A /* Quicksand-BoldItalic.otf */,
+				D4E8CA4C1D75110000C82F0A /* Quicksand-Italic.otf */,
+				D4E8CA4D1D75110000C82F0A /* Quicksand-Light.otf */,
+				D4E8CA4E1D75110000C82F0A /* Quicksand-LightItalic.otf */,
+				D4E8CA4F1D75110000C82F0A /* Quicksand-Regular.otf */,
+			);
+			name = quicksand;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,9 +350,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4E8CA3F1D750FD800C82F0A /* ABeeZee-Regular.otf in Resources */,
 				D448B3C31D6E989900F3DF51 /* Login.storyboard in Resources */,
+				D4E8CA521D75110000C82F0A /* Quicksand-BoldItalic.otf in Resources */,
+				D4E8CA441D7510C000C82F0A /* Comfortaa_Bold.ttf in Resources */,
+				D4E8CA551D75110000C82F0A /* Quicksand-LightItalic.otf in Resources */,
 				D448B3AB1D6E8EA500F3DF51 /* LaunchScreen.storyboard in Resources */,
+				D4E8CA511D75110000C82F0A /* Quicksand-Bold.otf in Resources */,
+				D4E8CA541D75110000C82F0A /* Quicksand-Light.otf in Resources */,
 				D448B3A81D6E8EA500F3DF51 /* Assets.xcassets in Resources */,
+				D4E8CA501D75110000C82F0A /* Quicksand_Dash.otf in Resources */,
+				D4E8CA531D75110000C82F0A /* Quicksand-Italic.otf in Resources */,
+				D4E8CA3E1D750FD800C82F0A /* ABeeZee-Italic.otf in Resources */,
+				D4E8CA451D7510C000C82F0A /* Comfortaa_Regular.ttf in Resources */,
+				D4E8CA461D7510C000C82F0A /* Comfortaa_Thin.ttf in Resources */,
+				D4E8CA561D75110000C82F0A /* Quicksand-Regular.otf in Resources */,
 				D448B3A31D6E8EA500F3DF51 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +394,7 @@
 				D4E8CA2D1D73EC0300C82F0A /* ReadingDayViewController.swift in Sources */,
 				D4E8CA381D73F08800C82F0A /* ButtonsTableViewCell.swift in Sources */,
 				D4E8CA361D73EF9500C82F0A /* ContentTableViewCell.swift in Sources */,
+				D4E8CA581D752B8200C82F0A /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

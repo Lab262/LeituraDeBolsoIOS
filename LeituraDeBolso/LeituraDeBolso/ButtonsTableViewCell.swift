@@ -19,13 +19,30 @@ class ButtonsTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.likeButton.setImage(UIImage(named: "button_likeRead_inactive"), forState: .Normal)
+        self.likeButton.setImage(UIImage(named: "button_likeRead_active"), forState: .Selected)
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        
+    }
+    
+    
+    @IBAction func likeReading(sender: AnyObject) {
+        
+        if !self.likeButton.selected {
+            self.likeButton.selected = true
+            
+        } else {
+            self.likeButton.selected = false
+        }
+        
     }
 
 }
+
+

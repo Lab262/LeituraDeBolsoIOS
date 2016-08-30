@@ -39,9 +39,10 @@ class HeadingTableViewCell: UITableViewCell {
         
         self.titleLabel.text = self.reading?.title
         self.timeLabel.text = self.reading?.duration
-        self.emojiOneImage.image = self.reading?.emojis![0]
-        self.emojiTwoImage.image = self.reading?.emojis![1]
-        self.emojiThreeImage.image = self.reading?.emojis![2]
+        
+      //  self.emojiOneImage.image = self.reading?.emojis![0]
+        //self.emojiTwoImage.image = self.reading?.emojis![1]
+        //self.emojiThreeImage.image = self.reading?.emojis![2]
         
     }
 

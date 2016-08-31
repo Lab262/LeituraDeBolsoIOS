@@ -35,8 +35,17 @@ class HistoricalReadingSegmentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+}
+
+//Pragma MARK: - UIScrollViewDelegate
+extension HistoricalReadingSegmentViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        self.setupPage()
+    }
+    
     func setupPage(){
-        
         let pageWidth: CGFloat = scrollView.frame.size.width
         let fractionalPage: CGFloat = scrollView.contentOffset.x / pageWidth
         let page: Int = lround(Double(fractionalPage))
@@ -45,14 +54,17 @@ class HistoricalReadingSegmentViewController: UIViewController {
             previousPage = page
         }
     }
-
-    
 }
 
-
-extension HistoricalReadingSegmentViewController: UIScrollViewDelegate {
+//Pragma MARK: - SegmentControlButtonDelegate
+extension HistoricalReadingSegmentViewController: SegmentControlButtonDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func segmentSelected(viewIndex: Int) {
         
+        var rectToScroll = self.view.frame
+        rectToScroll.origin.x = self.view.frame.width * CGFloat(viewIndex)
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .CurveEaseInOut, animations: {
+            self.scrollView.scrollRectToVisible(rectToScroll, animated: false)
+            }, completion: nil)
     }
 }

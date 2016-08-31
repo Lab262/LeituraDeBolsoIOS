@@ -15,10 +15,9 @@ class HeadingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    
-    @IBOutlet weak var emojiOneImage: UIImageView!
-    @IBOutlet weak var emojiTwoImage: UIImageView!
-    @IBOutlet weak var emojiThreeImage: UIImageView!
+    @IBOutlet weak var emojiOneLabel: UILabel!
+    @IBOutlet weak var emojiTwoLabel: UILabel!
+    @IBOutlet weak var emojiThreeLabel: UILabel!
     
     
     var reading: Reading? {
@@ -40,10 +39,11 @@ class HeadingTableViewCell: UITableViewCell {
         self.titleLabel.text = self.reading?.title
         self.timeLabel.text = self.reading?.duration
         
-      //  self.emojiOneImage.image = self.reading?.emojis![0]
-        //self.emojiTwoImage.image = self.reading?.emojis![1]
-        //self.emojiThreeImage.image = self.reading?.emojis![2]
         
+        self.emojiOneLabel.text = self.reading?.emojis?[0]
+        self.emojiTwoLabel.text = self.reading?.emojis?[1]
+        self.emojiThreeLabel.text = self.reading?.emojis?[2]
+     
     }
 
 }

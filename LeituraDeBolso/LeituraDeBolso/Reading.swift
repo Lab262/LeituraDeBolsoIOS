@@ -12,17 +12,16 @@ class Reading: NSObject {
     
     var title: String?
     var author: String?
-    var emojis: Array<UIImage>?
+    var emojis: Array<String>?
     var duration: String?
     var text: String?
     
-
     
     override init() {
          super.init()
     }
     
-    init (_title: String, _author: String, _emojis: Array<UIImage>, _duration: String, _text: String) {
+    init (_title: String, _author: String, _emojis: Array<String>, _duration: String, _text: String) {
         self.title = _title
         self.author = _author
         self.emojis = _emojis

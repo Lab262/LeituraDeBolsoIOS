@@ -35,6 +35,14 @@ class HistoricalReadingMainViewController: UIViewController {
         }
 
     }
+    
+    @IBAction func popoverView(sender: AnyObject) {
+        
+       self.navigationController?.popViewControllerAnimated(true)
+        
+    }
+    
+    
 
     @IBAction func showAllHistorical(sender: AnyObject? = nil) {
         setSelectionIndication(true, center: false, trailing: false)

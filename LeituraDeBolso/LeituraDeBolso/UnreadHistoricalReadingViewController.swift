@@ -56,7 +56,7 @@ class UnreadHistoricalReadingViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "goDemandView" {
+        if segue.identifier == "goReadingView" {
             
             if let destinationViewController = segue.destinationViewController as? ReadingDayViewController {
                 
@@ -65,11 +65,7 @@ class UnreadHistoricalReadingViewController: UIViewController {
             }
             
         }
-        
     }
-
-    
-
 }
 
 extension UnreadHistoricalReadingViewController: UITableViewDataSource {

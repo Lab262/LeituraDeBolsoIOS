@@ -28,15 +28,7 @@ class HistoricalReadingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var emojiTwoLabel: UILabel!
     
-    
     @IBOutlet weak var emojiThreeLabel: UILabel!
-    
-    
-    
-    
-    @IBOutlet weak var emojiOneImage: UIImageView!
-    @IBOutlet weak var emojiTwoImage: UIImageView!
-    @IBOutlet weak var emojiThreeImage: UIImageView!
 
     @IBOutlet weak var authorLabel: UILabel!
     

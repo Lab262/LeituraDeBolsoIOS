@@ -31,8 +31,19 @@ class HeadingTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.setNightMode()
+        
     }
+    
+    
+    func setNightMode () {
+        
+        self.titleLabel.textColor = UIColor.whiteColor()
+        self.timeLabel.textColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.colorWithHexString("190126")
+        
+    }
+
 
     func updateUI () {
         

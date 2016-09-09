@@ -17,14 +17,16 @@ extension UIButton {
             self.setImage(imageSelected, forState: .Normal)
 
         }
-            UIView.animateWithDuration(0.1, delay: 0.0, options: [.Autoreverse, .CurveEaseInOut], animations: {
-                self.transform = CGAffineTransformMakeScale(1.3, 1.3)
-                }, completion: { (finished) in
-                    self.transform = CGAffineTransformMakeScale(1.0, 1.0)
-                    
-            })
-        }
+        
+        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.1, initialSpringVelocity: 0.1, options: .CurveEaseInOut,animations: {
+            self.transform = CGAffineTransformMakeScale(1.2, 1.2)
+            }, completion: { (finished) in
+//                self.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                
+        })
     }
+
+}
 
 
 

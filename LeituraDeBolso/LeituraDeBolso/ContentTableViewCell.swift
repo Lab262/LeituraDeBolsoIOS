@@ -21,9 +21,11 @@ class ContentTableViewCell: UITableViewCell {
         }
     }
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.setNightMode()
     }
 
     func updateUI () {
@@ -32,5 +34,15 @@ class ContentTableViewCell: UITableViewCell {
         self.contentReadingLabel.text = reading?.text
         
     }
+    
+    func setNightMode () {
+        
+        self.authorReadingLabel.textColor = UIColor.whiteColor()
+        self.contentReadingLabel.textColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.colorWithHexString("190126")
+        
+    }
+    
+
 
 }

@@ -27,15 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setupBarsAppearance(){
         
-        //Cor dos placeholders
+        
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
+        // Color of placeholder
         UILabel.appearanceWhenContainedInInstancesOfClasses([UITextField.self]).textColor = UIColor.readingBlueColor()
         
-        //Cor e fonte da navigation bar
+        // Color and font of navigation bar
         UINavigationBar.appearance().translucent = false
         
         UINavigationBar.appearance().tintColor = UIColor.blueColor()
         
-        //Titulo da navigation bar
+        //Title color of navigation bar
         UINavigationBar.appearance().titleTextAttributes =
             ([NSFontAttributeName: UIFont(name: "Quicksand-Bold", size: 20)!,
                 NSForegroundColorAttributeName: UIColor.whiteColor()])

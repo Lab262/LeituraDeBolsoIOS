@@ -8,12 +8,17 @@
 
 import UIKit
 
+let KEY_EMAIL = "email"
+let KEY_PASS = "pass"
+let KEY_CONFIRM_ASS = "confirmationPass"
+
 class LoginViewController: UIViewController {
+    
+    var dictionaryTextFields = Dictionary <String, String>()
     
     @IBOutlet weak var tableView: UITableView!
     
 
-    
     override func viewWillAppear(animated: Bool) {
         
         
@@ -40,6 +45,8 @@ class LoginViewController: UIViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(ImageLogoTableViewCell.identifier, forIndexPath: indexPath) as! ImageLogoTableViewCell
         
+        cell.titleLabel.text = "Log in"
+        
         return cell
     }
     
@@ -49,6 +56,11 @@ class LoginViewController: UIViewController {
         
         cell.iconImage.image = UIImage(named: "icon_email")
         cell.textField.placeholder = "Email"
+        
+        cell.completionText = {(text) -> Void in
+            self.dictionaryTextFields[KEY_EMAIL] = text
+        }
+
         
         return cell
     }
@@ -62,6 +74,11 @@ class LoginViewController: UIViewController {
         
         cell.iconImage.image = UIImage(named: "icon_pass")
         cell.textField.placeholder = "Senha"
+        
+        cell.completionText = {(text) -> Void in
+            self.dictionaryTextFields[KEY_PASS] = text
+        }
+        
         
         return cell
     }

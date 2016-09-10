@@ -10,12 +10,13 @@ import UIKit
 
 class CreateAccountViewController: UIViewController {
     
+    var dictionaryTextFields = Dictionary <String, String>()
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         self.tableView.registerNib(UINib(nibName: "ImageLogoTableViewCell", bundle: nil), forCellReuseIdentifier: ImageLogoTableViewCell.identifier)
         
         self.tableView.registerNib(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: TextFieldTableViewCell.identifier)
@@ -53,6 +54,10 @@ class CreateAccountViewController: UIViewController {
         cell.iconImage.image = UIImage(named: "icon_email")
         cell.textField.placeholder = "Email"
         
+        cell.completionText = {(text) -> Void in
+            self.dictionaryTextFields[KEY_EMAIL] = text
+        }
+        
         return cell
     }
     
@@ -65,6 +70,11 @@ class CreateAccountViewController: UIViewController {
         
         cell.iconImage.image = UIImage(named: "icon_pass")
         cell.textField.placeholder = "Senha"
+        
+        cell.completionText = {(text) -> Void in
+            self.dictionaryTextFields[KEY_PASS] = text
+            
+        }
         
         return cell
     }
@@ -79,8 +89,11 @@ class CreateAccountViewController: UIViewController {
         
         cell.iconImage.image = UIImage(named: "icon_pass")
         cell.textField.placeholder = "Confirmar Senha"
-
         
+        cell.completionText = {(text) -> Void in
+            self.dictionaryTextFields[KEY_CONFIRM_ASS] = text
+        }
+
         return cell
     }
     
@@ -88,9 +101,7 @@ class CreateAccountViewController: UIViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(ButtonTableViewCell.identifier, forIndexPath: indexPath) as! ButtonTableViewCell
         
-        
         cell.button.addTarget(self, action: #selector(createAccount(_:)), forControlEvents: .TouchUpInside)
-        
         
         return cell
     }

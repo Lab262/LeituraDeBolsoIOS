@@ -1,14 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LXs-Sv-hpL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LXs-Sv-hpL">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Quicksand-Bold.otf">
+            <string>Quicksand-Bold</string>
+            <string>Quicksand-Bold</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Create Account View Controller-->
+        <scene sceneID="Fio-yU-Ga9">
+            <objects>
+                <viewController id="OSE-iC-3e1" customClass="CreateAccountViewController" customModule="LeituraDeBolso" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="u4z-dN-iRx"/>
+                        <viewControllerLayoutGuide type="bottom" id="dpK-xQ-2Ec"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Gwt-7S-GDe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0rg-Xd-Lgh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="OSE-iC-3e1" id="k2h-2I-luK"/>
+                                    <outlet property="delegate" destination="OSE-iC-3e1" id="g2r-Cy-QLK"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0rg-Xd-Lgh" firstAttribute="centerY" secondItem="Gwt-7S-GDe" secondAttribute="centerY" id="gbe-qH-9B0"/>
+                            <constraint firstItem="0rg-Xd-Lgh" firstAttribute="height" secondItem="Gwt-7S-GDe" secondAttribute="height" id="hZM-fo-w8G"/>
+                            <constraint firstItem="0rg-Xd-Lgh" firstAttribute="width" secondItem="Gwt-7S-GDe" secondAttribute="width" id="hk0-5a-wGn"/>
+                            <constraint firstItem="0rg-Xd-Lgh" firstAttribute="centerX" secondItem="Gwt-7S-GDe" secondAttribute="centerX" id="t9q-J9-RQI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="cau-aQ-IYK">
+                        <barButtonItem key="leftBarButtonItem" image="button_backPurple" id="3SM-fA-5dq">
+                            <connections>
+                                <action selector="popoverView:" destination="OSE-iC-3e1" id="e7c-YO-Wql"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="0rg-Xd-Lgh" id="Vtq-3v-LUI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xYc-5m-bQD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1764.5" y="-469.5"/>
+        </scene>
+        <!--Entry Selection View Controller-->
         <scene sceneID="7fT-K0-sSQ">
             <objects>
-                <viewController id="SYN-SO-o9u" sceneMemberID="viewController">
+                <viewController id="SYN-SO-o9u" customClass="EntrySelectionViewController" customModule="LeituraDeBolso" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="szs-kH-2Co"/>
                         <viewControllerLayoutGuide type="bottom" id="Y2e-kA-qTc"/>
@@ -17,54 +70,153 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo_leitura" translatesAutoresizingMaskIntoConstraints="NO" id="Mtf-he-8r3">
-                                <rect key="frame" x="85" y="114" width="207" height="71"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_leitura" translatesAutoresizingMaskIntoConstraints="NO" id="Mtf-he-8r3">
+                                <rect key="frame" x="84" y="114.5" width="207" height="71"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="207" id="1Xk-fK-RLQ"/>
+                                    <constraint firstAttribute="height" constant="71" id="aBt-nF-IaG"/>
+                                </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpu-dB-yEH" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
-                                <rect key="frame" x="60" y="260" width="256" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpu-dB-yEH" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
+                                <rect key="frame" x="60" y="272" width="256" height="50"/>
                                 <color key="backgroundColor" red="0.38823529411764707" green="0.14901960784313725" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="256" id="Vti-VZ-AHE"/>
+                                    <constraint firstAttribute="height" constant="50" id="Xl7-Wc-xe9"/>
+                                </constraints>
                                 <connections>
-                                    <segue destination="BOm-ib-9Md" kind="show" id="RzS-R6-8mc"/>
+                                    <segue destination="f0J-dt-obS" kind="show" id="tWh-sK-YbY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7p-3E-FFI" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
-                                <rect key="frame" x="60" y="330" width="256" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7p-3E-FFI" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
+                                <rect key="frame" x="60" y="342" width="256" height="50"/>
                                 <color key="backgroundColor" red="0.10588235294117647" green="0.85882352941176465" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="oqw-tC-4Sl"/>
+                                    <constraint firstAttribute="width" constant="256" id="xzZ-uI-c6b"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="OSE-iC-3e1" kind="show" id="MS8-Dp-WoV"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cadastro" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpR-3v-UWc">
-                                <rect key="frame" x="150" y="344" width="70" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cadastro" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cpR-3v-UWc">
+                                <rect key="frame" x="142.5" y="355" width="91" height="23.5"/>
+                                <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="20"/>
                                 <color key="textColor" red="0.38823529411764707" green="0.14901960784313725" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BdP-Si-H5a" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
-                                <rect key="frame" x="60" y="400" width="256" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BdP-Si-H5a" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
+                                <rect key="frame" x="60" y="412" width="256" height="50"/>
                                 <color key="backgroundColor" red="0.30196078431372547" green="0.50980392156862742" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="JU0-vZ-2fO"/>
+                                    <constraint firstAttribute="width" constant="256" id="cdd-gv-OQs"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="BOm-ib-9Md" kind="show" id="uwL-zK-aJb"/>
+                                </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_facebook" translatesAutoresizingMaskIntoConstraints="NO" id="g7g-zO-Aix">
-                                <rect key="frame" x="92" y="408" width="15" height="33"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_facebook" translatesAutoresizingMaskIntoConstraints="NO" id="g7g-zO-Aix">
+                                <rect key="frame" x="87.5" y="420" width="15" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="0YC-PZ-KNH"/>
+                                    <constraint firstAttribute="height" constant="33" id="Qig-aP-u25"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiQ-fa-8i1">
-                                <rect key="frame" x="165" y="274" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiQ-fa-8i1">
+                                <rect key="frame" x="160.5" y="285.5" width="55" height="23.5"/>
+                                <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="20"/>
                                 <color key="textColor" red="0.10588235294117647" green="0.85882352941176465" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Login com facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8V-tT-5sg">
-                                <rect key="frame" x="115" y="414" width="155" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login com facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8V-tT-5sg">
+                                <rect key="frame" x="110.5" y="426" width="155" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="g7g-zO-Aix" firstAttribute="centerY" secondItem="j8V-tT-5sg" secondAttribute="centerY" id="1Sk-dh-Bag"/>
+                            <constraint firstItem="j8V-tT-5sg" firstAttribute="centerY" secondItem="BdP-Si-H5a" secondAttribute="centerY" id="6vj-Ik-DuY"/>
+                            <constraint firstItem="qiQ-fa-8i1" firstAttribute="centerY" secondItem="hpu-dB-yEH" secondAttribute="centerY" id="EAm-JB-ryq"/>
+                            <constraint firstItem="qiQ-fa-8i1" firstAttribute="centerX" secondItem="hpu-dB-yEH" secondAttribute="centerX" id="Fdj-KY-rqP"/>
+                            <constraint firstItem="j8V-tT-5sg" firstAttribute="leading" secondItem="g7g-zO-Aix" secondAttribute="trailing" constant="8" id="PZz-LU-bUd"/>
+                            <constraint firstItem="hpu-dB-yEH" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="URp-TT-Rpf"/>
+                            <constraint firstItem="j8V-tT-5sg" firstAttribute="centerX" secondItem="BdP-Si-H5a" secondAttribute="centerX" id="V6r-Bc-XrI"/>
+                            <constraint firstItem="BdP-Si-H5a" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="VB9-v4-1Le"/>
+                            <constraint firstItem="Mtf-he-8r3" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="VG9-kE-3lT"/>
+                            <constraint firstItem="cpR-3v-UWc" firstAttribute="centerY" secondItem="i7p-3E-FFI" secondAttribute="centerY" id="ZWu-3A-uUN"/>
+                            <constraint firstItem="i7p-3E-FFI" firstAttribute="centerY" secondItem="WMn-l3-IfL" secondAttribute="centerY" multiplier="1.1" id="c4R-HA-0Pd"/>
+                            <constraint firstItem="i7p-3E-FFI" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="dIC-oo-wOF"/>
+                            <constraint firstItem="BdP-Si-H5a" firstAttribute="top" secondItem="g7g-zO-Aix" secondAttribute="bottom" constant="-41" id="iOj-W2-6nH"/>
+                            <constraint firstItem="i7p-3E-FFI" firstAttribute="top" secondItem="hpu-dB-yEH" secondAttribute="bottom" constant="20" id="l6Q-XK-n11"/>
+                            <constraint firstItem="BdP-Si-H5a" firstAttribute="top" secondItem="i7p-3E-FFI" secondAttribute="bottom" constant="20" id="mOh-iA-5AF"/>
+                            <constraint firstItem="j8V-tT-5sg" firstAttribute="leading" secondItem="g7g-zO-Aix" secondAttribute="trailing" constant="8" id="pJO-A1-5sL"/>
+                            <constraint firstItem="cpR-3v-UWc" firstAttribute="centerX" secondItem="i7p-3E-FFI" secondAttribute="centerX" id="rhU-5I-iFw"/>
+                            <constraint firstItem="Mtf-he-8r3" firstAttribute="centerY" secondItem="WMn-l3-IfL" secondAttribute="centerY" multiplier="0.45" id="sQe-4C-DW7"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="iOj-W2-6nH"/>
+                                <exclude reference="pJO-A1-5sL"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="ZnH-Yf-hSE"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g9f-3g-UR8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1111.5" y="265.5"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="4A6-dp-cpz">
+            <objects>
+                <viewController id="f0J-dt-obS" customClass="LoginViewController" customModule="LeituraDeBolso" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0tx-tI-OzA"/>
+                        <viewControllerLayoutGuide type="bottom" id="M4I-pZ-jKA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MkI-RZ-BtN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ap7-ny-upW">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="f0J-dt-obS" id="kDk-RQ-JeH"/>
+                                    <outlet property="delegate" destination="f0J-dt-obS" id="4Fl-pp-GzI"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ap7-ny-upW" firstAttribute="centerY" secondItem="MkI-RZ-BtN" secondAttribute="centerY" id="B9x-CN-z07"/>
+                            <constraint firstItem="ap7-ny-upW" firstAttribute="width" secondItem="MkI-RZ-BtN" secondAttribute="width" id="YxD-Dl-6Zo"/>
+                            <constraint firstItem="ap7-ny-upW" firstAttribute="centerX" secondItem="MkI-RZ-BtN" secondAttribute="centerX" id="Zdg-me-7vt"/>
+                            <constraint firstItem="ap7-ny-upW" firstAttribute="height" secondItem="MkI-RZ-BtN" secondAttribute="height" id="Zq0-yE-yKA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="3oV-Uz-DiS">
+                        <barButtonItem key="leftBarButtonItem" image="button_backPurple" id="k6v-nS-3nU">
+                            <connections>
+                                <action selector="popoverView:" destination="f0J-dt-obS" id="PRj-ql-Rtr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="ap7-ny-upW" id="Byl-Cr-xdi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zQW-ox-346" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1560.5" y="1356.5"/>
         </scene>
         <!--Main-->
         <scene sceneID="0Pl-g9-xvT">
@@ -72,7 +224,7 @@
                 <viewControllerPlaceholder storyboardName="Main" id="BOm-ib-9Md" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gQW-wN-XDe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1447" y="316"/>
+            <point key="canvasLocation" x="1551" y="266"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ab7-yq-JIe">
@@ -94,6 +246,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="button_backPurple" width="12" height="20"/>
         <image name="icon_facebook" width="17" height="34"/>
         <image name="logo_leitura" width="207" height="71"/>
     </resources>

@@ -7,8 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D40752B81D828F820093F0A0 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752B71D828F820093F0A0 /* CreateAccountViewController.swift */; };
+		D40752BA1D8293FC0093F0A0 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752B91D8293FC0093F0A0 /* RoundedView.swift */; };
+		D40752BC1D8299DF0093F0A0 /* EntrySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752BB1D8299DF0093F0A0 /* EntrySelectionViewController.swift */; };
+		D40752C01D8367000093F0A0 /* ImageLogoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D40752BF1D8367000093F0A0 /* ImageLogoTableViewCell.xib */; };
+		D40752C21D8367B80093F0A0 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D40752C11D8367B80093F0A0 /* TextFieldTableViewCell.xib */; };
+		D40752C41D8369580093F0A0 /* ImageLogoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752C31D8369580093F0A0 /* ImageLogoTableViewCell.swift */; };
+		D40752C61D83696D0093F0A0 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752C51D83696D0093F0A0 /* TextFieldTableViewCell.swift */; };
+		D40752C91D837AAA0093F0A0 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752C71D837AAA0093F0A0 /* ButtonTableViewCell.swift */; };
+		D40752CA1D837AAA0093F0A0 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D40752C81D837AAA0093F0A0 /* ButtonTableViewCell.xib */; };
 		D448B39E1D6E8EA500F3DF51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B39D1D6E8EA500F3DF51 /* AppDelegate.swift */; };
-		D448B3A01D6E8EA500F3DF51 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B39F1D6E8EA500F3DF51 /* ViewController.swift */; };
+		D448B3A01D6E8EA500F3DF51 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B39F1D6E8EA500F3DF51 /* LoginViewController.swift */; };
 		D448B3A31D6E8EA500F3DF51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D448B3A11D6E8EA500F3DF51 /* Main.storyboard */; };
 		D448B3A61D6E8EA500F3DF51 /* LeituraDeBolso.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D448B3A41D6E8EA500F3DF51 /* LeituraDeBolso.xcdatamodeld */; };
 		D448B3A81D6E8EA500F3DF51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D448B3A71D6E8EA500F3DF51 /* Assets.xcassets */; };
@@ -157,9 +166,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D40752B71D828F820093F0A0 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		D40752B91D8293FC0093F0A0 /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
+		D40752BB1D8299DF0093F0A0 /* EntrySelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrySelectionViewController.swift; sourceTree = "<group>"; };
+		D40752BF1D8367000093F0A0 /* ImageLogoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageLogoTableViewCell.xib; sourceTree = "<group>"; };
+		D40752C11D8367B80093F0A0 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		D40752C31D8369580093F0A0 /* ImageLogoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLogoTableViewCell.swift; sourceTree = "<group>"; };
+		D40752C51D83696D0093F0A0 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		D40752C71D837AAA0093F0A0 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		D40752C81D837AAA0093F0A0 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
 		D448B39A1D6E8EA500F3DF51 /* LeituraDeBolso.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeituraDeBolso.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D448B39D1D6E8EA500F3DF51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D448B39F1D6E8EA500F3DF51 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D448B39F1D6E8EA500F3DF51 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D448B3A21D6E8EA500F3DF51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D448B3A51D6E8EA500F3DF51 /* LeituraDeBolso.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LeituraDeBolso.xcdatamodel; sourceTree = "<group>"; };
 		D448B3A71D6E8EA500F3DF51 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -318,6 +336,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D40752B61D828EC10093F0A0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D448B39F1D6E8EA500F3DF51 /* LoginViewController.swift */,
+				D40752B71D828F820093F0A0 /* CreateAccountViewController.swift */,
+				D40752BB1D8299DF0093F0A0 /* EntrySelectionViewController.swift */,
+				D40752C31D8369580093F0A0 /* ImageLogoTableViewCell.swift */,
+				D40752C51D83696D0093F0A0 /* TextFieldTableViewCell.swift */,
+				D40752C71D837AAA0093F0A0 /* ButtonTableViewCell.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		D40752BE1D83662A0093F0A0 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D40752BF1D8367000093F0A0 /* ImageLogoTableViewCell.xib */,
+				D40752C11D8367B80093F0A0 /* TextFieldTableViewCell.xib */,
+				D40752C81D837AAA0093F0A0 /* ButtonTableViewCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		D448B3911D6E8EA500F3DF51 = {
 			isa = PBXGroup;
 			children = (
@@ -344,7 +385,6 @@
 				D448B3C41D6E9B6800F3DF51 /* Extensions */,
 				D448B3C01D6E988100F3DF51 /* Login */,
 				D448B39D1D6E8EA500F3DF51 /* AppDelegate.swift */,
-				D448B39F1D6E8EA500F3DF51 /* ViewController.swift */,
 				D448B3A11D6E8EA500F3DF51 /* Main.storyboard */,
 				D448B3A71D6E8EA500F3DF51 /* Assets.xcassets */,
 				D448B3A91D6E8EA500F3DF51 /* LaunchScreen.storyboard */,
@@ -366,6 +406,7 @@
 		D448B3C01D6E988100F3DF51 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				D40752B61D828EC10093F0A0 /* Controller */,
 				D448B3C11D6E988900F3DF51 /* View */,
 			);
 			name = Login;
@@ -374,6 +415,7 @@
 		D448B3C11D6E988900F3DF51 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D40752BE1D83662A0093F0A0 /* Cell */,
 				D448B3C21D6E989900F3DF51 /* Login.storyboard */,
 			);
 			name = View;
@@ -383,6 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				D448B3C51D6E9B9400F3DF51 /* RoundedButton.swift */,
+				D40752B91D8293FC0093F0A0 /* RoundedView.swift */,
 				D4A8E8921D779D86003F6854 /* UIView+Animations.swift */,
 				D448B3C71D6EA11E00F3DF51 /* UIViewExtension.swift */,
 				D448B3C81D6EA11E00F3DF51 /* TextFieldExtension.swift */,
@@ -712,6 +755,8 @@
 				D4BB0BCA1D767ACD00A6AC03 /* loadingGiff2.png in Resources */,
 				D4E8CA441D7510C000C82F0A /* Comfortaa_Bold.ttf in Resources */,
 				D4BB0BF21D767ACD00A6AC03 /* loadingGiff42.png in Resources */,
+				D40752C21D8367B80093F0A0 /* TextFieldTableViewCell.xib in Resources */,
+				D40752C01D8367000093F0A0 /* ImageLogoTableViewCell.xib in Resources */,
 				D4BB0C271D767ACD00A6AC03 /* loadingGiff95.png in Resources */,
 				D4BB0BDF1D767ACD00A6AC03 /* loadingGiff23.png in Resources */,
 				D4BB0C1B1D767ACD00A6AC03 /* loadingGiff83.png in Resources */,
@@ -747,6 +792,7 @@
 				D4BB0BD31D767ACD00A6AC03 /* loadingGiff11.png in Resources */,
 				D4BB0C151D767ACD00A6AC03 /* loadingGiff77.png in Resources */,
 				D4BB0C131D767ACD00A6AC03 /* loadingGiff75.png in Resources */,
+				D40752CA1D837AAA0093F0A0 /* ButtonTableViewCell.xib in Resources */,
 				D4BB0C1A1D767ACD00A6AC03 /* loadingGiff82.png in Resources */,
 				D4BB0C191D767ACD00A6AC03 /* loadingGiff81.png in Resources */,
 				D4BB0BEE1D767ACD00A6AC03 /* loadingGiff38.png in Resources */,
@@ -825,20 +871,26 @@
 				D4E8CA341D73EDA000C82F0A /* Reading.swift in Sources */,
 				D4CADAD91D75CA50005FE3DC /* FavoriteHistoricalReadingViewController.swift in Sources */,
 				D448B3A61D6E8EA500F3DF51 /* LeituraDeBolso.xcdatamodeld in Sources */,
+				D40752C41D8369580093F0A0 /* ImageLogoTableViewCell.swift in Sources */,
 				D4CADADD1D75FAE5005FE3DC /* UIButtonExtension.swift in Sources */,
 				D4A8E8911D7797A7003F6854 /* ApplicationState.swift in Sources */,
-				D448B3A01D6E8EA500F3DF51 /* ViewController.swift in Sources */,
+				D448B3A01D6E8EA500F3DF51 /* LoginViewController.swift in Sources */,
+				D40752BA1D8293FC0093F0A0 /* RoundedView.swift in Sources */,
 				D448B3CA1D6EA11E00F3DF51 /* TextFieldExtension.swift in Sources */,
 				D4CADAD31D75C377005FE3DC /* HistoricalReadingSegmentViewController.swift in Sources */,
 				D4CADADB1D75CB5D005FE3DC /* UnreadHistoricalReadingViewController.swift in Sources */,
 				D448B39E1D6E8EA500F3DF51 /* AppDelegate.swift in Sources */,
+				D40752B81D828F820093F0A0 /* CreateAccountViewController.swift in Sources */,
+				D40752BC1D8299DF0093F0A0 /* EntrySelectionViewController.swift in Sources */,
 				D448B3C61D6E9B9400F3DF51 /* RoundedButton.swift in Sources */,
 				D4E8CA2D1D73EC0300C82F0A /* ReadingDayViewController.swift in Sources */,
 				D4E8CA381D73F08800C82F0A /* ButtonsTableViewCell.swift in Sources */,
+				D40752C91D837AAA0093F0A0 /* ButtonTableViewCell.swift in Sources */,
 				D4CADAE51D76158B005FE3DC /* HistoricalReadingTableViewCell.swift in Sources */,
 				D4E8CA361D73EF9500C82F0A /* ContentTableViewCell.swift in Sources */,
 				D4E8CA581D752B8200C82F0A /* UIColorExtension.swift in Sources */,
 				D4CADAE11D7608F6005FE3DC /* NSUserDefaults+UIColor.swift in Sources */,
+				D40752C61D83696D0093F0A0 /* TextFieldTableViewCell.swift in Sources */,
 				D4CADAD71D75C9B6005FE3DC /* AllHistoricalReadingViewController.swift in Sources */,
 				D4CADAD51D75C8D1005FE3DC /* HistoricalReadingMainViewController.swift in Sources */,
 				D4A8E88F1D776ED3003F6854 /* SettingsTableViewController.swift in Sources */,

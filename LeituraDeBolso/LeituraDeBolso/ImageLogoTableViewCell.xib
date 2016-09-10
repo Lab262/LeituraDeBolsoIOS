@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Quicksand-Bold.otf">
+            <string>Quicksand-Bold</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="205" id="EXX-Xd-HQp" customClass="ImageLogoTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="322" height="178"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EXX-Xd-HQp" id="pms-qz-jUk">
+                <rect key="frame" x="0.0" y="0.0" width="322" height="177.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_leitura" translatesAutoresizingMaskIntoConstraints="NO" id="NxX-LB-9Rr">
+                        <rect key="frame" x="57" y="35.5" width="207" height="71"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="207" id="Cbr-0D-7UQ"/>
+                            <constraint firstAttribute="height" constant="71" id="hQ6-RL-Pzb"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cadastro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ozf-0p-Dcf">
+                        <rect key="frame" x="115" y="146.5" width="91" height="24"/>
+                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="20"/>
+                        <color key="textColor" red="0.38823529410000002" green="0.14901960780000001" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="NxX-LB-9Rr" firstAttribute="centerX" secondItem="pms-qz-jUk" secondAttribute="centerX" id="XVx-Qo-A4I"/>
+                    <constraint firstItem="Ozf-0p-Dcf" firstAttribute="top" secondItem="NxX-LB-9Rr" secondAttribute="bottom" constant="40" id="ryg-IT-Sek"/>
+                    <constraint firstItem="NxX-LB-9Rr" firstAttribute="centerY" secondItem="pms-qz-jUk" secondAttribute="centerY" multiplier="0.8" id="vEi-cG-fWH"/>
+                    <constraint firstItem="Ozf-0p-Dcf" firstAttribute="centerX" secondItem="pms-qz-jUk" secondAttribute="centerX" id="xFx-ZR-Fwx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="logoImageView" destination="NxX-LB-9Rr" id="MTI-rm-OS9"/>
+                <outlet property="titleLabel" destination="Ozf-0p-Dcf" id="XYJ-17-TCh"/>
+            </connections>
+            <point key="canvasLocation" x="147" y="106"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="logo_leitura" width="207" height="71"/>
+    </resources>
+</document>

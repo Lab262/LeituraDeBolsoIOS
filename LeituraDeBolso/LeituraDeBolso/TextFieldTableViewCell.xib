@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Comfortaa_Regular.ttf">
+            <string>Comfortaa</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="textFieldCell" rowHeight="75" id="WDk-dT-rgc" customClass="TextFieldTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WDk-dT-rgc" id="ZmJ-qi-3qo">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="667-lg-QSk" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
+                        <rect key="frame" x="12" y="10.5" width="350" height="54"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8FW-5n-ChN">
+                                <rect key="frame" x="55" y="12" width="288" height="30"/>
+                                <color key="tintColor" red="0.1058823529" green="0.85882352939999995" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.1058823529" green="0.85882352939999995" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Comfortaa" family="Comfortaa" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_email" translatesAutoresizingMaskIntoConstraints="NO" id="uai-KJ-3O6">
+                                <rect key="frame" x="20" y="17" width="27" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="BX8-56-llZ"/>
+                                    <constraint firstAttribute="width" constant="27" id="QWy-hb-Rlt"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.38823529410000002" green="0.14901960780000001" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="uai-KJ-3O6" firstAttribute="centerX" secondItem="667-lg-QSk" secondAttribute="centerX" id="1IS-v6-caB"/>
+                            <constraint firstAttribute="bottom" secondItem="uai-KJ-3O6" secondAttribute="bottom" constant="17" id="77g-yD-AxW"/>
+                            <constraint firstItem="uai-KJ-3O6" firstAttribute="leading" secondItem="667-lg-QSk" secondAttribute="leading" constant="20" id="97l-Xy-qTG"/>
+                            <constraint firstAttribute="height" constant="54" id="L6P-AI-cMn"/>
+                            <constraint firstItem="8FW-5n-ChN" firstAttribute="leading" secondItem="uai-KJ-3O6" secondAttribute="trailing" constant="8" id="N59-fn-9KQ"/>
+                            <constraint firstItem="uai-KJ-3O6" firstAttribute="top" secondItem="667-lg-QSk" secondAttribute="top" constant="17" id="U8N-yH-oab"/>
+                            <constraint firstItem="8FW-5n-ChN" firstAttribute="top" secondItem="667-lg-QSk" secondAttribute="top" constant="12" id="gmG-xX-8oC"/>
+                            <constraint firstAttribute="trailing" secondItem="8FW-5n-ChN" secondAttribute="trailing" constant="7" id="mNZ-re-nP0"/>
+                            <constraint firstAttribute="bottom" secondItem="8FW-5n-ChN" secondAttribute="bottom" constant="12" id="n5u-ou-0Lv"/>
+                            <constraint firstItem="uai-KJ-3O6" firstAttribute="centerY" secondItem="8FW-5n-ChN" secondAttribute="centerY" id="o3R-ii-eyZ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1IS-v6-caB"/>
+                                <exclude reference="77g-yD-AxW"/>
+                                <exclude reference="U8N-yH-oab"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="667-lg-QSk" secondAttribute="trailing" constant="5" id="GTp-MI-ibY"/>
+                    <constraint firstItem="667-lg-QSk" firstAttribute="leading" secondItem="ZmJ-qi-3qo" secondAttribute="leadingMargin" constant="4" id="Hd7-Xl-G05"/>
+                    <constraint firstItem="667-lg-QSk" firstAttribute="centerY" secondItem="ZmJ-qi-3qo" secondAttribute="centerY" id="sYk-wO-7oY"/>
+                    <constraint firstItem="667-lg-QSk" firstAttribute="centerX" secondItem="ZmJ-qi-3qo" secondAttribute="centerX" constant="-0.5" id="wkP-e9-Y8o"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="iconHeightConstraint" destination="BX8-56-llZ" id="MRb-wz-igu"/>
+                <outlet property="iconImage" destination="uai-KJ-3O6" id="pYJ-e7-ZZB"/>
+                <outlet property="iconWidthConstraint" destination="QWy-hb-Rlt" id="O8T-Tg-SxA"/>
+                <outlet property="textField" destination="8FW-5n-ChN" id="Ptu-ff-706"/>
+            </connections>
+            <point key="canvasLocation" x="112.5" y="360.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_email" width="28" height="22"/>
+    </resources>
+</document>

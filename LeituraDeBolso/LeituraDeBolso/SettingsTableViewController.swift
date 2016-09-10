@@ -55,7 +55,7 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func popoverView(sender: AnyObject) {
         
-        //self.presentViewController(<#T##viewControllerToPresent: UIViewController##UIViewController#>, animated: <#T##Bool#>, completion: nil)
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
    

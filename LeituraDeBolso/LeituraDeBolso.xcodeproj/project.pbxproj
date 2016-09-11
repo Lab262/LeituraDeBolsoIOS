@@ -27,6 +27,8 @@
 		D448B3C61D6E9B9400F3DF51 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B3C51D6E9B9400F3DF51 /* RoundedButton.swift */; };
 		D448B3C91D6EA11E00F3DF51 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B3C71D6EA11E00F3DF51 /* UIViewExtension.swift */; };
 		D448B3CA1D6EA11E00F3DF51 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B3C81D6EA11E00F3DF51 /* TextFieldExtension.swift */; };
+		D4944C291D84FAB300C4FC92 /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4944C281D84FAB300C4FC92 /* ViewUtil.swift */; };
+		D4944C2B1D85009100C4FC92 /* StepSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4944C2A1D85009100C4FC92 /* StepSlider.swift */; };
 		D4A8E88F1D776ED3003F6854 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E88E1D776ED3003F6854 /* SettingsTableViewController.swift */; };
 		D4A8E8911D7797A7003F6854 /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E8901D7797A7003F6854 /* ApplicationState.swift */; };
 		D4A8E8931D779D86003F6854 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E8921D779D86003F6854 /* UIView+Animations.swift */; };
@@ -190,6 +192,8 @@
 		D448B3C51D6E9B9400F3DF51 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		D448B3C71D6EA11E00F3DF51 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		D448B3C81D6EA11E00F3DF51 /* TextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
+		D4944C281D84FAB300C4FC92 /* ViewUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
+		D4944C2A1D85009100C4FC92 /* StepSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepSlider.swift; sourceTree = "<group>"; };
 		D4A8E88E1D776ED3003F6854 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		D4A8E8901D7797A7003F6854 /* ApplicationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
 		D4A8E8921D779D86003F6854 /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
@@ -384,6 +388,7 @@
 				D4E8CA291D73E1F700C82F0A /* Resources */,
 				D448B3C41D6E9B6800F3DF51 /* Extensions */,
 				D448B3C01D6E988100F3DF51 /* Login */,
+				D4A8E8901D7797A7003F6854 /* ApplicationState.swift */,
 				D448B39D1D6E8EA500F3DF51 /* AppDelegate.swift */,
 				D448B3A11D6E8EA500F3DF51 /* Main.storyboard */,
 				D448B3A71D6E8EA500F3DF51 /* Assets.xcassets */,
@@ -432,6 +437,8 @@
 				D4E8CA571D752B8200C82F0A /* UIColorExtension.swift */,
 				D4CADADC1D75FAE5005FE3DC /* UIButtonExtension.swift */,
 				D4CADAE01D7608F6005FE3DC /* NSUserDefaults+UIColor.swift */,
+				D4944C281D84FAB300C4FC92 /* ViewUtil.swift */,
+				D4944C2A1D85009100C4FC92 /* StepSlider.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -572,7 +579,6 @@
 				D4E8CA391D73F0F200C82F0A /* Control */,
 				D4E8CA321D73ED7300C82F0A /* Model */,
 				D4E8CA2E1D73EC8000C82F0A /* View */,
-				D4A8E8901D7797A7003F6854 /* ApplicationState.swift */,
 			);
 			name = Read;
 			sourceTree = "<group>";
@@ -880,6 +886,8 @@
 				D4CADAD31D75C377005FE3DC /* HistoricalReadingSegmentViewController.swift in Sources */,
 				D4CADADB1D75CB5D005FE3DC /* UnreadHistoricalReadingViewController.swift in Sources */,
 				D448B39E1D6E8EA500F3DF51 /* AppDelegate.swift in Sources */,
+				D4944C291D84FAB300C4FC92 /* ViewUtil.swift in Sources */,
+				D4944C2B1D85009100C4FC92 /* StepSlider.swift in Sources */,
 				D40752B81D828F820093F0A0 /* CreateAccountViewController.swift in Sources */,
 				D40752BC1D8299DF0093F0A0 /* EntrySelectionViewController.swift in Sources */,
 				D448B3C61D6E9B9400F3DF51 /* RoundedButton.swift in Sources */,

@@ -23,7 +23,11 @@ class ButtonsTableViewCell: UITableViewCell {
         self.likeButton.setImage(UIImage(named: "button_likeRead_inactive"), forState: .Normal)
         self.likeButton.setImage(UIImage(named: "button_likeRead_active"), forState: .Selected)
         
-        self.setNightMode()
+        if ApplicationState.sharedInstance.modeNight == true {
+            self.setNightMode()
+        } else {
+            self.setNormalMode()
+        }
         
     }
     
@@ -32,6 +36,11 @@ class ButtonsTableViewCell: UITableViewCell {
         
         self.backgroundColor = UIColor.colorWithHexString("190126")
         
+    }
+    
+    func setNormalMode () {
+        
+        self.backgroundColor = UIColor.whiteColor()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

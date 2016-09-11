@@ -31,8 +31,12 @@ class HeadingTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.setNightMode()
         
+        if ApplicationState.sharedInstance.modeNight == true {
+            self.setNightMode()
+        } else {
+            self.setNormalMode()
+        }
     }
     
     
@@ -42,6 +46,13 @@ class HeadingTableViewCell: UITableViewCell {
         self.timeLabel.textColor = UIColor.whiteColor()
         self.backgroundColor = UIColor.colorWithHexString("190126")
         
+    }
+    
+    func setNormalMode () {
+        
+        self.titleLabel.textColor = UIColor.blackColor()
+        self.timeLabel.textColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.whiteColor()
     }
 
 

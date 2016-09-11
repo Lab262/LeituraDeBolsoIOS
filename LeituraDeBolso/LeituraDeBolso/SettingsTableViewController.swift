@@ -15,13 +15,18 @@ class SettingsTableViewController: UITableViewController {
     
     private var showDateVisible = false
     
+    private var currentModeReader = false
+    private var currentFontSize = false
+    
     @IBOutlet weak var timeTableLabel: UILabel!
     
     @IBOutlet weak var timeTableDatePicker: UIDatePicker!
     
     @IBOutlet weak var modeNightSwitch: UISwitch!
     
+    @IBOutlet weak var fontSizeSlider: StepSlider!
     
+    @IBOutlet weak var trackView: UIView!
     
     
     override func viewWillAppear(animated: Bool) {
@@ -31,6 +36,14 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.trackView.layer.zPosition = -1
+        self.modeNightSwitch.on = ApplicationState.sharedInstance.modeNight!
+        self.currentModeReader = self.modeNightSwitch.on
+        
+       self.fontSizeSlider.steps = 7
+        
+        //self.currentFontSize = self.switch
 
     }
     
@@ -40,14 +53,12 @@ class SettingsTableViewController: UITableViewController {
         
         if self.modeNightSwitch.on {
             
-            self.modeNightSwitch.setOn(false, animated: true)
-            
-            
+           ApplicationState.sharedInstance.modeNight = true
+         
             
         } else {
             
-            self.modeNightSwitch.setOn(true, animated: true)
-            
+           ApplicationState.sharedInstance.modeNight = false
         }
 
     }
@@ -55,7 +66,13 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func popoverView(sender: AnyObject) {
         
-        self.navigationController?.popViewControllerAnimated(true)
+        if self.currentModeReader != ApplicationState.sharedInstance.modeNight {
+        
+            self.presentViewController(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+        } else {
+         
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
     
    
@@ -110,8 +127,6 @@ class SettingsTableViewController: UITableViewController {
     private func showHourChanged () {
         
         self.timeTableLabel.text = NSDateFormatter.localizedStringFromDate(self.timeTableDatePicker.date, dateStyle: .NoStyle, timeStyle: .ShortStyle)
-        
-        
         
     }
     

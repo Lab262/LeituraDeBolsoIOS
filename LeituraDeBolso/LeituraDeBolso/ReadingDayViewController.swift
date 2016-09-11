@@ -31,9 +31,17 @@ class ReadingDayViewController: UIViewController {
             
             self.readingDay?.author = "DULCINO DE MORAIS VIEIRA COSTA SMADI"
             
-            
-            
         }
+        if ApplicationState.sharedInstance.modeNight == true {
+            self.setNightMode()
+            self.tableView.reloadData()
+            print ("Nigh mode")
+        } else {
+            self.setNormalMode()
+            self.tableView.reloadData()
+        }
+        
+        self.view.layoutIfNeeded()
         
         
     }
@@ -42,6 +50,12 @@ class ReadingDayViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.colorWithHexString("190126")
         self.tableView.backgroundColor = UIColor.colorWithHexString("190126")
+    }
+    
+    func setNormalMode () {
+        
+        self.view.backgroundColor = UIColor.whiteColor()
+        self.tableView.backgroundColor = UIColor.whiteColor()
     }
     
     override func viewDidLoad() {

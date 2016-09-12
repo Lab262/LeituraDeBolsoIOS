@@ -76,6 +76,9 @@ class FavoriteHistoricalReadingViewController: UIViewController {
         
         cell.reading = self.favoriteReads[indexPath.row]
         cell.tag = indexPath.row
+        cell.emojiOneLabel.text = self.favoriteReads[indexPath.row].emojis![0]
+        cell.emojiTwoLabel.text = self.favoriteReads[indexPath.row].emojis![1]
+        cell.emojiThreeLabel.text = self.favoriteReads[indexPath.row].emojis![2]
         cell.likeButton.selected = true
         cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), forControlEvents: .TouchUpInside)
         

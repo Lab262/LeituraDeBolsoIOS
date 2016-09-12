@@ -43,6 +43,7 @@ class UnreadHistoricalReadingViewController: UIViewController {
         readingDay.text = "The majestic Rocky Mountains are a major tourist location in the western United States. Visitors can participate in a quantity of activities, including hiking, skiing, snowboarding, mountain biking, & plenty of more. The Rockies are home to several campgrounds, ghost towns, gold prospecting sites, & national parks. a quantity of the biggest tourist attractions in the Rockies are Pike’s Peak & Royal Gorge. There are several world famous national parks in the Rockies, including Yellowstone, Rocky Mountain, Grand Teton, & Glacier.\n \nThe legendary Rocky Mountains stretch from old Mexico up through the United States & into Canada. The Rocky Mountains are over 3000 miles long, spanning parts of california, Colorado, Idaho, Montana, & Wyoming before continuing into Canada. Stories of early adventurers like Lewis & Clark exploring the Rocky Mountains are legendary."
         
         readingDay.author = "DULCINO DE MORAIS VIEIRA COSTA SMADI"
+        readingDay.emojis = ["\u{1F603}", "\u{1F603}", "\u{1F603}"]
         
         self.allReadings.append(readingDay)
         
@@ -86,6 +87,10 @@ class UnreadHistoricalReadingViewController: UIViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(HistoricalReadingTableViewCell.identifier, forIndexPath: indexPath) as! HistoricalReadingTableViewCell
         
         cell.reading = self.allReadings[indexPath.row]
+        
+        cell.emojiOneLabel.text = self.allReadings[indexPath.row].emojis![0]
+        cell.emojiTwoLabel.text = self.allReadings[indexPath.row].emojis![1]
+        cell.emojiThreeLabel.text = self.allReadings[indexPath.row].emojis![2]
         
         cell.likeButton.tag = indexPath.row
         cell.likeButton.selected = false

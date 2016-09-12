@@ -11,6 +11,7 @@ import UIKit
 class ApplicationState: NSObject {
     
     var modeNight: Bool? = false
+    var sizeFontSelected: CGFloat? = 14
     
     private init(singleton: Bool) {
         super.init()

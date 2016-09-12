@@ -29,6 +29,7 @@
 		D448B3CA1D6EA11E00F3DF51 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B3C81D6EA11E00F3DF51 /* TextFieldExtension.swift */; };
 		D4944C291D84FAB300C4FC92 /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4944C281D84FAB300C4FC92 /* ViewUtil.swift */; };
 		D4944C2B1D85009100C4FC92 /* StepSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4944C2A1D85009100C4FC92 /* StepSlider.swift */; };
+		D494B3B51D863CAE00A9B571 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D494B3B41D863CAE00A9B571 /* UILabelExtension.swift */; };
 		D4A8E88F1D776ED3003F6854 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E88E1D776ED3003F6854 /* SettingsTableViewController.swift */; };
 		D4A8E8911D7797A7003F6854 /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E8901D7797A7003F6854 /* ApplicationState.swift */; };
 		D4A8E8931D779D86003F6854 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E8921D779D86003F6854 /* UIView+Animations.swift */; };
@@ -264,6 +265,7 @@
 		D448B3C81D6EA11E00F3DF51 /* TextFieldExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
 		D4944C281D84FAB300C4FC92 /* ViewUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
 		D4944C2A1D85009100C4FC92 /* StepSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepSlider.swift; sourceTree = "<group>"; };
+		D494B3B41D863CAE00A9B571 /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		D4A8E88E1D776ED3003F6854 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		D4A8E8901D7797A7003F6854 /* ApplicationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
 		D4A8E8921D779D86003F6854 /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 				D4CADAE01D7608F6005FE3DC /* NSUserDefaults+UIColor.swift */,
 				D4944C281D84FAB300C4FC92 /* ViewUtil.swift */,
 				D4944C2A1D85009100C4FC92 /* StepSlider.swift */,
+				D494B3B41D863CAE00A9B571 /* UILabelExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1172,6 +1175,7 @@
 				D40752BA1D8293FC0093F0A0 /* RoundedView.swift in Sources */,
 				D448B3CA1D6EA11E00F3DF51 /* TextFieldExtension.swift in Sources */,
 				D4CADAD31D75C377005FE3DC /* HistoricalReadingSegmentViewController.swift in Sources */,
+				D494B3B51D863CAE00A9B571 /* UILabelExtension.swift in Sources */,
 				D4CADADB1D75CB5D005FE3DC /* UnreadHistoricalReadingViewController.swift in Sources */,
 				D448B39E1D6E8EA500F3DF51 /* AppDelegate.swift in Sources */,
 				D4944C291D84FAB300C4FC92 /* ViewUtil.swift in Sources */,

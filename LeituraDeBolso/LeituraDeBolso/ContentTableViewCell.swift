@@ -25,6 +25,9 @@ class ContentTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.contentReadingLabel.setSizeFont(ApplicationState.sharedInstance.sizeFontSelected!)
+        
+        
         if ApplicationState.sharedInstance.modeNight == true {
             self.setNightMode()
         } else {

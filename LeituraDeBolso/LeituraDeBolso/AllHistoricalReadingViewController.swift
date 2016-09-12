@@ -21,8 +21,6 @@ class AllHistoricalReadingViewController: UIViewController {
         
         self.registerNibs()
         
-
-        
         let readingDay = Reading()
             
         readingDay.duration = "5 min"

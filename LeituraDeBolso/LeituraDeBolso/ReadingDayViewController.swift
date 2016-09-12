@@ -109,9 +109,10 @@ class ReadingDayViewController: UIViewController {
     func likeReader (sender: UIButton) {
      
         if sender.selected == true {
-            print ("LIKE")
+            ApplicationState.sharedInstance.favoriteReads.append(self.readingDay!)
         } else {
-            print ("UNLIKE")
+           
+           ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.readingDay!.title}
         }
         
     }

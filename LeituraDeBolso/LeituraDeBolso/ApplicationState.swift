@@ -13,6 +13,8 @@ class ApplicationState: NSObject {
     var modeNight: Bool? = false
     var sizeFontSelected: CGFloat? = 14
     
+    var favoriteReads = [Reading]()
+    
     private init(singleton: Bool) {
         super.init()
         

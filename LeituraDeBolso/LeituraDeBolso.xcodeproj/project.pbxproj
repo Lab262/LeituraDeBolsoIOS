@@ -30,6 +30,7 @@
 		D4944C291D84FAB300C4FC92 /* ViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4944C281D84FAB300C4FC92 /* ViewUtil.swift */; };
 		D4944C2B1D85009100C4FC92 /* StepSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4944C2A1D85009100C4FC92 /* StepSlider.swift */; };
 		D494B3B51D863CAE00A9B571 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D494B3B41D863CAE00A9B571 /* UILabelExtension.swift */; };
+		D494B3B71D86435900A9B571 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D494B3B61D86435900A9B571 /* ArrayExtension.swift */; };
 		D4A8E88F1D776ED3003F6854 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E88E1D776ED3003F6854 /* SettingsTableViewController.swift */; };
 		D4A8E8911D7797A7003F6854 /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E8901D7797A7003F6854 /* ApplicationState.swift */; };
 		D4A8E8931D779D86003F6854 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E8921D779D86003F6854 /* UIView+Animations.swift */; };
@@ -266,6 +267,7 @@
 		D4944C281D84FAB300C4FC92 /* ViewUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewUtil.swift; sourceTree = "<group>"; };
 		D4944C2A1D85009100C4FC92 /* StepSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepSlider.swift; sourceTree = "<group>"; };
 		D494B3B41D863CAE00A9B571 /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
+		D494B3B61D86435900A9B571 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		D4A8E88E1D776ED3003F6854 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		D4A8E8901D7797A7003F6854 /* ApplicationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
 		D4A8E8921D779D86003F6854 /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
@@ -582,6 +584,7 @@
 				D4944C281D84FAB300C4FC92 /* ViewUtil.swift */,
 				D4944C2A1D85009100C4FC92 /* StepSlider.swift */,
 				D494B3B41D863CAE00A9B571 /* UILabelExtension.swift */,
+				D494B3B61D86435900A9B571 /* ArrayExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1184,6 +1187,7 @@
 				D40752BC1D8299DF0093F0A0 /* EntrySelectionViewController.swift in Sources */,
 				D448B3C61D6E9B9400F3DF51 /* RoundedButton.swift in Sources */,
 				D4E8CA2D1D73EC0300C82F0A /* ReadingDayViewController.swift in Sources */,
+				D494B3B71D86435900A9B571 /* ArrayExtension.swift in Sources */,
 				D4E8CA381D73F08800C82F0A /* ButtonsTableViewCell.swift in Sources */,
 				D40752C91D837AAA0093F0A0 /* ButtonTableViewCell.swift in Sources */,
 				D4CADAE51D76158B005FE3DC /* HistoricalReadingTableViewCell.swift in Sources */,

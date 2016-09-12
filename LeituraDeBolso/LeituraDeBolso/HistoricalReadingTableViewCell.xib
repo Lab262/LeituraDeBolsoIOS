@@ -31,6 +31,9 @@
                             <constraint firstAttribute="width" constant="30" id="xb6-Mz-EP2"/>
                         </constraints>
                         <state key="normal" image="button_likeHistoric_active"/>
+                        <connections>
+                            <action selector="likeReading:" destination="gFy-pY-u1d" eventType="touchUpInside" id="Zqc-Z0-kRs"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTZ-70-xR0">
                         <rect key="frame" x="0.0" y="84" width="375" height="1"/>

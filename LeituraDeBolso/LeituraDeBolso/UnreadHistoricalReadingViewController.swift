@@ -18,10 +18,24 @@ class UnreadHistoricalReadingViewController: UIViewController {
     
     
     override func viewWillAppear(animated: Bool) {
-        let readingDay = Reading()
         
+
+    }
+    
+    func registerNibs () {
         
         self.tableView.registerNib(UINib(nibName: "HistoricalReadingTableViewCell", bundle: nil), forCellReuseIdentifier: HistoricalReadingTableViewCell.identifier)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.registerNibs()
+        self.configureTableView()
+        self.registerObserver()
+        
+        let readingDay = Reading()
+        
         
         readingDay.duration = "21 min"
         readingDay.title = "As Cronicas de Gelo e Fogo, A Fúria dos Reis, A Tormenta de Espadas"
@@ -31,17 +45,40 @@ class UnreadHistoricalReadingViewController: UIViewController {
         readingDay.author = "DULCINO DE MORAIS VIEIRA COSTA SMADI"
         
         self.allReadings.append(readingDay)
-
+        
+       
+        // Do any additional setup after loading the view.
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    func registerObserver () {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(newFavoriteReading(_:)), name: KEY_NOTIFICATION_NEW_FAVORITE, object: nil)
+    }
+    
+    func configureTableView () {
         
         self.tableView.estimatedRowHeight = 140
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.layoutIfNeeded()
 
-        // Do any additional setup after loading the view.
+    }
+    
+    func newFavoriteReading (notification: NSNotification) {
+        self.tableView.reloadData()
+    }
+    
+    func likeReader (sender: UIButton) {
+        
+        if sender.selected == true {
+            
+            ApplicationState.sharedInstance.favoriteReads.append(self.allReadings[sender.tag])
+        } else {
+            
+            ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.allReadings[sender.tag]}
+        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(KEY_NOTIFICATION_NEW_FAVORITE, object: nil)
+        
     }
 
     func generateHistoricalReadingCell (tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
@@ -49,6 +86,21 @@ class UnreadHistoricalReadingViewController: UIViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(HistoricalReadingTableViewCell.identifier, forIndexPath: indexPath) as! HistoricalReadingTableViewCell
         
         cell.reading = self.allReadings[indexPath.row]
+        
+        cell.likeButton.tag = indexPath.row
+        cell.likeButton.selected = false
+        
+        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
+            let readingFavorite = self.allReadings.filter {
+                ($0.title?.localizedCaseInsensitiveContainsString(ApplicationState.sharedInstance.favoriteReads[indexPath.row].title!))!
+            }
+            
+            if !readingFavorite.isEmpty {
+                cell.likeButton.selected = true
+            }
+        }
+        
+        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), forControlEvents: .TouchUpInside)
         
         return cell
     }
@@ -77,6 +129,9 @@ extension UnreadHistoricalReadingViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        if self.allReadings.isEmpty {
+            return 0
+        }
         return self.allReadings.count
     }
 }

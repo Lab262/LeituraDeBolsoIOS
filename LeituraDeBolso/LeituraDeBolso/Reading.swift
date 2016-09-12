@@ -10,6 +10,7 @@ import UIKit
 
 class Reading: NSObject {
     
+    var id: String?
     var title: String?
     var author: String?
     var emojis: Array<String>?

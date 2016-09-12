@@ -8,19 +8,25 @@
 
 import UIKit
 
+let KEY_NOTIFICATION_NEW_FAVORITE = "NEW_READING_FAVORITE"
+
 class FavoriteHistoricalReadingViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var allReadings = Array<Reading>()
+    var favoriteReads: [Reading] = ApplicationState.sharedInstance.favoriteReads
     
     var selectedIndexPath: NSIndexPath?
-    
     
     
     override func viewWillAppear(animated: Bool) {
         
         
+    }
+    
+    func registerObserver () {
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(newReading(_:)), name: KEY_NOTIFICATION_NEW_FAVORITE, object: nil)
     }
     
     func registerNibs () {
@@ -41,32 +47,37 @@ class FavoriteHistoricalReadingViewController: UIViewController {
         
         self.registerNibs()
         self.configureTableView()
-        
-        let readingDay = Reading()
-        
-        readingDay.duration = "21 min"
-        readingDay.title = "As Cronicas de Gelo e Fogo, A Fúria dos Reis, A Tormenta de Espadas"
-        
-        readingDay.text = "The majestic Rocky Mountains are a major tourist location in the western United States. Visitors can participate in a quantity of activities, including hiking, skiing, snowboarding, mountain biking, & plenty of more. The Rockies are home to several campgrounds, ghost towns, gold prospecting sites, & national parks. a quantity of the biggest tourist attractions in the Rockies are Pike’s Peak & Royal Gorge. There are several world famous national parks in the Rockies, including Yellowstone, Rocky Mountain, Grand Teton, & Glacier.\n \nThe legendary Rocky Mountains stretch from old Mexico up through the United States & into Canada. The Rocky Mountains are over 3000 miles long, spanning parts of california, Colorado, Idaho, Montana, & Wyoming before continuing into Canada. Stories of early adventurers like Lewis & Clark exploring the Rocky Mountains are legendary."
-        
-        readingDay.author = "DULCINO DE MORAIS VIEIRA COSTA SMADI"
-        
-        self.allReadings.append(readingDay)
-        
-        self.tableView.reloadData()
+        self.registerObserver()
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func newReading (notification: NSNotification) {
+        self.favoriteReads = ApplicationState.sharedInstance.favoriteReads
+        tableView.reloadData()    }
+    
+//    func reloadFavoriteReads () {
+//        self.favoriteReads = ApplicationState.sharedInstance.favoriteReads
+//        tableView.reloadData()
+//    }
+    
+    func likeReader (sender: UIButton) {
+    
+        ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.favoriteReads[sender.tag].title}
+        
+        NSNotificationCenter.defaultCenter().postNotificationName(KEY_NOTIFICATION_NEW_FAVORITE, object: nil)
+        
     }
+
     
     func generateHistoricalReadingCell (tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(HistoricalReadingTableViewCell.identifier, forIndexPath: indexPath) as! HistoricalReadingTableViewCell
         
-        cell.reading = self.allReadings[indexPath.row]
+        cell.reading = self.favoriteReads[indexPath.row]
+        cell.tag = indexPath.row
+        cell.likeButton.selected = true
+        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), forControlEvents: .TouchUpInside)
         
         return cell
     }
@@ -78,7 +89,7 @@ class FavoriteHistoricalReadingViewController: UIViewController {
             
             if let destinationViewController = segue.destinationViewController as? ReadingDayViewController {
                 
-                destinationViewController.readingDay = self.allReadings[selectedIndexPath!.row]
+                destinationViewController.readingDay = self.favoriteReads[selectedIndexPath!.row]
                 
             }
             
@@ -97,10 +108,10 @@ extension FavoriteHistoricalReadingViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if self.allReadings.isEmpty {
+        if self.favoriteReads.isEmpty {
             return 0
         }
-        return self.allReadings.count
+        return self.favoriteReads.count
     }
 }
 

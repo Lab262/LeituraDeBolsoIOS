@@ -20,7 +20,27 @@ class FavoriteHistoricalReadingViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         
+        
+    }
+    
+    func registerNibs () {
+        
         self.tableView.registerNib(UINib(nibName: "HistoricalReadingTableViewCell", bundle: nil), forCellReuseIdentifier: HistoricalReadingTableViewCell.identifier)
+        
+    }
+    
+    func configureTableView () {
+        
+        self.tableView.estimatedRowHeight = 140
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.layoutIfNeeded()
+        
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.registerNibs()
+        self.configureTableView()
         
         let readingDay = Reading()
         
@@ -32,16 +52,9 @@ class FavoriteHistoricalReadingViewController: UIViewController {
         readingDay.author = "DULCINO DE MORAIS VIEIRA COSTA SMADI"
         
         self.allReadings.append(readingDay)
-
         
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.tableView.estimatedRowHeight = 140
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.layoutIfNeeded()
-        // Do any additional setup after loading the view.
+        self.tableView.reloadData()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,6 +97,9 @@ extension FavoriteHistoricalReadingViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        if self.allReadings.isEmpty {
+            return 0
+        }
         return self.allReadings.count
     }
 }

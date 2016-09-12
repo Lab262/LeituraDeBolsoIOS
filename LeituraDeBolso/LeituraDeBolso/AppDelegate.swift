@@ -13,11 +13,66 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var maskBgView = UIView()
 
-
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func launchScreenAnimation () {
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        let navigationController = mainStoryboard.instantiateViewControllerWithIdentifier("navigation")
+        self.window!.rootViewController = navigationController
+        
+        self.maskBgView.frame = navigationController.view.frame
+        self.maskBgView.backgroundColor = UIColor.whiteColor()
+        
+        navigationController.view.addSubview(self.maskBgView)
+        
+        let launchScreenImageView = UIImageView(image: UIImage(named: "LaunchScreenFrames1.png"))
+        
+        launchScreenImageView.frame = CGRectMake(0, 0, 153, 153);
+     
+        launchScreenImageView.center = maskBgView.center
+        
+        maskBgView.addSubview(launchScreenImageView)
+        
+        var images = [CGImage]()
+        
+        for i in 1..<71 {
+            
+            images.append((UIImage(named: "LaunchScreenFrames\(i)")?.CGImage)!)
+        }
+        
+        let animation: CAKeyframeAnimation = CAKeyframeAnimation(keyPath: "contents")
+        
+        animation.calculationMode = kCAAnimationDiscrete
+        animation.duration = 70/24
+        animation.values = images
+        animation.repeatCount = 1
+        animation.delegate = self
+        animation.removedOnCompletion = false
+        animation.fillMode = kCAFillModeForwards
+        
+        launchScreenImageView.layer.addAnimation(animation, forKey: "animation")
+        
+    }
     
+    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
+        
+        UIView.animateWithDuration(2, animations: {
+            self.maskBgView.alpha = 0.0
+            }, completion: { (finished) in
                 
+                if finished {
+                    self.maskBgView.removeFromSuperview()
+                }
+        })
+
+    }
+
+   
+    
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        self.launchScreenAnimation()
         
         self.setupBarsAppearance()
         

@@ -52,15 +52,11 @@ class ButtonsTableViewCell: UITableViewCell {
     
     @IBAction func likeReading(sender: AnyObject) {
         
-        
-        
         if !self.likeButton.selected {
         
             self.likeButton.selected = true
 
            // self.likeButton.selectedButtonWithImage(UIImage(named: "button_likeRead_active")!)
-            
-     
             
             self.likeButton.bouncingAnimation(true, duration: 0.2, delay: 0.0, completion: { (finished) in
                 
@@ -70,12 +66,8 @@ class ButtonsTableViewCell: UITableViewCell {
 
                 }
                 
-                
                 }, finalAlpha: 1.0, animationOptions: UIViewAnimationOptions.CurveEaseIn)
-            
-            
         } else {
-            
             
             self.likeButton.selected = false
             self.likeButton.bouncingAnimation(true, duration: 0.2, delay: 0.0, completion: { (finished) in

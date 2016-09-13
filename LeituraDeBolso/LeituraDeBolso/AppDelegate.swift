@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window!.rootViewController = navigationController
         
         self.maskBgView.frame = navigationController.view.frame
-        self.maskBgView.backgroundColor = UIColor.whiteColor()
+        self.maskBgView.backgroundColor = UIColor.colorWithHexString("1BDBAD")
         
         navigationController.view.addSubview(self.maskBgView)
         
@@ -85,6 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
+        let button = UIBarButtonItem.appearance()
+        
         // Color of placeholder
         UILabel.appearanceWhenContainedInInstancesOfClasses([UITextField.self]).textColor = UIColor.readingBlueColor()
         
@@ -98,6 +100,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ([NSFontAttributeName: UIFont(name: "Quicksand-Bold", size: 20)!,
                 NSForegroundColorAttributeName: UIColor.whiteColor()])
         
+        button.setTitleTextAttributes(([NSFontAttributeName: UIFont(name: "Quicksand", size: 14)!,
+            NSForegroundColorAttributeName: UIColor.whiteColor()]), forState: UIControlState.Normal)
     }
 
     func applicationWillResignActive(application: UIApplication) {

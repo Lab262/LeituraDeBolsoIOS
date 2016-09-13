@@ -79,16 +79,22 @@ class AllHistoricalReadingViewController: UIViewController {
         cell.emojiThreeLabel.text = self.allReadings[indexPath.row].emojis![2]
         cell.reading = self.allReadings[indexPath.row]
         cell.likeButton.tag = indexPath.row
-        cell.likeButton.selected = false
-        
+     
         if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
-            let readingFavorite = self.allReadings.filter {
-                ($0.title?.localizedCaseInsensitiveContainsString(ApplicationState.sharedInstance.favoriteReads[indexPath.row].title!))!
+            
+            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
+                
+                    ($0.title?.localizedCaseInsensitiveContainsString(self.allReadings[indexPath.row].title!))!
             }
             
             if !readingFavorite.isEmpty {
                 cell.likeButton.selected = true
+            } else {
+                cell.likeButton.selected = false
             }
+        
+        } else {
+            cell.likeButton.selected = false
         }
 
         cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), forControlEvents: .TouchUpInside)
@@ -102,8 +108,9 @@ class AllHistoricalReadingViewController: UIViewController {
             
             ApplicationState.sharedInstance.favoriteReads.append(self.allReadings[sender.tag])
         } else {
+           
+            ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.allReadings[sender.tag].title}
             
-            ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.allReadings[sender.tag]}
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName(KEY_NOTIFICATION_NEW_FAVORITE, object: nil)

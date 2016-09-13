@@ -54,12 +54,9 @@ class FavoriteHistoricalReadingViewController: UIViewController {
     
     func newReading (notification: NSNotification) {
         self.favoriteReads = ApplicationState.sharedInstance.favoriteReads
-        tableView.reloadData()    }
+        tableView.reloadData()
     
-//    func reloadFavoriteReads () {
-//        self.favoriteReads = ApplicationState.sharedInstance.favoriteReads
-//        tableView.reloadData()
-//    }
+    }
     
     func likeReader (sender: UIButton) {
     
@@ -75,7 +72,7 @@ class FavoriteHistoricalReadingViewController: UIViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(HistoricalReadingTableViewCell.identifier, forIndexPath: indexPath) as! HistoricalReadingTableViewCell
         
         cell.reading = self.favoriteReads[indexPath.row]
-        cell.tag = indexPath.row
+        cell.likeButton.tag = indexPath.row
         cell.emojiOneLabel.text = self.favoriteReads[indexPath.row].emojis![0]
         cell.emojiTwoLabel.text = self.favoriteReads[indexPath.row].emojis![1]
         cell.emojiThreeLabel.text = self.favoriteReads[indexPath.row].emojis![2]

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SegmentControlPageDelegate {
-    func segmentScrolled(viewIndex: Int)
+    func segmentScrolled(_ viewIndex: Int)
 }
 
 class HistoricalReadingSegmentViewController: UIViewController {
@@ -41,7 +41,7 @@ class HistoricalReadingSegmentViewController: UIViewController {
 //Pragma MARK: - UIScrollViewDelegate
 extension HistoricalReadingSegmentViewController: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.setupPage()
     }
     
@@ -59,11 +59,11 @@ extension HistoricalReadingSegmentViewController: UIScrollViewDelegate {
 //Pragma MARK: - SegmentControlButtonDelegate
 extension HistoricalReadingSegmentViewController: SegmentControlButtonDelegate {
     
-    func segmentSelected(viewIndex: Int) {
+    func segmentSelected(_ viewIndex: Int) {
         
         var rectToScroll = self.view.frame
         rectToScroll.origin.x = self.view.frame.width * CGFloat(viewIndex)
-        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: UIViewAnimationOptions(), animations: {
             self.scrollView.scrollRectToVisible(rectToScroll, animated: false)
             }, completion: nil)
     }

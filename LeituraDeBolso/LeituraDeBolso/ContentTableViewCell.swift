@@ -21,18 +21,21 @@ class ContentTableViewCell: UITableViewCell {
         }
     }
     
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func didMoveToWindow() {
         
         self.contentReadingLabel.setSizeFont(ApplicationState.sharedInstance.sizeFontSelected!)
-        
         
         if ApplicationState.sharedInstance.modeNight == true {
             self.setNightMode()
         } else {
             self.setNormalMode()
         }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        
     }
 
     func updateUI () {
@@ -44,17 +47,17 @@ class ContentTableViewCell: UITableViewCell {
     
     func setNightMode () {
         
-        self.authorReadingLabel.textColor = UIColor.whiteColor()
-        self.contentReadingLabel.textColor = UIColor.whiteColor()
+        self.authorReadingLabel.textColor = UIColor.white
+        self.contentReadingLabel.textColor = UIColor.white
         self.backgroundColor = UIColor.colorWithHexString("190126")
         
     }
     
     func setNormalMode () {
         
-        self.authorReadingLabel.textColor = UIColor.blackColor()
-        self.contentReadingLabel.textColor = UIColor.blackColor()
-        self.backgroundColor = UIColor.whiteColor()
+        self.authorReadingLabel.textColor = UIColor.black
+        self.contentReadingLabel.textColor = UIColor.black
+        self.backgroundColor = UIColor.white
     }
     
 

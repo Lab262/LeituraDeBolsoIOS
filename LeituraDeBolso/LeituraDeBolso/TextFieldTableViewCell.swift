@@ -34,12 +34,12 @@ class TextFieldTableViewCell: UITableViewCell {
     
     //MARK: Setup dos observers
     func setupObserver(){
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(myTextFieldDidChange), name: UITextFieldTextDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(myTextFieldDidChange), name: NSNotification.Name.UITextFieldTextDidChange, object: nil)
     }
     
     deinit{
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     
     }
     
@@ -54,7 +54,7 @@ class TextFieldTableViewCell: UITableViewCell {
         self.completionText(self.textField.text!)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.endEditing(true)
         self.textField.resignFirstResponder()
     }
@@ -66,11 +66,11 @@ class TextFieldTableViewCell: UITableViewCell {
 extension TextFieldTableViewCell : UITextFieldDelegate{
     
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         self.completionText(textField.text!)
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.textField.resignFirstResponder()
         self.completionText(textField.text!)
         return true

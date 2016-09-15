@@ -27,32 +27,41 @@ class HeadingTableViewCell: UITableViewCell {
     }
     
     
-    
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func didMoveToWindow() {
         
         if ApplicationState.sharedInstance.modeNight == true {
             self.setNightMode()
         } else {
             self.setNormalMode()
         }
+        
+    }
+    
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+//        if ApplicationState.sharedInstance.modeNight == true {
+//            self.setNightMode()
+//        } else {
+//            self.setNormalMode()
+//        }
     }
     
     
     func setNightMode () {
         
-        self.titleLabel.textColor = UIColor.whiteColor()
-        self.timeLabel.textColor = UIColor.whiteColor()
+        self.titleLabel.textColor = UIColor.white
+        self.timeLabel.textColor = UIColor.white
         self.backgroundColor = UIColor.colorWithHexString("190126")
         
     }
     
     func setNormalMode () {
         
-        self.titleLabel.textColor = UIColor.blackColor()
-        self.timeLabel.textColor = UIColor.blackColor()
-        self.backgroundColor = UIColor.whiteColor()
+        self.titleLabel.textColor = UIColor.black
+        self.timeLabel.textColor = UIColor.colorWithHexString("9B9B9B")
+        self.backgroundColor = UIColor.white
     }
 
 

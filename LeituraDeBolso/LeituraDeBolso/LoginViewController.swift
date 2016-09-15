@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         
     }
@@ -33,26 +33,26 @@ class LoginViewController: UIViewController {
     
     func registerNibs () {
         
-        self.tableView.registerNib(UINib(nibName: "ImageLogoTableViewCell", bundle: nil), forCellReuseIdentifier: ImageLogoTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: "ImageLogoTableViewCell", bundle: nil), forCellReuseIdentifier: ImageLogoTableViewCell.identifier)
         
-        self.tableView.registerNib(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: TextFieldTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: "TextFieldTableViewCell", bundle: nil), forCellReuseIdentifier: TextFieldTableViewCell.identifier)
         
-        self.tableView.registerNib(UINib(nibName: "ButtonTableViewCell", bundle: nil), forCellReuseIdentifier: ButtonTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: "ButtonTableViewCell", bundle: nil), forCellReuseIdentifier: ButtonTableViewCell.identifier)
         
     }
     
-    func generateLogoImageCell (tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+    func generateLogoImageCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(ImageLogoTableViewCell.identifier, forIndexPath: indexPath) as! ImageLogoTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ImageLogoTableViewCell.identifier, for: indexPath) as! ImageLogoTableViewCell
         
         cell.titleLabel.text = "Log in"
         
         return cell
     }
     
-    func generateEmailTextFieldCell (tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+    func generateEmailTextFieldCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(TextFieldTableViewCell.identifier, forIndexPath: indexPath) as! TextFieldTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
         
         cell.iconImage.image = UIImage(named: "icon_email")
         cell.textField.placeholder = "Email"
@@ -65,9 +65,9 @@ class LoginViewController: UIViewController {
         return cell
     }
     
-    func generatePasswordTextFieldCell (tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+    func generatePasswordTextFieldCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(TextFieldTableViewCell.identifier, forIndexPath: indexPath) as! TextFieldTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
         
         cell.iconHeightConstraint.constant = 31
         cell.iconWidthConstraint.constant = 23
@@ -83,28 +83,28 @@ class LoginViewController: UIViewController {
         return cell
     }
     
-    func generateForgotPassButtonCell (tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+    func generateForgotPassButtonCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(ButtonTableViewCell.identifier, forIndexPath: indexPath) as! ButtonTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.identifier, for: indexPath) as! ButtonTableViewCell
         
         
-        cell.button.addTarget(self, action: #selector(recoverPassword(_:)), forControlEvents: .TouchUpInside)
+        cell.button.addTarget(self, action: #selector(recoverPassword(_:)), for: .touchUpInside)
         
         cell.button.titleLabel?.font = UIFont(name: "Comfortaa", size: 15)
-        cell.button.setTitle("Esqueci a senha", forState: .Normal)
-        cell.button.backgroundColor = UIColor.clearColor()
+        cell.button.setTitle("Esqueci a senha", for: UIControlState())
+        cell.button.backgroundColor = UIColor.clear
         
         
         return cell
     }
     
-    func generateLoginButtonCell (tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+    func generateLoginButtonCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(ButtonTableViewCell.identifier, forIndexPath: indexPath) as! ButtonTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.identifier, for: indexPath) as! ButtonTableViewCell
         
-        cell.button.addTarget(self, action: #selector(loginUser(_:)), forControlEvents: .TouchUpInside)
+        cell.button.addTarget(self, action: #selector(loginUser(_:)), for: .touchUpInside)
         
-        cell.button.setTitle("Entrar", forState: .Normal)
+        cell.button.setTitle("Entrar", for: UIControlState())
         
         
         return cell
@@ -113,18 +113,18 @@ class LoginViewController: UIViewController {
     
 
 
-    @IBAction func popoverView(sender: AnyObject) {
+    @IBAction func popoverView(_ sender: AnyObject) {
         
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
-    func recoverPassword (sender: UIButton) {
+    func recoverPassword (_ sender: UIButton) {
         
         
     }
     
-    func loginUser (sender: UIButton) {
+    func loginUser (_ sender: UIButton) {
         
     }
 
@@ -132,14 +132,14 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 5
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
             
         case 0:
             return generateLogoImageCell(tableView, indexPath: indexPath)
@@ -160,10 +160,10 @@ extension LoginViewController: UITableViewDataSource {
 
 extension LoginViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
             
         case 0:
             return 205

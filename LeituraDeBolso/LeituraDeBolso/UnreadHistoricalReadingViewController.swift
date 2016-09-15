@@ -14,17 +14,17 @@ class UnreadHistoricalReadingViewController: UIViewController {
     
     var allReadings = Array<Reading>()
     
-    var selectedIndexPath: NSIndexPath?
+    var selectedIndexPath: IndexPath?
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
 
     }
     
     func registerNibs () {
         
-        self.tableView.registerNib(UINib(nibName: "HistoricalReadingTableViewCell", bundle: nil), forCellReuseIdentifier: HistoricalReadingTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: "HistoricalReadingTableViewCell", bundle: nil), forCellReuseIdentifier: HistoricalReadingTableViewCell.identifier)
     }
 
     override func viewDidLoad() {
@@ -53,7 +53,7 @@ class UnreadHistoricalReadingViewController: UIViewController {
     
     func registerObserver () {
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(newFavoriteReading(_:)), name: KEY_NOTIFICATION_NEW_FAVORITE, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(newFavoriteReading(_:)), name: NSNotification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
     }
     
     func configureTableView () {
@@ -64,13 +64,13 @@ class UnreadHistoricalReadingViewController: UIViewController {
 
     }
     
-    func newFavoriteReading (notification: NSNotification) {
+    func newFavoriteReading (_ notification: Notification) {
         self.tableView.reloadData()
     }
     
-    func likeReader (sender: UIButton) {
+    func likeReader (_ sender: UIButton) {
         
-        if sender.selected == true {
+        if sender.isSelected == true {
             
             ApplicationState.sharedInstance.favoriteReads.append(self.allReadings[sender.tag])
         } else {
@@ -78,52 +78,52 @@ class UnreadHistoricalReadingViewController: UIViewController {
             ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.allReadings[sender.tag].title}
         }
         
-        NSNotificationCenter.defaultCenter().postNotificationName(KEY_NOTIFICATION_NEW_FAVORITE, object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
         
     }
 
-    func generateHistoricalReadingCell (tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+    func generateHistoricalReadingCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(HistoricalReadingTableViewCell.identifier, forIndexPath: indexPath) as! HistoricalReadingTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: HistoricalReadingTableViewCell.identifier, for: indexPath) as! HistoricalReadingTableViewCell
         
-        cell.reading = self.allReadings[indexPath.row]
+        cell.reading = self.allReadings[(indexPath as NSIndexPath).row]
         
-        cell.emojiOneLabel.text = self.allReadings[indexPath.row].emojis![0]
-        cell.emojiTwoLabel.text = self.allReadings[indexPath.row].emojis![1]
-        cell.emojiThreeLabel.text = self.allReadings[indexPath.row].emojis![2]
-        cell.likeButton.tag = indexPath.row
+        cell.emojiOneLabel.text = self.allReadings[(indexPath as NSIndexPath).row].emojis![0]
+        cell.emojiTwoLabel.text = self.allReadings[(indexPath as NSIndexPath).row].emojis![1]
+        cell.emojiThreeLabel.text = self.allReadings[(indexPath as NSIndexPath).row].emojis![2]
+        cell.likeButton.tag = (indexPath as NSIndexPath).row
         
         if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
             
             let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
                 
-                ($0.title?.localizedCaseInsensitiveContainsString(self.allReadings[indexPath.row].title!))!
+                ($0.title?.localizedCaseInsensitiveContains(self.allReadings[indexPath.row].title!))!
             }
             
             if !readingFavorite.isEmpty {
-                cell.likeButton.selected = true
+                cell.likeButton.isSelected = true
             } else {
-                cell.likeButton.selected = false
+                cell.likeButton.isSelected = false
             }
             
         } else {
             
-            cell.likeButton.selected = false
+            cell.likeButton.isSelected = false
         }
         
-        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), forControlEvents: .TouchUpInside)
+        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
         
         return cell
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "goReadingView" {
             
-            if let destinationViewController = segue.destinationViewController as? ReadingDayViewController {
+            if let destinationViewController = segue.destination as? ReadingDayViewController {
                 
-                destinationViewController.readingDay = self.allReadings[selectedIndexPath!.row]
+                destinationViewController.readingDay = self.allReadings[(selectedIndexPath! as NSIndexPath).row]
                 
             }
             
@@ -133,12 +133,12 @@ class UnreadHistoricalReadingViewController: UIViewController {
 
 extension UnreadHistoricalReadingViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         return generateHistoricalReadingCell(tableView, indexPath: indexPath)
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if self.allReadings.isEmpty {
             return 0
@@ -149,10 +149,10 @@ extension UnreadHistoricalReadingViewController: UITableViewDataSource {
 
 extension UnreadHistoricalReadingViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         self.selectedIndexPath = indexPath
-        self.performSegueWithIdentifier("goReadingView", sender: self)
+        self.performSegue(withIdentifier: "goReadingView", sender: self)
         
     }
 }

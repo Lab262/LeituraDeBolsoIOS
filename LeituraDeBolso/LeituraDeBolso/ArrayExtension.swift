@@ -9,7 +9,7 @@
 import UIKit
 
 extension Array where Element: Equatable {
-    func removeObject(object: Element) -> [Element] {
+    func removeObject(_ object: Element) -> [Element] {
         return filter { $0 != object }
     }
 }

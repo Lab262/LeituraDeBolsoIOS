@@ -11,15 +11,15 @@ import UIKit
 extension UIButton {
     
     
-    func selectedButtonWithImage(imageSelected: UIImage? = nil) {
+    func selectedButtonWithImage(_ imageSelected: UIImage? = nil) {
         
         if imageSelected != nil {
-            self.setImage(imageSelected, forState: .Normal)
+            self.setImage(imageSelected, for: UIControlState())
 
         }
         
-        UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.1, initialSpringVelocity: 0.1, options: .CurveEaseInOut,animations: {
-            self.transform = CGAffineTransformMakeScale(1.2, 1.2)
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.1, initialSpringVelocity: 0.1, options: UIViewAnimationOptions(),animations: {
+            self.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             }, completion: { (finished) in
 //                self.transform = CGAffineTransformMakeScale(1.0, 1.0)
                 

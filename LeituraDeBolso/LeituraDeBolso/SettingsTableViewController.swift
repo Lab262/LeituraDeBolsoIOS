@@ -13,11 +13,10 @@ import UIKit
 class SettingsTableViewController: UITableViewController {
 
     
-    private var showDateVisible = false
+    fileprivate var showDateVisible = false
     
-    private var currentModeReader = false
-    private var currentFontSize: CGFloat = 0.0
-    private var dictionarySizeText: Dictionary <CGFloat, Float> = [11.0: 1, 12.0: 2, 13.0: 3, 14.0: 4, 15.0: 5,  16.0: 6, 17.0: 7]
+   
+    fileprivate var dictionarySizeText: Dictionary <CGFloat, Float> = [11.0: 1, 12.0: 2, 13.0: 3, 14.0: 4, 15.0: 5,  16.0: 6, 17.0: 7]
     
     @IBOutlet weak var timeTableLabel: UILabel!
     
@@ -30,10 +29,36 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var trackView: UIView!
     
     
+    @IBOutlet weak var notificationLabel: UILabel!
+    @IBOutlet weak var receiveLabel: UILabel!
     
     
-    override func viewWillAppear(animated: Bool) {
+    @IBOutlet weak var nightModeLabel: UILabel!
+    
+    
+    @IBOutlet weak var informationNightLabel: UILabel!
+    
+    
+    @IBOutlet weak var textSizeLabel: UILabel!
+    
+    @IBOutlet weak var smallerSizeLabel: UILabel!
+    
+    
+    @IBOutlet weak var largerSizeLabel: UILabel!
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
         
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        
+        if ApplicationState.sharedInstance.modeNight! {
+            self.setNightMode()
+        } else {
+            self.setNormalMode()
+        }
         
     }
     
@@ -41,19 +66,17 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.trackView.layer.zPosition = -1
-        self.modeNightSwitch.on = ApplicationState.sharedInstance.modeNight!
-        
-        self.currentModeReader = self.modeNightSwitch.on
-        self.currentFontSize = ApplicationState.sharedInstance.sizeFontSelected!
+        self.modeNightSwitch.isOn = ApplicationState.sharedInstance.modeNight!
+            
         self.fontSizeSlider.steps = 7
         self.fontSizeSlider.minValue = 1
         self.fontSizeSlider.maxValue = 7
         self.fontSizeSlider.value = self.dictionarySizeText[ApplicationState.sharedInstance.sizeFontSelected!]!
-        self.fontSizeSlider.addTarget(self, action: #selector(changedFontSizeText(_:)), forControlEvents: .AllEvents)
+        self.fontSizeSlider.addTarget(self, action: #selector(changedFontSizeText(_:)), for: .allEvents)
 
     }
     
-    func changedFontSizeText (sender: UIButton) {
+    func changedFontSizeText (_ sender: UIButton) {
         
         if self.fontSizeSlider.value == 1 {
             ApplicationState.sharedInstance.sizeFontSelected = 11
@@ -73,35 +96,81 @@ class SettingsTableViewController: UITableViewController {
         
     }
     
-    @IBAction func nightModeSelected(sender: AnyObject) {
+    @IBAction func nightModeSelected(_ sender: AnyObject) {
         
-        if self.modeNightSwitch.on {
+        if self.modeNightSwitch.isOn {
             
            ApplicationState.sharedInstance.modeNight = true
-         
+           self.setNightMode()
             
         } else {
             
            ApplicationState.sharedInstance.modeNight = false
+            self.setNormalMode()
         }
 
     }
     
-    
-    @IBAction func popoverView(sender: AnyObject) {
+    func setNightMode () {
         
-        if self.currentModeReader != ApplicationState.sharedInstance.modeNight || self.currentFontSize != ApplicationState.sharedInstance.sizeFontSelected {
+        self.view.backgroundColor = UIColor.readingModeNightBackground()
+        self.tableView.backgroundColor = UIColor.readingModeNightBackground()
         
-            self.presentViewController(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
-        } else {
-         
-            self.navigationController?.popViewControllerAnimated(true)
+        for (_, cell) in self.tableView.visibleCells.enumerated() {
+            cell.backgroundColor = UIColor.readingModeNightBackground()
         }
+        
+        
+        for i in 1..<7 {
+            
+            if let label = self.view.viewWithTag(i) as? UILabel {
+            label.textColor = UIColor.white
+                
+            }
+        }
+        
+        self.timeTableDatePicker.setValue(UIColor.white, forKey: "textColor")
+        self.timeTableDatePicker.layoutIfNeeded()
+
+        
+        
+    }
+    
+    func setNormalMode () {
+        
+        
+        self.view.backgroundColor = UIColor.white
+        self.tableView.backgroundColor = UIColor.white
+        
+        
+        for (_, cell) in self.tableView.visibleCells.enumerated() {
+            cell.backgroundColor = UIColor.white
+        }
+        
+        
+        for i in 1..<7 {
+            
+            if let label = self.view.viewWithTag(i) as? UILabel {
+                label.textColor = UIColor.black
+                
+            }
+        }
+        
+        self.timeTableDatePicker.setValue(UIColor.white, forKey: "textColor")
+
+       
+    }
+    
+    
+    @IBAction func popoverView(_ sender: AnyObject) {
+
+        self.navigationController!.popViewController(animated: true)
+      
     }
     
    
    
-    @IBAction func showTimeTable(sender: AnyObject) {
+    @IBAction func showTimeTable(_ sender: AnyObject) {
         
         self.showHourChanged()
         
@@ -109,18 +178,18 @@ class SettingsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return 5
     }
     
   
-    private func toogleDatePicker () {
+    fileprivate func toogleDatePicker () {
         
         self.showDateVisible = !self.showDateVisible
         
@@ -128,29 +197,29 @@ class SettingsTableViewController: UITableViewController {
         tableView.endUpdates()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        if indexPath.row == 1 {
+        if (indexPath as NSIndexPath).row == 1 {
             self.toogleDatePicker()
             
         }
     }
     
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if !self.showDateVisible && indexPath.row == 2 {
+        if !self.showDateVisible && (indexPath as NSIndexPath).row == 2 {
             return 0
         } else {
-            return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+            return super.tableView(tableView, heightForRowAt: indexPath)
         }
     }
     
     
-    private func showHourChanged () {
+    fileprivate func showHourChanged () {
         
-        self.timeTableLabel.text = NSDateFormatter.localizedStringFromDate(self.timeTableDatePicker.date, dateStyle: .NoStyle, timeStyle: .ShortStyle)
+        self.timeTableLabel.text = DateFormatter.localizedString(from: self.timeTableDatePicker.date, dateStyle: .none, timeStyle: .short)
         
     }
  }

@@ -11,33 +11,33 @@ import UIKit
 
 @IBDesignable
 
-public class StepSlider: UISlider {
+open class StepSlider: UISlider {
 
     // Inspectables
-    @IBInspectable public var steps: Int = 5 {
+    @IBInspectable open var steps: Int = 5 {
         didSet { maximumValue = Float(steps - 1) }
     }
-    @IBInspectable public var minValue: Float = 0.0 {
+    @IBInspectable open var minValue: Float = 0.0 {
         didSet { minimumValue = minValue }
     }
-    @IBInspectable public var maxValue: Float = 4.0 {
+    @IBInspectable open var maxValue: Float = 4.0 {
         didSet { maximumValue = maxValue }
     }
-    @IBInspectable public var customTrack: Bool = false
-    @IBInspectable public var trackHeight: Int = 1
-    @IBInspectable public var trackColor: UIColor = UIColor.colorWithHexString("BFBFBF")
-    @IBInspectable public var stepTickWidth: Int = 1
-    @IBInspectable public var stepTickHeight: Double = 12
-    @IBInspectable public var stepTickColor: UIColor = UIColor.colorWithHexString("BFBFBF")
-    @IBInspectable public var stepTickRounded: Bool = false
+    @IBInspectable open var customTrack: Bool = false
+    @IBInspectable open var trackHeight: Int = 1
+    @IBInspectable open var trackColor: UIColor = UIColor.colorWithHexString("BFBFBF")
+    @IBInspectable open var stepTickWidth: Int = 1
+    @IBInspectable open var stepTickHeight: Double = 12
+    @IBInspectable open var stepTickColor: UIColor = UIColor.colorWithHexString("BFBFBF")
+    @IBInspectable open var stepTickRounded: Bool = false
     
     // Computeds
     var stepWidth: Double {
         return Double(trackWidth) / (Double(steps - 1))
     }
     var thumbRect: CGRect {
-        let trackRect = trackRectForBounds(bounds)
-        return thumbRectForBounds(bounds, trackRect: trackRect, value: value)
+        let trackRect = self.trackRect(forBounds: bounds)
+        return self.thumbRect(forBounds: bounds, trackRect: trackRect, value: value)
     }
     var trackWidth: CGFloat {
         return self.bounds.size.width - thumbRect.width
@@ -47,50 +47,50 @@ public class StepSlider: UISlider {
     }
     
     // Properties for handling touch
-    var previousLocation = CGPointZero
+    var previousLocation = CGPoint.zero
     var dragging = false
     var originalValue: Int = 0
     
     // Methods
-    override public func awakeFromNib() {
+    override open func awakeFromNib() {
         super.awakeFromNib()
         setupView()
     }
     
-    override public func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override open func draw(_ rect: CGRect) {
+        super.draw(rect)
         drawTrack()
     }
     
     func drawTrack() {
         
         let ctx = UIGraphicsGetCurrentContext()
-        CGContextSaveGState(ctx)
+        ctx?.saveGState()
         
         // Remove the original track if custom
         if customTrack {
             
             // Clear original track using a transparent pixel
-            UIGraphicsBeginImageContextWithOptions(CGSizeMake(1, 1), false, 0.0)
+            UIGraphicsBeginImageContextWithOptions(CGSize(width: 1, height: 1), false, 0.0)
             let transparentImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
-            setMaximumTrackImage(transparentImage, forState: .Normal)
-            setMinimumTrackImage(transparentImage, forState: .Normal)
+            setMaximumTrackImage(transparentImage, for: UIControlState())
+            setMinimumTrackImage(transparentImage, for: UIControlState())
             
             // Draw custom track
-            CGContextSetFillColorWithColor(ctx, trackColor.CGColor)
+            ctx?.setFillColor(trackColor.cgColor)
             let x = trackOffset
             let y = Int((bounds.height / 2)) - (trackHeight / 2)
             let trackPath = UIBezierPath(rect: CGRect(x: Int(x), y: y, width: Int(bounds.width - (trackOffset * 2)), height: trackHeight))
             
-            CGContextAddPath(ctx, trackPath.CGPath)
-            CGContextFillPath(ctx)
+            ctx?.addPath(trackPath.cgPath)
+            ctx?.fillPath()
         }
         
         
         // Draw ticks
-        CGContextSetFillColorWithColor(ctx, stepTickColor.CGColor)
+        ctx?.setFillColor(stepTickColor.cgColor)
         
         for index in 0..<steps {
             
@@ -105,11 +105,11 @@ public class StepSlider: UISlider {
                 stepPath = UIBezierPath(rect: CGRect(x: x, y: y, width: Double(stepTickWidth), height: stepTickHeight))
             }
             
-            CGContextAddPath(ctx, stepPath.CGPath)
-            CGContextFillPath(ctx)
+            ctx?.addPath(stepPath.cgPath)
+            ctx?.fillPath()
         }
         
-        CGContextRestoreGState(ctx)
+        ctx?.restoreGState()
     }
 }
 
@@ -117,8 +117,8 @@ public class StepSlider: UISlider {
 // MARK: - Touch Handling
 extension StepSlider {
     
-    override public func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        let location = touch.locationInView(self)
+    override open func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let location = touch.location(in: self)
         originalValue = Int(value)
         
         if thumbRect.contains(location) {
@@ -132,13 +132,13 @@ extension StepSlider {
         return dragging
     }
     
-    override public func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
-        let location = touch.locationInView(self)
+    override open func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        let location = touch.location(in: self)
         
         let deltaLocation = Double(location.x) - Double(previousLocation.x)
         let deltaValue = Int(round(fabs(deltaLocation) / stepWidth))
         
-        func clipValue(value: Int) -> Int {
+        func clipValue(_ value: Int) -> Int {
             return min(max(value, Int(minimumValue)), Int(maximumValue))
         }
         
@@ -157,13 +157,13 @@ extension StepSlider {
         return true
     }
     
-    override public func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
-        previousLocation = CGPointZero
+    override open func endTracking(_ touch: UITouch?, with event: UIEvent?) {
+        previousLocation = CGPoint.zero
         originalValue = 0
         dragging = false
         
-        if self.continuous == false {
-            self.sendActionsForControlEvents(.ValueChanged)
+        if self.isContinuous == false {
+            self.sendActions(for: .valueChanged)
         }
     }
 }
@@ -179,7 +179,7 @@ extension StepSlider {
 
 // MARK: - IB
 extension StepSlider {
-    override public func prepareForInterfaceBuilder() {
+    override open func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         setupView()
         drawTrack()

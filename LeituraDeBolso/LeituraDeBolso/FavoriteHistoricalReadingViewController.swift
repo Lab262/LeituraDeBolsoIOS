@@ -16,22 +16,22 @@ class FavoriteHistoricalReadingViewController: UIViewController {
     
     var favoriteReads: [Reading] = ApplicationState.sharedInstance.favoriteReads
     
-    var selectedIndexPath: NSIndexPath?
+    var selectedIndexPath: IndexPath?
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         
     }
     
     func registerObserver () {
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(newReading(_:)), name: KEY_NOTIFICATION_NEW_FAVORITE, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(newReading(_:)), name: NSNotification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
     }
     
     func registerNibs () {
         
-        self.tableView.registerNib(UINib(nibName: "HistoricalReadingTableViewCell", bundle: nil), forCellReuseIdentifier: HistoricalReadingTableViewCell.identifier)
+        self.tableView.register(UINib(nibName: "HistoricalReadingTableViewCell", bundle: nil), forCellReuseIdentifier: HistoricalReadingTableViewCell.identifier)
         
     }
     
@@ -52,44 +52,44 @@ class FavoriteHistoricalReadingViewController: UIViewController {
     }
 
     
-    func newReading (notification: NSNotification) {
+    func newReading (_ notification: Notification) {
         self.favoriteReads = ApplicationState.sharedInstance.favoriteReads
         tableView.reloadData()
     
     }
     
-    func likeReader (sender: UIButton) {
+    func likeReader (_ sender: UIButton) {
     
         ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.favoriteReads[sender.tag].title}
         
-        NSNotificationCenter.defaultCenter().postNotificationName(KEY_NOTIFICATION_NEW_FAVORITE, object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
         
     }
 
     
-    func generateHistoricalReadingCell (tableView: UITableView, indexPath: NSIndexPath) -> UITableViewCell {
+    func generateHistoricalReadingCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(HistoricalReadingTableViewCell.identifier, forIndexPath: indexPath) as! HistoricalReadingTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: HistoricalReadingTableViewCell.identifier, for: indexPath) as! HistoricalReadingTableViewCell
         
-        cell.reading = self.favoriteReads[indexPath.row]
-        cell.likeButton.tag = indexPath.row
-        cell.emojiOneLabel.text = self.favoriteReads[indexPath.row].emojis![0]
-        cell.emojiTwoLabel.text = self.favoriteReads[indexPath.row].emojis![1]
-        cell.emojiThreeLabel.text = self.favoriteReads[indexPath.row].emojis![2]
-        cell.likeButton.selected = true
-        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), forControlEvents: .TouchUpInside)
+        cell.reading = self.favoriteReads[(indexPath as NSIndexPath).row]
+        cell.likeButton.tag = (indexPath as NSIndexPath).row
+        cell.emojiOneLabel.text = self.favoriteReads[(indexPath as NSIndexPath).row].emojis![0]
+        cell.emojiTwoLabel.text = self.favoriteReads[(indexPath as NSIndexPath).row].emojis![1]
+        cell.emojiThreeLabel.text = self.favoriteReads[(indexPath as NSIndexPath).row].emojis![2]
+        cell.likeButton.isSelected = true
+        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
         
         return cell
     }
     
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "goReadingView" {
             
-            if let destinationViewController = segue.destinationViewController as? ReadingDayViewController {
+            if let destinationViewController = segue.destination as? ReadingDayViewController {
                 
-                destinationViewController.readingDay = self.favoriteReads[selectedIndexPath!.row]
+                destinationViewController.readingDay = self.favoriteReads[(selectedIndexPath! as NSIndexPath).row]
                 
             }
             
@@ -101,12 +101,12 @@ class FavoriteHistoricalReadingViewController: UIViewController {
 
 extension FavoriteHistoricalReadingViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         return generateHistoricalReadingCell(tableView, indexPath: indexPath)
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if self.favoriteReads.isEmpty {
             return 0
@@ -117,10 +117,10 @@ extension FavoriteHistoricalReadingViewController: UITableViewDataSource {
 
 extension FavoriteHistoricalReadingViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         self.selectedIndexPath = indexPath
-        self.performSegueWithIdentifier("goReadingView", sender: self)
+        self.performSegue(withIdentifier: "goReadingView", sender: self)
         
     }
 }

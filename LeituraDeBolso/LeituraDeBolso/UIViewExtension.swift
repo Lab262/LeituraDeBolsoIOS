@@ -11,7 +11,7 @@ import UIKit
 extension UIView {
     
     
-    func loadAnimation (duration: NSTimeInterval = 0.5) {
+    func loadAnimation (_ duration: TimeInterval = 0.5) {
         if let _ = viewWithTag(10) {
             //View is already loading
         } else {
@@ -42,28 +42,28 @@ extension UIView {
         
             self.addSubview(loadView)
         
-            let xCenterConstraint = NSLayoutConstraint(item: activityImageView, attribute: .CenterX, relatedBy: .Equal, toItem: loadView, attribute: .CenterX, multiplier: 1, constant: 0)
+            let xCenterConstraint = NSLayoutConstraint(item: activityImageView, attribute: .centerX, relatedBy: .equal, toItem: loadView, attribute: .centerX, multiplier: 1, constant: 0)
         
-            let yCenterConstraint = NSLayoutConstraint(item: activityImageView, attribute: .CenterY, relatedBy: .Equal, toItem: loadView, attribute: .CenterY, multiplier: 1, constant: 0)
+            let yCenterConstraint = NSLayoutConstraint(item: activityImageView, attribute: .centerY, relatedBy: .equal, toItem: loadView, attribute: .centerY, multiplier: 1, constant: 0)
         
-            NSLayoutConstraint.activateConstraints([xCenterConstraint, yCenterConstraint])
+            NSLayoutConstraint.activate([xCenterConstraint, yCenterConstraint])
         
-            UIView.animateWithDuration(duration) {
+            UIView.animate(withDuration: duration, animations: {
             loadView.alpha = 1.0
-            }
+            }) 
         }
         
     }
     
-    func unload (duration: NSTimeInterval = 0.2) {
+    func unload (_ duration: TimeInterval = 0.2) {
         
         if let loadView = self.viewWithTag(10) {
             
-            UIView.animateWithDuration(duration, animations: { 
+            UIView.animate(withDuration: duration, animations: { 
                 loadView.alpha = 0.0
-            }) { finished in
+            }, completion: { finished in
                 loadView.removeFromSuperview()
-            }
+            }) 
         }
     }
 

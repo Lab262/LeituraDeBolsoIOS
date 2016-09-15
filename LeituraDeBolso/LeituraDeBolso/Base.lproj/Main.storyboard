@@ -35,16 +35,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="116"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="As Cronicas de Gelo e Fogo, a Dança dos Dragoões, nome maior pra testar, mais linhas, uma terceira vai " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="KPG-UT-prK">
-                                                    <rect key="frame" x="22" y="20" width="247" height="55"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="As Cronicas de Gelo e Fogo, a Dança dos Dragoões, nome maior pra testar, mais linhas, uma terceira vai " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPG-UT-prK">
+                                                    <rect key="frame" x="22" y="20" width="247" height="50"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ln-mS-wWj">
-                                                    <rect key="frame" x="47" y="77" width="37" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                                    <color key="textColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="47" y="77" width="41" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_time" translatesAutoresizingMaskIntoConstraints="NO" id="gPO-WG-MdD">
@@ -90,7 +90,7 @@
                                                 <constraint firstItem="KPG-UT-prK" firstAttribute="leading" secondItem="auB-aW-U6g" secondAttribute="leadingMargin" constant="14" id="5RI-Wz-MXr"/>
                                                 <constraint firstItem="dEw-yo-CbE" firstAttribute="centerY" secondItem="Qfv-nk-eIb" secondAttribute="centerY" id="6M0-s9-15Z"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="mfe-XT-qHG" secondAttribute="trailing" constant="2" id="Kii-Rx-5G2"/>
-                                                <constraint firstItem="5ln-mS-wWj" firstAttribute="top" secondItem="KPG-UT-prK" secondAttribute="bottom" constant="2" id="Ylo-u8-lZP"/>
+                                                <constraint firstItem="5ln-mS-wWj" firstAttribute="top" secondItem="KPG-UT-prK" secondAttribute="bottom" constant="7" id="Ylo-u8-lZP"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="gPO-WG-MdD" secondAttribute="bottom" constant="15" id="Zvr-m2-SoZ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="5ln-mS-wWj" secondAttribute="bottom" constant="15" id="aNK-F4-iTp"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="KPG-UT-prK" secondAttribute="trailing" constant="90" id="dwk-q7-pmA"/>
@@ -102,7 +102,7 @@
                                                 <constraint firstItem="KPG-UT-prK" firstAttribute="top" secondItem="auB-aW-U6g" secondAttribute="topMargin" constant="12" id="iHz-cN-Su6"/>
                                                 <constraint firstItem="mfe-XT-qHG" firstAttribute="centerY" secondItem="dEw-yo-CbE" secondAttribute="centerY" id="kwV-Tf-bC5"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="mfe-XT-qHG" secondAttribute="trailing" constant="5" id="mtz-ZL-TuZ"/>
-                                                <constraint firstItem="gPO-WG-MdD" firstAttribute="top" secondItem="KPG-UT-prK" secondAttribute="bottom" constant="2" id="zvB-XI-B0Y"/>
+                                                <constraint firstItem="gPO-WG-MdD" firstAttribute="top" secondItem="KPG-UT-prK" secondAttribute="bottom" constant="7" id="zvB-XI-B0Y"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -127,17 +127,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhl-TC-JrQ">
-                                                    <rect key="frame" x="22" y="0.0" width="331" height="345"/>
+                                                    <rect key="frame" x="22" y="0.0" width="331" height="318"/>
                                                     <string key="text">The majestic Rocky Mountains are a major tourist location in the western United States. Visitors can participate in a quantity of activities, including hiking, skiing, snowboarding, mountain biking, &amp; plenty of more. The Rockies are home to several campgrounds, ghost towns, gold prospecting sites, &amp; national parks. a quantity of the biggest tourist attractions in the Rockies are Pike’s Peak &amp; Royal Gorge. There are several world famous national parks in the Rockies, including Yellowstone, Rocky Mountain, Grand Teton, &amp; Glacier.
 
 The legendary Rocky Mountains stretch from old Mexico up through the United States &amp; into Canada. The Rocky Mountains are over 3000 miles long, spanning parts of california, Colorado, Idaho, Montana, &amp; Wyoming before continuing into Canada. Stories of early adventurers like Lewis &amp; Clark exploring the Rocky Mountains are legendary.</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Marcos Augusto Tito Alves de Morais teste de nome" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="QSK-zx-Yga">
-                                                    <rect key="frame" x="73" y="367" width="229" height="33"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Marcos Augusto Tito Alves de Morais teste de nome" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSK-zx-Yga">
+                                                    <rect key="frame" x="73" y="340" width="229" height="60"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -184,6 +184,9 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                         <constraint firstAttribute="width" constant="46" id="vxE-6j-auh"/>
                                                     </constraints>
                                                     <state key="normal" title="Button" image="button_share"/>
+                                                    <connections>
+                                                        <action selector="shareReading:" destination="XHK-PT-vgt" eventType="touchUpInside" id="vAu-PB-OsF"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -621,7 +624,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notificações" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1Q-iA-wWW">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notificações" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1Q-iA-wWW">
                                                     <rect key="frame" x="42" y="25" width="90" height="19"/>
                                                     <fontDescription key="fontDescription" name="DINBoldAlternate" family="DIN" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -670,7 +673,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receber a Leitura" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmB-xm-pV5">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Receber a Leitura" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmB-xm-pV5">
                                                     <rect key="frame" x="42" y="26" width="127" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -683,7 +686,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                         <constraint firstAttribute="height" constant="1" id="rHx-iD-6oS"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horário" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Psc-cB-PzU">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horário" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Psc-cB-PzU">
                                                     <rect key="frame" x="288" y="26" width="54" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.53725490200000003" green="0.53725490200000003" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -759,7 +762,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modo Noturno" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUn-Ws-daL">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modo Noturno" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUn-Ws-daL">
                                                     <rect key="frame" x="42" y="25" width="106" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -779,11 +782,11 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                         <action selector="nightModeSelected:" destination="uwY-7Q-OCH" eventType="valueChanged" id="3Lz-W0-VLe"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="h3u-c8-FKK">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="h3u-c8-FKK">
                                                     <rect key="frame" x="8" y="68" width="359" height="57"/>
                                                     <string key="text">A sua tela ficará com o fundo preto e texto branco,
 tornando mais agradável sua leitura durante a noite.</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -819,7 +822,7 @@ tornando mais agradável sua leitura durante a noite.</string>
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="122"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tamanho do Texto" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4J-U7-rFv">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="6" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tamanho do Texto" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4J-U7-rFv">
                                                     <rect key="frame" x="42" y="25" width="134" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -853,13 +856,13 @@ tornando mais agradável sua leitura durante a noite.</string>
                                                         <constraint firstAttribute="height" constant="1" id="lOt-of-LMf"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7n7-bc-kaH">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="8" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7n7-bc-kaH">
                                                     <rect key="frame" x="332" y="46" width="15" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAn-Dk-EkB">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="7" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAn-Dk-EkB">
                                                     <rect key="frame" x="33" y="56" width="9" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -903,7 +906,14 @@ tornando mais agradável sua leitura durante a noite.</string>
                     <size key="freeformSize" width="375" height="675"/>
                     <connections>
                         <outlet property="fontSizeSlider" destination="czL-v6-kOf" id="oWa-FZ-OLq"/>
+                        <outlet property="informationNightLabel" destination="h3u-c8-FKK" id="Pa0-XY-yEU"/>
+                        <outlet property="largerSizeLabel" destination="7n7-bc-kaH" id="X7P-h7-x5e"/>
                         <outlet property="modeNightSwitch" destination="X1V-1h-HVS" id="Wqw-6Y-l2r"/>
+                        <outlet property="nightModeLabel" destination="PUn-Ws-daL" id="21M-w7-BP0"/>
+                        <outlet property="notificationLabel" destination="k1Q-iA-wWW" id="P2v-Kr-bgz"/>
+                        <outlet property="receiveLabel" destination="FmB-xm-pV5" id="Y6l-Kz-zXZ"/>
+                        <outlet property="smallerSizeLabel" destination="aAn-Dk-EkB" id="V23-0a-DDK"/>
+                        <outlet property="textSizeLabel" destination="J4J-U7-rFv" id="Gdn-im-6JJ"/>
                         <outlet property="timeTableDatePicker" destination="oQ3-Mj-7iq" id="5kS-sR-jiR"/>
                         <outlet property="timeTableLabel" destination="Psc-cB-PzU" id="3eV-wm-hWt"/>
                         <outlet property="trackView" destination="y4x-xG-84V" id="Pvp-6D-D7r"/>

@@ -12,30 +12,32 @@ import UIKit
 
 extension UIColor {
     //Pragma MARK : - Functions
-    class func colorWithHexString(hex:String) -> UIColor {
-        var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
+    class func colorWithHexString(_ hex:String) -> UIColor {
+        
+        var cString = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        //var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercased()
         
         if (cString.hasPrefix("#")) {
-            cString = (cString as NSString).substringFromIndex(1)
+            cString = (cString as NSString).substring(from: 1)
         }
         
         if (cString.characters.count != 6) {
-            return UIColor.grayColor()
+            return UIColor.gray
         }
         
-        let rString = (cString as NSString).substringToIndex(2)
-        let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
-        let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+        let rString = (cString as NSString).substring(to: 2)
+        let gString = ((cString as NSString).substring(from: 2) as NSString).substring(to: 2)
+        let bString = ((cString as NSString).substring(from: 4) as NSString).substring(to: 2)
         
         var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
-        NSScanner(string: rString).scanHexInt(&r)
-        NSScanner(string: gString).scanHexInt(&g)
-        NSScanner(string: bString).scanHexInt(&b)
+        Scanner(string: rString).scanHexInt32(&r)
+        Scanner(string: gString).scanHexInt32(&g)
+        Scanner(string: bString).scanHexInt32(&b)
         
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
     }
     
-    public func hexString(includeAlpha: Bool) -> String {
+    public func hexString(_ includeAlpha: Bool) -> String {
         var r: CGFloat = 0
         var g: CGFloat = 0
         var b: CGFloat = 0
@@ -49,12 +51,12 @@ extension UIColor {
         }
     }
     
-    class func getColorWithNameFromUserDefaults(colorName: String) -> UIColor {
+    class func getColorWithNameFromUserDefaults(_ colorName: String) -> UIColor {
         
-        if let color = NSUserDefaults.standardUserDefaults().objectForKey(colorName) as? UIColor{
+        if let color = UserDefaults.standard.object(forKey: colorName) as? UIColor{
             return color
         } else {
-            return .whiteColor()
+            return .white
         }
     }
     
@@ -66,6 +68,9 @@ extension UIColor {
         return colorWithHexString("632686")
     }
     
+    class func readingModeNightBackground () -> UIColor {
+        return colorWithHexString("190126")
+    }
    
     class func readingBlueColor()->UIColor{
         return colorWithHexString("1BDBAD")
@@ -78,7 +83,7 @@ extension UIColor {
         }
         set {
             let hexString = newValue.hexString(true)
-             NSUserDefaults.standardUserDefaults().setObject(hexString, forKey: "backgroundColor")
+             UserDefaults.standard.set(hexString, forKey: "backgroundColor")
         }
     }
     

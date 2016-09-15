@@ -16,18 +16,19 @@ class ButtonsTableViewCell: UITableViewCell {
     @IBOutlet weak var shareButton: UIButton!
     
     
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        self.likeButton.setImage(UIImage(named: "button_likeRead_inactive"), forState: .Normal)
-        self.likeButton.setImage(UIImage(named: "button_likeRead_active"), forState: .Selected)
-        
+    override func didMoveToWindow() {
         if ApplicationState.sharedInstance.modeNight == true {
             self.setNightMode()
         } else {
             self.setNormalMode()
         }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.likeButton.setImage(UIImage(named: "button_likeRead_inactive"), for: UIControlState())
+        self.likeButton.setImage(UIImage(named: "button_likeRead_active"), for: .selected)
         
     }
     
@@ -40,21 +41,30 @@ class ButtonsTableViewCell: UITableViewCell {
     
     func setNormalMode () {
         
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         
     }
     
     
-    @IBAction func likeReading(sender: AnyObject) {
+    @IBAction func shareReading(_ sender: AnyObject) {
         
-        if !self.likeButton.selected {
+        self.shareButton.bouncingAnimation(true, duration: 0.2, delay: 0.0, completion: { (finished) in
+            
+            
+            }, finalAlpha: 1.0, animationOptions: UIViewAnimationOptions.curveEaseIn)
         
-            self.likeButton.selected = true
+    }
+    
+    @IBAction func likeReading(_ sender: AnyObject) {
+        
+        if !self.likeButton.isSelected {
+        
+            self.likeButton.isSelected = true
 
            // self.likeButton.selectedButtonWithImage(UIImage(named: "button_likeRead_active")!)
             
@@ -66,10 +76,10 @@ class ButtonsTableViewCell: UITableViewCell {
 
                 }
                 
-                }, finalAlpha: 1.0, animationOptions: UIViewAnimationOptions.CurveEaseIn)
+                }, finalAlpha: 1.0, animationOptions: UIViewAnimationOptions.curveEaseIn)
         } else {
             
-            self.likeButton.selected = false
+            self.likeButton.isSelected = false
             self.likeButton.bouncingAnimation(true, duration: 0.2, delay: 0.0, completion: { (finished) in
                 
                 if finished {
@@ -78,7 +88,7 @@ class ButtonsTableViewCell: UITableViewCell {
                 }
                 
                 
-                }, finalAlpha: 1.0, animationOptions: UIViewAnimationOptions.CurveEaseIn)
+                }, finalAlpha: 1.0, animationOptions: UIViewAnimationOptions.curveEaseIn)
             
 
         }

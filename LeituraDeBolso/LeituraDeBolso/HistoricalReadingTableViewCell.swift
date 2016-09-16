@@ -33,6 +33,14 @@ class HistoricalReadingTableViewCell: UITableViewCell {
     @IBOutlet weak var authorLabel: UILabel!
     
     
+    
+    override func didMoveToWindow() {
+        
+        if ApplicationState.sharedInstance.modeNight! {
+            self.setNightMode()
+        }
+      
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,6 +48,15 @@ class HistoricalReadingTableViewCell: UITableViewCell {
         self.likeButton.setImage(UIImage(named: "button_likeHistoric_inactive"), for: UIControlState())
         self.likeButton.setImage(UIImage(named: "button_likeHistoric_active"), for: .selected)
         
+    }
+    
+    
+    func setNightMode () {
+        
+        self.backgroundColor = UIColor.readingModeNightBackground()
+        self.titleLabel.textColor = UIColor.white
+        self.authorLabel.textColor = UIColor.lightGray
+    
     }
     
     func updateUI() {

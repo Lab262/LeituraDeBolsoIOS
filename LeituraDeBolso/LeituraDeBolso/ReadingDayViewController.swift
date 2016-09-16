@@ -15,15 +15,6 @@ class ReadingDayViewController: UIViewController {
     var readingDay: Reading? = Reading()
     var arrayImages = Array<String>()
     
-//    override func viewWillAppear(animated: Bool) {
-//        
-//        if ApplicationState.sharedInstance.modeNight == true {
-//            self.setNightMode()
-//        } else {
-//            self.setNormalMode()
-//        }
-//        
-//    }
     
     override func viewWillLayoutSubviews() {
         
@@ -44,8 +35,8 @@ class ReadingDayViewController: UIViewController {
     }
     func setNightMode () {
         
-        self.view.backgroundColor = UIColor.colorWithHexString("190126")
-        self.tableView.backgroundColor = UIColor.colorWithHexString("190126")
+        self.view.backgroundColor = UIColor.readingModeNightBackground()
+        self.tableView.backgroundColor = UIColor.readingModeNightBackground()
     }
     
     func setNormalMode () {

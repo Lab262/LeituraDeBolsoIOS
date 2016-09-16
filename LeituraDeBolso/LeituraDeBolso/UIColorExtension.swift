@@ -15,7 +15,6 @@ extension UIColor {
     class func colorWithHexString(_ hex:String) -> UIColor {
         
         var cString = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        //var cString:String = hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercased()
         
         if (cString.hasPrefix("#")) {
             cString = (cString as NSString).substring(from: 1)

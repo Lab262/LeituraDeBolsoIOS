@@ -14,8 +14,10 @@ class AllHistoricalReadingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var allReadings = Array<Reading>()
-    
+    var leftButtonItem: UIBarButtonItem?
+    var rightButtonItem: UIBarButtonItem?
     var selectedIndexPath: IndexPath?
+    var searchController: UISearchController!
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -105,6 +107,50 @@ class AllHistoricalReadingViewController: UIViewController {
         return cell
     }
     
+    func showSearchBar() {
+        
+        self.searchController.searchBar.alpha = 0
+        
+        let leftNavBarButton = UIBarButtonItem(customView: self.searchController.searchBar)
+        navigationItem.setLeftBarButton(leftNavBarButton, animated: true)
+        navigationItem.setRightBarButton(nil, animated: true)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.searchController.searchBar.alpha = 1
+            }, completion: { finished in
+                self.searchController.searchBar.becomeFirstResponder()
+        })
+    }
+    
+    func configureSearchBar () {
+        
+        self.searchController = UISearchController(searchResultsController: nil)
+        self.searchController.searchResultsUpdater = self
+        self.searchController.searchBar.delegate = self
+        self.searchController.searchBar.setImage(UIImage(named: "button_search"), for: .search, state: UIControlState())
+        self.searchController.delegate = self
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.dimsBackgroundDuringPresentation = true
+        
+        self.searchController.searchBar.placeholder = "Buscar"
+        self.searchController.searchBar.setValue("Cancelarr", forKey: "_cancelButtonText")
+        
+        self.searchController.searchBar.tintColor = UIColor.colorWithHexString("1CDBAD")
+        
+        // self.searchController.searchBar.searchBarStyle = .minimal
+        //   self.searchController.displaysSearchBarInNavigationBa‌​r = YES
+        
+        
+        let searchField = self.searchController.searchBar.value(forKey: "searchField") as? UITextField
+        
+        
+        searchField?.backgroundColor = UIColor.colorWithHexString("370653")
+        searchField?.textColor = UIColor.readingBlueColor()
+        searchField?.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.colorWithHexString("1CDBAD")])
+        
+        
+    }
+
+    
     func likeReader (_ sender: UIButton) {
         
         if sender.isSelected == true {
@@ -120,6 +166,19 @@ class AllHistoricalReadingViewController: UIViewController {
         
     }
 
+
+    override func viewDidLayoutSubviews() {
+        
+        if ApplicationState.sharedInstance.modeNight! {
+            self.setNightMode()
+        }
+    }
+    
+    func setNightMode () {
+        
+        self.view.backgroundColor = UIColor.readingModeNightBackground()
+        self.tableView.backgroundColor = UIColor.readingModeNightBackground()
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -160,3 +219,37 @@ extension AllHistoricalReadingViewController: UITableViewDelegate {
         
     }
 }
+
+extension AllHistoricalReadingViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
+    
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        
+    }
+    
+    
+    func presentSearchController(_ searchController: UISearchController) {
+        self.searchController.searchBar.becomeFirstResponder()
+    }
+    
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        self.navigationItem.leftBarButtonItem = self.leftButtonItem
+        self.navigationItem.rightBarButtonItem = self.rightButtonItem
+        
+    }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        
+        
+    }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        self.navigationItem.leftBarButtonItem = self.leftButtonItem
+        self.navigationItem.rightBarButtonItem = self.rightButtonItem
+    }
+}
+
+

@@ -51,6 +51,18 @@ class FavoriteHistoricalReadingViewController: UIViewController {
         
     }
 
+    override func viewDidLayoutSubviews() {
+        
+        if ApplicationState.sharedInstance.modeNight! {
+            self.setNightMode()
+        }
+    }
+    
+    func setNightMode () {
+        
+        self.view.backgroundColor = UIColor.readingModeNightBackground()
+        self.tableView.backgroundColor = UIColor.readingModeNightBackground()
+    }
     
     func newReading (_ notification: Notification) {
         self.favoriteReads = ApplicationState.sharedInstance.favoriteReads

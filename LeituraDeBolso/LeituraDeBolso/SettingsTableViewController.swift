@@ -130,11 +130,11 @@ class SettingsTableViewController: UITableViewController {
         }
         
         self.timeTableDatePicker.setValue(UIColor.white, forKey: "textColor")
-        self.timeTableDatePicker.layoutIfNeeded()
 
         
-        
     }
+    
+    
     
     func setNormalMode () {
         
@@ -156,7 +156,7 @@ class SettingsTableViewController: UITableViewController {
             }
         }
         
-        self.timeTableDatePicker.setValue(UIColor.white, forKey: "textColor")
+        self.timeTableDatePicker.setValue(UIColor.black, forKey: "textColor")
 
        
     }
@@ -164,7 +164,7 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func popoverView(_ sender: AnyObject) {
 
-        self.navigationController!.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
       
     }
     

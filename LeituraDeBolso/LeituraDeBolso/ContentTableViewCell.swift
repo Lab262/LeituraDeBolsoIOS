@@ -49,8 +49,7 @@ class ContentTableViewCell: UITableViewCell {
         
         self.authorReadingLabel.textColor = UIColor.white
         self.contentReadingLabel.textColor = UIColor.white
-        self.backgroundColor = UIColor.colorWithHexString("190126")
-        
+        self.backgroundColor = UIColor.readingModeNightBackground()
     }
     
     func setNormalMode () {

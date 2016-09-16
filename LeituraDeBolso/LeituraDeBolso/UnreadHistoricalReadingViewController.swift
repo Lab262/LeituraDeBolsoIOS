@@ -116,6 +116,19 @@ class UnreadHistoricalReadingViewController: UIViewController {
         return cell
     }
     
+    override func viewDidLayoutSubviews() {
+        
+        if ApplicationState.sharedInstance.modeNight! {
+            self.setNightMode()
+        }
+    }
+    
+    func setNightMode () {
+        
+        self.view.backgroundColor = UIColor.readingModeNightBackground()
+        self.tableView.backgroundColor = UIColor.readingModeNightBackground()
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

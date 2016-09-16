@@ -18,6 +18,9 @@ class HistoricalReadingMainViewController: UIViewController {
     
     
     @IBOutlet weak var searchBarButton: UIBarButtonItem!
+    @IBOutlet weak var favoriteReadingsButton: UIButton!
+    
+    @IBOutlet weak var unreadReadingsButton: UIButton!
     
     var searchController: UISearchController!
     var segmentControlButtonDelegate: SegmentControlButtonDelegate?
@@ -25,6 +28,10 @@ class HistoricalReadingMainViewController: UIViewController {
     @IBOutlet weak var allReadingsSelectionBarCenterConstraint: NSLayoutConstraint!
     @IBOutlet weak var likedReadingsSelectionBarCenterConstraint: NSLayoutConstraint!
     @IBOutlet weak var unreadSelectionBarCenterConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var allReadingsButton: UIButton!
+    
+    var filteredReadings = Array<Reading>()
 
     var leftButtonItem: UIBarButtonItem?
     var rightButtonItem: UIBarButtonItem?
@@ -32,41 +39,57 @@ class HistoricalReadingMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-     //   self.configureNavitionBar()
-        
         self.leftButtonItem = UIBarButtonItem(image: UIImage(named: "button_read"), style: .done, target: self, action: #selector(popoverView(_:)))
         
         self.rightButtonItem = UIBarButtonItem(image: UIImage(named:"button_search"), style: .done, target: self, action: #selector(searchReading(_:)))
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.configureNavitionBar()
+        self.configureSearchBar()
     }
     
-    func configureNavitionBar () {
+    func configureSearchBar () {
         
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
         self.searchController.searchBar.delegate = self
         self.searchController.searchBar.setImage(UIImage(named: "button_search"), for: .search, state: UIControlState())
-        self.searchController.view.frame = CGRect(x: 0, y: 0, width: 10, height: 44)
         self.searchController.delegate = self
-        searchController.definesPresentationContext = true
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = true
-        self.definesPresentationContext = true
+       
         self.searchController.searchBar.placeholder = "Buscar"
         self.searchController.searchBar.setValue("Cancelarr", forKey: "_cancelButtonText")
         
         self.searchController.searchBar.tintColor = UIColor.colorWithHexString("1CDBAD")
+        
+       // self.searchController.searchBar.searchBarStyle = .minimal
+     //   self.searchController.displaysSearchBarInNavigationBa‌​r = YES
+        
+        
         let searchField = self.searchController.searchBar.value(forKey: "searchField") as? UITextField
         
+    
         searchField?.backgroundColor = UIColor.colorWithHexString("370653")
         searchField?.textColor = UIColor.readingBlueColor()
         searchField?.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.colorWithHexString("1CDBAD")])
         
         
     }
+    
+    func filterContentForSearchText (searchText: String, scope: String = "All") {
+        
+        //  self.filteredReadings = filter() {$0.title != self.readingDay!.title}
+        
+        //self.filteredReadings = (self.filteredReadings.filter { reading in
+            
+          //  return ($.name?.localizedCaseInsensitiveContainsString(searchText))!
+            
+          //  })!
+        
+        //self.tableView.reloadData()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let segmentVC = segue.destination as? HistoricalReadingSegmentViewController {
@@ -78,28 +101,74 @@ class HistoricalReadingMainViewController: UIViewController {
     
     @IBAction func popoverView(_ sender: AnyObject) {
         
-       self.navigationController?.popViewController(animated: true)
+       _ = self.navigationController?.popViewController(animated: true)
         
     }
     
+    func showSearchBar() {
+        
+        self.searchController.searchBar.alpha = 0
+       
+        let leftNavBarButton = UIBarButtonItem(customView: self.searchController.searchBar)
+        navigationItem.setLeftBarButton(leftNavBarButton, animated: true)
+        navigationItem.setRightBarButton(nil, animated: true)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.searchController.searchBar.alpha = 1
+            }, completion: { finished in
+                self.searchController.searchBar.becomeFirstResponder()
+        })
+    }
+    
+    func hideSearchBar() {
+        //navigationItem.setLeftBarButton(searchBarButton, animated: true)
+  //      logoImageView.alpha = 0
+        //UIView.animate(withDuration: 0.3, animations: {
+           // self.navigationItem.titleView = self.logoImageView
+            //self.logoImageView.alpha = 1
+            //}, completion: { finished in
+                
+        //})
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
     
     override func viewWillLayoutSubviews() {
         
+        if ApplicationState.sharedInstance.modeNight! {
+            self.setNightMode()
+        }
         
     }
     
     @IBAction func searchReading(_ sender: AnyObject) {
         
+        self.showSearchBar()
         //self.navigationItem.leftBarButtonItem?.imageInsets = UIEdgeInsetsMake(0, -10, 0, 0)
-        let leftNavBarButton = UIBarButtonItem(customView: self.searchController.searchBar)
+    //    let leftNavBarButton = UIBarButtonItem(customView: self.searchController.searchBar)
         
         //leftNavBarButton.imageInsets = UIEdgeInsetsMake(0, -10, 0, 0)
         
-        self.navigationItem.leftBarButtonItem = leftNavBarButton
-        self.navigationItem.rightBarButtonItem = nil
+      //  self.navigationItem.leftBarButtonItem = leftNavBarButton
+        //self.navigationItem.rightBarButtonItem = nil
         
-        self.searchController.isActive = true
+       // self.searchController.isActive = true
         
+        
+    }
+    
+    func setNightMode () {
+        
+        self.view.backgroundColor = UIColor.readingModeNightBackground()
+        self.allReadingsButton.backgroundColor = UIColor.readingModeNightBackground()
+        self.favoriteReadingsButton.backgroundColor = UIColor.readingModeNightBackground()
+        self.unreadReadingsButton.backgroundColor = UIColor.readingModeNightBackground()
+    }
+    
+    func setNormalMode (){
+        
+        self.view.backgroundColor = UIColor.white
         
     }
     
@@ -107,6 +176,7 @@ class HistoricalReadingMainViewController: UIViewController {
     @IBAction func showAllHistorical(_ sender: AnyObject? = nil) {
         setSelectionIndication(true, center: false, trailing: false)
         segmentControlButtonDelegate?.segmentSelected(0)
+
     }
     
     @IBAction func showFavoriteHistorical(_ sender: AnyObject? = nil) {

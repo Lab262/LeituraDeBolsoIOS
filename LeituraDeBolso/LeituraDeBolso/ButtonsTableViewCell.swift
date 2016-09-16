@@ -35,7 +35,7 @@ class ButtonsTableViewCell: UITableViewCell {
     
     func setNightMode () {
         
-        self.backgroundColor = UIColor.colorWithHexString("190126")
+        self.backgroundColor = UIColor.readingModeNightBackground()
         
     }
     

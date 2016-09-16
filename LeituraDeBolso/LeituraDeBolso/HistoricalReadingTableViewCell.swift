@@ -63,6 +63,9 @@ class HistoricalReadingTableViewCell: UITableViewCell {
         
         self.titleLabel.text = self.reading?.title
         self.authorLabel.text = self.reading?.author
+        self.emojiOneLabel.text = self.reading?.emojis?[0]
+        self.emojiTwoLabel.text = self.reading?.emojis?[1]
+        self.emojiThreeLabel.text = self.reading?.emojis?[2]
         
     }
     

@@ -12,9 +12,13 @@ class UnreadHistoricalReadingViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var allReadings = Array<Reading>()
+    var unreadReadings = Array<Reading>()
     
     var selectedIndexPath: IndexPath?
+    
+    var isFilterArray: Bool = false
+    var textSearch: String?
+    var filteredReadings = Array<Reading>()
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,7 +36,7 @@ class UnreadHistoricalReadingViewController: UIViewController {
         
         self.registerNibs()
         self.configureTableView()
-        self.registerObserver()
+        self.registerObservers()
         
         let readingDay = Reading()
         
@@ -45,15 +49,30 @@ class UnreadHistoricalReadingViewController: UIViewController {
         readingDay.author = "DULCINO DE MORAIS VIEIRA COSTA SMADI"
         readingDay.emojis = ["\u{1F603}", "\u{1F603}", "\u{1F603}"]
         
-        self.allReadings.append(readingDay)
+        self.unreadReadings.append(readingDay)
         
+        let readingDay2 = Reading()
+        
+        
+        readingDay2.duration = "21 min"
+        readingDay2.title = "Soul Eater"
+        
+        readingDay2.text = "MANGÁ DOIDO"
+        
+        readingDay2.author = "OHKUBO"
+        readingDay2.emojis = ["\u{1F603}", "\u{1F603}", "\u{1F603}"]
+
+        self.unreadReadings.append(readingDay2)
+
        
         // Do any additional setup after loading the view.
     }
     
-    func registerObserver () {
+    func registerObservers () {
         
         NotificationCenter.default.addObserver(self, selector: #selector(newFavoriteReading(_:)), name: NSNotification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(filterReading(_:)), name: NSNotification.Name(rawValue: KEY_NOTIFICATION_FILTER_UNREAD_READINGS), object: nil)
     }
     
     func configureTableView () {
@@ -68,14 +87,61 @@ class UnreadHistoricalReadingViewController: UIViewController {
         self.tableView.reloadData()
     }
     
+    func filterReading (_ notification: Notification) {
+        
+        let text = notification.object as! String
+        self.textSearch = text
+        self.isFilterArray = true
+        self.filterContentForSearchText(searchText: text)
+    }
+    
+    func filterContentForSearchText (searchText: String, scope: String = "All") {
+        
+        self.filteredReadings = (self.unreadReadings.filter { reading in
+            
+            return reading.title!.localizedCaseInsensitiveContains(searchText)
+        })
+        
+        self.tableView.reloadData()
+    }
+    
+    func generateHistoricalCellByArrayReading (readingArray: [Reading], cell: UITableViewCell, indexPath: IndexPath) {
+        
+        let cell = cell as! HistoricalReadingTableViewCell
+        
+        cell.reading = readingArray[indexPath.row]
+        cell.likeButton.tag = indexPath.row
+        
+        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
+            
+            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
+                $0.title!.localizedCaseInsensitiveContains(readingArray[indexPath.row].title!)
+            }
+            
+            if !readingFavorite.isEmpty {
+                cell.likeButton.isSelected = true
+            } else {
+                cell.likeButton.isSelected = false
+            }
+            
+        } else {
+            cell.likeButton.isSelected = false
+        }
+        
+        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
+        
+        
+    }
+
+    
     func likeReader (_ sender: UIButton) {
         
         if sender.isSelected == true {
             
-            ApplicationState.sharedInstance.favoriteReads.append(self.allReadings[sender.tag])
+            ApplicationState.sharedInstance.favoriteReads.append(self.unreadReadings[sender.tag])
         } else {
             
-            ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.allReadings[sender.tag].title}
+            ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.unreadReadings[sender.tag].title}
         }
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
@@ -86,32 +152,14 @@ class UnreadHistoricalReadingViewController: UIViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoricalReadingTableViewCell.identifier, for: indexPath) as! HistoricalReadingTableViewCell
         
-        cell.reading = self.allReadings[(indexPath as NSIndexPath).row]
-        
-        cell.emojiOneLabel.text = self.allReadings[(indexPath as NSIndexPath).row].emojis![0]
-        cell.emojiTwoLabel.text = self.allReadings[(indexPath as NSIndexPath).row].emojis![1]
-        cell.emojiThreeLabel.text = self.allReadings[(indexPath as NSIndexPath).row].emojis![2]
-        cell.likeButton.tag = (indexPath as NSIndexPath).row
-        
-        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
+        if self.isFilterArray && textSearch != "" {
             
-            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
-                
-                ($0.title?.localizedCaseInsensitiveContains(self.allReadings[indexPath.row].title!))!
-            }
-            
-            if !readingFavorite.isEmpty {
-                cell.likeButton.isSelected = true
-            } else {
-                cell.likeButton.isSelected = false
-            }
+            self.generateHistoricalCellByArrayReading(readingArray: self.filteredReadings, cell: cell, indexPath: indexPath)
             
         } else {
             
-            cell.likeButton.isSelected = false
+            self.generateHistoricalCellByArrayReading(readingArray: self.unreadReadings, cell: cell, indexPath: indexPath)
         }
-        
-        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
         
         return cell
     }
@@ -136,7 +184,7 @@ class UnreadHistoricalReadingViewController: UIViewController {
             
             if let destinationViewController = segue.destination as? ReadingDayViewController {
                 
-                destinationViewController.readingDay = self.allReadings[(selectedIndexPath! as NSIndexPath).row]
+                destinationViewController.readingDay = self.unreadReadings[(selectedIndexPath! as NSIndexPath).row]
                 
             }
             
@@ -153,10 +201,11 @@ extension UnreadHistoricalReadingViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if self.allReadings.isEmpty {
-            return 0
+        if self.isFilterArray && self.textSearch != "" {
+            return self.filteredReadings.count
+        } else {
+            return self.unreadReadings.count
         }
-        return self.allReadings.count
     }
 }
 

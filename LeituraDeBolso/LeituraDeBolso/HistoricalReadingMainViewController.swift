@@ -8,6 +8,10 @@
 
 import UIKit
 
+let KEY_NOTIFICATION_NEW_FAVORITE = "NEW_READING_FAVORITE"
+let KEY_NOTIFICATION_FILTER_ALL_READINGS = "FILTER_ALL_READINGS"
+let KEY_NOTIFICATION_FILTER_FAVORITE_READINGS = "FILTER_FAVORITE_READINGS"
+let KEY_NOTIFICATION_FILTER_UNREAD_READINGS = "FILTER_UNREAD_READINGS"
 
 protocol SegmentControlButtonDelegate {
     func segmentSelected(_ viewIndex: Int)
@@ -21,6 +25,8 @@ class HistoricalReadingMainViewController: UIViewController {
     @IBOutlet weak var favoriteReadingsButton: UIButton!
     
     @IBOutlet weak var unreadReadingsButton: UIButton!
+    
+    var segmentSelected: Int?
     
     var searchController: UISearchController!
     var segmentControlButtonDelegate: SegmentControlButtonDelegate?
@@ -38,7 +44,7 @@ class HistoricalReadingMainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.segmentSelected = 0
         self.leftButtonItem = UIBarButtonItem(image: UIImage(named: "button_read"), style: .done, target: self, action: #selector(popoverView(_:)))
         
         self.rightButtonItem = UIBarButtonItem(image: UIImage(named:"button_search"), style: .done, target: self, action: #selector(searchReading(_:)))
@@ -47,33 +53,35 @@ class HistoricalReadingMainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.configureSearchBar()
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        if self.searchController.isActive {
+            self.searchController.isActive = false
+            self.searchController.searchBar.resignFirstResponder()
+        }
+    }
     func configureSearchBar () {
-        
+        self.searchBarButton.isEnabled = false
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
         self.searchController.searchBar.delegate = self
         self.searchController.searchBar.setImage(UIImage(named: "button_search"), for: .search, state: UIControlState())
         self.searchController.delegate = self
         self.searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.dimsBackgroundDuringPresentation = true
-       
+        self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.searchBar.placeholder = "Buscar"
         self.searchController.searchBar.setValue("Cancelarr", forKey: "_cancelButtonText")
         
         self.searchController.searchBar.tintColor = UIColor.colorWithHexString("1CDBAD")
         
-       // self.searchController.searchBar.searchBarStyle = .minimal
-     //   self.searchController.displaysSearchBarInNavigationBa‌​r = YES
-        
-        
+        searchController.hidesBottomBarWhenPushed = true
+        searchController.searchBar.sizeToFit()
         let searchField = self.searchController.searchBar.value(forKey: "searchField") as? UITextField
         
     
         searchField?.backgroundColor = UIColor.colorWithHexString("370653")
         searchField?.textColor = UIColor.readingBlueColor()
         searchField?.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.colorWithHexString("1CDBAD")])
-        
+        searchBarButton.isEnabled = true
         
     }
     
@@ -107,12 +115,13 @@ class HistoricalReadingMainViewController: UIViewController {
     
     func showSearchBar() {
         
+        self.searchController.isActive = true
         self.searchController.searchBar.alpha = 0
        
         let leftNavBarButton = UIBarButtonItem(customView: self.searchController.searchBar)
         navigationItem.setLeftBarButton(leftNavBarButton, animated: true)
         navigationItem.setRightBarButton(nil, animated: true)
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.searchController.searchBar.alpha = 1
             }, completion: { finished in
                 self.searchController.searchBar.becomeFirstResponder()
@@ -214,12 +223,15 @@ extension HistoricalReadingMainViewController: SegmentControlPageDelegate {
         switch viewIndex {
         case 0:
             showAllHistorical()
+            self.segmentSelected = 0
             break
         case 1:
             showFavoriteHistorical()
+            self.segmentSelected = 1
             break
         case 2:
             showUnreadHistorical()
+            self.segmentSelected = 2
             break
             
         default: break
@@ -232,7 +244,20 @@ extension HistoricalReadingMainViewController: UISearchControllerDelegate, UISea
     
     
     func updateSearchResults(for searchController: UISearchController) {
-        
+    
+        if segmentSelected == 0 {
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: KEY_NOTIFICATION_FILTER_ALL_READINGS), object: searchController.searchBar.text, userInfo: nil)
+            
+        } else if segmentSelected == 1 {
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: KEY_NOTIFICATION_FILTER_FAVORITE_READINGS), object: searchController.searchBar.text, userInfo: nil)
+            
+        } else {
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: KEY_NOTIFICATION_FILTER_UNREAD_READINGS), object: searchController.searchBar.text, userInfo: nil)
+        }
+      
         
     }
     
@@ -250,7 +275,7 @@ extension HistoricalReadingMainViewController: UISearchControllerDelegate, UISea
     }
     
     func didDismissSearchController(_ searchController: UISearchController) {
-        
+        self.searchController.searchBar.resignFirstResponder()
         
     }
     

@@ -14,10 +14,10 @@ class AllHistoricalReadingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var allReadings = Array<Reading>()
-    var leftButtonItem: UIBarButtonItem?
-    var rightButtonItem: UIBarButtonItem?
     var selectedIndexPath: IndexPath?
-    var searchController: UISearchController!
+    var isFilterArray: Bool = false
+    var textSearch: String?
+    var filteredReadings = Array<Reading>()
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -34,7 +34,37 @@ class AllHistoricalReadingViewController: UIViewController {
         
         readingDay.emojis = ["\u{1F603}", "\u{1F603}", "\u{1F603}"]
         
+        
         self.allReadings.append(readingDay)
+
+        let readingDay2 = Reading()
+        
+        readingDay2.duration = "5 min"
+        readingDay2.title = "Naruto"
+        
+        readingDay2.text = "NIIINJA"
+        
+        readingDay2.author = "KISHIMOTO"
+        
+        readingDay2.emojis = ["\u{1F603}", "\u{1F603}", "\u{1F603}"]
+
+        
+        self.allReadings.append(readingDay2)
+        
+        let readingDay3 = Reading()
+        
+        readingDay3.duration = "5 min"
+        readingDay3.title = "Bleach"
+        
+        readingDay3.text = "SHINIGAMIS"
+        
+        readingDay3.author = "TITE KUBO"
+        
+        readingDay3.emojis = ["\u{1F603}", "\u{1F603}", "\u{1F603}"]
+        
+        
+        self.allReadings.append(readingDay3)
+
         
     }
     
@@ -44,7 +74,6 @@ class AllHistoricalReadingViewController: UIViewController {
         self.tableView.estimatedRowHeight = 140
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.layoutIfNeeded()
-
         
     }
     
@@ -57,100 +86,85 @@ class AllHistoricalReadingViewController: UIViewController {
         super.viewDidLoad()
         
         self.configureTableView()
-        self.registerObserver()
+        self.registerObservers()
 
         // Do any additional setup after loading the view.
     }
     
-    func registerObserver () {
+    func registerObservers () {
         
         NotificationCenter.default.addObserver(self, selector: #selector(newFavoriteReading(_:)), name: NSNotification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(filterReading(_:)), name: NSNotification.Name(rawValue: KEY_NOTIFICATION_FILTER_ALL_READINGS), object: nil)
     }
+    
+    
     
     func newFavoriteReading (_ notification: Notification) {
          self.tableView.reloadData()
     }
     
+    func filterReading (_ notification: Notification) {
+        
+        let text = notification.object as! String
+        self.textSearch = text
+        self.isFilterArray = true
+        self.filterContentForSearchText(searchText: text)
+    }
     
-    func generateHistoricalReadingCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+    func filterContentForSearchText (searchText: String, scope: String = "All") {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: HistoricalReadingTableViewCell.identifier, for: indexPath) as! HistoricalReadingTableViewCell
+        self.filteredReadings = (self.allReadings.filter { reading in
+            
+            return reading.title!.localizedCaseInsensitiveContains(searchText)
+        })
         
-        cell.emojiOneLabel.text = self.allReadings[(indexPath as NSIndexPath).row].emojis![0]
-        cell.emojiTwoLabel.text = self.allReadings[(indexPath as NSIndexPath).row].emojis![1]
-        cell.emojiThreeLabel.text = self.allReadings[(indexPath as NSIndexPath).row].emojis![2]
-        cell.reading = self.allReadings[(indexPath as NSIndexPath).row]
-        cell.likeButton.tag = (indexPath as NSIndexPath).row
-     
+        self.tableView.reloadData()
+    }
+    
+    func generateHistoricalCellByArrayReading (readingArray: [Reading], cell: UITableViewCell, indexPath: IndexPath) {
+        
+        let cell = cell as! HistoricalReadingTableViewCell
+        
+        cell.reading = readingArray[indexPath.row]
+        cell.likeButton.tag = indexPath.row
+        
         if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
             
             let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
-                
-                $0.title!.localizedCaseInsensitiveContains(self.allReadings[indexPath.row].title!)
-                
+                $0.title!.localizedCaseInsensitiveContains(readingArray[indexPath.row].title!)
             }
-           
-            
             
             if !readingFavorite.isEmpty {
                 cell.likeButton.isSelected = true
             } else {
                 cell.likeButton.isSelected = false
             }
-        
+            
         } else {
             cell.likeButton.isSelected = false
         }
-
-        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
         
+          cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
+    }
+    
+    func generateHistoricalReadingCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: HistoricalReadingTableViewCell.identifier, for: indexPath) as! HistoricalReadingTableViewCell
+        
+        if self.isFilterArray && textSearch != "" {
+        
+            self.generateHistoricalCellByArrayReading(readingArray: self.filteredReadings, cell: cell, indexPath: indexPath)
+            
+        } else {
+            
+            self.generateHistoricalCellByArrayReading(readingArray: self.allReadings, cell: cell, indexPath: indexPath)
+        }
+
         return cell
     }
     
-    func showSearchBar() {
-        
-        self.searchController.searchBar.alpha = 0
-        
-        let leftNavBarButton = UIBarButtonItem(customView: self.searchController.searchBar)
-        navigationItem.setLeftBarButton(leftNavBarButton, animated: true)
-        navigationItem.setRightBarButton(nil, animated: true)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.searchController.searchBar.alpha = 1
-            }, completion: { finished in
-                self.searchController.searchBar.becomeFirstResponder()
-        })
-    }
-    
-    func configureSearchBar () {
-        
-        self.searchController = UISearchController(searchResultsController: nil)
-        self.searchController.searchResultsUpdater = self
-        self.searchController.searchBar.delegate = self
-        self.searchController.searchBar.setImage(UIImage(named: "button_search"), for: .search, state: UIControlState())
-        self.searchController.delegate = self
-        self.searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.dimsBackgroundDuringPresentation = true
-        
-        self.searchController.searchBar.placeholder = "Buscar"
-        self.searchController.searchBar.setValue("Cancelarr", forKey: "_cancelButtonText")
-        
-        self.searchController.searchBar.tintColor = UIColor.colorWithHexString("1CDBAD")
-        
-        // self.searchController.searchBar.searchBarStyle = .minimal
-        //   self.searchController.displaysSearchBarInNavigationBa‌​r = YES
-        
-        
-        let searchField = self.searchController.searchBar.value(forKey: "searchField") as? UITextField
-        
-        
-        searchField?.backgroundColor = UIColor.colorWithHexString("370653")
-        searchField?.textColor = UIColor.readingBlueColor()
-        searchField?.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.colorWithHexString("1CDBAD")])
-        
-        
-    }
 
-    
     func likeReader (_ sender: UIButton) {
         
         if sender.isSelected == true {
@@ -206,7 +220,12 @@ extension AllHistoricalReadingViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.allReadings.count
+        if self.isFilterArray && self.textSearch != "" {
+            return self.filteredReadings.count
+        } else {
+           return self.allReadings.count
+        }
+        
     }
 }
 
@@ -217,38 +236,6 @@ extension AllHistoricalReadingViewController: UITableViewDelegate {
         self.selectedIndexPath = indexPath
         self.performSegue(withIdentifier: "goReadingView", sender: self)
         
-    }
-}
-
-extension AllHistoricalReadingViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
-    
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
-        
-    }
-    
-    
-    func presentSearchController(_ searchController: UISearchController) {
-        self.searchController.searchBar.becomeFirstResponder()
-    }
-    
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
-        self.navigationItem.leftBarButtonItem = self.leftButtonItem
-        self.navigationItem.rightBarButtonItem = self.rightButtonItem
-        
-    }
-    
-    func didDismissSearchController(_ searchController: UISearchController) {
-        
-        
-    }
-    
-    func willDismissSearchController(_ searchController: UISearchController) {
-        self.navigationItem.leftBarButtonItem = self.leftButtonItem
-        self.navigationItem.rightBarButtonItem = self.rightButtonItem
     }
 }
 

@@ -8,15 +8,16 @@
 
 import UIKit
 
-let KEY_NOTIFICATION_NEW_FAVORITE = "NEW_READING_FAVORITE"
 
 class FavoriteHistoricalReadingViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
     var favoriteReads: [Reading] = ApplicationState.sharedInstance.favoriteReads
-    
     var selectedIndexPath: IndexPath?
+    var isFilterArray: Bool = false
+    var textSearch: String?
+    var filteredReadings = Array<Reading>()
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,10 +25,45 @@ class FavoriteHistoricalReadingViewController: UIViewController {
         
     }
     
-    func registerObserver () {
+    func registerObservers () {
         
         NotificationCenter.default.addObserver(self, selector: #selector(newReading(_:)), name: NSNotification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(filterReading(_:)), name: NSNotification.Name(rawValue:KEY_NOTIFICATION_FILTER_FAVORITE_READINGS), object: nil)
     }
+    
+    func filterReading (_ notification: Notification) {
+        
+        let text = notification.object as! String
+        self.textSearch = text
+        self.isFilterArray = true
+        self.filterContentForSearchText(searchText: text)
+    }
+    
+    func filterContentForSearchText (searchText: String, scope: String = "All") {
+        
+        self.filteredReadings = (self.favoriteReads.filter { reading in
+            
+            return reading.title!.localizedCaseInsensitiveContains(searchText)
+        })
+        
+        self.tableView.reloadData()
+    }
+    
+    func generateHistoricalCellByArrayReading (readingArray: [Reading], cell: UITableViewCell, indexPath: IndexPath) {
+        
+        let cell = cell as! HistoricalReadingTableViewCell
+        
+        cell.reading = readingArray[indexPath.row]
+        cell.likeButton.tag = indexPath.row
+        
+        cell.likeButton.isSelected = true
+        
+        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
+        
+        
+    }
+
     
     func registerNibs () {
         
@@ -47,7 +83,7 @@ class FavoriteHistoricalReadingViewController: UIViewController {
         
         self.registerNibs()
         self.configureTableView()
-        self.registerObserver()
+        self.registerObservers()
         
     }
 
@@ -83,13 +119,16 @@ class FavoriteHistoricalReadingViewController: UIViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoricalReadingTableViewCell.identifier, for: indexPath) as! HistoricalReadingTableViewCell
         
-        cell.reading = self.favoriteReads[(indexPath as NSIndexPath).row]
-        cell.likeButton.tag = (indexPath as NSIndexPath).row
-        cell.emojiOneLabel.text = self.favoriteReads[(indexPath as NSIndexPath).row].emojis![0]
-        cell.emojiTwoLabel.text = self.favoriteReads[(indexPath as NSIndexPath).row].emojis![1]
-        cell.emojiThreeLabel.text = self.favoriteReads[(indexPath as NSIndexPath).row].emojis![2]
-        cell.likeButton.isSelected = true
-        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
+        
+        if self.isFilterArray && textSearch != "" {
+            
+            self.generateHistoricalCellByArrayReading(readingArray: self.filteredReadings, cell: cell, indexPath: indexPath)
+            
+        } else {
+            
+            self.generateHistoricalCellByArrayReading(readingArray: self.favoriteReads, cell: cell, indexPath: indexPath)
+        }
+
         
         return cell
     }
@@ -120,10 +159,11 @@ extension FavoriteHistoricalReadingViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if self.favoriteReads.isEmpty {
-            return 0
+        if self.isFilterArray && self.textSearch != "" {
+            return self.filteredReadings.count
+        } else {
+            return self.favoriteReads.count
         }
-        return self.favoriteReads.count
     }
 }
 

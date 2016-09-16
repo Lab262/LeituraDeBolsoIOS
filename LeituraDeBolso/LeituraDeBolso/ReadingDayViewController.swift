@@ -18,12 +18,22 @@ class ReadingDayViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         
+    
         if ApplicationState.sharedInstance.modeNight! {
             self.setNightMode()
         } else {
             self.setNormalMode()
         }
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        if ApplicationState.sharedInstance.modeNight! {
+            self.setNightMode()
+        } else {
+            self.setNormalMode()
+        }
     }
     
     func configureTableView () {
@@ -37,33 +47,29 @@ class ReadingDayViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.readingModeNightBackground()
         self.tableView.backgroundColor = UIColor.readingModeNightBackground()
+        self.view.layoutIfNeeded()
+        self.tableView.layoutIfNeeded()
     }
     
     func setNormalMode () {
         
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
+        self.view.layoutIfNeeded()
+        self.tableView.layoutIfNeeded()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if self.readingDay?.title == nil || self.readingDay?.title == "" {
+            self.readingDay = ApplicationState.sharedInstance.allReadings[2]
+            
+            tableView.reloadData()
+        }
+        
         self.configureTableView()
         
-        self.readingDay?.duration = "21 min"
-        self.readingDay?.title = "As Cronicas de Gelo e Fogo, A Fúria dos Reis, A Tormenta de Espadas"
-        
-        self.arrayImages.append("\u{1F603}")
-        self.arrayImages.append("\u{1F603}")
-        self.arrayImages.append("\u{1F603}")
-        
-        self.readingDay?.emojis = self.arrayImages
-        self.readingDay?.text = "The majestic Rocky Mountains are a major tourist location in the western United States. Visitors can participate in a quantity of activities, including hiking, skiing, snowboarding, mountain biking, & plenty of more. The Rockies are home to several campgrounds, ghost towns, gold prospecting sites, & national parks. a quantity of the biggest tourist attractions in the Rockies are Pike’s Peak & Royal Gorge. There are several world famous national parks in the Rockies, including Yellowstone, Rocky Mountain, Grand Teton, & Glacier.\n \nThe legendary Rocky Mountains stretch from old Mexico up through the United States & into Canada. The Rocky Mountains are over 3000 miles long, spanning parts of california, Colorado, Idaho, Montana, & Wyoming before continuing into Canada. Stories of early adventurers like Lewis & Clark exploring the Rocky Mountains are legendary."
-        
-        self.readingDay?.author = "DULCINO DE MORAIS VIEIRA COSTA SMADI"
-        
-        self.tableView.reloadData()
-
         // Do any additional setup after loading the view.
     }
     
@@ -97,6 +103,24 @@ class ReadingDayViewController: UIViewController {
         cell.shareButton.addTarget(self, action: #selector(shareReading(_:)), for: .touchUpInside)
         
         cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
+        
+        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
+            
+            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
+                $0.title!.localizedCaseInsensitiveContains(self.readingDay!.title!)
+            }
+            
+            if !readingFavorite.isEmpty {
+                cell.likeButton.isSelected = true
+            } else {
+                cell.likeButton.isSelected = false
+            }
+            
+        } else {
+            cell.likeButton.isSelected = false
+        }
+        
+
         
         
         
@@ -135,6 +159,11 @@ extension ReadingDayViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        if self.readingDay?.title == "" || self.readingDay?.title == nil {
+            return 0
+        } else {
+            return 3
+        }
+      
     }
 }

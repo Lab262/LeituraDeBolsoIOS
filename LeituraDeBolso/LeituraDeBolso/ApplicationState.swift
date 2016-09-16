@@ -14,8 +14,9 @@ class ApplicationState: NSObject {
     var modeNight: Bool? = false
     var sizeFontSelected: CGFloat? = 14
     
+    var allReadings = [Reading]()
     var favoriteReads = [Reading]()
-    
+    var unreadReadings = [Reading]()
     
     static let sharedInstance : ApplicationState = {
         let instance = ApplicationState(singleton: true)

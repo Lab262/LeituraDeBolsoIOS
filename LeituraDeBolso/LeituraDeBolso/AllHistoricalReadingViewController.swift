@@ -13,7 +13,7 @@ class AllHistoricalReadingViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var allReadings = Array<Reading>()
+    var allReadings = ApplicationState.sharedInstance.allReadings
     var selectedIndexPath: IndexPath?
     var isFilterArray: Bool = false
     var textSearch: String?
@@ -21,51 +21,7 @@ class AllHistoricalReadingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        self.registerNibs()
-        
-        let readingDay = Reading()
-            
-        readingDay.duration = "5 min"
-        readingDay.title = "Harry Potter"
-        
-        readingDay.text = "The majestic Rocky Mountains are a major tourist location in the western United States. Visitors can participate in a quantity of activities, including hiking, skiing, snowboarding, mountain biking, & plenty of more. The Rockies are home to several campgrounds, ghost towns, gold prospecting sites, & national parks. a quantity of the biggest tourist attractions in the Rockies are Pike’s Peak & Royal Gorge. There are several world famous national parks in the Rockies, including Yellowstone, Rocky Mountain, Grand Teton, & Glacier.\n \nThe legendary Rocky Mountains stretch from old Mexico up through the United States & into Canada. The Rocky Mountains are over 3000 miles long, spanning parts of california, Colorado, Idaho, Montana, & Wyoming before continuing into Canada. Stories of early adventurers like Lewis & Clark exploring the Rocky Mountains are legendary."
-        
-        readingDay.author = "André Santana Tito Alves Augusto Morais"
-        
-        readingDay.emojis = ["\u{1F603}", "\u{1F603}", "\u{1F603}"]
-        
-        
-        self.allReadings.append(readingDay)
-
-        let readingDay2 = Reading()
-        
-        readingDay2.duration = "5 min"
-        readingDay2.title = "Naruto"
-        
-        readingDay2.text = "NIIINJA"
-        
-        readingDay2.author = "KISHIMOTO"
-        
-        readingDay2.emojis = ["\u{1F603}", "\u{1F603}", "\u{1F603}"]
-
-        
-        self.allReadings.append(readingDay2)
-        
-        let readingDay3 = Reading()
-        
-        readingDay3.duration = "5 min"
-        readingDay3.title = "Bleach"
-        
-        readingDay3.text = "SHINIGAMIS"
-        
-        readingDay3.author = "TITE KUBO"
-        
-        readingDay3.emojis = ["\u{1F603}", "\u{1F603}", "\u{1F603}"]
-        
-        
-        self.allReadings.append(readingDay3)
-
-        
+   
     }
     
     
@@ -84,7 +40,7 @@ class AllHistoricalReadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.registerNibs()
         self.configureTableView()
         self.registerObservers()
 

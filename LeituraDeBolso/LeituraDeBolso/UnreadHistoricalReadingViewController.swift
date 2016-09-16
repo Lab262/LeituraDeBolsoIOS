@@ -38,32 +38,9 @@ class UnreadHistoricalReadingViewController: UIViewController {
         self.configureTableView()
         self.registerObservers()
         
-        let readingDay = Reading()
+        self.unreadReadings = ApplicationState.sharedInstance.unreadReadings
         
-        
-        readingDay.duration = "21 min"
-        readingDay.title = "As Cronicas de Gelo e Fogo, A Fúria dos Reis, A Tormenta de Espadas"
-        
-        readingDay.text = "The majestic Rocky Mountains are a major tourist location in the western United States. Visitors can participate in a quantity of activities, including hiking, skiing, snowboarding, mountain biking, & plenty of more. The Rockies are home to several campgrounds, ghost towns, gold prospecting sites, & national parks. a quantity of the biggest tourist attractions in the Rockies are Pike’s Peak & Royal Gorge. There are several world famous national parks in the Rockies, including Yellowstone, Rocky Mountain, Grand Teton, & Glacier.\n \nThe legendary Rocky Mountains stretch from old Mexico up through the United States & into Canada. The Rocky Mountains are over 3000 miles long, spanning parts of california, Colorado, Idaho, Montana, & Wyoming before continuing into Canada. Stories of early adventurers like Lewis & Clark exploring the Rocky Mountains are legendary."
-        
-        readingDay.author = "DULCINO DE MORAIS VIEIRA COSTA SMADI"
-        readingDay.emojis = ["\u{1F603}", "\u{1F603}", "\u{1F603}"]
-        
-        self.unreadReadings.append(readingDay)
-        
-        let readingDay2 = Reading()
-        
-        
-        readingDay2.duration = "21 min"
-        readingDay2.title = "Soul Eater"
-        
-        readingDay2.text = "MANGÁ DOIDO"
-        
-        readingDay2.author = "OHKUBO"
-        readingDay2.emojis = ["\u{1F603}", "\u{1F603}", "\u{1F603}"]
-
-        self.unreadReadings.append(readingDay2)
-
+        tableView.reloadData()
        
         // Do any additional setup after loading the view.
     }

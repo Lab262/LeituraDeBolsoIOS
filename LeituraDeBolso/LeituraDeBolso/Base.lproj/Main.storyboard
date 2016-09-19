@@ -405,7 +405,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <viewControllerLayoutGuide type="bottom" id="lDm-94-AZa"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YbW-q2-Zri">
-                        <rect key="frame" x="0.0" y="0.0" width="1125" height="572"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CU3-x8-Pc0" userLabel="Content View">
@@ -414,23 +414,17 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Er5-Ce-OI6" userLabel="Content View">
                                                 <subviews>
-                                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g6F-SD-O4p">
-                                                        <frame key="frameInset" width="375" height="572"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g6F-SD-O4p" userLabel="ALL">
                                                         <connections>
                                                             <segue destination="Nya-uy-bNS" kind="embed" id="8of-nu-skW"/>
                                                         </connections>
                                                     </containerView>
-                                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KzY-yC-wM5">
-                                                        <frame key="frameInset" minX="375" width="375" height="572"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KzY-yC-wM5" userLabel="FAVORITES">
                                                         <connections>
                                                             <segue destination="GfE-SS-atA" kind="embed" id="4G1-8w-sx3"/>
                                                         </connections>
                                                     </containerView>
-                                                    <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Ji-JL-acT">
-                                                        <frame key="frameInset" minX="750" width="375" height="572"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ji-JL-acT" userLabel="UNREAD">
                                                         <connections>
                                                             <segue destination="JSD-02-TH2" kind="embed" id="i0B-Pw-V5E"/>
                                                         </connections>
@@ -438,7 +432,19 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="1125" id="urk-uT-XmJ"/>
+                                                    <constraint firstItem="KzY-yC-wM5" firstAttribute="height" secondItem="g6F-SD-O4p" secondAttribute="height" id="1TV-jP-K7X"/>
+                                                    <constraint firstItem="KzY-yC-wM5" firstAttribute="leading" secondItem="g6F-SD-O4p" secondAttribute="trailing" id="329-cT-IRQ"/>
+                                                    <constraint firstItem="8Ji-JL-acT" firstAttribute="centerY" secondItem="KzY-yC-wM5" secondAttribute="centerY" id="4M8-yT-DNH"/>
+                                                    <constraint firstItem="g6F-SD-O4p" firstAttribute="width" secondItem="Er5-Ce-OI6" secondAttribute="width" multiplier="1/3" id="4Wy-cs-FEf"/>
+                                                    <constraint firstItem="KzY-yC-wM5" firstAttribute="width" secondItem="g6F-SD-O4p" secondAttribute="width" id="6Rn-q2-w7t"/>
+                                                    <constraint firstItem="g6F-SD-O4p" firstAttribute="centerY" secondItem="8Ji-JL-acT" secondAttribute="centerY" id="C9F-kn-fvQ"/>
+                                                    <constraint firstItem="8Ji-JL-acT" firstAttribute="leading" secondItem="KzY-yC-wM5" secondAttribute="trailing" id="K0M-Iv-VS4"/>
+                                                    <constraint firstItem="g6F-SD-O4p" firstAttribute="height" secondItem="Er5-Ce-OI6" secondAttribute="height" id="LSV-Lf-nCA"/>
+                                                    <constraint firstItem="KzY-yC-wM5" firstAttribute="centerY" secondItem="g6F-SD-O4p" secondAttribute="centerY" id="Xai-uC-Uk6"/>
+                                                    <constraint firstItem="8Ji-JL-acT" firstAttribute="height" secondItem="KzY-yC-wM5" secondAttribute="height" id="Z4o-B9-dhd"/>
+                                                    <constraint firstItem="8Ji-JL-acT" firstAttribute="width" secondItem="KzY-yC-wM5" secondAttribute="width" id="b1Z-6e-xcc"/>
+                                                    <constraint firstItem="g6F-SD-O4p" firstAttribute="leading" secondItem="Er5-Ce-OI6" secondAttribute="leading" id="hKG-cQ-w28"/>
+                                                    <constraint firstItem="g6F-SD-O4p" firstAttribute="centerY" secondItem="Er5-Ce-OI6" secondAttribute="centerY" id="ijg-rf-lHB"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -455,6 +461,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                 <constraints>
                                     <constraint firstItem="KPT-lB-cIf" firstAttribute="centerX" secondItem="CU3-x8-Pc0" secondAttribute="centerX" id="7Zt-zl-EyN"/>
                                     <constraint firstItem="KPT-lB-cIf" firstAttribute="top" secondItem="CU3-x8-Pc0" secondAttribute="top" id="9im-qv-PAe"/>
+                                    <constraint firstItem="Er5-Ce-OI6" firstAttribute="width" secondItem="CU3-x8-Pc0" secondAttribute="width" multiplier="3" id="DTZ-nC-cKS"/>
                                     <constraint firstAttribute="bottom" secondItem="KPT-lB-cIf" secondAttribute="bottom" id="EzN-NI-jsb"/>
                                     <constraint firstItem="KPT-lB-cIf" firstAttribute="leading" secondItem="CU3-x8-Pc0" secondAttribute="leading" id="cHC-nE-8mA"/>
                                     <constraint firstAttribute="trailing" secondItem="KPT-lB-cIf" secondAttribute="trailing" id="suM-jd-f92"/>
@@ -470,8 +477,6 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                             <constraint firstItem="CU3-x8-Pc0" firstAttribute="centerY" secondItem="YbW-q2-Zri" secondAttribute="centerY" id="PFt-dn-QJd"/>
                         </constraints>
                     </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="1125" height="572"/>
                     <connections>
                         <outlet property="scrollView" destination="KPT-lB-cIf" id="voD-yq-arZ"/>
                     </connections>
@@ -489,7 +494,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <viewControllerLayoutGuide type="bottom" id="BOc-CW-zIw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HPf-h3-Obm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="572"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JZC-tP-Wb7">
@@ -527,7 +532,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <viewControllerLayoutGuide type="bottom" id="qte-BF-qJ0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="44h-0K-cYF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="572"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="93" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ClH-NV-rKp">
@@ -564,7 +569,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <viewControllerLayoutGuide type="bottom" id="dRz-yw-D8F"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VqY-dl-NbR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="572"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="93" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H6M-yJ-X2B">

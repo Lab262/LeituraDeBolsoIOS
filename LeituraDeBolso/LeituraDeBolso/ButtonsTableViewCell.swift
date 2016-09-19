@@ -25,6 +25,7 @@ class ButtonsTableViewCell: UITableViewCell {
     }
 
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         
         self.likeButton.setImage(UIImage(named: "button_likeRead_inactive"), for: UIControlState())

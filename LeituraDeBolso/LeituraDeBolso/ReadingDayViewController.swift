@@ -19,22 +19,9 @@ class ReadingDayViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         
     
-        if ApplicationState.sharedInstance.modeNight! {
-            self.setNightMode()
-        } else {
-            self.setNormalMode()
-        }
-        
+              
     }
     
-    override func viewDidLayoutSubviews() {
-        
-        if ApplicationState.sharedInstance.modeNight! {
-            self.setNightMode()
-        } else {
-            self.setNormalMode()
-        }
-    }
     
     func configureTableView () {
         
@@ -45,8 +32,9 @@ class ReadingDayViewController: UIViewController {
     }
     func setNightMode () {
         
-        self.view.backgroundColor = UIColor.readingModeNightBackground()
         self.tableView.backgroundColor = UIColor.readingModeNightBackground()
+        self.view.backgroundColor = UIColor.readingModeNightBackground()
+
         self.view.layoutIfNeeded()
         self.tableView.layoutIfNeeded()
     }
@@ -57,6 +45,16 @@ class ReadingDayViewController: UIViewController {
         self.tableView.backgroundColor = UIColor.white
         self.view.layoutIfNeeded()
         self.tableView.layoutIfNeeded()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if ApplicationState.sharedInstance.modeNight! {
+            self.setNightMode()
+        } else {
+            self.setNormalMode()
+        }
+
     }
     
     override func viewDidLoad() {
@@ -119,10 +117,6 @@ class ReadingDayViewController: UIViewController {
         } else {
             cell.likeButton.isSelected = false
         }
-        
-
-        
-        
         
         return cell
     }

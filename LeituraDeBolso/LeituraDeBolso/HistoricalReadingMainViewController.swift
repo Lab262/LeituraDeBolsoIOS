@@ -26,8 +26,11 @@ class HistoricalReadingMainViewController: UIViewController {
     
     @IBOutlet weak var unreadReadingsButton: UIButton!
     
-    var segmentSelected: Int?
+    @IBOutlet weak var lineBottomView: UIView!
     
+    
+    var segmentSelected: Int?
+    var viewSearch: UIView?
     var searchController: UISearchController!
     var segmentControlButtonDelegate: SegmentControlButtonDelegate?
 
@@ -48,6 +51,19 @@ class HistoricalReadingMainViewController: UIViewController {
         self.leftButtonItem = UIBarButtonItem(image: UIImage(named: "button_read"), style: .done, target: self, action: #selector(popoverView(_:)))
         
         self.rightButtonItem = UIBarButtonItem(image: UIImage(named:"button_search"), style: .done, target: self, action: #selector(searchReading(_:)))
+        
+        
+    self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
+        
+        self.favoriteReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+        
+        self.unreadReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+        self.segmentSelected = 0
+        
+        
+    //self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,12 +85,14 @@ class HistoricalReadingMainViewController: UIViewController {
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = false
         self.searchController.searchBar.placeholder = "Buscar"
-        self.searchController.searchBar.setValue("Cancelarr", forKey: "_cancelButtonText")
+        self.searchController.searchBar.setValue("Cancelar", forKey: "_cancelButtonText")
+        
+        self.searchController.searchBar.setBackgroundImage(ViewUtil.imageFromColor(.clear, forSize: self.searchController.searchBar.frame.size, withCornerRadius: 0), for: .any, barMetrics: .default)
+      
         
         self.searchController.searchBar.tintColor = UIColor.colorWithHexString("1CDBAD")
         
         searchController.hidesBottomBarWhenPushed = true
-        searchController.searchBar.sizeToFit()
         let searchField = self.searchController.searchBar.value(forKey: "searchField") as? UITextField
         
     
@@ -82,6 +100,15 @@ class HistoricalReadingMainViewController: UIViewController {
         searchField?.textColor = UIColor.readingBlueColor()
         searchField?.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.colorWithHexString("1CDBAD")])
         searchBarButton.isEnabled = true
+        
+        
+        
+        self.viewSearch = UIView(frame: CGRect(x: self.searchController.searchBar.frame.origin.x, y: self.searchController.searchBar.frame.origin.y, width: self.searchController.searchBar.bounds.size.width-15, height: self.searchController.searchBar.bounds.size.height))
+        
+        
+        self.viewSearch?.backgroundColor = UIColor.clear
+        
+        self.viewSearch?.addSubview(self.searchController.searchBar)
         
     }
     
@@ -118,8 +145,10 @@ class HistoricalReadingMainViewController: UIViewController {
         self.searchController.isActive = true
         self.searchController.searchBar.alpha = 0
        
-        let leftNavBarButton = UIBarButtonItem(customView: self.searchController.searchBar)
+        
+        let leftNavBarButton = UIBarButtonItem(customView: self.viewSearch!)
         navigationItem.setLeftBarButton(leftNavBarButton, animated: true)
+    
         navigationItem.setRightBarButton(nil, animated: true)
         UIView.animate(withDuration: 0.2, animations: {
             self.searchController.searchBar.alpha = 1
@@ -169,6 +198,7 @@ class HistoricalReadingMainViewController: UIViewController {
     
     func setNightMode () {
         
+        self.lineBottomView.alpha = 0.3
         self.view.backgroundColor = UIColor.readingModeNightBackground()
         self.allReadingsButton.backgroundColor = UIColor.readingModeNightBackground()
         self.favoriteReadingsButton.backgroundColor = UIColor.readingModeNightBackground()
@@ -177,6 +207,7 @@ class HistoricalReadingMainViewController: UIViewController {
     
     func setNormalMode (){
         
+        self.lineBottomView.alpha = 1.0
         self.view.backgroundColor = UIColor.white
         
     }
@@ -223,18 +254,46 @@ extension HistoricalReadingMainViewController: SegmentControlPageDelegate {
         switch viewIndex {
         case 0:
             showAllHistorical()
+        self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
+            
+            self.favoriteReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+            
+            self.unreadReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
             self.segmentSelected = 0
+//            self.allReadingsButton.isSelected = true
+//            self.favoriteReadingsButton.isSelected = false
+//            self.unreadReadingsButton.isSelected = false
+            
             break
         case 1:
             showFavoriteHistorical()
             self.segmentSelected = 1
+        
+//            self.allReadingsButton.isSelected = false
+//            self.favoriteReadingsButton.isSelected = true
+//            self.unreadReadingsButton.isSelected = false
+        self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+            
+            self.favoriteReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
+            
+            self.unreadReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
             break
         case 2:
             showUnreadHistorical()
             self.segmentSelected = 2
+//            self.allReadingsButton.isSelected = false
+//            self.favoriteReadingsButton.isSelected = false
+//            self.unreadReadingsButton.isSelected = true
+        self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+            
+            self.favoriteReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+           
+            self.unreadReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
+            
             break
             
         default: break
+            
         }
     }
     

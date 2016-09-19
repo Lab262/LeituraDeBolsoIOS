@@ -129,6 +129,11 @@ class UnreadHistoricalReadingViewController: UIViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoricalReadingTableViewCell.identifier, for: indexPath) as! HistoricalReadingTableViewCell
         
+        
+        if ApplicationState.sharedInstance.modeNight! {
+            cell.viewLine.alpha = 0.3
+        }
+        
         if self.isFilterArray && textSearch != "" {
             
             self.generateHistoricalCellByArrayReading(readingArray: self.filteredReadings, cell: cell, indexPath: indexPath)

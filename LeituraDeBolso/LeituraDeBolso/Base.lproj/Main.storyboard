@@ -242,11 +242,10 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <viewControllerLayoutGuide type="bottom" id="U3q-Gd-DaA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dDb-CW-ZQc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="750"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J30-6K-Oue">
-                                <frame key="frameInset" minY="109" width="375" height="509"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J30-6K-Oue">
                                 <connections>
                                     <segue destination="HIQ-jQ-GpI" kind="embed" id="DiJ-Zx-eix"/>
                                 </connections>
@@ -257,7 +256,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Todos">
-                                            <color key="titleColor" red="0.93333333333333335" green="0.37254901960784315" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="showAllHistorical:" destination="sRo-aa-m8V" eventType="touchUpInside" id="ElF-fx-Fe5"/>
@@ -286,7 +285,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eHJ-RK-HDp" userLabel="Divider">
                                         <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="E3g-kb-IMJ"/>
+                                            <constraint firstAttribute="height" constant="0.5" id="CjD-sm-Oal"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNp-KB-Rs2" userLabel="SegmentControlBar">
@@ -361,11 +360,14 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="allReadingsButton" destination="Bu7-a0-CHi" id="AWv-mV-feX"/>
                         <outlet property="allReadingsSelectionBarCenterConstraint" destination="tvE-R1-w3L" id="5bM-o3-E4C"/>
                         <outlet property="favoriteReadingsButton" destination="O88-JT-1my" id="MVe-70-xBv"/>
                         <outlet property="likedReadingsSelectionBarCenterConstraint" destination="Fie-l2-eEb" id="f2D-Ux-uH2"/>
+                        <outlet property="lineBottomView" destination="eHJ-RK-HDp" id="OEe-dJ-QMl"/>
                         <outlet property="searchBarButton" destination="Ghk-a3-Tei" id="hlM-IQ-jwu"/>
                         <outlet property="unreadReadingsButton" destination="e7e-hh-C8e" id="lhb-Ws-KnC"/>
                         <outlet property="unreadSelectionBarCenterConstraint" destination="ImJ-cr-Nq8" id="PIn-wT-O0I"/>
@@ -616,8 +618,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qae-SU-YEt">
                                                     <color key="backgroundColor" red="0.82745098039215681" green="0.82745098039215681" blue="0.82745098039215681" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="ALK-0W-RiH"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="Hdq-X1-f1q"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="YVx-ZW-KGg"/>
                                                     </constraints>
                                                 </view>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oy0-Fv-9FT">
@@ -662,7 +663,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jUL-7D-j2s">
                                                     <color key="backgroundColor" red="0.82745098039999998" green="0.82745098039999998" blue="0.82745098039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="rHx-iD-6oS"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="5RN-xh-P8f"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Horário" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Psc-cB-PzU">
@@ -699,7 +700,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNk-AT-6OE">
                                                     <color key="backgroundColor" red="0.82745098039999998" green="0.82745098039999998" blue="0.82745098039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="ddO-Ez-aXA"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="zpv-2i-7i3"/>
                                                     </constraints>
                                                 </view>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="oQ3-Mj-7iq">
@@ -746,7 +747,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wyX-YC-3Ep">
                                                     <color key="backgroundColor" red="0.82745098039999998" green="0.82745098039999998" blue="0.82745098039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="swx-jM-8fa"/>
+                                                        <constraint firstAttribute="height" constant="0.5" id="efg-sX-T2s"/>
                                                     </constraints>
                                                 </view>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="X1V-1h-HVS">
@@ -872,15 +873,19 @@ tornando mais agradável sua leitura durante a noite.</string>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="675"/>
                     <connections>
+                        <outlet property="firstLineView" destination="Qae-SU-YEt" id="i92-R8-Xyx"/>
                         <outlet property="fontSizeSlider" destination="czL-v6-kOf" id="oWa-FZ-OLq"/>
+                        <outlet property="fourthLineView" destination="wyX-YC-3Ep" id="eu9-4K-eI6"/>
                         <outlet property="informationNightLabel" destination="h3u-c8-FKK" id="Pa0-XY-yEU"/>
                         <outlet property="largerSizeLabel" destination="7n7-bc-kaH" id="X7P-h7-x5e"/>
                         <outlet property="modeNightSwitch" destination="X1V-1h-HVS" id="Wqw-6Y-l2r"/>
                         <outlet property="nightModeLabel" destination="PUn-Ws-daL" id="21M-w7-BP0"/>
                         <outlet property="notificationLabel" destination="k1Q-iA-wWW" id="P2v-Kr-bgz"/>
                         <outlet property="receiveLabel" destination="FmB-xm-pV5" id="Y6l-Kz-zXZ"/>
+                        <outlet property="secondLineView" destination="jUL-7D-j2s" id="UWc-of-6BS"/>
                         <outlet property="smallerSizeLabel" destination="aAn-Dk-EkB" id="V23-0a-DDK"/>
                         <outlet property="textSizeLabel" destination="J4J-U7-rFv" id="Gdn-im-6JJ"/>
+                        <outlet property="thirdLineView" destination="wNk-AT-6OE" id="QsW-jF-FqN"/>
                         <outlet property="timeTableDatePicker" destination="oQ3-Mj-7iq" id="5kS-sR-jiR"/>
                         <outlet property="timeTableLabel" destination="Psc-cB-PzU" id="3eV-wm-hWt"/>
                         <outlet property="trackView" destination="y4x-xG-84V" id="Pvp-6D-D7r"/>

@@ -15,6 +15,13 @@ class SettingsTableViewController: UITableViewController {
     
     fileprivate var showDateVisible = false
     
+    @IBOutlet weak var firstLineView: UIView!
+    
+    @IBOutlet weak var secondLineView: UIView!
+    
+    @IBOutlet weak var thirdLineView: UIView!
+    
+    @IBOutlet weak var fourthLineView: UIView!
    
     fileprivate var dictionarySizeText: Dictionary <CGFloat, Float> = [11.0: 1, 12.0: 2, 13.0: 3, 14.0: 4, 15.0: 5,  16.0: 6, 17.0: 7]
     
@@ -113,6 +120,11 @@ class SettingsTableViewController: UITableViewController {
     
     func setNightMode () {
         
+        self.firstLineView.alpha = 0.3
+        self.secondLineView.alpha = 0.3
+        self.thirdLineView.alpha = 0.3
+        self.fourthLineView.alpha = 0.3
+        
         self.view.backgroundColor = UIColor.readingModeNightBackground()
         self.tableView.backgroundColor = UIColor.readingModeNightBackground()
         
@@ -138,6 +150,10 @@ class SettingsTableViewController: UITableViewController {
     
     func setNormalMode () {
         
+        self.firstLineView.alpha = 1.0
+        self.secondLineView.alpha = 1.0
+        self.thirdLineView.alpha = 1.0
+        self.fourthLineView.alpha = 1.0
         
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white

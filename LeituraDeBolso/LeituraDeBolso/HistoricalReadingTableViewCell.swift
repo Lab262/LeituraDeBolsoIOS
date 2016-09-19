@@ -24,6 +24,9 @@ class HistoricalReadingTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
     
+    @IBOutlet weak var viewLine: UIView!
+    
+    
     @IBOutlet weak var emojiOneLabel: UILabel!
     
     @IBOutlet weak var emojiTwoLabel: UILabel!

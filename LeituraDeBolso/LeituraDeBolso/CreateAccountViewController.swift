@@ -27,7 +27,7 @@ class CreateAccountViewController: UIViewController {
     
     @IBAction func popoverView(_ sender: AnyObject) {
         
-        self.navigationController?.popViewController(animated: true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     

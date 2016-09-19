@@ -37,7 +37,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XTZ-70-xR0">
                         <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="pFX-yE-0ou"/>
+                            <constraint firstAttribute="height" constant="0.5" id="YZW-Gw-EQR"/>
                         </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_select" translatesAutoresizingMaskIntoConstraints="NO" id="VK7-bC-3dr">
@@ -120,10 +120,10 @@
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
-                        <exclude reference="40u-1g-48Y"/>
-                        <exclude reference="pzg-50-e8o"/>
                         <exclude reference="Ksk-PQ-dTJ"/>
                         <exclude reference="sv2-ia-ggS"/>
+                        <exclude reference="40u-1g-48Y"/>
+                        <exclude reference="pzg-50-e8o"/>
                         <exclude reference="HZ0-K5-26e"/>
                         <exclude reference="vKV-Dn-X44"/>
                         <exclude reference="zyj-Ie-d0h"/>
@@ -137,6 +137,7 @@
                 <outlet property="emojiTwoLabel" destination="k1c-Qi-0V1" id="tjD-1M-9TF"/>
                 <outlet property="likeButton" destination="fpY-Ya-BNq" id="2SL-dE-0KS"/>
                 <outlet property="titleLabel" destination="cxl-mE-3C3" id="mGr-bG-7ZY"/>
+                <outlet property="viewLine" destination="XTZ-70-xR0" id="k1Z-IN-SNF"/>
             </connections>
             <point key="canvasLocation" x="340.5" y="69"/>
         </tableViewCell>

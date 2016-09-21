@@ -22,6 +22,9 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var thirdLineView: UIView!
     
     @IBOutlet weak var fourthLineView: UIView!
+    
+    @IBOutlet weak var fifthLineView: UIView!
+    
    
     fileprivate var dictionarySizeText: Dictionary <CGFloat, Float> = [11.0: 1, 12.0: 2, 13.0: 3, 14.0: 4, 15.0: 5,  16.0: 6, 17.0: 7]
     
@@ -35,6 +38,7 @@ class SettingsTableViewController: UITableViewController {
     
     @IBOutlet weak var trackView: UIView!
     
+    @IBOutlet weak var logoutButton: UIButton!
     
     @IBOutlet weak var notificationLabel: UILabel!
     @IBOutlet weak var receiveLabel: UILabel!
@@ -124,7 +128,8 @@ class SettingsTableViewController: UITableViewController {
         self.secondLineView.alpha = 0.3
         self.thirdLineView.alpha = 0.3
         self.fourthLineView.alpha = 0.3
-        
+        self.fifthLineView.alpha = 0.3
+        self.logoutButton.setTitleColor(UIColor.white, for: .normal)
         self.view.backgroundColor = UIColor.readingModeNightBackground()
         self.tableView.backgroundColor = UIColor.readingModeNightBackground()
         
@@ -154,6 +159,9 @@ class SettingsTableViewController: UITableViewController {
         self.secondLineView.alpha = 1.0
         self.thirdLineView.alpha = 1.0
         self.fourthLineView.alpha = 1.0
+        self.fifthLineView.alpha = 1.0
+        
+        self.logoutButton.setTitleColor(UIColor.black, for: .normal)
         
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
@@ -178,6 +186,10 @@ class SettingsTableViewController: UITableViewController {
     }
     
     
+    @IBAction func logout(_ sender: AnyObject) {
+        self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Login")!, animated: true, completion: nil)
+    }
+    
     @IBAction func popoverView(_ sender: AnyObject) {
 
         _ = self.navigationController?.popViewController(animated: true)
@@ -201,7 +213,7 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 5
+        return 6
     }
     
   

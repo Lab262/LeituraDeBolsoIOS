@@ -15,6 +15,7 @@ extension UIView {
         if let _ = viewWithTag(10) {
             //View is already loading
         } else {
+            
             let loadView = UIView(frame: bounds)
             loadView.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
             loadView.tag = 10

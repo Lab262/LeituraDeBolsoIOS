@@ -1,54 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Quicksand-Bold.otf">
+        <array key="Quicksand-Bold.otf">
             <string>Quicksand-Bold</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="205" id="EXX-Xd-HQp" customClass="ImageLogoTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="322" height="178"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="270" id="EXX-Xd-HQp" customClass="ImageLogoTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="322" height="243"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EXX-Xd-HQp" id="pms-qz-jUk">
-                <rect key="frame" x="0.0" y="0.0" width="322" height="177.5"/>
+                <frame key="frameInset" width="322" height="242"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_leitura" translatesAutoresizingMaskIntoConstraints="NO" id="NxX-LB-9Rr">
-                        <rect key="frame" x="57" y="35.5" width="207" height="71"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="KpG-1W-zTG">
                         <constraints>
-                            <constraint firstAttribute="width" constant="207" id="Cbr-0D-7UQ"/>
-                            <constraint firstAttribute="height" constant="71" id="hQ6-RL-Pzb"/>
+                            <constraint firstAttribute="width" constant="115" id="1cL-uh-a1b"/>
+                            <constraint firstAttribute="height" constant="96" id="B18-y1-uUN"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_title" translatesAutoresizingMaskIntoConstraints="NO" id="bec-qV-4YI">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="250" id="Vzx-R5-QfS"/>
+                            <constraint firstAttribute="height" constant="32" id="twu-Ov-DW0"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cadastro" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ozf-0p-Dcf">
-                        <rect key="frame" x="115" y="146.5" width="91" height="24"/>
                         <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="20"/>
-                        <color key="textColor" red="0.38823529410000002" green="0.14901960780000001" blue="0.52549019610000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.38823529410000002" green="0.14901960780000001" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" red="0.1058823529" green="0.85882352939999995" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstItem="NxX-LB-9Rr" firstAttribute="centerX" secondItem="pms-qz-jUk" secondAttribute="centerX" id="XVx-Qo-A4I"/>
-                    <constraint firstItem="Ozf-0p-Dcf" firstAttribute="top" secondItem="NxX-LB-9Rr" secondAttribute="bottom" constant="40" id="ryg-IT-Sek"/>
-                    <constraint firstItem="NxX-LB-9Rr" firstAttribute="centerY" secondItem="pms-qz-jUk" secondAttribute="centerY" multiplier="0.8" id="vEi-cG-fWH"/>
+                    <constraint firstItem="KpG-1W-zTG" firstAttribute="top" secondItem="pms-qz-jUk" secondAttribute="topMargin" constant="7.5" id="JH6-tc-MZd"/>
+                    <constraint firstItem="bec-qV-4YI" firstAttribute="centerX" secondItem="KpG-1W-zTG" secondAttribute="centerX" id="RsH-br-Qon"/>
+                    <constraint firstItem="KpG-1W-zTG" firstAttribute="centerX" secondItem="pms-qz-jUk" secondAttribute="centerX" id="Y06-et-AON"/>
+                    <constraint firstItem="bec-qV-4YI" firstAttribute="top" secondItem="KpG-1W-zTG" secondAttribute="bottom" constant="26" id="sXt-rb-Wya"/>
+                    <constraint firstItem="Ozf-0p-Dcf" firstAttribute="top" secondItem="bec-qV-4YI" secondAttribute="bottom" constant="29" id="vgJ-mG-u17"/>
                     <constraint firstItem="Ozf-0p-Dcf" firstAttribute="centerX" secondItem="pms-qz-jUk" secondAttribute="centerX" id="xFx-ZR-Fwx"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="logoImageView" destination="NxX-LB-9Rr" id="MTI-rm-OS9"/>
                 <outlet property="titleLabel" destination="Ozf-0p-Dcf" id="XYJ-17-TCh"/>
             </connections>
-            <point key="canvasLocation" x="147" y="106"/>
+            <point key="canvasLocation" x="147" y="138.5"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="logo_leitura" width="207" height="71"/>
+        <image name="logo" width="115" height="96"/>
+        <image name="logo_title" width="566" height="70"/>
     </resources>
 </document>

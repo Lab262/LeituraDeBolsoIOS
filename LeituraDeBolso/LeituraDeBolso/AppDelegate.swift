@@ -14,6 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var maskBgView = UIView()
+    var launchScreenImageView = UIImageView()
+    var xCenterConstraint = NSLayoutConstraint()
+    var yCenterConstraint = NSLayoutConstraint()
 
     func launchScreenAnimation () {
         
@@ -26,13 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         navigationController.view.addSubview(self.maskBgView)
         
-        let launchScreenImageView = UIImageView(image: UIImage(named: "LaunchScreenFrames1.png"))
+        self.launchScreenImageView = UIImageView(image: UIImage(named: "LaunchScreenFrames1.png"))
         
-        launchScreenImageView.frame = CGRect(x: 0, y: 0, width: 153, height: 153);
+        self.launchScreenImageView.frame = CGRect(x: 0, y: 0, width: 153, height: 153);
      
-        launchScreenImageView.center = maskBgView.center
+        self.launchScreenImageView.center = maskBgView.center
         
-        maskBgView.addSubview(launchScreenImageView)
+        maskBgView.addSubview(self.launchScreenImageView)
+        
+        self.launchScreenImageView.translatesAutoresizingMaskIntoConstraints = false
         
         var images = [CGImage]()
         
@@ -51,7 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         animation.isRemovedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
         
-        launchScreenImageView.layer.add(animation, forKey: "animation")
+        self.xCenterConstraint = NSLayoutConstraint(item: self.launchScreenImageView, attribute: .centerX, relatedBy: .equal, toItem: self.maskBgView, attribute: .centerX, multiplier: 1, constant: 0)
+
+        self.yCenterConstraint = NSLayoutConstraint(item: self.launchScreenImageView, attribute: .centerY, relatedBy: .equal, toItem: self.maskBgView, attribute: .centerY, multiplier: 0.32, constant: 0)
+        
+        self.launchScreenImageView.layer.add(animation, forKey: "animation")
         
     }
     
@@ -217,17 +226,30 @@ extension AppDelegate: CAAnimationDelegate {
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         
-        UIView.animate(withDuration: 0.8, animations: {
-            self.maskBgView.alpha = 0.0
+        
+        
+        UIView.animate(withDuration: 0.8, delay: 0.0, usingSpringWithDamping: 0.60, initialSpringVelocity: 0.7, options: UIViewAnimationOptions(), animations: {
+            
+            NSLayoutConstraint.activate([self.xCenterConstraint, self.yCenterConstraint])
+            
+            self.maskBgView.layoutIfNeeded()
+
             }, completion: { (finished) in
                 
                 if finished {
-                    self.maskBgView.removeFromSuperview()
+                    
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.maskBgView.alpha = 0.0
+                        }, completion: { (finished) in
+                            
+                            if finished {
+                                self.maskBgView.removeFromSuperview()
+                            }
+                    })
+                    
                 }
         })
         
     }
-
-    
 }
 

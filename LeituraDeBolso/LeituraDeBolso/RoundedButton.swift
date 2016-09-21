@@ -13,7 +13,12 @@ class RoundedButton: UIButton {
   
     override func willMove(toWindow newWindow: UIWindow?) {
         
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = self.frame.height/2
+        self.layoutIfNeeded()
+        self.layer.cornerRadius = self.bounds.height/2
+
+        self.clipsToBounds = true
+     
+
     }
+    
 }

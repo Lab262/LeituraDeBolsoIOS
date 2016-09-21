@@ -16,6 +16,7 @@
 		D40752C61D83696D0093F0A0 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752C51D83696D0093F0A0 /* TextFieldTableViewCell.swift */; };
 		D40752C91D837AAA0093F0A0 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752C71D837AAA0093F0A0 /* ButtonTableViewCell.swift */; };
 		D40752CA1D837AAA0093F0A0 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D40752C81D837AAA0093F0A0 /* ButtonTableViewCell.xib */; };
+		D4159B931D91DE5B003E7585 /* TextInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4159B921D91DE5B003E7585 /* TextInputTableViewCell.swift */; };
 		D448B39E1D6E8EA500F3DF51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B39D1D6E8EA500F3DF51 /* AppDelegate.swift */; };
 		D448B3A01D6E8EA500F3DF51 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B39F1D6E8EA500F3DF51 /* LoginViewController.swift */; };
 		D448B3A31D6E8EA500F3DF51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D448B3A11D6E8EA500F3DF51 /* Main.storyboard */; };
@@ -249,6 +250,7 @@
 		D40752C51D83696D0093F0A0 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		D40752C71D837AAA0093F0A0 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		D40752C81D837AAA0093F0A0 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
+		D4159B921D91DE5B003E7585 /* TextInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputTableViewCell.swift; sourceTree = "<group>"; };
 		D448B39A1D6E8EA500F3DF51 /* LeituraDeBolso.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeituraDeBolso.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D448B39D1D6E8EA500F3DF51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D448B39F1D6E8EA500F3DF51 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 				D40752C31D8369580093F0A0 /* ImageLogoTableViewCell.swift */,
 				D40752C51D83696D0093F0A0 /* TextFieldTableViewCell.swift */,
 				D40752C71D837AAA0093F0A0 /* ButtonTableViewCell.swift */,
+				D4159B921D91DE5B003E7585 /* TextInputTableViewCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1198,6 +1201,7 @@
 				D4E8CA581D752B8200C82F0A /* UIColorExtension.swift in Sources */,
 				D4CADAE11D7608F6005FE3DC /* NSUserDefaults+UIColor.swift in Sources */,
 				D40752C61D83696D0093F0A0 /* TextFieldTableViewCell.swift in Sources */,
+				D4159B931D91DE5B003E7585 /* TextInputTableViewCell.swift in Sources */,
 				D4CADAD71D75C9B6005FE3DC /* AllHistoricalReadingViewController.swift in Sources */,
 				D4CADAD51D75C8D1005FE3DC /* HistoricalReadingMainViewController.swift in Sources */,
 				D4A8E88F1D776ED3003F6854 /* SettingsTableViewController.swift in Sources */,

@@ -41,7 +41,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ln-mS-wWj">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -113,14 +113,14 @@
                                             <outlet property="titleLabel" destination="KPG-UT-prK" id="krs-6G-Uel"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="contentCell" rowHeight="411" id="P1v-L8-byG" customClass="ContentTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="208" width="375" height="411"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="contentCell" rowHeight="377" id="P1v-L8-byG" customClass="ContentTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="208" width="375" height="377"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P1v-L8-byG" id="N8o-kN-DDZ">
-                                            <frame key="frameInset" width="375" height="411"/>
+                                            <frame key="frameInset" width="375" height="377"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhl-TC-JrQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhl-TC-JrQ">
                                                     <string key="text">The majestic Rocky Mountains are a major tourist location in the western United States. Visitors can participate in a quantity of activities, including hiking, skiing, snowboarding, mountain biking, &amp; plenty of more. The Rockies are home to several campgrounds, ghost towns, gold prospecting sites, &amp; national parks. a quantity of the biggest tourist attractions in the Rockies are Pike’s Peak &amp; Royal Gorge. There are several world famous national parks in the Rockies, including Yellowstone, Rocky Mountain, Grand Teton, &amp; Glacier.
 
 The legendary Rocky Mountains stretch from old Mexico up through the United States &amp; into Canada. The Rocky Mountains are over 3000 miles long, spanning parts of california, Colorado, Idaho, Montana, &amp; Wyoming before continuing into Canada. Stories of early adventurers like Lewis &amp; Clark exploring the Rocky Mountains are legendary.</string>
@@ -140,7 +140,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                 <constraint firstAttribute="trailingMargin" secondItem="xhl-TC-JrQ" secondAttribute="trailing" constant="14" id="4tY-Ey-sab"/>
                                                 <constraint firstItem="xhl-TC-JrQ" firstAttribute="leading" secondItem="N8o-kN-DDZ" secondAttribute="leadingMargin" constant="14" id="BF8-u7-A0m"/>
                                                 <constraint firstItem="QSK-zx-Yga" firstAttribute="top" secondItem="xhl-TC-JrQ" secondAttribute="bottom" constant="22" id="L3S-hw-0cJ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="QSK-zx-Yga" secondAttribute="bottom" constant="3" id="PVa-fs-Bic"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="QSK-zx-Yga" secondAttribute="bottom" constant="29" id="PVa-fs-Bic"/>
                                                 <constraint firstItem="QSK-zx-Yga" firstAttribute="centerX" secondItem="N8o-kN-DDZ" secondAttribute="centerX" id="TtO-cz-mYx"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="QSK-zx-Yga" secondAttribute="trailing" constant="65" id="Zvw-X1-SXc"/>
                                                 <constraint firstItem="QSK-zx-Yga" firstAttribute="leading" secondItem="N8o-kN-DDZ" secondAttribute="leadingMargin" constant="65" id="aib-h4-LLX"/>
@@ -152,11 +152,11 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                             <outlet property="contentReadingLabel" destination="xhl-TC-JrQ" id="J1X-QP-0TW"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="buttonsCell" rowHeight="110" id="XHK-PT-vgt" customClass="ButtonsTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="619" width="375" height="110"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="buttonsCell" rowHeight="82" id="XHK-PT-vgt" customClass="ButtonsTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="585" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XHK-PT-vgt" id="yIs-vv-bMY">
-                                            <frame key="frameInset" width="375" height="110"/>
+                                            <frame key="frameInset" width="375" height="82"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uQ-hN-OeI">
@@ -181,12 +181,11 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="4oN-B3-aPd" firstAttribute="centerY" secondItem="yIs-vv-bMY" secondAttribute="centerY" id="07e-tC-06H"/>
-                                                <constraint firstItem="6uQ-hN-OeI" firstAttribute="centerY" secondItem="yIs-vv-bMY" secondAttribute="centerY" id="IK5-os-vs1"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="6uQ-hN-OeI" secondAttribute="bottom" constant="20" id="8ku-VH-1Ey"/>
                                                 <constraint firstItem="4oN-B3-aPd" firstAttribute="centerX" secondItem="yIs-vv-bMY" secondAttribute="centerX" multiplier="1.35" id="JkL-AI-7qg"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="4oN-B3-aPd" secondAttribute="bottom" constant="23.5" id="Wqv-lD-9ae"/>
+                                                <constraint firstAttribute="topMargin" secondItem="6uQ-hN-OeI" secondAttribute="top" id="QSU-dG-WcD"/>
                                                 <constraint firstItem="6uQ-hN-OeI" firstAttribute="centerX" secondItem="yIs-vv-bMY" secondAttribute="centerX" multiplier="0.65" id="nkn-Rn-1Li"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="6uQ-hN-OeI" secondAttribute="bottom" constant="23.5" id="wwy-zx-fOK"/>
+                                                <constraint firstAttribute="topMargin" secondItem="4oN-B3-aPd" secondAttribute="top" id="zjh-4P-lBB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -231,7 +230,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1150.5" y="433"/>
+            <point key="canvasLocation" x="-1151.2" y="432.68365817091455"/>
         </scene>
         <!--Histórico de Leitura-->
         <scene sceneID="kFT-QP-IrY">
@@ -382,7 +381,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pb9-SL-CI3" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="MM3-tS-jCO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MM3-tS-jCO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.38823529410000002" green="0.14901960780000001" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -602,7 +601,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
             <objects>
                 <tableViewController id="uwY-7Q-OCH" customClass="SettingsTableViewController" customModule="LeituraDeBolso" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Wkz-5C-mNB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="675"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
@@ -841,23 +840,59 @@ tornando mais agradável sua leitura durante a noite.</string>
                                                     <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QBF-3W-l2p">
+                                                    <color key="backgroundColor" red="0.82745098039999998" green="0.82745098039999998" blue="0.82745098039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="0.5" id="liU-oY-rzQ"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="J4J-U7-rFv" firstAttribute="leading" secondItem="kYP-z4-1dW" secondAttribute="leadingMargin" constant="34" id="1KF-sy-txf"/>
                                                 <constraint firstItem="y4x-xG-84V" firstAttribute="leading" secondItem="kYP-z4-1dW" secondAttribute="leadingMargin" constant="29.5" id="52S-Im-DPU"/>
                                                 <constraint firstItem="czL-v6-kOf" firstAttribute="top" secondItem="aAn-Dk-EkB" secondAttribute="bottom" constant="-2.5" id="JuQ-U8-Uue"/>
+                                                <constraint firstAttribute="bottom" secondItem="QBF-3W-l2p" secondAttribute="bottom" constant="0.5" id="OBP-a5-yHt"/>
                                                 <constraint firstItem="y4x-xG-84V" firstAttribute="centerY" secondItem="czL-v6-kOf" secondAttribute="centerY" id="PAZ-Nh-ewE"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="7n7-bc-kaH" secondAttribute="trailing" constant="20" id="UjE-op-umj"/>
+                                                <constraint firstAttribute="trailing" secondItem="QBF-3W-l2p" secondAttribute="trailing" id="UoR-RP-LEu"/>
                                                 <constraint firstItem="aAn-Dk-EkB" firstAttribute="top" secondItem="J4J-U7-rFv" secondAttribute="bottom" constant="12" id="UyS-M1-2sC"/>
                                                 <constraint firstItem="aAn-Dk-EkB" firstAttribute="leading" secondItem="kYP-z4-1dW" secondAttribute="leadingMargin" constant="25" id="Ya8-CH-4cE"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="czL-v6-kOf" secondAttribute="trailing" constant="15.5" id="c5i-yk-QS6"/>
                                                 <constraint firstItem="czL-v6-kOf" firstAttribute="leading" secondItem="kYP-z4-1dW" secondAttribute="leadingMargin" constant="15.5" id="c5l-Pr-Yls"/>
+                                                <constraint firstItem="QBF-3W-l2p" firstAttribute="leading" secondItem="kYP-z4-1dW" secondAttribute="leading" id="ezM-za-9P6"/>
                                                 <constraint firstItem="7n7-bc-kaH" firstAttribute="top" secondItem="J4J-U7-rFv" secondAttribute="bottom" constant="1" id="l44-Tu-d6K"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="y4x-xG-84V" secondAttribute="trailing" constant="29.5" id="oBK-f8-WyV"/>
                                                 <constraint firstItem="J4J-U7-rFv" firstAttribute="top" secondItem="kYP-z4-1dW" secondAttribute="topMargin" constant="17" id="wo3-vT-807"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="50" id="wna-Nn-YKy">
+                                        <rect key="frame" x="0.0" y="679" width="375" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wna-Nn-YKy" id="iS8-Db-BVQ">
+                                            <frame key="frameInset" width="375" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONS-98-AUv">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="150" id="HeA-fD-bSK"/>
+                                                        <constraint firstAttribute="height" constant="50" id="rO8-Ja-rA4"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <state key="normal" title="Logout">
+                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="logout:" destination="uwY-7Q-OCH" eventType="touchUpInside" id="8bl-So-eUU"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ONS-98-AUv" firstAttribute="centerY" secondItem="iS8-Db-BVQ" secondAttribute="centerY" id="2V2-D2-h6g"/>
+                                                <constraint firstItem="ONS-98-AUv" firstAttribute="centerX" secondItem="iS8-Db-BVQ" secondAttribute="centerX" id="5aQ-E6-ohb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -876,13 +911,15 @@ tornando mais agradável sua leitura durante a noite.</string>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="375" height="675"/>
+                    <size key="freeformSize" width="375" height="800"/>
                     <connections>
+                        <outlet property="fifthLineView" destination="QBF-3W-l2p" id="0wU-ZW-xab"/>
                         <outlet property="firstLineView" destination="Qae-SU-YEt" id="i92-R8-Xyx"/>
                         <outlet property="fontSizeSlider" destination="czL-v6-kOf" id="oWa-FZ-OLq"/>
                         <outlet property="fourthLineView" destination="wyX-YC-3Ep" id="eu9-4K-eI6"/>
                         <outlet property="informationNightLabel" destination="h3u-c8-FKK" id="Pa0-XY-yEU"/>
                         <outlet property="largerSizeLabel" destination="7n7-bc-kaH" id="X7P-h7-x5e"/>
+                        <outlet property="logoutButton" destination="ONS-98-AUv" id="vKk-uJ-RYR"/>
                         <outlet property="modeNightSwitch" destination="X1V-1h-HVS" id="Wqw-6Y-l2r"/>
                         <outlet property="nightModeLabel" destination="PUn-Ws-daL" id="21M-w7-BP0"/>
                         <outlet property="notificationLabel" destination="k1Q-iA-wWW" id="P2v-Kr-bgz"/>
@@ -898,7 +935,7 @@ tornando mais agradável sua leitura durante a noite.</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0l-rJ-Q7V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-666.5" y="-489.5"/>
+            <point key="canvasLocation" x="-668" y="-490.25487256371815"/>
         </scene>
     </scenes>
     <resources>

@@ -14,21 +14,27 @@ let KEY_CONFIRM_ASS = "confirmationPass"
 
 class LoginViewController: UIViewController {
     
+    @IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
     var dictionaryTextFields = Dictionary <String, String>()
     
     @IBOutlet weak var tableView: UITableView!
     
-
-    override func viewWillAppear(_ animated: Bool) {
-        
-        
-    }
+    var lastEditingCell: TextFieldTableViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.registerNibs()
         
+        self.configureGestureRecognizer()
+        
+        self.registerObservers()
+        
+    }
+    
+    private func registerObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     func registerNibs () {
@@ -56,7 +62,8 @@ class LoginViewController: UIViewController {
         
         cell.iconImage.image = UIImage(named: "icon_email")
         cell.textField.placeholder = "Email"
-        
+        cell.delegate = self
+        cell.textField.keyboardType = .emailAddress
         cell.completionText = {(text) -> Void in
             self.dictionaryTextFields[KEY_EMAIL] = text
         }
@@ -71,7 +78,8 @@ class LoginViewController: UIViewController {
         
         cell.iconHeightConstraint.constant = 31
         cell.iconWidthConstraint.constant = 23
-        
+        cell.delegate = self
+        cell.textField.isSecureTextEntry = true
         cell.iconImage.image = UIImage(named: "icon_pass")
         cell.textField.placeholder = "Senha"
         
@@ -95,6 +103,7 @@ class LoginViewController: UIViewController {
         cell.button.backgroundColor = UIColor.clear
         
         
+        
         return cell
     }
     
@@ -103,7 +112,8 @@ class LoginViewController: UIViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.identifier, for: indexPath) as! ButtonTableViewCell
         
         cell.button.addTarget(self, action: #selector(loginUser(_:)), for: .touchUpInside)
-        
+        cell.button.titleLabel?.font = UIFont(name: "Quicksand-Bold", size: 20)
+        cell.button.backgroundColor = UIColor.colorWithHexString("EE5F66")
         cell.button.setTitle("Entrar", for: UIControlState())
         
         
@@ -111,7 +121,55 @@ class LoginViewController: UIViewController {
     }
 
     
-
+    //MARK: Para tratar eventos do teclado
+    
+    
+    func configureGestureRecognizer(){
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
+        panGesture.delegate = self
+        tableView.addGestureRecognizer(panGesture)
+    }
+    
+    
+    func didPan(_ gesture : UIGestureRecognizer) {
+        tableView.endEditing(true)
+      
+        
+    }
+    
+    func keyboardDidShow(_ notification: NSNotification){
+        if let object = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue{
+            let frame = object.cgRectValue
+            bottomTableConstraint.constant = frame.height
+            tableView.layoutIfNeeded()
+         //   adjustTextFieldCell()
+        }
+    }
+    
+    func keyboardWillHide(_ notification: NSNotification){
+        self.bottomTableConstraint.constant = 0
+        
+    }
+    
+    func adjustTextFieldCell(){
+        if let unwrappedLastCell = lastEditingCell{
+            if let index = tableView.indexPath(for: unwrappedLastCell){
+                let cellRect = tableView.rectForRow(at: index)
+                if !tableView.bounds.contains(cellRect){
+                    UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                        self.tableView.scrollToRow(at: index, at: .bottom, animated: false)
+                        }, completion: nil)
+                }
+            }
+        }
+        
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
 
     @IBAction func popoverView(_ sender: AnyObject) {
         
@@ -125,7 +183,7 @@ class LoginViewController: UIViewController {
     }
     
     func loginUser (_ sender: UIButton) {
-        
+        self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
     }
 
 }
@@ -148,7 +206,7 @@ extension LoginViewController: UITableViewDataSource {
         case 2:
             return generatePasswordTextFieldCell(tableView, indexPath: indexPath)
         case 3:
-            return generateForgotPassButtonCell (tableView, indexPath: indexPath)
+            return generateForgotPassButtonCell(tableView, indexPath: indexPath)
         case 4:
             return generateLoginButtonCell(tableView, indexPath: indexPath)
         default:
@@ -166,7 +224,7 @@ extension LoginViewController: UITableViewDelegate {
         switch (indexPath as NSIndexPath).row {
             
         case 0:
-            return 205
+            return 240
         case 1, 2:
             return 70
         case 3, 4:
@@ -177,3 +235,51 @@ extension LoginViewController: UITableViewDelegate {
     }
     
 }
+
+extension LoginViewController : UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+
+extension LoginViewController : TextInputWithLabelTableViewCellDelegate {
+    
+    func userDidBeginEdit(cell: TextFieldTableViewCell) {
+        lastEditingCell = cell
+    }
+    
+    func textFieldReturn(cell: TextFieldTableViewCell, text: String?) {
+        
+    }
+    
+    func textCellAtIndexBecomeFirstResponder(indexPath index: IndexPath){
+    }
+    
+    func textDidChange(cell: TextFieldTableViewCell, text: String?) {
+        fillModelWith(cell: cell, text: text)
+        lastEditingCell = nil
+        
+    }
+    
+    func userDidEndEdit(cell: TextFieldTableViewCell, text: String?) {
+        fillModelWith(cell: cell, text: text)
+        lastEditingCell = nil
+        
+    }
+    
+    private func fillModelWith(cell: TextFieldTableViewCell, text: String?){
+        //        switch TagTextField.fromTag(tag: cell.txtFieldInput.tag) {
+        //        case .username:
+        //            viewModel.username = text ?? ""
+        //            break
+        //        case .password:
+        //            viewModel.password = text ?? ""
+        //            break
+        //        default:
+        //            break
+        //        }
+    }
+}
+
+
+

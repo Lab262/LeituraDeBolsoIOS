@@ -105,20 +105,24 @@
                                     <segue destination="BOm-ib-9Md" kind="show" id="uwL-zK-aJb"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_facebook" translatesAutoresizingMaskIntoConstraints="NO" id="g7g-zO-Aix">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="15" id="0YC-PZ-KNH"/>
-                                    <constraint firstAttribute="height" constant="33" id="Qig-aP-u25"/>
-                                </constraints>
-                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UDx-oy-AWJ">
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_facebook" translatesAutoresizingMaskIntoConstraints="NO" id="g7g-zO-Aix">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="13" id="0YC-PZ-KNH"/>
+                                            <constraint firstAttribute="height" constant="26" id="Qig-aP-u25"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login com Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8V-tT-5sg">
+                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="16"/>
+                                        <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qiQ-fa-8i1">
                                 <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="20"/>
                                 <color key="textColor" red="0.10588235294117647" green="0.85882352941176465" blue="0.67843137254901964" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login com Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j8V-tT-5sg">
-                                <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="16"/>
-                                <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="rWn-vE-A9K">
@@ -136,33 +140,23 @@
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.85882352939999995" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="g7g-zO-Aix" firstAttribute="centerY" secondItem="j8V-tT-5sg" secondAttribute="centerY" id="1Sk-dh-Bag"/>
-                            <constraint firstItem="j8V-tT-5sg" firstAttribute="centerY" secondItem="BdP-Si-H5a" secondAttribute="centerY" id="6vj-Ik-DuY"/>
                             <constraint firstItem="rWn-vE-A9K" firstAttribute="centerY" secondItem="WMn-l3-IfL" secondAttribute="centerY" multiplier="0.32" id="Dt5-eD-3vV"/>
                             <constraint firstItem="qiQ-fa-8i1" firstAttribute="centerY" secondItem="hpu-dB-yEH" secondAttribute="centerY" id="EAm-JB-ryq"/>
                             <constraint firstItem="qiQ-fa-8i1" firstAttribute="centerX" secondItem="hpu-dB-yEH" secondAttribute="centerX" id="Fdj-KY-rqP"/>
                             <constraint firstItem="cON-ZT-ipJ" firstAttribute="top" secondItem="rWn-vE-A9K" secondAttribute="bottom" constant="26" id="LMD-Sb-3fH"/>
-                            <constraint firstItem="j8V-tT-5sg" firstAttribute="leading" secondItem="g7g-zO-Aix" secondAttribute="trailing" constant="8" id="PZz-LU-bUd"/>
                             <constraint firstItem="hpu-dB-yEH" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="URp-TT-Rpf"/>
-                            <constraint firstItem="j8V-tT-5sg" firstAttribute="centerX" secondItem="BdP-Si-H5a" secondAttribute="centerX" id="V6r-Bc-XrI"/>
                             <constraint firstItem="BdP-Si-H5a" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="VB9-v4-1Le"/>
                             <constraint firstItem="cpR-3v-UWc" firstAttribute="centerY" secondItem="i7p-3E-FFI" secondAttribute="centerY" id="ZWu-3A-uUN"/>
+                            <constraint firstItem="UDx-oy-AWJ" firstAttribute="centerY" secondItem="BdP-Si-H5a" secondAttribute="centerY" id="bht-PU-ygn"/>
                             <constraint firstItem="i7p-3E-FFI" firstAttribute="centerY" secondItem="WMn-l3-IfL" secondAttribute="centerY" multiplier="1.1" id="c4R-HA-0Pd"/>
                             <constraint firstItem="i7p-3E-FFI" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="dIC-oo-wOF"/>
                             <constraint firstItem="cON-ZT-ipJ" firstAttribute="centerX" secondItem="rWn-vE-A9K" secondAttribute="centerX" id="ffX-Y2-0wP"/>
-                            <constraint firstItem="BdP-Si-H5a" firstAttribute="top" secondItem="g7g-zO-Aix" secondAttribute="bottom" constant="-41" id="iOj-W2-6nH"/>
                             <constraint firstItem="i7p-3E-FFI" firstAttribute="top" secondItem="hpu-dB-yEH" secondAttribute="bottom" constant="20" id="l6Q-XK-n11"/>
                             <constraint firstItem="BdP-Si-H5a" firstAttribute="top" secondItem="i7p-3E-FFI" secondAttribute="bottom" constant="20" id="mOh-iA-5AF"/>
-                            <constraint firstItem="j8V-tT-5sg" firstAttribute="leading" secondItem="g7g-zO-Aix" secondAttribute="trailing" constant="8" id="pJO-A1-5sL"/>
                             <constraint firstItem="cpR-3v-UWc" firstAttribute="centerX" secondItem="i7p-3E-FFI" secondAttribute="centerX" id="rhU-5I-iFw"/>
                             <constraint firstItem="rWn-vE-A9K" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="x44-Sv-I49"/>
+                            <constraint firstItem="UDx-oy-AWJ" firstAttribute="centerX" secondItem="BdP-Si-H5a" secondAttribute="centerX" id="xUo-DK-jLV"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="iOj-W2-6nH"/>
-                                <exclude reference="pJO-A1-5sL"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="ZnH-Yf-hSE"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -229,7 +223,7 @@
             <objects>
                 <navigationController storyboardIdentifier="navigation" automaticallyAdjustsScrollViewInsets="NO" id="LXs-Sv-hpL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r3a-Eb-YfE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r3a-Eb-YfE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

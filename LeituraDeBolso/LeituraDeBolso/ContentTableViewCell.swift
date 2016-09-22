@@ -21,7 +21,10 @@ class ContentTableViewCell: UITableViewCell {
         }
     }
     
-    override func didMoveToWindow() {
+    
+     override func layoutSubviews() {
+        
+    
         
         self.contentReadingLabel.setSizeFont(ApplicationState.sharedInstance.sizeFontSelected!)
         
@@ -30,19 +33,21 @@ class ContentTableViewCell: UITableViewCell {
         } else {
             self.setNormalMode()
         }
+
+
     }
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
+   
     }
 
     func updateUI () {
         
         self.authorReadingLabel.text = reading?.author
         self.contentReadingLabel.text = reading?.text
-        
     }
     
     func setNightMode () {

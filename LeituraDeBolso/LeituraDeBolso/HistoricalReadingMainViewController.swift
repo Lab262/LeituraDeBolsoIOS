@@ -53,11 +53,12 @@ class HistoricalReadingMainViewController: UIViewController {
         self.rightButtonItem = UIBarButtonItem(image: UIImage(named:"button_search"), style: .done, target: self, action: #selector(searchReading(_:)))
         
         
-    self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
+        self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
         
         self.favoriteReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
         
         self.unreadReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+        
         self.segmentSelected = 0
         
         

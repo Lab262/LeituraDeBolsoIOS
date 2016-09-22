@@ -16,11 +16,7 @@ class ReadingDayViewController: UIViewController {
     var arrayImages = Array<String>()
     
     
-    override func viewWillLayoutSubviews() {
-        
-    
-              
-    }
+   
     
     
     func configureTableView () {
@@ -54,8 +50,13 @@ class ReadingDayViewController: UIViewController {
         } else {
             self.setNormalMode()
         }
-
+        
+        self.tableView.reloadData()
+        
+    
+        
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +68,7 @@ class ReadingDayViewController: UIViewController {
         }
         
         self.configureTableView()
+       
         
         // Do any additional setup after loading the view.
     }
@@ -88,8 +90,10 @@ class ReadingDayViewController: UIViewController {
     func generateContentCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ContentTableViewCell.identifier, for: indexPath) as! ContentTableViewCell
-        
+    
         cell.reading = self.readingDay
+        cell.layoutIfNeeded()
+        cell.layoutSubviews()
         
         return cell
     }
@@ -134,7 +138,7 @@ class ReadingDayViewController: UIViewController {
 }
 
 
-extension ReadingDayViewController: UITableViewDataSource {
+extension ReadingDayViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -160,4 +164,5 @@ extension ReadingDayViewController: UITableViewDataSource {
         }
       
     }
+    
 }

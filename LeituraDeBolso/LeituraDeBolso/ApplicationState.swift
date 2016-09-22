@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ApplicationState: NSObject {
     
@@ -27,6 +28,7 @@ class ApplicationState: NSObject {
     private init(singleton: Bool) {
         super.init()
         
+    
        
     }
     

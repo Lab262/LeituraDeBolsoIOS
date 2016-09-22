@@ -21,7 +21,7 @@
                         <viewControllerLayoutGuide type="bottom" id="dpK-xQ-2Ec"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Gwt-7S-GDe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0rg-Xd-Lgh">
@@ -67,7 +67,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Y2e-kA-qTc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WMn-l3-IfL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpu-dB-yEH" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
@@ -174,7 +174,7 @@
                         <viewControllerLayoutGuide type="bottom" id="M4I-pZ-jKA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MkI-RZ-BtN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ap7-ny-upW">

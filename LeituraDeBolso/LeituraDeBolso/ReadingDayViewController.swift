@@ -16,8 +16,6 @@ class ReadingDayViewController: UIViewController {
     var arrayImages = Array<String>()
     
     
-   
-    
     
     func configureTableView () {
         

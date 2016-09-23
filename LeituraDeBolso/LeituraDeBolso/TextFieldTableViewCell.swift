@@ -9,22 +9,12 @@
 import UIKit
 
 
-protocol TextInputWithLabelTableViewCellDelegate{
-    func textDidChange(cell: TextFieldTableViewCell, text: String?)
-    func userDidEndEdit(cell: TextFieldTableViewCell, text: String?)
-    func textFieldReturn(cell: TextFieldTableViewCell, text: String?)
-    func userDidBeginEdit(cell: TextFieldTableViewCell)
-}
-
 
 class TextFieldTableViewCell: UITableViewCell {
  
     @IBOutlet weak var iconHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var iconWidthConstraint: NSLayoutConstraint!
-    
-    var delegate: TextInputWithLabelTableViewCellDelegate?
-
     
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var textField: UITextField!
@@ -79,10 +69,6 @@ extension TextFieldTableViewCell : UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         self.completionText(textField.text!)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        delegate?.userDidBeginEdit(cell: self)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -62,7 +62,7 @@ class LoginViewController: UIViewController {
         
         cell.iconImage.image = UIImage(named: "icon_email")
         cell.textField.placeholder = "Email"
-        cell.delegate = self
+        
         cell.textField.keyboardType = .emailAddress
         cell.completionText = {(text) -> Void in
             self.dictionaryTextFields[KEY_EMAIL] = text
@@ -78,7 +78,7 @@ class LoginViewController: UIViewController {
         
         cell.iconHeightConstraint.constant = 31
         cell.iconWidthConstraint.constant = 23
-        cell.delegate = self
+        
         cell.textField.isSecureTextEntry = true
         cell.iconImage.image = UIImage(named: "icon_pass")
         cell.textField.placeholder = "Senha"
@@ -242,44 +242,44 @@ extension LoginViewController : UIGestureRecognizerDelegate {
     }
 }
 
-extension LoginViewController : TextInputWithLabelTableViewCellDelegate {
-    
-    func userDidBeginEdit(cell: TextFieldTableViewCell) {
-        lastEditingCell = cell
-    }
-    
-    func textFieldReturn(cell: TextFieldTableViewCell, text: String?) {
-        
-    }
-    
-    func textCellAtIndexBecomeFirstResponder(indexPath index: IndexPath){
-    }
-    
-    func textDidChange(cell: TextFieldTableViewCell, text: String?) {
-        fillModelWith(cell: cell, text: text)
-        lastEditingCell = nil
-        
-    }
-    
-    func userDidEndEdit(cell: TextFieldTableViewCell, text: String?) {
-        fillModelWith(cell: cell, text: text)
-        lastEditingCell = nil
-        
-    }
-    
-    private func fillModelWith(cell: TextFieldTableViewCell, text: String?){
-        //        switch TagTextField.fromTag(tag: cell.txtFieldInput.tag) {
-        //        case .username:
-        //            viewModel.username = text ?? ""
-        //            break
-        //        case .password:
-        //            viewModel.password = text ?? ""
-        //            break
-        //        default:
-        //            break
-        //        }
-    }
-}
-
-
-
+//extension LoginViewController : TextInputWithLabelTableViewCellDelegate {
+//    
+//    func userDidBeginEdit(cell: TextFieldTableViewCell) {
+//        lastEditingCell = cell
+//    }
+//    
+//    func textFieldReturn(cell: TextFieldTableViewCell, text: String?) {
+//        
+//    }
+//    
+//    func textCellAtIndexBecomeFirstResponder(indexPath index: IndexPath){
+//    }
+//    
+//    func textDidChange(cell: TextFieldTableViewCell, text: String?) {
+//        fillModelWith(cell: cell, text: text)
+//        lastEditingCell = nil
+//        
+//    }
+//    
+//    func userDidEndEdit(cell: TextFieldTableViewCell, text: String?) {
+//        fillModelWith(cell: cell, text: text)
+//        lastEditingCell = nil
+//        
+//    }
+//    
+//    private func fillModelWith(cell: TextFieldTableViewCell, text: String?){
+//        //        switch TagTextField.fromTag(tag: cell.txtFieldInput.tag) {
+//        //        case .username:
+//        //            viewModel.username = text ?? ""
+//        //            break
+//        //        case .password:
+//        //            viewModel.password = text ?? ""
+//        //            break
+//        //        default:
+//        //            break
+//        //        }
+//    }
+//}
+//
+//
+//

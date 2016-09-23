@@ -31,9 +31,8 @@ class CreateAccountViewController: UIViewController {
         self.tableView.register(UINib(nibName: "ButtonTableViewCell", bundle: nil), forCellReuseIdentifier: ButtonTableViewCell.identifier)
         
         self.configureGestureRecognizer()
-       // self.automaticallyAdjustsScrollViewInsets = true
+       
         self.registerObservers()
-        //self.setupKeyBoardDismiss()
         
     }
     
@@ -53,6 +52,20 @@ class CreateAccountViewController: UIViewController {
     func createAccount (_ sender: UIButton) {
         
         
+        let user = User(_email: self.dictionaryTextFields[KEY_EMAIL]!)
+        
+        UserRequest.createAccountUser(user: user, pass: self.dictionaryTextFields[KEY_PASS]!) { (success, msg) in
+            
+            if success {
+                
+                print ("MENSAGEM DE SUCESSO: \(msg)")
+                
+            } else {
+                
+                print ("MENSAGEM RUIM: \(msg)")
+            }
+            
+        }
         
         
     }
@@ -70,7 +83,7 @@ class CreateAccountViewController: UIViewController {
         
         cell.iconImage.image = UIImage(named: "icon_email")
         cell.textField.placeholder = "Email"
-        cell.delegate = self
+        
         cell.textField.keyboardType = .emailAddress
         cell.completionText = {(text) -> Void in
             self.dictionaryTextFields[KEY_EMAIL] = text
@@ -85,7 +98,6 @@ class CreateAccountViewController: UIViewController {
         
         cell.iconHeightConstraint.constant = 31
         cell.iconWidthConstraint.constant = 23
-        cell.delegate = self
         cell.textField.isSecureTextEntry = true
         cell.iconImage.image = UIImage(named: "icon_pass")
         cell.textField.placeholder = "Senha"
@@ -105,7 +117,6 @@ class CreateAccountViewController: UIViewController {
         
         cell.iconHeightConstraint.constant = 31
         cell.iconWidthConstraint.constant = 23
-        cell.delegate = self
         cell.textField.isSecureTextEntry = true
         cell.iconImage.image = UIImage(named: "icon_pass")
         cell.textField.placeholder = "Confirmar Senha"
@@ -150,7 +161,7 @@ class CreateAccountViewController: UIViewController {
     
     func didPan(_ gesture : UIGestureRecognizer) {
         tableView.endEditing(true)
-        //tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        
         
     }
     
@@ -159,7 +170,7 @@ class CreateAccountViewController: UIViewController {
             let frame = object.cgRectValue
             bottomTableConstraint.constant = frame.height
             tableView.layoutIfNeeded()
-         //   adjustTextFieldCell()
+         
         }
     }
     
@@ -238,104 +249,50 @@ extension CreateAccountViewController: UITableViewDelegate {
     
 }
 
-////codigo do luciano
-//
-//private func registerObservers(){
-//    NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-//    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-//}
-//
-//private func setUpDissmissPanGesture(){
-//    let pan = UIPanGestureRecognizer(target: self, action: #selector(didPan(gesture:)))
-//    pan.delegate = self
-//    tableView.addGestureRecognizer(pan)
-//}
-//
-////MARK: Gesture recognizer handlers
-//func didPan(gesture: UIPanGestureRecognizer){
-//    endEditing()
-//}
-//
-////MARK: Observers Handlers
-//func keyboardDidShow(notification: NSNotification){
-//    if let object = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue{
-//        let frame = object.cgRectValue
-//        bottomTableConstraint.constant = frame.height
-//        tableView.layoutIfNeeded()
-//        adjustTextFieldCell()
-//    }
-//}
-//
-//func keyboardWillHide(notification: NSNotification){
-//    bottomTableConstraint.constant = 0
-//    tableView.layoutIfNeeded()
-//}
-//
-//deinit {
-//    NotificationCenter.default.removeObserver(self)
-//}
-//
-//
-//@IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
-//
-//
-//func adjustTextFieldCell(){
-//    if let unwrappedLastCell = lastEditingCell{
-//        if let index = tableView.indexPath(for: unwrappedLastCell){
-//            let cellRect = tableView.rectForRow(at: index)
-//            if !tableView.bounds.contains(cellRect){
-//                UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-//                    self.tableView.scrollToRow(at: index, at: .bottom, animated: false)
-//                    }, completion: nil)
-//            }
-//        }
-//    }
-//    
-
 extension CreateAccountViewController : UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
 
-extension CreateAccountViewController : TextInputWithLabelTableViewCellDelegate {
-    
-    func userDidBeginEdit(cell: TextFieldTableViewCell) {
-        lastEditingCell = cell
-    }
-    
-    func textFieldReturn(cell: TextFieldTableViewCell, text: String?) {
-
-    }
-    
-    func textCellAtIndexBecomeFirstResponder(indexPath index: IndexPath){
-    }
-    
-    func textDidChange(cell: TextFieldTableViewCell, text: String?) {
-        fillModelWith(cell: cell, text: text)
-        lastEditingCell = nil
-        
-    }
-    
-    func userDidEndEdit(cell: TextFieldTableViewCell, text: String?) {
-        fillModelWith(cell: cell, text: text)
-        lastEditingCell = nil
-        
-    }
-    
-    private func fillModelWith(cell: TextFieldTableViewCell, text: String?){
-//        switch TagTextField.fromTag(tag: cell.txtFieldInput.tag) {
-//        case .username:
-//            viewModel.username = text ?? ""
-//            break
-//        case .password:
-//            viewModel.password = text ?? ""
-//            break
-//        default:
-//            break
-//        }
-    }
-}
+//extension CreateAccountViewController : TextInputWithLabelTableViewCellDelegate {
+//    
+//    func userDidBeginEdit(cell: TextFieldTableViewCell) {
+//        lastEditingCell = cell
+//    }
+//    
+//    func textFieldReturn(cell: TextFieldTableViewCell, text: String?) {
+//
+//    }
+//    
+//    func textCellAtIndexBecomeFirstResponder(indexPath index: IndexPath){
+//    }
+//    
+//    func textDidChange(cell: TextFieldTableViewCell, text: String?) {
+//        fillModelWith(cell: cell, text: text)
+//        lastEditingCell = nil
+//        
+//    }
+//    
+//    func userDidEndEdit(cell: TextFieldTableViewCell, text: String?) {
+//        fillModelWith(cell: cell, text: text)
+//        lastEditingCell = nil
+//        
+//    }
+//    
+//    private func fillModelWith(cell: TextFieldTableViewCell, text: String?){
+////        switch TagTextField.fromTag(tag: cell.txtFieldInput.tag) {
+////        case .username:
+////            viewModel.username = text ?? ""
+////            break
+////        case .password:
+////            viewModel.password = text ?? ""
+////            break
+////        default:
+////            break
+////        }
+//    }
+//}
 
 
 

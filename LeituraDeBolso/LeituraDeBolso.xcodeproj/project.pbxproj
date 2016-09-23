@@ -17,7 +17,9 @@
 		D40752C91D837AAA0093F0A0 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752C71D837AAA0093F0A0 /* ButtonTableViewCell.swift */; };
 		D40752CA1D837AAA0093F0A0 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D40752C81D837AAA0093F0A0 /* ButtonTableViewCell.xib */; };
 		D410CBC71D93758D00FAD01F /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410CBC61D93758D00FAD01F /* SegueFromLeft.swift */; };
-		D4159B931D91DE5B003E7585 /* TextInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4159B921D91DE5B003E7585 /* TextInputTableViewCell.swift */; };
+		D438F78E1D94A15900F38109 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438F78D1D94A15900F38109 /* User.swift */; };
+		D438F7911D95B32500F38109 /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438F7901D95B32500F38109 /* UserRequest.swift */; };
+		D438F7931D95B37900F38109 /* UserRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438F7921D95B37900F38109 /* UserRequestTests.swift */; };
 		D448B39E1D6E8EA500F3DF51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B39D1D6E8EA500F3DF51 /* AppDelegate.swift */; };
 		D448B3A01D6E8EA500F3DF51 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D448B39F1D6E8EA500F3DF51 /* LoginViewController.swift */; };
 		D448B3A31D6E8EA500F3DF51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D448B3A11D6E8EA500F3DF51 /* Main.storyboard */; };
@@ -255,7 +257,9 @@
 		D40752C71D837AAA0093F0A0 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		D40752C81D837AAA0093F0A0 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
 		D410CBC61D93758D00FAD01F /* SegueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
-		D4159B921D91DE5B003E7585 /* TextInputTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputTableViewCell.swift; sourceTree = "<group>"; };
+		D438F78D1D94A15900F38109 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D438F7901D95B32500F38109 /* UserRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRequest.swift; sourceTree = "<group>"; };
+		D438F7921D95B37900F38109 /* UserRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRequestTests.swift; sourceTree = "<group>"; };
 		D448B39A1D6E8EA500F3DF51 /* LeituraDeBolso.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeituraDeBolso.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D448B39D1D6E8EA500F3DF51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D448B39F1D6E8EA500F3DF51 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -519,7 +523,6 @@
 				D40752C31D8369580093F0A0 /* ImageLogoTableViewCell.swift */,
 				D40752C51D83696D0093F0A0 /* TextFieldTableViewCell.swift */,
 				D40752C71D837AAA0093F0A0 /* ButtonTableViewCell.swift */,
-				D4159B921D91DE5B003E7585 /* TextInputTableViewCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -532,6 +535,14 @@
 				D40752C81D837AAA0093F0A0 /* ButtonTableViewCell.xib */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		D438F78F1D95B31400F38109 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				D438F7901D95B32500F38109 /* UserRequest.swift */,
+			);
+			name = Request;
 			sourceTree = "<group>";
 		};
 		D448B3911D6E8EA500F3DF51 = {
@@ -557,6 +568,7 @@
 		D448B39C1D6E8EA500F3DF51 /* LeituraDeBolso */ = {
 			isa = PBXGroup;
 			children = (
+				D438F78F1D95B31400F38109 /* Request */,
 				D4E8CA2B1D73EBB800C82F0A /* Read */,
 				D4E8CA291D73E1F700C82F0A /* Resources */,
 				D448B3C41D6E9B6800F3DF51 /* Extensions */,
@@ -576,6 +588,7 @@
 			isa = PBXGroup;
 			children = (
 				D448B3B51D6E8EA600F3DF51 /* LeituraDeBolsoTests.swift */,
+				D438F7921D95B37900F38109 /* UserRequestTests.swift */,
 				D448B3B71D6E8EA600F3DF51 /* Info.plist */,
 			);
 			path = LeituraDeBolsoTests;
@@ -783,6 +796,7 @@
 			isa = PBXGroup;
 			children = (
 				D4E8CA331D73EDA000C82F0A /* Reading.swift */,
+				D438F78D1D94A15900F38109 /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1270,6 +1284,7 @@
 				D40752B81D828F820093F0A0 /* CreateAccountViewController.swift in Sources */,
 				D40752BC1D8299DF0093F0A0 /* EntrySelectionViewController.swift in Sources */,
 				D448B3C61D6E9B9400F3DF51 /* RoundedButton.swift in Sources */,
+				D438F7911D95B32500F38109 /* UserRequest.swift in Sources */,
 				D4E8CA2D1D73EC0300C82F0A /* ReadingDayViewController.swift in Sources */,
 				D494B3B71D86435900A9B571 /* ArrayExtension.swift in Sources */,
 				D4E8CA381D73F08800C82F0A /* ButtonsTableViewCell.swift in Sources */,
@@ -1280,8 +1295,8 @@
 				D4E8CA581D752B8200C82F0A /* UIColorExtension.swift in Sources */,
 				D4CADAE11D7608F6005FE3DC /* NSUserDefaults+UIColor.swift in Sources */,
 				D40752C61D83696D0093F0A0 /* TextFieldTableViewCell.swift in Sources */,
-				D4159B931D91DE5B003E7585 /* TextInputTableViewCell.swift in Sources */,
 				D4CADAD71D75C9B6005FE3DC /* AllHistoricalReadingViewController.swift in Sources */,
+				D438F78E1D94A15900F38109 /* User.swift in Sources */,
 				D4CADAD51D75C8D1005FE3DC /* HistoricalReadingMainViewController.swift in Sources */,
 				D4A8E88F1D776ED3003F6854 /* SettingsTableViewController.swift in Sources */,
 				D4A8E8931D779D86003F6854 /* UIView+Animations.swift in Sources */,
@@ -1292,6 +1307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D438F7931D95B37900F38109 /* UserRequestTests.swift in Sources */,
 				D448B3B61D6E8EA600F3DF51 /* LeituraDeBolsoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1441,6 +1457,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = R6AP92RETV;
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = LeituraDeBolso/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lab262.leituraDeBolso;

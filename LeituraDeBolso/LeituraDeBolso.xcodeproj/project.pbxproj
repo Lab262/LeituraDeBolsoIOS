@@ -143,6 +143,9 @@
 		D4CADADD1D75FAE5005FE3DC /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CADADC1D75FAE5005FE3DC /* UIButtonExtension.swift */; };
 		D4CADAE11D7608F6005FE3DC /* NSUserDefaults+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CADAE01D7608F6005FE3DC /* NSUserDefaults+UIColor.swift */; };
 		D4CADAE51D76158B005FE3DC /* HistoricalReadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CADAE41D76158B005FE3DC /* HistoricalReadingTableViewCell.swift */; };
+		D4DE56501D999BE700146E47 /* ReadingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE564F1D999BE700146E47 /* ReadingRequest.swift */; };
+		D4DE56521D99AC2300146E47 /* ReadingRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE56511D99AC2300146E47 /* ReadingRequestTests.swift */; };
+		D4DE565A1D9AFF4A00146E47 /* UserReadingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DE56591D9AFF4A00146E47 /* UserReadingRequest.swift */; };
 		D4E8CA2D1D73EC0300C82F0A /* ReadingDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA2C1D73EC0300C82F0A /* ReadingDayViewController.swift */; };
 		D4E8CA311D73ECA300C82F0A /* HeadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA301D73ECA300C82F0A /* HeadingTableViewCell.swift */; };
 		D4E8CA341D73EDA000C82F0A /* Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CA331D73EDA000C82F0A /* Reading.swift */; };
@@ -387,6 +390,9 @@
 		D4CADADC1D75FAE5005FE3DC /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		D4CADAE01D7608F6005FE3DC /* NSUserDefaults+UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSUserDefaults+UIColor.swift"; sourceTree = "<group>"; };
 		D4CADAE41D76158B005FE3DC /* HistoricalReadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalReadingTableViewCell.swift; sourceTree = "<group>"; };
+		D4DE564F1D999BE700146E47 /* ReadingRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingRequest.swift; sourceTree = "<group>"; };
+		D4DE56511D99AC2300146E47 /* ReadingRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingRequestTests.swift; sourceTree = "<group>"; };
+		D4DE56591D9AFF4A00146E47 /* UserReadingRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserReadingRequest.swift; sourceTree = "<group>"; };
 		D4E8CA2C1D73EC0300C82F0A /* ReadingDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadingDayViewController.swift; sourceTree = "<group>"; };
 		D4E8CA301D73ECA300C82F0A /* HeadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingTableViewCell.swift; sourceTree = "<group>"; };
 		D4E8CA331D73EDA000C82F0A /* Reading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reading.swift; sourceTree = "<group>"; };
@@ -541,6 +547,8 @@
 			isa = PBXGroup;
 			children = (
 				D438F7901D95B32500F38109 /* UserRequest.swift */,
+				D4DE564F1D999BE700146E47 /* ReadingRequest.swift */,
+				D4DE56591D9AFF4A00146E47 /* UserReadingRequest.swift */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -590,6 +598,7 @@
 				D448B3B51D6E8EA600F3DF51 /* LeituraDeBolsoTests.swift */,
 				D438F7921D95B37900F38109 /* UserRequestTests.swift */,
 				D448B3B71D6E8EA600F3DF51 /* Info.plist */,
+				D4DE56511D99AC2300146E47 /* ReadingRequestTests.swift */,
 			);
 			path = LeituraDeBolsoTests;
 			sourceTree = "<group>";
@@ -1273,6 +1282,7 @@
 				D4CADADD1D75FAE5005FE3DC /* UIButtonExtension.swift in Sources */,
 				D4A8E8911D7797A7003F6854 /* ApplicationState.swift in Sources */,
 				D448B3A01D6E8EA500F3DF51 /* LoginViewController.swift in Sources */,
+				D4DE56501D999BE700146E47 /* ReadingRequest.swift in Sources */,
 				D40752BA1D8293FC0093F0A0 /* RoundedView.swift in Sources */,
 				D448B3CA1D6EA11E00F3DF51 /* TextFieldExtension.swift in Sources */,
 				D4CADAD31D75C377005FE3DC /* HistoricalReadingSegmentViewController.swift in Sources */,
@@ -1282,6 +1292,7 @@
 				D4944C291D84FAB300C4FC92 /* ViewUtil.swift in Sources */,
 				D4944C2B1D85009100C4FC92 /* StepSlider.swift in Sources */,
 				D40752B81D828F820093F0A0 /* CreateAccountViewController.swift in Sources */,
+				D4DE565A1D9AFF4A00146E47 /* UserReadingRequest.swift in Sources */,
 				D40752BC1D8299DF0093F0A0 /* EntrySelectionViewController.swift in Sources */,
 				D448B3C61D6E9B9400F3DF51 /* RoundedButton.swift in Sources */,
 				D438F7911D95B32500F38109 /* UserRequest.swift in Sources */,
@@ -1308,6 +1319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D438F7931D95B37900F38109 /* UserRequestTests.swift in Sources */,
+				D4DE56521D99AC2300146E47 /* ReadingRequestTests.swift in Sources */,
 				D448B3B61D6E8EA600F3DF51 /* LeituraDeBolsoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

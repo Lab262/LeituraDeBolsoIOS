@@ -10,6 +10,11 @@ import UIKit
 import Alamofire
 
 
+let URL_WS_CREATE_USER = "\(URL_WS_SERVER)users"
+let URL_WS_LOGIN_USER = "\(URL_WS_SERVER)auth/login"
+let URL_WS_FORGOT_PASS = "\(URL_WS_SERVER)auth/forgotPassword"
+
+
 class UserRequest: NSObject {
     
     
@@ -18,7 +23,7 @@ class UserRequest: NSObject {
         var dic = user.getAsDictionaryForWS()
         dic ["password"] = pass
         
-        Alamofire.request(URL_WS_SET_USER, method: .post, parameters: dic, headers: TOKEN).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request(URL_WS_CREATE_USER, method: .post, parameters: dic).responseJSON { (response: DataResponse<Any>) in
             
             switch  response.result {
                 
@@ -30,11 +35,16 @@ class UserRequest: NSObject {
                     
                     let data = response.result.value as! Dictionary<String, AnyObject>
                     
-//                    user.id = data["_id"] as? String
                     user.token = data["token"] as? String
+                    
+                    let userData = data["user"]?["data"] as? Dictionary<String, AnyObject>
+                   
+                    let attributes = userData?["attributes"] as? Dictionary<String, AnyObject>
+                  
+                    user.id = attributes?["-id"] as? String
+               
                     completionHandler(true, data["message"] as! String)
-                    
-                    
+            
                 default:
                     
                     completionHandler(false, "erro")
@@ -42,17 +52,102 @@ class UserRequest: NSObject {
                 
             case .failure(_):
                 
-                completionHandler(false, "NETWORK ERRO")
-                
-                break
-                
-                
+                completionHandler(false, "NETWORK ERROR")
+ 
             }
             
         }
         
     }
     
+    static func loginUser (email: String, pass: String, completionHandler: @escaping (_ sucess: Bool, _ msg: String) -> Void) {
+        
+        
+        var dic = Dictionary<String, String>()
+        
+        dic["email"] = email
+        dic["password"] = pass
+        
+        
+        Alamofire.request(URL_WS_LOGIN_USER, method: .post, parameters: dic).responseJSON { (response: DataResponse<Any>) in
+            
+            switch response.result {
+                
+            case .success:
+                
+                switch response.response!.statusCode {
+                    
+                case 200:
+                    
+                    let data = response.result.value as! Dictionary<String, AnyObject>
+                    let userData = data ["user"]
+                    let user: User = User(data: userData as! Dictionary<String, AnyObject>)
+                    user.token = data ["token"] as? String
+                    ApplicationState.sharedInstance.currentUser = user
+                    
+                    completionHandler(true, "Sucesso")
+                
+                    
+                case 422:
+                    
+                    completionHandler(false, "Senha nao encontrado")
+                    
+                default:
+                    
+                    completionHandler(false, "Fracasso")
+                }
+            
+            case .failure(_):
+                
+                
+                completionHandler(false, "Network erro")
+                
+            
+            }
+        
+        }
+    }
+    
+    static func forgotPass (email: String, completionHandler: @escaping (_ sucess: Bool, _ msg: String) -> Void) {
+        
+        
+        var dic = Dictionary<String, String>()
+        
+        dic["email"] = email
+    
 
+        Alamofire.request(URL_WS_FORGOT_PASS, method: .post, parameters: dic, headers: TOKEN).responseJSON { (response: DataResponse<Any>) in
+            
+            switch response.result {
+                
+            case .success:
+                
+                let data = response.result.value as! Dictionary<String, AnyObject>
+                
+                switch response.response!.statusCode {
+                    
+                case 200:
+                    
+                    completionHandler(true, data["message"] as! String)
+                    
+                case 422:
+                    
+                    completionHandler(false, data["message"] as! String)
+                
+                default:
+                    
+                    completionHandler(false, data["message"] as! String)
+                }
+                
+            case .failure(_):
+            
+                completionHandler(false, "Network erro")
+            }
+            
+        }
+    }
+
+    
+    
 
 }

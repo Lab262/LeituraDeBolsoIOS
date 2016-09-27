@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ObjectMapper
 
 class User: NSObject {
     
@@ -40,8 +39,13 @@ class User: NSObject {
     
     func setDataFromWS(data: (Dictionary<String, AnyObject>)) {
         
-        if let email = data["email"] as? String { self.email = email }
+        if let id = data ["_id"] as? String { self.id = id }
+        
+        if let email = data ["email"] as? String { self.email = email }
+        
+        if let token = data ["token"] as? String { self.token = token }
     }
+    
     
     func getAsDictionaryForWS() -> Dictionary<String, String> {
         

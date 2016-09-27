@@ -47,7 +47,7 @@ class ContentTableViewCell: UITableViewCell {
     func updateUI () {
         
         self.authorReadingLabel.text = reading?.author
-        self.contentReadingLabel.text = reading?.text
+        self.contentReadingLabel.text = reading?.content
     }
     
     func setNightMode () {

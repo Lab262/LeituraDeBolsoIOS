@@ -71,9 +71,9 @@ class HeadingTableViewCell: UITableViewCell {
         self.timeLabel.text = self.reading?.duration
         
         
-        self.emojiOneLabel.text = self.reading?.emojis?[0]
-        self.emojiTwoLabel.text = self.reading?.emojis?[1]
-        self.emojiThreeLabel.text = self.reading?.emojis?[2]
+        self.emojiOneLabel.text = self.reading?.emojis[0].cod
+        self.emojiTwoLabel.text = self.reading?.emojis[1].cod
+        self.emojiThreeLabel.text = self.reading?.emojis[2].cod
      
     }
 

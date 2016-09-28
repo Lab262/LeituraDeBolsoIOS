@@ -19,7 +19,6 @@ class ApplicationState: NSObject {
     
     var modeNight: Bool? = false
     var sizeFontSelected: CGFloat? = 14
-    
     var allReadings = [Reading]()
     var favoriteReads = [Reading]()
     var unreadReadings = [Reading]()
@@ -27,7 +26,6 @@ class ApplicationState: NSObject {
     
     static let sharedInstance : ApplicationState = {
         let instance = ApplicationState(singleton: true)
-        
         return instance
     }()
     
@@ -36,46 +34,5 @@ class ApplicationState: NSObject {
         super.init()
         
     }
-    
-    
-    
-    
-//    
-//    Alamofire.request(.POST, URL_WS_SET_USER_REGISTER, parameters:dic).validate().responseJSON { response in debugPrint(response)
-//    
-//    switch response.result {
-//    
-//    
-//    case .Success:
-//    
-//    let data = response.result.value as! Dictionary<String, AnyObject>
-//    
-//    if let ret = data["retorno"] {
-//    
-//    if let msg = data["msg"] {
-//    print ("MSG \(msg)")
-//    }
-//    
-//    if ret as? String == "true" {
-//    
-//    returnFunction(success: true, msg: data["msg"] as! String)
-//    
-//    } else {
-//    
-//    returnFunction(success: false, msg: data["msg"] as! String)
-//    }
-//    }
-//    
-//    case .Failure(_):
-//    
-//    returnFunction(success: false, msg: NETWORK_ERROR)
-//    }
-//    
-//    }
-//}
 
-
-
-
-
-   }
+}

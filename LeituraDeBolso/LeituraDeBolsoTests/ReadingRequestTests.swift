@@ -19,20 +19,14 @@ class ReadingRequestTests: XCTestCase {
         var readings: [Reading]?
         
         let completionBlock = { (success: Bool, message: String, allReadings: [Reading]) -> Void  in
-            
             readings = allReadings
             asyncExpectation.fulfill()
         }
         
-        
         ReadingRequest.getAllReadings(completionHandler: completionBlock)
-        
-        
         waitForExpectations(timeout: 10.0) { (error) in
             XCTAssertNotNil(readings)
 
         }
     }
-
-
 }

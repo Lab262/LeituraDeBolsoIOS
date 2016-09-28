@@ -7,42 +7,34 @@
 //
 
 import UIKit
+import RealmSwift
+import Realm
 
-class User: NSObject {
+class User: Object {
+    
+    dynamic var id: String?
+    dynamic var email: String?
+    let readings = List<Reading>()
+    dynamic var token: String?
     
     
-    var id: String?
-    var email: String?
-    var readingsFavorite: [Reading]?
-    var token: String?
     
-    
-    override init () {
-        super.init()
-    }
-    
-    init (_id: String, _email: String, _readingsFavorite: [Reading]) {
-        
-        
-    }
-    
-    init (_email: String) {
-        self.email = _email
-    }
-    
-    required init(data: (Dictionary<String, AnyObject>)) {
-        super.init()
+//    override static func primaryKey() -> String? {
+//        return "email"
+//    }
+//    
+    convenience init(data: (Dictionary<String, AnyObject>)) {
+        self.init()
         
         print(data)
         self.setDataFromWS(data: data)
+        
     }
     
     func setDataFromWS(data: (Dictionary<String, AnyObject>)) {
         
         if let id = data ["_id"] as? String { self.id = id }
-        
         if let email = data ["email"] as? String { self.email = email }
-        
         if let token = data ["token"] as? String { self.token = token }
     }
     

@@ -29,6 +29,7 @@ class LoginViewController: UIViewController {
         self.configureGestureRecognizer()
         
         self.registerObservers()
+      
         
     }
     

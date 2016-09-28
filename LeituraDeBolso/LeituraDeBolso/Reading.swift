@@ -6,38 +6,27 @@
 //  Copyright © 2016 Lab262. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import RealmSwift
+import Realm
 
-class Reading: NSObject {
+class Reading: Object {
     
-    var id: String?
-    var title: String?
-    var author: String?
-    var emojis: Array<String>?
-    var duration: String?
-    var content: String?
+    dynamic var id: String?
+    dynamic var title: String?
+    dynamic var author: String?
+    let emojis = List<Emoji>()
+    dynamic var duration: String?
+    dynamic var content: String?
     
     
-    override init() {
-         super.init()
-    }
-    
-    init (_title: String, _author: String, _emojis: Array<String>, _duration: String, _text: String) {
-        
-        self.title = _title
-        self.author = _author
-        self.emojis = _emojis
-        self.duration = _duration
-        self.content = _text
-        
-    }
-    
-    required init(data: (Dictionary<String, AnyObject>)) {
-        super.init()
+    convenience init(data: (Dictionary<String, AnyObject>)) {
+        self.init()
         
         print(data)
         self.setDataFromWS(data: data)
     }
+    
     
     func setDataFromWS(data: (Dictionary<String, AnyObject>)) {
         
@@ -49,9 +38,16 @@ class Reading: NSObject {
         
         if let author = data["author-name"] as? String { self.author = author }
         
-        if let emojis = data["emojis"] as? Array<String> { self.emojis = emojis }
+        if let emojis = data["emojis"] as? Array<String> {
+            
+            for emoji in emojis {
+                let emojiObject = Emoji()
+                emojiObject.cod = emoji
+                self.emojis.append(emojiObject)
+                DBManager.addObjc(emojiObject)
+            }
+        }
         
     }
-    
-    
+
 }

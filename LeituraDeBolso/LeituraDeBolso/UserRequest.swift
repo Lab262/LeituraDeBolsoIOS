@@ -84,6 +84,7 @@ class UserRequest: NSObject {
                     let user: User = User(data: userData as! Dictionary<String, AnyObject>)
                     user.token = data ["token"] as? String
                     ApplicationState.sharedInstance.currentUser = user
+                    DBManager.addObjc(user)
                     
                     completionHandler(true, "Sucesso")
                 

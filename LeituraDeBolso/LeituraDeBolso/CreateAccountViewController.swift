@@ -50,9 +50,9 @@ class CreateAccountViewController: UIViewController {
     
     
     func createAccount (_ sender: UIButton) {
+        let user = User()
+        user.email = self.dictionaryTextFields[KEY_EMAIL]!
         
-        
-        let user = User(_email: self.dictionaryTextFields[KEY_EMAIL]!)
         
         UserRequest.createAccountUser(user: user, pass: self.dictionaryTextFields[KEY_PASS]!) { (success, msg) in
             

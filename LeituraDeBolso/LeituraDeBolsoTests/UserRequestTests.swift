@@ -26,7 +26,9 @@ class UserRequestTests: XCTestCase {
             asyncExpectation.fulfill()
         }
         
-        let user = User(_email: "huallyd.smadi@gmail.com")
+        let user = User()
+        
+        user.email = "huallyd.smadi@gmail.com"
         
         UserRequest.createAccountUser(user: user, pass: "123456", completionHandler: completionBlock)
         

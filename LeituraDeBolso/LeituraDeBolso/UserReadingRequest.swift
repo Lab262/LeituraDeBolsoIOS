@@ -28,7 +28,7 @@ class UserReadingRequest: NSObject {
 //                switch response.response!.statusCode {
 //                    
 //                case 200:
-//                    
+//
 //                    let data = response.result.value as! Dictionary<String, AnyObject>
 //                    
 //                    user.token = data["token"] as? String

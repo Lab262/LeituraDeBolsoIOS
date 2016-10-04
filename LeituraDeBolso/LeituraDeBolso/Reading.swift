@@ -14,6 +14,8 @@ class Reading: Object {
     
     dynamic var id: String?
     dynamic var title: String?
+    dynamic var isFavorite = false
+    dynamic var isReading = false
     dynamic var author: String?
     let emojis = List<Emoji>()
     dynamic var duration: String?

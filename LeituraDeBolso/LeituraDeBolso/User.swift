@@ -19,10 +19,6 @@ class User: Object {
     
     
     
-//    override static func primaryKey() -> String? {
-//        return "email"
-//    }
-//    
     convenience init(data: (Dictionary<String, AnyObject>)) {
         self.init()
         

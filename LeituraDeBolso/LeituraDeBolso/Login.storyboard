@@ -208,7 +208,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQW-ox-346" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1560.5" y="1356.5"/>
+            <point key="canvasLocation" x="1111" y="1354"/>
         </scene>
         <!--Main-->
         <scene sceneID="0Pl-g9-xvT">
@@ -223,7 +223,7 @@
             <objects>
                 <navigationController storyboardIdentifier="navigation" automaticallyAdjustsScrollViewInsets="NO" id="LXs-Sv-hpL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r3a-Eb-YfE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r3a-Eb-YfE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

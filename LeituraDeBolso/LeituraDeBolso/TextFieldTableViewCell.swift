@@ -9,7 +9,6 @@
 import UIKit
 
 
-
 class TextFieldTableViewCell: UITableViewCell {
  
     @IBOutlet weak var iconHeightConstraint: NSLayoutConstraint!

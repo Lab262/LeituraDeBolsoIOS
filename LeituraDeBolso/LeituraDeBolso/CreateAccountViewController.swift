@@ -62,7 +62,8 @@ class CreateAccountViewController: UIViewController {
                 
             } else {
                 
-                print ("MENSAGEM RUIM: \(msg)")
+                self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: msg), animated: true, completion: nil)
+               
             }
             
         }
@@ -139,9 +140,6 @@ class CreateAccountViewController: UIViewController {
         
         return cell
     }
-    
-    
-    //MARK: Para tratar eventos do teclado
     
     func setupKeyBoardDismiss(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
@@ -255,44 +253,6 @@ extension CreateAccountViewController : UIGestureRecognizerDelegate {
     }
 }
 
-//extension CreateAccountViewController : TextInputWithLabelTableViewCellDelegate {
-//    
-//    func userDidBeginEdit(cell: TextFieldTableViewCell) {
-//        lastEditingCell = cell
-//    }
-//    
-//    func textFieldReturn(cell: TextFieldTableViewCell, text: String?) {
-//
-//    }
-//    
-//    func textCellAtIndexBecomeFirstResponder(indexPath index: IndexPath){
-//    }
-//    
-//    func textDidChange(cell: TextFieldTableViewCell, text: String?) {
-//        fillModelWith(cell: cell, text: text)
-//        lastEditingCell = nil
-//        
-//    }
-//    
-//    func userDidEndEdit(cell: TextFieldTableViewCell, text: String?) {
-//        fillModelWith(cell: cell, text: text)
-//        lastEditingCell = nil
-//        
-//    }
-//    
-//    private func fillModelWith(cell: TextFieldTableViewCell, text: String?){
-////        switch TagTextField.fromTag(tag: cell.txtFieldInput.tag) {
-////        case .username:
-////            viewModel.username = text ?? ""
-////            break
-////        case .password:
-////            viewModel.password = text ?? ""
-////            break
-////        default:
-////            break
-////        }
-//    }
-//}
 
 
 

@@ -23,17 +23,25 @@ class UserRequest: NSObject {
         var dic = user.getAsDictionaryForWS()
         dic ["password"] = pass
         
-        Alamofire.request(URL_WS_CREATE_USER, method: .post, parameters: dic).responseJSON { (response: DataResponse<Any>) in
+        let body = [
+            "data": [
+                "attributes": dic
+            ]
+        ]
+        
+        
+        Alamofire.request(URL_WS_CREATE_USER, method: .post, parameters: body, encoding: JSONEncoding.default).responseJSON { (response: DataResponse<Any>) in
             
-            switch  response.result {
+        
+            switch response.result {
                 
             case .success:
+                
+                let data = response.result.value as! Dictionary<String, AnyObject>
                 
                 switch response.response!.statusCode {
                     
                 case 200:
-                    
-                    let data = response.result.value as! Dictionary<String, AnyObject>
                     
                     user.token = data["token"] as? String
                     
@@ -45,6 +53,10 @@ class UserRequest: NSObject {
                
                     completionHandler(true, data["message"] as! String)
             
+                case 403:
+                    
+                    completionHandler(false, data["message"] as! String)
+                    
                 default:
                     
                     completionHandler(false, "erro")
@@ -52,7 +64,7 @@ class UserRequest: NSObject {
                 
             case .failure(_):
                 
-                completionHandler(false, "NETWORK ERROR")
+                completionHandler(false, "NETWORK ERROR  \(response.result.error)")
  
             }
             
@@ -68,8 +80,7 @@ class UserRequest: NSObject {
         dic["email"] = email
         dic["password"] = pass
         
-        
-        Alamofire.request(URL_WS_LOGIN_USER, method: .post, parameters: dic).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request(URL_WS_LOGIN_USER, method: .post, parameters: dic, encoding: JSONEncoding.default).responseJSON { (response: DataResponse<Any>) in
             
             switch response.result {
                 
@@ -117,7 +128,7 @@ class UserRequest: NSObject {
         dic["email"] = email
     
 
-        Alamofire.request(URL_WS_FORGOT_PASS, method: .post, parameters: dic, headers: TOKEN).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request(URL_WS_FORGOT_PASS, method: .post, parameters: dic, encoding: JSONEncoding.default, headers: TOKEN).responseJSON { (response: DataResponse<Any>) in
             
             switch response.result {
                 

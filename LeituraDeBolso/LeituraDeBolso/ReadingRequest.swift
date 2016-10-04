@@ -45,6 +45,7 @@ class ReadingRequest: NSObject {
                             let attributes = dic["attributes"] as? Dictionary<String, AnyObject>
                             
                             let reading = Reading(data: attributes!)
+                            
                             DBManager.addObjc(reading)
                             
                             allReadings.append(reading)

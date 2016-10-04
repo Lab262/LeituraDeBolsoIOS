@@ -9,17 +9,31 @@
 import UIKit
 import Alamofire
 
-class UserReadingRequest: NSObject {
 
-    let URL_WS_CREATE_USER_READING = "\(URL_WS_SERVER)users"
+
+let URL_WS_CREATE_USER_READING = "\(URL_WS_SERVER)users"
+
+class UserReadingRequest: NSObject {
     
-    
-//    static func createUserReading (readingId: String, completionHandler: @escaping (_ success: Bool, _ msg: String) -> Void) {
+//    static func createUserReading (readingId: String, isFavorite: Bool, alreadyRead: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String) -> Void) {
 //        
-//        var dic = user.getAsDictionaryForWS()
-//        dic ["password"] = pass
+//        var dic = Dictionary <String, AnyObject>()
+//        dic["_readingId"] = readingId as AnyObject?
+//        dic["alreadyRead"] = alreadyRead as AnyObject?
+//        dic["isFavorite"] = isFavorite as AnyObject?
+//    
 //        
-//        Alamofire.request(URL_WS_CREATE_USER, method: .post, parameters: dic).responseJSON { (response: DataResponse<Any>) in
+//        Alamofire.request(URL_WS_CREATE_USER_READING, method: .post, parameters: dic) { (response: DataResponse<Any>) in {
+//            
+//            
+//            
+//            }
+////        Alamofire.request(URL_WS_CREATE_USER_READING, method: .post, parameters: dic, encoding: JSONEncoding.default) { (response: DataResponse<Any>) in {
+////            
+////            }
+//
+////        Alamofire.request(URL_WS_CREATE_USER_READING, method: .post, encoding: JSONEncoding.default, headers: TOKEN_READING).responseJSON { (response: DataResponse<Any>) in
+//        
 //            
 //            switch  response.result {
 //                

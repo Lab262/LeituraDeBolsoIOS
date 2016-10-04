@@ -14,6 +14,7 @@ class ReadingDayViewController: UIViewController {
     
     var readingDay: Reading? = Reading()
     var arrayImages = Array<String>()
+    var allReadings = [Reading]()
     
     
     
@@ -51,24 +52,21 @@ class ReadingDayViewController: UIViewController {
         
         self.tableView.reloadData()
         
-    
-        
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.readingDay?.title == nil || self.readingDay?.title == "" {
-            self.readingDay = ApplicationState.sharedInstance.allReadings[2]
-            
-            tableView.reloadData()
+        if self.readingDay?.title == nil {
+            ReadingRequest.getAllReadings(completionHandler: { (success, msg, readings) in
+                self.allReadings = readings
+                self.readingDay = self.allReadings.last
+                self.tableView.reloadData()
+            })
         }
         
         self.configureTableView()
        
-        
-        // Do any additional setup after loading the view.
     }
     
     func shareReading (_ sender: UIButton) {

@@ -19,17 +19,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var launchScreenImageView = UIImageView()
     var xCenterConstraint = NSLayoutConstraint()
     var yCenterConstraint = NSLayoutConstraint()
+    var initialViewController: UIViewController? = nil
+
 
     func launchScreenAnimation () {
         
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-        let navigationController = mainStoryboard.instantiateViewController(withIdentifier: "navigation")
+        let users:[User]? = DBManager.getAll()
+        
+        let user = users?.first
+        
+        let mainStoryboard: UIStoryboard?
+
+        if user != nil {
+            mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        } else {
+            mainStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        }
+
+        let navigationController = mainStoryboard?.instantiateViewController(withIdentifier: "navigation")
         self.window!.rootViewController = navigationController
         
-        self.maskBgView.frame = navigationController.view.frame
+        self.maskBgView.frame = navigationController!.view.frame
         self.maskBgView.backgroundColor = UIColor.colorWithHexString("1BDBAD")
         
-        navigationController.view.addSubview(self.maskBgView)
+        navigationController?.view.addSubview(self.maskBgView)
         
         self.launchScreenImageView = UIImageView(image: UIImage(named: "LaunchScreenFrames1.png"))
         

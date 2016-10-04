@@ -13,7 +13,7 @@ class AllHistoricalReadingViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var allReadings = ApplicationState.sharedInstance.allReadings
+    var allReadings: [Reading] = DBManager.getAll()
     var selectedIndexPath: IndexPath?
     var isFilterArray: Bool = false
     var textSearch: String?

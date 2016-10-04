@@ -26,6 +26,12 @@ class ReadingRequestTests: XCTestCase {
         ReadingRequest.getAllReadings(completionHandler: completionBlock)
         waitForExpectations(timeout: 10.0) { (error) in
             XCTAssertNotNil(readings)
+            
+            let inteiro = 0x1f601
+            print ("INT: \(inteiro.description)")
+            let inteiro2 = 128513
+            
+            print ("INT 2: \(inteiro2.description)")
 
         }
     }

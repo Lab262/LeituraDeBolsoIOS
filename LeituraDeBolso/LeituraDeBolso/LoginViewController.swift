@@ -12,6 +12,9 @@ let KEY_EMAIL = "email"
 let KEY_PASS = "pass"
 let KEY_CONFIRM_ASS = "confirmationPass"
 
+
+
+
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
@@ -20,6 +23,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var lastEditingCell: TextFieldTableViewCell?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,7 +129,6 @@ class LoginViewController: UIViewController {
     
     //MARK: Para tratar eventos do teclado
     
-    
     func configureGestureRecognizer(){
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
         panGesture.delegate = self
@@ -135,7 +139,6 @@ class LoginViewController: UIViewController {
     func didPan(_ gesture : UIGestureRecognizer) {
         tableView.endEditing(true)
       
-        
     }
     
     func keyboardDidShow(_ notification: NSNotification){
@@ -183,8 +186,51 @@ class LoginViewController: UIViewController {
         
     }
     
+    func verifyInformations() -> String? {
+        
+        var msgErro: String?
+        
+        if self.dictionaryTextFields[KEY_EMAIL] == nil || self.dictionaryTextFields[KEY_EMAIL] == "" {
+            
+            msgErro = "Email inválido"
+            
+            return msgErro
+        }
+        
+        if self.dictionaryTextFields[KEY_PASS] == nil || self.dictionaryTextFields[KEY_PASS] == "" {
+            
+            msgErro = "Senha inválida"
+            
+            return msgErro
+        }
+        
+        return msgErro
+        
+    }
+
+    
     func loginUser (_ sender: UIButton) {
-        self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+        
+        if let msgError = self.verifyInformations() {
+            
+             self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: msgError), animated: true, completion: nil)
+            
+            return
+        }
+        
+        UserRequest.loginUser(email: dictionaryTextFields[KEY_EMAIL]!, pass: dictionaryTextFields[KEY_PASS]!) { (success, msg) in
+            
+            if success {
+                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+                
+                print ("MSG SUCESSO: \(msg)")
+            } else {
+                
+                self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: msg), animated: true, completion: nil)
+                
+            }
+        }
+    
     }
 
 }
@@ -198,7 +244,7 @@ extension LoginViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch (indexPath as NSIndexPath).row {
+        switch indexPath.row {
             
         case 0:
             return generateLogoImageCell(tableView, indexPath: indexPath)

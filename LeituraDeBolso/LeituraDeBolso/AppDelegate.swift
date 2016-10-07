@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let readingIds = Reading.getAllSelectIdProperty(propertyName: "id")
             
-            ReadingRequest.getAllReadings(readingsAmount: differenceDay, readingsIds: readingIds as! [String], toIgnore: true,completionHandler: { (success, msg, readings) in
+            ReadingRequest.getAllReadings(readingsAmount: differenceDay, readingsIds: readingIds as! [String], isReadingIdsToDownload: true,completionHandler: { (success, msg, readings) in
         
                 if success {
                     

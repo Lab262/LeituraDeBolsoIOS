@@ -215,32 +215,6 @@ class LoginViewController: UIViewController {
         DBManager.addObjc(user)
         
     }
-    
-    func loginUser (_ sender: UIButton) {
-        
-        if let msgError = self.verifyInformations() {
-            
-             self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: msgError), animated: true, completion: nil)
-            
-            return
-        }
-        
-        UserRequest.loginUser(email: dictionaryTextFields[KEY_EMAIL]!, pass: dictionaryTextFields[KEY_PASS]!) { (success, msg, user) in
-            
-            if success {
-                
-                self.saveCurrentSessionInTimeInterval(user: user!)
-                
-                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
-                
-                print ("MSG SUCESSO: \(msg)")
-            } else {
-                
-                self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: msg), animated: true, completion: nil)
-                
-            }
-        }
-    }
 }
 
 extension LoginViewController: UITableViewDataSource {
@@ -297,44 +271,61 @@ extension LoginViewController : UIGestureRecognizerDelegate {
     }
 }
 
-//extension LoginViewController : TextInputWithLabelTableViewCellDelegate {
-//    
-//    func userDidBeginEdit(cell: TextFieldTableViewCell) {
-//        lastEditingCell = cell
-//    }
-//    
-//    func textFieldReturn(cell: TextFieldTableViewCell, text: String?) {
-//        
-//    }
-//    
-//    func textCellAtIndexBecomeFirstResponder(indexPath index: IndexPath){
-//    }
-//    
-//    func textDidChange(cell: TextFieldTableViewCell, text: String?) {
-//        fillModelWith(cell: cell, text: text)
-//        lastEditingCell = nil
-//        
-//    }
-//    
-//    func userDidEndEdit(cell: TextFieldTableViewCell, text: String?) {
-//        fillModelWith(cell: cell, text: text)
-//        lastEditingCell = nil
-//        
-//    }
-//    
-//    private func fillModelWith(cell: TextFieldTableViewCell, text: String?){
-//        //        switch TagTextField.fromTag(tag: cell.txtFieldInput.tag) {
-//        //        case .username:
-//        //            viewModel.username = text ?? ""
-//        //            break
-//        //        case .password:
-//        //            viewModel.password = text ?? ""
-//        //            break
-//        //        default:
-//        //            break
-//        //        }
-//    }
-//}
-//
-//
-//
+//MARK: - Requests
+
+extension LoginViewController {
+    
+    func getReadingsIdUser (user: User) -> [String] {
+        
+        let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "id")
+        
+        return allReadingsIdUser as! [String]
+    }
+    
+    
+    func getReadings (readingsIds: [String]) {
+        
+        ReadingRequest.getAllReadings(readingsAmount: 0, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
+            
+            if success {
+                for reading in readings {
+                    DBManager.addObjc(reading)
+                }
+                
+            } else {
+                
+                print ("MSG ERROR: \(msg)")
+                
+            }
+        }
+    }
+    
+    func loginUser (_ sender: UIButton) {
+        
+        if let msgError = self.verifyInformations() {
+            
+            self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: msgError), animated: true, completion: nil)
+            
+            return
+        }
+        
+        UserRequest.loginUser(email: dictionaryTextFields[KEY_EMAIL]!, pass: dictionaryTextFields[KEY_PASS]!) { (success, msg, user) in
+            
+            if success {
+                
+                self.saveCurrentSessionInTimeInterval(user: user!)
+                self.getReadings(readingsIds: self.getReadingsIdUser(user: user!))
+                
+                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+                
+                print ("MSG SUCESSO: \(msg)")
+                
+            } else {
+                
+                self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: msg), animated: true, completion: nil)
+                
+            }
+        }
+    }
+    
+}

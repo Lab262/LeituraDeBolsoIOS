@@ -20,13 +20,13 @@ class ReadingRequest: NSObject {
     
     
     
-    static func getAllReadings (readingsAmount: Int, readingsIds: [String], toIgnore: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String, _ reading: [Reading]) -> Void) {
+    static func getAllReadings (readingsAmount: Int, readingsIds: [String], isReadingIdsToDownload: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String, _ reading: [Reading]) -> Void) {
         
         var allReadings = [Reading]()
 
         let urlParams = [
             "skip":"0",
-            "$where":self.parseIdsInQueryWhereParam(readingIds: readingsIds, toIgnore: toIgnore),
+            "$where":self.parseIdsInQueryWhereParam(readingIds: readingsIds, isReadingIdsToDownload: isReadingIdsToDownload),
             "limit":String(readingsAmount)]
 
         let url = URL_WS_GET_ALL_READINGS + "?" + urlParams.stringFromHttpParameters()
@@ -52,8 +52,6 @@ class ReadingRequest: NSObject {
                             let attributes = dic["attributes"] as? Dictionary<String, AnyObject>
                             
                             let reading = Reading(data: attributes!)
-                            
-                            DBManager.addObjc(reading)
                             
                             allReadings.append(reading)
                             
@@ -83,12 +81,12 @@ class ReadingRequest: NSObject {
         }
     }
     
-    static func parseIdsInQueryWhereParam(readingIds: [String], toIgnore: Bool) -> String {
+    static func parseIdsInQueryWhereParam(readingIds: [String], isReadingIdsToDownload: Bool) -> String {
         
         let allIdQuerys = readingIds.map { (readingId) -> String in
             
             var queryWhereString = "this._id "
-            let comparator = toIgnore ? "!= " : "== "
+            let comparator = isReadingIdsToDownload ? "!= " : "== "
             let idString = "'\(readingId )'"
             queryWhereString += comparator + idString
             

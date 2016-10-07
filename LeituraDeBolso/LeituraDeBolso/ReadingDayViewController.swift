@@ -61,30 +61,31 @@ class ReadingDayViewController: UIViewController {
             
             
             
-            
-            if let userReadings = ApplicationState.sharedInstance.currentUser?.readings {
-                
-                var userReadingsIds = [String]()
-                
-                
-                for reading in userReadings {
-                    userReadingsIds.append(reading.id!)
-                }
-                
-                ReadingRequest.getAllReadings(readingsAmount: 10, readingsToIgnore: userReadingsIds, completionHandler: { (success, msg, readings) in
-                    
-                    self.allReadings = readings
-                    self.readingDay = self.allReadings.last
-                    self.tableView.reloadData()
-                })
-                
-            }
-
-                
-        }
+//            
+//            if let userReadings = ApplicationState.sharedInstance.currentUser?.readings {
+//                
+//                var userReadingsIds = [String]()
+//                
+//                for reading in userReadings {
+//                    userReadingsIds.append(reading.id!)
+//                }
+//                
+//                ReadingRequest.getAllReadings(readingsAmount: 10, readingsToIgnore: userReadingsIds, completionHandler: { (success, msg, readings) in
+//                    
+//                    self.allReadings = readings
+//                    self.readingDay = self.allReadings.last
+//                    self.tableView.reloadData()
+//                })
+//                
+//            }
+//
+//                
+//        }
             
         self.configureTableView()
        
+        }
+        
     }
     
     func shareReading (_ sender: UIButton) {

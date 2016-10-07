@@ -381,7 +381,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
             <objects>
                 <navigationController storyboardIdentifier="navigation" automaticallyAdjustsScrollViewInsets="NO" id="pb9-SL-CI3" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MM3-tS-jCO">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="MM3-tS-jCO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.38823529410000002" green="0.14901960780000001" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -493,7 +493,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <viewControllerLayoutGuide type="bottom" id="BOc-CW-zIw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HPf-h3-Obm">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JZC-tP-Wb7">
@@ -531,7 +531,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <viewControllerLayoutGuide type="bottom" id="qte-BF-qJ0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="44h-0K-cYF">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="93" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ClH-NV-rKp">
@@ -568,7 +568,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <viewControllerLayoutGuide type="bottom" id="dRz-yw-D8F"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VqY-dl-NbR">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="93" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H6M-yJ-X2B">

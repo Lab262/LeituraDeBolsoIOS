@@ -49,11 +49,12 @@ class UserRequestTests: XCTestCase {
             asyncExpectation.fulfill()
         }
     
-        UserRequest.loginUser(email: "huallyd@gmail.com", pass: "w4xFKxrLysXR", completionHandler: completionBlock)
+        UserRequest.loginUser(email: "huallyd.smadi@gmail.com", pass: "123456", completionHandler: completionBlock)
         
         waitForExpectations(timeout: 10.0) { (error) in
             XCTAssertNotNil(ApplicationState.sharedInstance.currentUser?.token)
             XCTAssertNotNil(ApplicationState.sharedInstance.currentUser?.email)
+            
             
         }
         

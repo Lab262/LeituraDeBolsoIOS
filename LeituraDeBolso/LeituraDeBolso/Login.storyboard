@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,7 +23,7 @@
                         <viewControllerLayoutGuide type="bottom" id="dpK-xQ-2Ec"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Gwt-7S-GDe">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0rg-Xd-Lgh">
@@ -67,7 +69,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Y2e-kA-qTc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WMn-l3-IfL">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpu-dB-yEH" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
@@ -84,7 +86,6 @@
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.37254901960784315" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="oqw-tC-4Sl"/>
-                                    <constraint firstAttribute="width" constant="256" id="xzZ-uI-c6b"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="OSE-iC-3e1" kind="show" id="MS8-Dp-WoV"/>
@@ -99,7 +100,6 @@
                                 <color key="backgroundColor" red="0.30196078431372547" green="0.50980392156862742" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="JU0-vZ-2fO"/>
-                                    <constraint firstAttribute="width" constant="256" id="cdd-gv-OQs"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="BOm-ib-9Md" kind="show" id="uwL-zK-aJb"/>
@@ -133,8 +133,7 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_title" translatesAutoresizingMaskIntoConstraints="NO" id="cON-ZT-ipJ">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="OGg-Jy-ZnA"/>
-                                    <constraint firstAttribute="height" constant="32" id="QXt-8G-Bd3"/>
+                                    <constraint firstAttribute="width" secondItem="cON-ZT-ipJ" secondAttribute="height" multiplier="125:16" id="wDE-H5-F0z"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -146,13 +145,18 @@
                             <constraint firstItem="cON-ZT-ipJ" firstAttribute="top" secondItem="rWn-vE-A9K" secondAttribute="bottom" constant="26" id="LMD-Sb-3fH"/>
                             <constraint firstItem="hpu-dB-yEH" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="URp-TT-Rpf"/>
                             <constraint firstItem="BdP-Si-H5a" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="VB9-v4-1Le"/>
+                            <constraint firstItem="BdP-Si-H5a" firstAttribute="width" secondItem="i7p-3E-FFI" secondAttribute="width" id="XGT-AR-lAJ"/>
                             <constraint firstItem="cpR-3v-UWc" firstAttribute="centerY" secondItem="i7p-3E-FFI" secondAttribute="centerY" id="ZWu-3A-uUN"/>
                             <constraint firstItem="UDx-oy-AWJ" firstAttribute="centerY" secondItem="BdP-Si-H5a" secondAttribute="centerY" id="bht-PU-ygn"/>
                             <constraint firstItem="i7p-3E-FFI" firstAttribute="centerY" secondItem="WMn-l3-IfL" secondAttribute="centerY" multiplier="1.1" id="c4R-HA-0Pd"/>
+                            <constraint firstItem="i7p-3E-FFI" firstAttribute="leading" secondItem="WMn-l3-IfL" secondAttribute="leadingMargin" constant="43" id="ceV-0M-fPT"/>
                             <constraint firstItem="i7p-3E-FFI" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="dIC-oo-wOF"/>
                             <constraint firstItem="cON-ZT-ipJ" firstAttribute="centerX" secondItem="rWn-vE-A9K" secondAttribute="centerX" id="ffX-Y2-0wP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="i7p-3E-FFI" secondAttribute="trailing" constant="43.5" id="jjy-zF-kXR"/>
                             <constraint firstItem="i7p-3E-FFI" firstAttribute="top" secondItem="hpu-dB-yEH" secondAttribute="bottom" constant="20" id="l6Q-XK-n11"/>
                             <constraint firstItem="BdP-Si-H5a" firstAttribute="top" secondItem="i7p-3E-FFI" secondAttribute="bottom" constant="20" id="mOh-iA-5AF"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="cON-ZT-ipJ" secondAttribute="trailing" constant="43" id="nDh-k3-ee6"/>
+                            <constraint firstItem="cON-ZT-ipJ" firstAttribute="leading" secondItem="WMn-l3-IfL" secondAttribute="leadingMargin" constant="42" id="nSB-PH-yem"/>
                             <constraint firstItem="cpR-3v-UWc" firstAttribute="centerX" secondItem="i7p-3E-FFI" secondAttribute="centerX" id="rhU-5I-iFw"/>
                             <constraint firstItem="rWn-vE-A9K" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="x44-Sv-I49"/>
                             <constraint firstItem="UDx-oy-AWJ" firstAttribute="centerX" secondItem="BdP-Si-H5a" secondAttribute="centerX" id="xUo-DK-jLV"/>
@@ -174,7 +178,7 @@
                         <viewControllerLayoutGuide type="bottom" id="M4I-pZ-jKA"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MkI-RZ-BtN">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ap7-ny-upW">

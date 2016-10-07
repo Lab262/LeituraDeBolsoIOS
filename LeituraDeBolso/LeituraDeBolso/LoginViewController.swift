@@ -10,7 +10,7 @@ import UIKit
 
 let KEY_EMAIL = "email"
 let KEY_PASS = "pass"
-let KEY_CONFIRM_ASS = "confirmationPass"
+let KEY_CONFIRM_PASS = "confirmationPass"
 
 
 
@@ -207,7 +207,14 @@ class LoginViewController: UIViewController {
         return msgErro
         
     }
-
+        
+    func saveCurrentSessionInTimeInterval (user: User) {
+    
+        user.lastSessionTimeInterval = NSDate().timeIntervalSince1970
+        ApplicationState.sharedInstance.currentUser = user
+        DBManager.addObjc(user)
+        
+    }
     
     func loginUser (_ sender: UIButton) {
         
@@ -218,9 +225,12 @@ class LoginViewController: UIViewController {
             return
         }
         
-        UserRequest.loginUser(email: dictionaryTextFields[KEY_EMAIL]!, pass: dictionaryTextFields[KEY_PASS]!) { (success, msg) in
+        UserRequest.loginUser(email: dictionaryTextFields[KEY_EMAIL]!, pass: dictionaryTextFields[KEY_PASS]!) { (success, msg, user) in
             
             if success {
+                
+                self.saveCurrentSessionInTimeInterval(user: user!)
+                
                 self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                 
                 print ("MSG SUCESSO: \(msg)")
@@ -230,9 +240,7 @@ class LoginViewController: UIViewController {
                 
             }
         }
-    
     }
-
 }
 
 extension LoginViewController: UITableViewDataSource {

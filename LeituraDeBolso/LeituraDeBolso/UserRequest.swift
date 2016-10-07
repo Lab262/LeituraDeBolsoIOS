@@ -10,9 +10,9 @@ import UIKit
 import Alamofire
 
 
-let URL_WS_CREATE_USER = "\(URL_WS_SERVER)users"
-let URL_WS_LOGIN_USER = "\(URL_WS_SERVER)auth/login"
-let URL_WS_FORGOT_PASS = "\(URL_WS_SERVER)auth/forgotPassword"
+let URL_WS_CREATE_USER = "\(URL_WS_LOCAL)users"
+let URL_WS_LOGIN_USER = "\(URL_WS_LOCAL)auth/login"
+let URL_WS_FORGOT_PASS = "\(URL_WS_LOCAL)auth/forgotPassword"
 
 
 class UserRequest: NSObject {
@@ -59,7 +59,7 @@ class UserRequest: NSObject {
                     
                 default:
                     
-                    completionHandler(false, "erro")
+                    completionHandler(false, data["message"] as! String)
                 }
                 
             case .failure(_):
@@ -72,8 +72,7 @@ class UserRequest: NSObject {
         
     }
     
-    static func loginUser (email: String, pass: String, completionHandler: @escaping (_ sucess: Bool, _ msg: String) -> Void) {
-        
+    static func loginUser (email: String, pass: String, completionHandler: @escaping (_ sucess: Bool, _ msg: String, _ user: User?) -> Void) {
         
         var dic = Dictionary<String, String>()
         
@@ -86,37 +85,28 @@ class UserRequest: NSObject {
                 
             case .success:
                 
+                let data = response.result.value as! Dictionary<String, AnyObject>
+                
                 switch response.response!.statusCode {
                     
+   
                 case 200:
                     
-                    let data = response.result.value as! Dictionary<String, AnyObject>
                     let userData = data ["user"]
                     let user: User = User(data: userData as! Dictionary<String, AnyObject>)
                     user.token = data ["token"] as? String
-                    ApplicationState.sharedInstance.currentUser = user
-                    DBManager.addObjc(user)
-                    
-                    completionHandler(true, "Sucesso")
                 
-                    
-                case 422:
-                    
-                    completionHandler(false, "Senha nao encontrado")
-                    
+                    completionHandler(true, data["message"] as! String, user)
+                
                 default:
-                    
-                    completionHandler(false, "Fracasso")
+                    completionHandler(false, data["message"] as! String, nil)
                 }
             
             case .failure(_):
+
+                completionHandler(false, "Network erro", nil)
                 
-                
-                completionHandler(false, "Network erro")
-                
-            
             }
-        
         }
     }
     

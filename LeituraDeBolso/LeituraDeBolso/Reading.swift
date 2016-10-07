@@ -51,5 +51,22 @@ class Reading: Object {
         }
         
     }
+    
+    
+    func getAllSelectIdProperty (propertyName: String) -> [Any] {
+        
+        let allReadings: [Reading] = DBManager.getAll()
+        
+        let allReadingsId = allReadings.map { (object) -> Any in
+            
+            return object.value(forKey: propertyName)
+            
+        }
+        
+        
+        return allReadingsId
+    }
+    
+  
 
 }

@@ -22,6 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var initialViewController: UIViewController? = nil
 
 
+    
+    func getDifferenceDays (user: User) -> Int {
+        
+        let lastSessionDate = Date(timeIntervalSince1970: (user.lastSessionTimeInterval))
+        let lastDateInDays = Date().days(from: lastSessionDate)
+        
+        return lastDateInDays
+    }
+    
     func launchScreenAnimation () {
         
         let users:[User]? = DBManager.getAll()
@@ -85,6 +94,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.launchScreenAnimation()
         
         self.setupBarsAppearance()
+        
+        if let user = ApplicationState.sharedInstance.currentUser {
+            
+            user.lastSessionTimeInterval = self.getDifferenceDays(user: user)
+        }
     
         return true
     }

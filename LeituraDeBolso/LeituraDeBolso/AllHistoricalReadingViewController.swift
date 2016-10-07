@@ -40,6 +40,7 @@ class AllHistoricalReadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.registerNibs()
         self.configureTableView()
         self.registerObservers()

@@ -11,8 +11,9 @@ import Alamofire
 
 
 let URL_WS_SERVER = "https://leituradebolso.herokuapp.com/api/v0/"
-let TOKEN = ["token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbW"]
+let URL_WS_LOCAL = "http://localhost:8080/api/v0/"
 
+let TOKEN = ["token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRtYjA3MTBAZ21haWwuY29tIiwiaWQiOiI1N2U2YjRiNzVjMWVhNzk3MTk0OGQ5ZTYiLCJpYXQiOjE0NzQ3NTMwNjd9.QgGJDsKl8mfYApIqKIxp5GzSyQWBxegbQATAGXi_AZU"]
 
 
 class ApplicationState: NSObject {

@@ -9,65 +9,139 @@
 import UIKit
 import Alamofire
 
+let URL_WS_USER_READING = "\(URL_WS_LOCAL)users/57f461e8c4e3f46697831a86/readings"
 
-
-let URL_WS_CREATE_USER_READING = "\(URL_WS_SERVER)users"
+let URL_WS_USER_READING_UPDATE = "\(URL_WS_LOCAL)users/57f461e8c4e3f46697831a86/readings/57ec1d762755e3667920b168"
 
 class UserReadingRequest: NSObject {
     
-//    static func createUserReading (readingId: String, isFavorite: Bool, alreadyRead: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String) -> Void) {
-//        
-//        var dic = Dictionary <String, AnyObject>()
-//        dic["_readingId"] = readingId as AnyObject?
-//        dic["alreadyRead"] = alreadyRead as AnyObject?
-//        dic["isFavorite"] = isFavorite as AnyObject?
-//    
-//        
-//        Alamofire.request(URL_WS_CREATE_USER_READING, method: .post, parameters: dic) { (response: DataResponse<Any>) in {
-//            
-//            
-//            
-//            }
-////        Alamofire.request(URL_WS_CREATE_USER_READING, method: .post, parameters: dic, encoding: JSONEncoding.default) { (response: DataResponse<Any>) in {
-////            
-////            }
-//
-////        Alamofire.request(URL_WS_CREATE_USER_READING, method: .post, encoding: JSONEncoding.default, headers: TOKEN_READING).responseJSON { (response: DataResponse<Any>) in
-//        
-//            
-//            switch  response.result {
-//                
-//            case .success:
-//                
-//                switch response.response!.statusCode {
-//                    
-//                case 200:
-//
-//                    let data = response.result.value as! Dictionary<String, AnyObject>
-//                    
-//                    user.token = data["token"] as? String
-//                    
-//                    let userData = data["user"]?["data"] as? Dictionary<String, AnyObject>
-//                    
-//                    let attributes = userData?["attributes"] as? Dictionary<String, AnyObject>
-//                    
-//                    user.id = attributes?["-id"] as? String
-//                    
-//                    completionHandler(true, data["message"] as! String)
-//                    
-//                default:
-//                    
-//                    completionHandler(false, "erro")
-//                }
-//                
-//            case .failure(_):
-//                
-//                completionHandler(false, "NETWORK ERROR")
-//                
-//            }
-//            
-//        }
-//        
-//    }
-//
+    static func createUserReading (readingId: String, isFavorite: Bool, alreadyRead: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String) -> Void) {
+        
+        var dic = Dictionary <String, AnyObject>()
+        dic["readingId"] = readingId as AnyObject
+        dic["already_read"] = alreadyRead as AnyObject?
+        dic["is_favorite"] = isFavorite as AnyObject?
+        
+        let body = [
+            "data": [
+                "attributes": dic
+            ]
+        ]
+        
+        Alamofire.request(URL_WS_USER_READING, method: .post, parameters: body, encoding: JSONEncoding.default, headers: TOKEN_READING).responseJSON { (response: DataResponse<Any>) in
+          
+            switch response.result {
+                case .success:
+                
+                    let data = response.result.value as! Dictionary<String, AnyObject>
+                    
+                    switch response.response!.statusCode {
+                
+                    case 200:
+
+                        if let msg = data["msg"] as? String {
+                            print ("MESSAGE: \(msg)")
+                        }
+                    
+                        completionHandler(true, data["message"] as! String)
+                    
+                    case 403:
+                
+                    completionHandler(false, data["message"] as! String)
+                    
+                    default:
+                        completionHandler(false, data["message"] as! String)
+                    }
+                
+            case .failure(_):
+                
+                completionHandler(false, "NETWORK ERROR")
+                
+            }
+        }
+    }
+    
+    static func getAllUserReading (readingId: String, isFavorite: Bool, alreadyRead: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String) -> Void) {
+        
+        
+        Alamofire.request(URL_WS_USER_READING, method: .get, encoding: JSONEncoding.default, headers: TOKEN_READING).responseJSON { (response: DataResponse<Any>) in
+            
+            switch response.result {
+            case .success:
+                
+                let data = response.result.value as! Dictionary<String, AnyObject>
+                
+                switch response.response!.statusCode {
+                    
+                case 200:
+                    
+                    if let msg = data["msg"] as? String {
+                        print ("MESSAGE: \(msg)")
+                    }
+                    
+                    completionHandler(true, data["message"] as! String)
+                    
+                case 403:
+                    
+                    completionHandler(false, data["message"] as! String)
+                    
+                default:
+                    completionHandler(false, data["message"] as! String)
+                }
+                
+            case .failure(_):
+                
+                completionHandler(false, "NETWORK ERROR")
+                
+            }
+        }
+    }
+    
+    static func updateUserReading (readingId: String, isFavorite: Bool, alreadyRead: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String) -> Void) {
+        
+        
+        var dic = Dictionary <String, AnyObject>()
+        dic["readingId"] = readingId as AnyObject
+        dic["already_read"] = alreadyRead as AnyObject?
+        dic["is_favorite"] = isFavorite as AnyObject?
+        
+        let body = [
+            "data": [
+                "attributes": dic
+            ]
+        ]
+        
+        Alamofire.request(URL_WS_USER_READING_UPDATE, method: .patch, parameters: body,encoding: JSONEncoding.default, headers: TOKEN_READING).responseJSON { (response: DataResponse<Any>) in
+            
+            switch response.result {
+            case .success:
+                
+                let data = response.result.value as! Dictionary<String, AnyObject>
+                
+                switch response.response!.statusCode {
+                    
+                case 200:
+                    
+                    if let msg = data["msg"] as? String {
+                        print ("MESSAGE: \(msg)")
+                    }
+                    
+                    completionHandler(true, data["message"] as! String)
+                    
+                case 403:
+                    
+                    completionHandler(false, data["message"] as! String)
+                    
+                default:
+                    completionHandler(false, data["message"] as! String)
+                }
+                
+            case .failure(_):
+                
+                completionHandler(false, "NETWORK ERROR")
+                
+            }
+        }
+    }
+
 }

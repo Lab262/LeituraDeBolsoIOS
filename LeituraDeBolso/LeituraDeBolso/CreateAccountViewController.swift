@@ -46,24 +46,97 @@ class CreateAccountViewController: UIViewController {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
+    func verifyPass (pass: String, confirmPass: String) -> String? {
+        
+        var msgError: String?
+        
+        if pass == confirmPass {
+            
+            return msgError
+            
+        } else {
+            
+            msgError = "Senha não confere."
+            
+            return msgError
+        }
+    }
     
     
+    func verifyInformations() -> String? {
+        
+        var msgErro: String?
+        
+        if self.dictionaryTextFields[KEY_EMAIL] == nil || self.dictionaryTextFields[KEY_EMAIL] == "" {
+            
+            msgErro = "Email inválido"
+            
+            return msgErro
+        }
+        
+        if self.dictionaryTextFields[KEY_PASS] == nil || self.dictionaryTextFields[KEY_PASS] == "" {
+            
+            msgErro = "Senha inválida"
+            
+            return msgErro
+        }
+        
+        if self.dictionaryTextFields[KEY_CONFIRM_PASS] == nil || self.dictionaryTextFields[KEY_CONFIRM_PASS] == "" {
+            
+            msgErro = "Confirmação de senha inválida"
+            
+            return msgErro
+        }
+        
+        msgErro = self.verifyPass(pass: self.dictionaryTextFields[KEY_PASS]!, confirmPass: self.dictionaryTextFields[KEY_CONFIRM_PASS]!)
+        
+        
+        return msgErro
+        
+    }
+
+    func alertControllerWithAction (title: String, msg: String) -> UIAlertController {
+        
+        let alertController = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        
+
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+                UIAlertAction in
+            
+          _ = self.navigationController?.popViewController(animated: true)
+        }
+        
+    
+        alertController.addAction(okAction)
+        
+        return alertController
+        
+    }
+
     
     func createAccount (_ sender: UIButton) {
+        
+        if let error = self.verifyInformations() {
+            self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: error), animated: true, completion: nil)
+            
+            return
+        }
+        
+        self.view.loadAnimation()
+        
         let user = User()
         user.email = self.dictionaryTextFields[KEY_EMAIL]!
-        
         
         UserRequest.createAccountUser(user: user, pass: self.dictionaryTextFields[KEY_PASS]!) { (success, msg) in
             
             if success {
+                self.view.unload()
                 
-                print ("MENSAGEM DE SUCESSO: \(msg)")
+                self.present(self.alertControllerWithAction(title: "Atenção", msg: msg), animated: true, completion: nil)
                 
             } else {
-                
+                self.view.unload()
                 self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: msg), animated: true, completion: nil)
-               
             }
             
         }
@@ -123,7 +196,7 @@ class CreateAccountViewController: UIViewController {
         cell.textField.placeholder = "Confirmar Senha"
         
         cell.completionText = {(text) -> Void in
-            self.dictionaryTextFields[KEY_CONFIRM_ASS] = text
+            self.dictionaryTextFields[KEY_CONFIRM_PASS] = text
         }
 
 

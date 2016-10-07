@@ -16,7 +16,7 @@ class User: Object {
     dynamic var email: String?
     let readings = List<Reading>()
     dynamic var token: String?
-    
+    dynamic var lastSessionTimeInterval:Double = 0
     
     
     convenience init(data: (Dictionary<String, AnyObject>)) {

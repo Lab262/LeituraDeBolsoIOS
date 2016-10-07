@@ -58,13 +58,31 @@ class ReadingDayViewController: UIViewController {
         super.viewDidLoad()
         
         if self.readingDay?.title == nil {
-            ReadingRequest.getAllReadings(completionHandler: { (success, msg, readings) in
-                self.allReadings = readings
-                self.readingDay = self.allReadings.last
-                self.tableView.reloadData()
-            })
+            
+            
+            
+            
+            if let userReadings = ApplicationState.sharedInstance.currentUser?.readings {
+                
+                var userReadingsIds = [String]()
+                
+                
+                for reading in userReadings {
+                    userReadingsIds.append(reading.id!)
+                }
+                
+                ReadingRequest.getAllReadings(readingsAmount: 10, readingsToIgnore: userReadingsIds, completionHandler: { (success, msg, readings) in
+                    
+                    self.allReadings = readings
+                    self.readingDay = self.allReadings.last
+                    self.tableView.reloadData()
+                })
+                
+            }
+
+                
         }
-        
+            
         self.configureTableView()
        
     }
@@ -138,7 +156,7 @@ extension ReadingDayViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch (indexPath as NSIndexPath).row {
+        switch indexPath.row {
         case 0:
             return generateHeadingCell(tableView, indexPath: indexPath)
         case 1:

@@ -19,24 +19,25 @@ let TOKEN_READING = ["x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ
 class ReadingRequest: NSObject {
     
     
-    static func getAllReadings (completionHandler: @escaping (_ success: Bool, _ msg: String, _ reading: [Reading]) -> Void) {
-        
+    
+    static func getAllReadings (readingsAmount: Int, readingsToIgnore: [String], completionHandler: @escaping (_ success: Bool, _ msg: String, _ reading: [Reading]) -> Void) {
         
         var allReadings = [Reading]()
-       
-      
+        
+    
         Alamofire.request(URL_WS_GET_ALL_READINGS, method: .get, headers: TOKEN_READING).responseJSON { (response: DataResponse<Any>) in
-            
             
             switch  response.result {
                 
             case .success:
                 
+                
+                let data = response.result.value as! Dictionary<String, AnyObject>
+                
+                
                 switch response.response!.statusCode {
                     
                 case 200:
-                    
-                    let data = response.result.value as! Dictionary<String, AnyObject>
                    
                     if let listDictonary = data["data"] as? Array<Dictionary<String, AnyObject>> {
                         
@@ -52,17 +53,17 @@ class ReadingRequest: NSObject {
                             
                         }
                         
-                        completionHandler(true, "Sucesso", allReadings)
+                        completionHandler(true,  data["message"] as! String, allReadings)
                         
                     } else {
                         
-                        completionHandler(false, "No Reads", allReadings)
+                        completionHandler(false, data["message"] as! String, allReadings)
                     }
        
                     
                 default:
                     
-                    completionHandler(false, "erro", allReadings)
+                    completionHandler(false, data["message"] as! String, allReadings)
                 }
                 
             case .failure(_):
@@ -70,7 +71,6 @@ class ReadingRequest: NSObject {
                 completionHandler(false, "NETWORK ERROR", allReadings)
                 
                 break
-                
                 
             }
             

@@ -20,12 +20,18 @@ class ReadingRequest: NSObject {
     
     
     
-    static func getAllReadings (readingsAmount: Int, readingsToIgnore: [String], completionHandler: @escaping (_ success: Bool, _ msg: String, _ reading: [Reading]) -> Void) {
+    static func getAllReadings (readingsAmount: Int, readingsIds: [String], toIgnore: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String, _ reading: [Reading]) -> Void) {
         
         var allReadings = [Reading]()
-        
+
+        let urlParams = [
+            "skip":"0",
+            "$where":self.parseIdsInQueryWhereParam(readingIds: readingsIds, toIgnore: toIgnore),
+            "limit":String(readingsAmount)]
+
+        let url = URL_WS_GET_ALL_READINGS + "?" + urlParams.stringFromHttpParameters()
     
-        Alamofire.request(URL_WS_GET_ALL_READINGS, method: .get, headers: TOKEN_READING).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request(url, method: .get, headers: TOKEN_READING).responseJSON { (response: DataResponse<Any>) in
             
             switch  response.result {
                 
@@ -75,6 +81,23 @@ class ReadingRequest: NSObject {
             }
             
         }
+    }
+    
+    static func parseIdsInQueryWhereParam(readingIds: [String], toIgnore: Bool) -> String {
+        
+        let allIdQuerys = readingIds.map { (readingId) -> String in
+            
+            var queryWhereString = "this._id "
+            let comparator = toIgnore ? "!= " : "== "
+            let idString = "'\(readingId )'"
+            queryWhereString += comparator + idString
+            
+            return queryWhereString
+            
+        }.joined(separator: " || ")
+        
+        return allIdQuerys
+        
     }
 
 }

@@ -97,7 +97,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let user = ApplicationState.sharedInstance.currentUser {
             
-            user.lastSessionTimeInterval = self.getDifferenceDays(user: user)
+            let differenceDay = self.getDifferenceDays(user: user)
+            
+            let readingIds = Reading.getAllSelectIdProperty(propertyName: "id")
+            
+            ReadingRequest.getAllReadings(readingsAmount: differenceDay, readingsIds: readingIds as! [String], toIgnore: true,completionHandler: { (success, msg, readings) in
+        
+                if success {
+                    
+                } else {
+                    
+                }
+            })
+            
+            
+            user.lastSessionTimeInterval = NSDate().timeIntervalSince1970
+            
         }
     
         return true

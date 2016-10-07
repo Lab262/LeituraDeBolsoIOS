@@ -32,6 +32,17 @@ class User: Object {
         if let id = data ["_id"] as? String { self.id = id }
         if let email = data ["email"] as? String { self.email = email }
         if let token = data ["token"] as? String { self.token = token }
+        
+        if let readings = data ["readings"] as? Array<Dictionary<String, AnyObject>> {
+            
+            for reading in readings {
+                
+                let reading = Reading(data: reading)
+                
+                
+            }
+            
+        }
     }
     
     

@@ -48,7 +48,6 @@ class ReadingRequestTests: XCTestCase {
         
         XCTAssertEqual(queryParam, "skip=0&%24where=this._id%20%21%3D%20%2757f2e00aa993e78e70babcb5%27&limit=0")
         
-        
     }
     
     func testParseIdsInQueryWhereParam() {
@@ -74,11 +73,6 @@ class ReadingRequestTests: XCTestCase {
         
         
         XCTAssertTrue(allIdQuerys.contains(" || "), "erro")
-        
-
-        
-        
-        
         
     }
     

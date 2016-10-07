@@ -14,8 +14,6 @@ class Reading: Object {
     
     dynamic var id: String?
     dynamic var title: String?
-    dynamic var isFavorite = false
-    dynamic var isReading = false
     dynamic var author: String?
     let emojis = List<Emoji>()
     dynamic var duration: String?
@@ -53,7 +51,7 @@ class Reading: Object {
     }
     
     
-    func getAllSelectIdProperty (propertyName: String) -> [Any] {
+    static func getAllSelectIdProperty (propertyName: String) -> [Any] {
         
         let allReadings: [Reading] = DBManager.getAll()
         
@@ -62,8 +60,6 @@ class Reading: Object {
             return object.value(forKey: propertyName)
             
         }
-        
-        
         return allReadingsId
     }
     

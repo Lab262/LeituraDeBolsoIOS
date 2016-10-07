@@ -143,6 +143,7 @@
 		D4C64D061DA5F3D0004B21F0 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4C64D031DA5F3D0004B21F0 /* FBSDKShareKit.framework */; };
 		D4C64D081DA73012004B21F0 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4C64D071DA73012004B21F0 /* Bolts.framework */; };
 		D4C64D0A1DA74268004B21F0 /* NSDate+DateCompator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C64D091DA74268004B21F0 /* NSDate+DateCompator.swift */; };
+		D4C64D0C1DA7581F004B21F0 /* UserReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C64D0B1DA7581F004B21F0 /* UserReading.swift */; };
 		D4CADAD31D75C377005FE3DC /* HistoricalReadingSegmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CADAD21D75C377005FE3DC /* HistoricalReadingSegmentViewController.swift */; };
 		D4CADAD51D75C8D1005FE3DC /* HistoricalReadingMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CADAD41D75C8D1005FE3DC /* HistoricalReadingMainViewController.swift */; };
 		D4CADAD71D75C9B6005FE3DC /* AllHistoricalReadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CADAD61D75C9B6005FE3DC /* AllHistoricalReadingViewController.swift */; };
@@ -401,6 +402,7 @@
 		D4C64D031DA5F3D0004B21F0 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		D4C64D071DA73012004B21F0 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		D4C64D091DA74268004B21F0 /* NSDate+DateCompator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+DateCompator.swift"; sourceTree = "<group>"; };
+		D4C64D0B1DA7581F004B21F0 /* UserReading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserReading.swift; sourceTree = "<group>"; };
 		D4CADAD21D75C377005FE3DC /* HistoricalReadingSegmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalReadingSegmentViewController.swift; sourceTree = "<group>"; };
 		D4CADAD41D75C8D1005FE3DC /* HistoricalReadingMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoricalReadingMainViewController.swift; sourceTree = "<group>"; };
 		D4CADAD61D75C9B6005FE3DC /* AllHistoricalReadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllHistoricalReadingViewController.swift; sourceTree = "<group>"; };
@@ -859,6 +861,7 @@
 				D4E8CA331D73EDA000C82F0A /* Reading.swift */,
 				D438F78D1D94A15900F38109 /* User.swift */,
 				D4D0BFB51D9B73AE00A24A60 /* Emoji.swift */,
+				D4C64D0B1DA7581F004B21F0 /* UserReading.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1331,6 +1334,7 @@
 				D4E8CA341D73EDA000C82F0A /* Reading.swift in Sources */,
 				D4C64D0A1DA74268004B21F0 /* NSDate+DateCompator.swift in Sources */,
 				D4CADAD91D75CA50005FE3DC /* FavoriteHistoricalReadingViewController.swift in Sources */,
+				D4C64D0C1DA7581F004B21F0 /* UserReading.swift in Sources */,
 				D448B3A61D6E8EA500F3DF51 /* LeituraDeBolso.xcdatamodeld in Sources */,
 				D40752C41D8369580093F0A0 /* ImageLogoTableViewCell.swift in Sources */,
 				D4CADADD1D75FAE5005FE3DC /* UIButtonExtension.swift in Sources */,

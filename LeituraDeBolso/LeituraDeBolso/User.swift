@@ -14,6 +14,7 @@ class User: Object {
     
     dynamic var id: String?
     dynamic var email: String?
+    let userReadings = List<UserReading>()
     let readings = List<Reading>()
     dynamic var token: String?
     dynamic var lastSessionTimeInterval:Double = 0
@@ -37,9 +38,8 @@ class User: Object {
             
             for reading in readings {
                 
-                let reading = Reading(data: reading)
-                
-                
+                let userReading = UserReading(data: reading)
+                self.userReadings.append(userReading)
             }
             
         }

@@ -15,6 +15,7 @@ class UserReading: Object {
     dynamic var idReading: String?
     dynamic var isFavorite = false
     dynamic var isReading = false
+    dynamic var alreadyRead = false
     
     
     convenience init(data: (Dictionary<String, AnyObject>)) {
@@ -27,9 +28,19 @@ class UserReading: Object {
     
     func setDataFromWS(data: (Dictionary<String, AnyObject>)) {
         
-//        if let id = data["-id"] as? String { self.id = id }
-//        
-//        if let title = data["title"] as? String { self.title = title }
+        
+        if let idReading = data ["-_readingId"] as? String {
+            self.idReading = idReading
+        }
+        
+        if let isFavorite = data ["isFavorite"] as? Bool {
+            self.isFavorite = isFavorite
+        }
+        
+        if let alreadyRead = data ["alreadyRead"] as? Bool {
+            self.alreadyRead = alreadyRead
+        }
+
     
     }
 

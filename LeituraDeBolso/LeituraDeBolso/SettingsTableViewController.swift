@@ -187,6 +187,8 @@ class SettingsTableViewController: UITableViewController {
     
     
     @IBAction func logout(_ sender: AnyObject) {
+        
+        
         self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Login")!, animated: true, completion: nil)
     }
     

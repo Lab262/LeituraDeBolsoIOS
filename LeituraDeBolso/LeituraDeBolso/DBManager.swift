@@ -47,6 +47,20 @@ struct DBManager {
         }
     }
     
+    static func deleteAllDatas() {
+        try! Realm().write(){
+            try! Realm().deleteAll()
+        }
+    }
+    
+//    static func deleteAllTypeData() {
+//        try! Realm().write(){
+//            let listObjects: [T] = getAll()
+//            try! Realm().deleteAll(listObjects)
+//        }
+//        
+//    }
+    
     static func update(_ obj: Object){
         
         try! Realm().write(){

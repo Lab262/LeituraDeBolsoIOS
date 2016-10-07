@@ -215,6 +215,19 @@ class LoginViewController: UIViewController {
         DBManager.addObjc(user)
         
     }
+    
+    func verifyUserExistInDataBase (user: User) -> Bool {
+        
+
+        let user: User = DBManager.getByCondition(param: user.email!, value: "email")
+            
+        if user.email != nil {
+            return true
+        } else {
+            return false
+        }
+        
+    }
 }
 
 extension LoginViewController: UITableViewDataSource {
@@ -312,6 +325,10 @@ extension LoginViewController {
         UserRequest.loginUser(email: dictionaryTextFields[KEY_EMAIL]!, pass: dictionaryTextFields[KEY_PASS]!) { (success, msg, user) in
             
             if success {
+                
+                if !self.verifyUserExistInDataBase(user: user!) {
+                    DBManager.deleteAllDatas()
+                }
                 
                 self.saveCurrentSessionInTimeInterval(user: user!)
                 self.getReadings(readingsIds: self.getReadingsIdUser(user: user!))

@@ -109,12 +109,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                 }
             })
-            
-            
             user.lastSessionTimeInterval = NSDate().timeIntervalSince1970
-            
         }
-    
+        
         return true
     }
     

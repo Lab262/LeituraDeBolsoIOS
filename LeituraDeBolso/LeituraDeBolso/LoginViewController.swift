@@ -13,8 +13,6 @@ let KEY_PASS = "pass"
 let KEY_CONFIRM_PASS = "confirmationPass"
 
 
-
-
 class LoginViewController: UIViewController {
     
     @IBOutlet weak var bottomTableConstraint: NSLayoutConstraint!
@@ -30,15 +28,13 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         self.registerNibs()
-        
         self.configureGestureRecognizer()
-        
         self.registerObservers()
-      
         
     }
     
     private func registerObservers(){
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -68,12 +64,10 @@ class LoginViewController: UIViewController {
         
         cell.iconImage.image = UIImage(named: "icon_email")
         cell.textField.placeholder = "Email"
-        
         cell.textField.keyboardType = .emailAddress
         cell.completionText = {(text) -> Void in
             self.dictionaryTextFields[KEY_EMAIL] = text
         }
-
         
         return cell
     }
@@ -84,7 +78,6 @@ class LoginViewController: UIViewController {
         
         cell.iconHeightConstraint.constant = 31
         cell.iconWidthConstraint.constant = 23
-        
         cell.textField.isSecureTextEntry = true
         cell.iconImage.image = UIImage(named: "icon_pass")
         cell.textField.placeholder = "Senha"
@@ -93,19 +86,19 @@ class LoginViewController: UIViewController {
             self.dictionaryTextFields[KEY_PASS] = text
         }
         
-        
         return cell
     }
     
     func generateForgotPassButtonCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.identifier, for: indexPath) as! ButtonTableViewCell
-        
-        
+
         cell.button.addTarget(self, action: #selector(recoverPassword(_:)), for: .touchUpInside)
         
         cell.button.titleLabel?.font = UIFont(name: "Comfortaa", size: 15)
+        
         cell.button.setTitle("Esqueci a senha", for: UIControlState())
+        
         cell.button.backgroundColor = UIColor.clear
         
         
@@ -166,7 +159,6 @@ class LoginViewController: UIViewController {
                 }
             }
         }
-        
     }
     
     deinit {
@@ -212,7 +204,7 @@ class LoginViewController: UIViewController {
     
         user.lastSessionTimeInterval = NSDate().timeIntervalSince1970
         ApplicationState.sharedInstance.currentUser = user
-        DBManager.addObjc(user)
+        DBManager.update(ApplicationState.sharedInstance.currentUser!)
         
     }
     
@@ -222,6 +214,7 @@ class LoginViewController: UIViewController {
         let user: User = DBManager.getByCondition(param: user.email!, value: "email")
             
         if user.email != nil {
+            
             return true
         } else {
             return false
@@ -290,24 +283,48 @@ extension LoginViewController {
     
     func getReadingsIdUser (user: User) -> [String] {
         
-        let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "id")
+        let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "idReading")
         
         return allReadingsIdUser as! [String]
     }
     
     
-    func getReadings (readingsIds: [String]) {
+    func getReadings (readingsIds: [String], user: User) {
         
-        ReadingRequest.getAllReadings(readingsAmount: 0, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
+        ReadingRequest.getAllReadings(readingsAmount: 1, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
             
             if success {
-                for reading in readings {
-                    DBManager.addObjc(reading)
+                
+                if readings!.count > 0 {
+                    self.createUserReading(user: user, reading: readings!.first!)
+                    for reading in readings! {
+                        DBManager.addObjc(reading)
+                    }
+                } else {
+                     self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                 }
                 
             } else {
                 
                 print ("MSG ERROR: \(msg)")
+                
+            }
+        }
+    }
+    
+    func createUserReading (user: User, reading: Reading) {
+        
+        UserReadingRequest.createUserReading(readingId: reading.id!, isFavorite: false, alreadyRead: false) { (success, msg) in
+            
+            if success {
+                
+                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+                
+                
+            } else {
+                
+                print ("MSG FRACASO: \(msg)")
+                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                 
             }
         }
@@ -326,14 +343,15 @@ extension LoginViewController {
             
             if success {
                 
-                if !self.verifyUserExistInDataBase(user: user!) {
-                    DBManager.deleteAllDatas()
-                }
+//                if !self.verifyUserExistInDataBase(user: user!) {
+//                    DBManager.deleteAllDatas()
+//                }
                 
                 self.saveCurrentSessionInTimeInterval(user: user!)
-                self.getReadings(readingsIds: self.getReadingsIdUser(user: user!))
                 
-                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+                self.getReadings(readingsIds: self.getReadingsIdUser(user: user!), user: user!)
+                
+            
                 
                 print ("MSG SUCESSO: \(msg)")
                 

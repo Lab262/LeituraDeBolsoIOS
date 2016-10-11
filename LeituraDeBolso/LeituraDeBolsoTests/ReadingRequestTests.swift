@@ -22,7 +22,11 @@ class ReadingRequestTests: XCTestCase {
             readings = allReadings
             asyncExpectation.fulfill()
         }
-//        
+        
+        
+        
+        
+    
 //        ReadingRequest.getAllReadings(completionHandler: completionBlock)
 //        waitForExpectations(timeout: 10.0) { (error) in
 //            XCTAssertNotNil(readings)
@@ -52,10 +56,8 @@ class ReadingRequestTests: XCTestCase {
     
     func testParseIdsInQueryWhereParam() {
         
-        "this._id != '57f2e00aa993e78e70babcb5' || "
         
-        let reading = Reading()
-        let readingIds = reading.getAllSelectIdProperty(propertyName: "id")
+        let readingIds = Reading.getAllSelectIdProperty(propertyName: "id")
         
         let idIncluded = false
         
@@ -78,8 +80,7 @@ class ReadingRequestTests: XCTestCase {
     
     func testGetReadingIds() {
         
-       let reading = Reading()
-       let readingIds = reading.getAllSelectIdProperty(propertyName: "id")
+       let readingIds = Reading.getAllSelectIdProperty(propertyName: "id")
         
         XCTAssertNotNil(readingIds)
     

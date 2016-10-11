@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Realm
 import RealmSwift
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var xCenterConstraint = NSLayoutConstraint()
     var yCenterConstraint = NSLayoutConstraint()
     var initialViewController: UIViewController? = nil
+    var navigationController: UIViewController?
 
 
     
@@ -33,25 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func launchScreenAnimation () {
         
-        let users:[User]? = DBManager.getAll()
-        
-        let user = users?.first
-        
-        let mainStoryboard: UIStoryboard?
-
-        if user != nil {
-            mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        } else {
-            mainStoryboard = UIStoryboard(name: "Login", bundle: nil)
-        }
-
-        let navigationController = mainStoryboard?.instantiateViewController(withIdentifier: "navigation")
-        self.window!.rootViewController = navigationController
-        
         self.maskBgView.frame = navigationController!.view.frame
         self.maskBgView.backgroundColor = UIColor.colorWithHexString("1BDBAD")
         
-        navigationController?.view.addSubview(self.maskBgView)
+        self.navigationController?.view.addSubview(self.maskBgView)
         
         self.launchScreenImageView = UIImageView(image: UIImage(named: "LaunchScreenFrames1.png"))
         
@@ -89,32 +76,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+    
+    func requestReadingDay (user: User) {
+        
+        let differenceDay = self.getDifferenceDays(user: user)
+        
+        let readingIds = Reading.getAllSelectIdProperty(propertyName: "id")
+        
+        ReadingRequest.getAllReadings(readingsAmount: differenceDay, readingsIds: readingIds as! [String], isReadingIdsToDownload: true,completionHandler: { (success, msg, readings) in
+            
+            if success {
+                
+            } else {
+                
+            }
+        })
+        
+        
+        try! Realm().write(){
+            user.lastSessionTimeInterval = NSDate().timeIntervalSince1970
+        }
+       
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        self.launchScreenAnimation()
+        let mainStoryboard: UIStoryboard?
         
         self.setupBarsAppearance()
         
-        if let user = ApplicationState.sharedInstance.currentUser {
-            
-            let differenceDay = self.getDifferenceDays(user: user)
-            
-            let readingIds = Reading.getAllSelectIdProperty(propertyName: "id")
-            
-            ReadingRequest.getAllReadings(readingsAmount: differenceDay, readingsIds: readingIds as! [String], isReadingIdsToDownload: true,completionHandler: { (success, msg, readings) in
         
-                if success {
-                    
-                } else {
-                    
-                }
-            })
-            user.lastSessionTimeInterval = NSDate().timeIntervalSince1970
+        if ApplicationState.sharedInstance.currentUser?.token != nil {
+            
+             mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            self.requestReadingDay(user: ApplicationState.sharedInstance.currentUser!)
+            
+        } else {
+            
+             mainStoryboard = UIStoryboard(name: "Login", bundle: nil)
         }
         
-        return true
+        self.navigationController = mainStoryboard?.instantiateViewController(withIdentifier: "navigation")
+        
+
+        self.window!.rootViewController = navigationController
+        
+        self.launchScreenAnimation()
+
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
     }
-    
 
     func setupBarsAppearance(){
         
@@ -159,6 +171,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.

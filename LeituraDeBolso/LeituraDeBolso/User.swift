@@ -19,6 +19,11 @@ class User: Object {
     dynamic var lastSessionTimeInterval:Double = 0
     
     
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+
+    
     convenience init(data: (Dictionary<String, AnyObject>)) {
         self.init()
         
@@ -62,14 +67,9 @@ class User: Object {
         let allReadingsId = allReadings.map { (object) -> Any in
             
             return object.value(forKey: propertyName)
-            
         }
         
         return allReadingsId
     }
     
-    
-
-
-
 }

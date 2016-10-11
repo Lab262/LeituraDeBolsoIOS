@@ -11,7 +11,7 @@ import Alamofire
 
 
 let URL_WS_CREATE_USER = "\(URL_WS_LOCAL)users"
-let URL_WS_LOGIN_USER = "\(URL_WS_LOCAL)auth/login"
+let URL_WS_LOGIN_USER = "\(URL_WS_SERVER)auth/login"
 let URL_WS_FORGOT_PASS = "\(URL_WS_LOCAL)auth/forgotPassword"
 
 
@@ -93,10 +93,13 @@ class UserRequest: NSObject {
                 case 200:
                     
                     let userData = data ["user"]
+                    
                     let user: User = User(data: userData as! Dictionary<String, AnyObject>)
+                    
+                    
                     user.token = data ["token"] as? String
                 
-                    completionHandler(true, data["message"] as! String, user)
+                    completionHandler(true, "Sucesso", user)
                 
                 default:
                     completionHandler(false, data["message"] as! String, nil)

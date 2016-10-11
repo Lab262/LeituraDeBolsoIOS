@@ -42,7 +42,76 @@ class ReadingDayViewController: UIViewController {
         self.tableView.layoutIfNeeded()
     }
     
+    func getReadingsIdUser (user: User) -> [String] {
+        
+        let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "idReading")
+        
+        return allReadingsIdUser as! [String]
+    }
+    
+    
+    func getReadings (readingsIds: [String], user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
+        
+        ReadingRequest.getAllReadings(readingsAmount: 5, readingsIds: readingsIds, isReadingIdsToDownload: false) { (success, msg, readings) in
+            
+            if success {
+                
+                if readings!.count > 0 {
+                    
+                    for reading in readings! {
+                        self.createUserReading(user: user, reading: reading)
+                        DBManager.addObjc(reading)
+                    }
+                    //57f4674e6d79cc0300305b51
+                    let reading = readings!.first
+                    
+                    completionHandler(true, "Leituras salvas", reading)
+                    
+                } else {
+                    print ("Sem leituras para baixar.")
+                    
+                    let reading:Reading = DBManager.getAll().first! as! Reading
+                    
+                    completionHandler(true, "Sem Leituras", reading)
+                }
+                
+            } else {
+                
+                let reading:Reading = DBManager.getAll().first! as! Reading
+                
+                completionHandler(true, "MSG ERROR: \(msg)", reading)
+
+                
+            }
+        }
+    }
+    
+    func createUserReading (user: User, reading: Reading) {
+        
+        UserReadingRequest.createUserReading(readingId: reading.id!, isFavorite: false, alreadyRead: false) { (success, msg) in
+            
+            if success {
+                print ("USER READING CRIADO: \(msg)")
+            } else {
+                print ("USER READING NÃO CRIADO: \(msg)")
+                
+            }
+        }
+    }
+
+    
     override func viewWillAppear(_ animated: Bool) {
+        
+        self.getReadings(readingsIds: self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!), user: ApplicationState.sharedInstance.currentUser!) { (success, msg, reading) in
+            
+            if success {
+                self.readingDay = reading!
+                self.tableView.reloadData()
+            } else {
+                print ("MENSAGEM ERRO: \(msg)")
+            }
+            
+        }
         
         if ApplicationState.sharedInstance.modeNight! {
             self.setNightMode()
@@ -50,7 +119,6 @@ class ReadingDayViewController: UIViewController {
             self.setNormalMode()
         }
         
-        self.tableView.reloadData()
         
     }
     
@@ -58,35 +126,15 @@ class ReadingDayViewController: UIViewController {
         super.viewDidLoad()
         
         if self.readingDay?.title == nil {
+            self.readingDay = DBManager.getAll().first
             
-            
-            
-//            
-//            if let userReadings = ApplicationState.sharedInstance.currentUser?.readings {
-//                
-//                var userReadingsIds = [String]()
-//                
-//                for reading in userReadings {
-//                    userReadingsIds.append(reading.id!)
-//                }
-//                
-//                ReadingRequest.getAllReadings(readingsAmount: 10, readingsToIgnore: userReadingsIds, completionHandler: { (success, msg, readings) in
-//                    
-//                    self.allReadings = readings
-//                    self.readingDay = self.allReadings.last
-//                    self.tableView.reloadData()
-//                })
-//                
-//            }
-//
-//                
-//        }
-            
-        self.configureTableView()
-       
+            self.tableView.reloadData()
         }
         
+        self.configureTableView()
+       
     }
+    
     
     func shareReading (_ sender: UIButton) {
         
@@ -181,3 +229,25 @@ extension ReadingDayViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
+
+//
+//            if let userReadings = ApplicationState.sharedInstance.currentUser?.readings {
+//
+//                var userReadingsIds = [String]()
+//
+//                for reading in userReadings {
+//                    userReadingsIds.append(reading.id!)
+//                }
+//
+//                ReadingRequest.getAllReadings(readingsAmount: 10, readingsToIgnore: userReadingsIds, completionHandler: { (success, msg, readings) in
+//
+//                    self.allReadings = readings
+//                    self.readingDay = self.allReadings.last
+//                    self.tableView.reloadData()
+//                })
+//
+//            }
+//
+//
+//        }

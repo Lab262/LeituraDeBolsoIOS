@@ -29,7 +29,7 @@ class UserReading: Object {
     func setDataFromWS(data: (Dictionary<String, AnyObject>)) {
         
         
-        if let idReading = data ["-_readingId"] as? String {
+        if let idReading = data ["readingId"] as? String {
             self.idReading = idReading
         }
         

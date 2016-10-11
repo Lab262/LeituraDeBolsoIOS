@@ -8,41 +8,52 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
+import Realm
 
 
 let URL_WS_GET_ALL_READINGS = "\(URL_WS_SERVER)readings"
 let URL_WS_GET_READING_BY_ID = "\(URL_WS_SERVER)auth/login"
 
-let TOKEN_READING = ["x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRtYjA3MTBAZ21haWwuY29tIiwiaWQiOiI1N2U2YjRiNzVjMWVhNzk3MTk0OGQ5ZTYiLCJpYXQiOjE0NzQ3NTMwNjd9.QgGJDsKl8mfYApIqKIxp5GzSyQWBxegbQATAGXi_AZU"]
+var TOKEN_READING = ["x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imh1YWxseWQuc21hZGlAZ21haWwuY29tIiwiaWQiOiI1N2U5OWJhMWYyYjRmNjAzMDA3ZjU2NTciLCJpYXQiOjE0NzU4NzQ5MDZ9.Ny1WlCtuOkBsO9E3cddGZmjERJg_fxvWDFsB-_g5XSU"]
 
 
 class ReadingRequest: NSObject {
     
-    
-    
-    static func getAllReadings (readingsAmount: Int, readingsIds: [String], isReadingIdsToDownload: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String, _ reading: [Reading]) -> Void) {
+    static func getAllReadings (readingsAmount: Int, readingsIds: [String], isReadingIdsToDownload: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String, _ reading: [Reading]?) -> Void) {
         
         var allReadings = [Reading]()
 
-        let urlParams = [
+        var urlParams = [
             "skip":"0",
-            "$where":self.parseIdsInQueryWhereParam(readingIds: readingsIds, isReadingIdsToDownload: isReadingIdsToDownload),
             "limit":String(readingsAmount)]
 
+        if readingsIds.count > 0 {
+            urlParams["$where"] = self.parseIdsInQueryWhereParam(readingIds: readingsIds, isReadingIdsToDownload: isReadingIdsToDownload)
+
+        }
+        
         let url = URL_WS_GET_ALL_READINGS + "?" + urlParams.stringFromHttpParameters()
+        
+        print ("IS READING IDS TO DOWNLOAD: \(isReadingIdsToDownload)")
+        
+        print (" URL DOWNLOAD: \(url)")
+        
+        
+        
+        var token = Dictionary<String, String>()
+        
+        token ["x-access-token"] = ApplicationState.sharedInstance.currentUser!.token
     
-        Alamofire.request(url, method: .get, headers: TOKEN_READING).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request(url, method: .get, headers: token).responseJSON { (response: DataResponse<Any>) in
             
             switch  response.result {
                 
             case .success:
-                
-                
                 let data = response.result.value as! Dictionary<String, AnyObject>
                 
-                
                 switch response.response!.statusCode {
-                    
+        
                 case 200:
                    
                     if let listDictonary = data["data"] as? Array<Dictionary<String, AnyObject>> {
@@ -57,22 +68,22 @@ class ReadingRequest: NSObject {
                             
                         }
                         
-                        completionHandler(true,  data["message"] as! String, allReadings)
-                        
+                        completionHandler(true, "Sucesso", allReadings)
+                      //  57f2e0e8ca6aa5030035528a
+                       // 57f2e0e8ca6aa5030035528a
                     } else {
                         
-                        completionHandler(false, data["message"] as! String, allReadings)
+                        completionHandler(false, data["message"] as! String, nil)
                     }
        
-                    
                 default:
                     
-                    completionHandler(false, data["message"] as! String, allReadings)
+                    completionHandler(false, data["message"] as! String, nil)
                 }
                 
             case .failure(_):
                 
-                completionHandler(false, "NETWORK ERROR", allReadings)
+                completionHandler(false, "NETWORK ERROR", nil)
                 
                 break
                 
@@ -86,13 +97,14 @@ class ReadingRequest: NSObject {
         let allIdQuerys = readingIds.map { (readingId) -> String in
             
             var queryWhereString = "this._id "
-            let comparator = isReadingIdsToDownload ? "!= " : "== "
+            let comparator = isReadingIdsToDownload ? "== " : "!= "
+            
             let idString = "'\(readingId )'"
             queryWhereString += comparator + idString
             
             return queryWhereString
             
-        }.joined(separator: " || ")
+        }.joined(separator: " && ")
         
         return allIdQuerys
         

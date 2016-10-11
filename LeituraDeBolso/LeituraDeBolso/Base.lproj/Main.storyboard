@@ -28,7 +28,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VmR-rG-TSr">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="headingCell" rowHeight="116" id="70I-te-XXV" customClass="HeadingTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="headingCell" rowHeight="116" id="70I-te-XXV" customClass="HeadingTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="70I-te-XXV" id="auB-aW-U6g">
@@ -113,7 +113,7 @@
                                             <outlet property="titleLabel" destination="KPG-UT-prK" id="krs-6G-Uel"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="contentCell" rowHeight="377" id="P1v-L8-byG" customClass="ContentTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="contentCell" rowHeight="377" id="P1v-L8-byG" customClass="ContentTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="208" width="375" height="377"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P1v-L8-byG" id="N8o-kN-DDZ">
@@ -152,7 +152,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                             <outlet property="contentReadingLabel" destination="xhl-TC-JrQ" id="J1X-QP-0TW"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="buttonsCell" rowHeight="82" id="XHK-PT-vgt" customClass="ButtonsTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="buttonsCell" rowHeight="82" id="XHK-PT-vgt" customClass="ButtonsTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="585" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XHK-PT-vgt" id="yIs-vv-bMY">

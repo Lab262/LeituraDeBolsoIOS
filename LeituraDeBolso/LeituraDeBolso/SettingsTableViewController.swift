@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Realm
+import RealmSwift
 
 
 
@@ -187,6 +189,17 @@ class SettingsTableViewController: UITableViewController {
     
     
     @IBAction func logout(_ sender: AnyObject) {
+        
+        
+//        try! Realm().write(){
+//            
+//        }
+        
+        try! Realm().write(){
+             ApplicationState.sharedInstance.currentUser?.token = nil
+        }
+        DBManager.update(ApplicationState.sharedInstance.currentUser!)
+        
         
         
         self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Login")!, animated: true, completion: nil)

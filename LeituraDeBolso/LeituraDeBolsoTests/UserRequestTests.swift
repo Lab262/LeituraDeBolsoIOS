@@ -15,7 +15,6 @@ class UserRequestTests: XCTestCase {
     
     func testCreateUserAccount() {
         
-        
         var msg: String?
         
         let asyncExpectation = expectation(description: "User post request return")
@@ -42,7 +41,7 @@ class UserRequestTests: XCTestCase {
         
         var msg: String?
         
-        let completionBlock = { (success: Bool, message: String) -> Void  in
+        let completionBlock = { (success: Bool, message: String, user: User?) -> Void  in
             
             msg = message
             

@@ -138,6 +138,15 @@ class ReadingDayViewController: UIViewController {
     
     func shareReading (_ sender: UIButton) {
         
+    
+        let activity = UIActivityViewController(activityItems: ["\(self.readingDay!.title!) \(self.readingDay!.content!)"], applicationActivities: nil)
+        
+        
+        let excludeActivities = [UIActivityType.postToFacebook, UIActivityType.postToTwitter, UIActivityType.message, UIActivityType.mail]
+        
+        activity.excludedActivityTypes = excludeActivities
+        
+        self.present(activity, animated: true, completion: nil)
         
     }
     

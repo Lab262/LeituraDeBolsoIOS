@@ -21,6 +21,7 @@ class User: Object {
     dynamic var isNotification: Bool = false
     dynamic var sizeFont: Int = 14
     dynamic var notificationHour: Date = Date()
+    dynamic var readingDayId: Int = 0
     
     
     override static func primaryKey() -> String? {

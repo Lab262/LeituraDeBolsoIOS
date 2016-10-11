@@ -120,8 +120,8 @@ class UserRequest: NSObject {
         
         dic["email"] = email
     
-
-        Alamofire.request(URL_WS_FORGOT_PASS, method: .post, parameters: dic, encoding: JSONEncoding.default, headers: TOKEN).responseJSON { (response: DataResponse<Any>) in
+        
+        Alamofire.request(URL_WS_FORGOT_PASS, method: .post, parameters: dic, encoding: JSONEncoding.default, headers: nil).responseJSON { (response: DataResponse<Any>) in
             
             switch response.result {
                 

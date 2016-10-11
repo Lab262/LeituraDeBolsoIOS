@@ -39,8 +39,6 @@ class ReadingRequest: NSObject {
         
         print (" URL DOWNLOAD: \(url)")
         
-        
-        
         var token = Dictionary<String, String>()
         
         token ["x-access-token"] = ApplicationState.sharedInstance.currentUser!.token
@@ -69,8 +67,7 @@ class ReadingRequest: NSObject {
                         }
                         
                         completionHandler(true, "Sucesso", allReadings)
-                      //  57f2e0e8ca6aa5030035528a
-                       // 57f2e0e8ca6aa5030035528a
+                      
                     } else {
                         
                         completionHandler(false, data["message"] as! String, nil)

@@ -28,7 +28,6 @@ class UserReadingRequest: NSObject {
             ]
         ]
         
-        
         var token = Dictionary<String, String>()
         
         token["x-access-token"] = ApplicationState.sharedInstance.currentUser!.token!
@@ -73,8 +72,10 @@ class UserReadingRequest: NSObject {
     
     static func getAllUserReading (readingId: String, isFavorite: Bool, alreadyRead: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String) -> Void) {
         
+        var token = Dictionary<String, String>()
+        token ["x-access-token"] = ApplicationState.sharedInstance.currentUser!.token
         
-        Alamofire.request(URL_WS_USER_READING, method: .get, encoding: JSONEncoding.default, headers: TOKEN_READING).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request(URL_WS_USER_READING, method: .get, encoding: JSONEncoding.default, headers: token).responseJSON { (response: DataResponse<Any>) in
             
             switch response.result {
             case .success:
@@ -121,7 +122,10 @@ class UserReadingRequest: NSObject {
             ]
         ]
         
-        Alamofire.request(URL_WS_USER_READING_UPDATE, method: .patch, parameters: body,encoding: JSONEncoding.default, headers: TOKEN_READING).responseJSON { (response: DataResponse<Any>) in
+        var token = Dictionary<String, String>()
+        token ["x-access-token"] = ApplicationState.sharedInstance.currentUser!.token
+        
+        Alamofire.request(URL_WS_USER_READING_UPDATE, method: .patch, parameters: body,encoding: JSONEncoding.default, headers: token).responseJSON { (response: DataResponse<Any>) in
             
             switch response.result {
             case .success:

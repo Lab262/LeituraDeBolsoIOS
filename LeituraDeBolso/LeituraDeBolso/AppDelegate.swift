@@ -11,6 +11,7 @@ import CoreData
 import Realm
 import RealmSwift
 import FBSDKCoreKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var yCenterConstraint = NSLayoutConstraint()
     var initialViewController: UIViewController? = nil
     var navigationController: UIViewController?
+    var isGrantedNotificationAccess:Bool = false
 
 
     
@@ -74,7 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.launchScreenImageView.layer.add(animation, forKey: "animation")
         
     }
-    
     
     
     func requestReadingDay (user: User) {

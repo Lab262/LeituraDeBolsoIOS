@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+import UserNotifications
+import Realm
+import RealmSwift
 class ReadingDayViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -15,9 +17,8 @@ class ReadingDayViewController: UIViewController {
     var readingDay: Reading? = Reading()
     var arrayImages = Array<String>()
     var allReadings = [Reading]()
-    
-    
-    
+    var isGrantedNotificationAccess = false
+
     func configureTableView () {
         
         self.tableView.estimatedRowHeight = 300
@@ -62,7 +63,7 @@ class ReadingDayViewController: UIViewController {
                         self.createUserReading(user: user, reading: reading)
                         DBManager.addObjc(reading)
                     }
-                    //57f4674e6d79cc0300305b51
+                    
                     let reading = readings!.first
                     
                     completionHandler(true, "Leituras salvas", reading)
@@ -101,7 +102,7 @@ class ReadingDayViewController: UIViewController {
 
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.setNotification()
         self.getReadings(readingsIds: self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!), user: ApplicationState.sharedInstance.currentUser!) { (success, msg, reading) in
             
             if success {
@@ -125,6 +126,7 @@ class ReadingDayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.sendNotification()
         if self.readingDay?.title == nil {
             self.readingDay = DBManager.getAll().first
             
@@ -135,8 +137,60 @@ class ReadingDayViewController: UIViewController {
        
     }
     
+    func sendNotification() {
+        
+        if isGrantedNotificationAccess {
+            if #available(iOS 10.0, *) {
+                
+                let content = UNMutableNotificationContent()
+                content.title = "Leitura nova disponível!"
+                content.subtitle = "Leitura de Bolso"
+                content.body = "Leitura do dia está disponível :)"
+                content.categoryIdentifier = "message"
+                
+                
+              //  let interval = Date().addingTimeInterval(<#T##timeInterval: TimeInterval##TimeInterval#>)
+                let trigger = UNTimeIntervalNotificationTrigger(
+                    timeInterval: 10.0,
+                    repeats: false)
+                
+                
+                let request = UNNotificationRequest(
+                    identifier: "10.second.message",
+                    content: content,
+                    trigger: trigger
+                )
+                
+                
+                UNUserNotificationCenter.current().add(
+                    request, withCompletionHandler: nil)
+                
+            }
+
+        } else {
+                // Fallback on earlier versions
+        }
+    }
+        
     
-    func shareReading (_ sender: UIButton) {
+    func setNotification() {
+        
+        if #available(iOS 10.0, *) {
+            
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+                
+                self.isGrantedNotificationAccess = granted
+                self.sendNotification()
+                
+            }
+            
+        } else {
+            
+        }
+    }
+    
+    
+    func shareReading(_ sender: UIButton) {
         
     
         let activity = UIActivityViewController(activityItems: ["\(self.readingDay!.title!) \(self.readingDay!.content!)"], applicationActivities: nil)
@@ -208,6 +262,7 @@ class ReadingDayViewController: UIViewController {
         
     }
 }
+
 
 
 extension ReadingDayViewController: UITableViewDataSource, UITableViewDelegate {

@@ -17,19 +17,21 @@ class User: Object {
     let userReadings = List<UserReading>()
     dynamic var token: String?
     dynamic var lastSessionTimeInterval:Double = 0
+    dynamic var isModeNight: Bool = false
+    dynamic var isNotification: Bool = false
+    dynamic var sizeFont: Int = 14
+    dynamic var notificationHour: Date = Date()
     
     
     override static func primaryKey() -> String? {
         return "id"
     }
-
     
     convenience init(data: (Dictionary<String, AnyObject>)) {
         self.init()
         
         print(data)
         self.setDataFromWS(data: data)
-        
     }
     
     func setDataFromWS(data: (Dictionary<String, AnyObject>)) {

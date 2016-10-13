@@ -291,7 +291,7 @@ extension LoginViewController {
     
     func getReadings (readingsIds: [String], user: User) {
         
-        ReadingRequest.getAllReadings(readingsAmount: 1, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
+        ReadingRequest.getAllReadings(readingsAmount: 1, readingsIds: readingsIds, isReadingIdsToDownload: false) { (success, msg, readings) in
             
             if success {
                 

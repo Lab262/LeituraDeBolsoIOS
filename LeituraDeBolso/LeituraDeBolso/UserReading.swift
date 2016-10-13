@@ -14,7 +14,7 @@ class UserReading: Object {
     
     dynamic var idReading: String?
     dynamic var isFavorite = false
-    dynamic var isReading = false
+    dynamic var isShared = false
     dynamic var alreadyRead = false
     
     
@@ -23,6 +23,10 @@ class UserReading: Object {
         
         print(data)
         self.setDataFromWS(data: data)
+    }
+    
+    override static func primaryKey() -> String? {
+        return "idReading"
     }
     
     

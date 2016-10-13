@@ -15,6 +15,7 @@ class ReadingDayViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var readingDay: Reading? = Reading()
+    var isReadingFavorite: Bool!
     var arrayImages = Array<String>()
     var allReadings = [Reading]()
     var isGrantedNotificationAccess = false
@@ -26,7 +27,20 @@ class ReadingDayViewController: UIViewController {
         self.tableView.layoutIfNeeded()
         
     }
-    func setNightMode () {
+    
+    func setAlreadyRead() {
+        
+        UserReadingRequest.updateUserReading(readingId: self.readingDay!.id!, isFavorite: nil, alreadyRead: true, completionHandler: { (success, msg) in
+            
+            if success {
+                print ("LEU LEITURA: \(msg)")
+            } else {
+                print ("DEU ERRO NA READING LEITURA: \(msg)")
+            }
+        })
+    }
+    
+    func setNightMode() {
         
         self.tableView.backgroundColor = UIColor.readingModeNightBackground()
         self.view.backgroundColor = UIColor.readingModeNightBackground()
@@ -47,13 +61,47 @@ class ReadingDayViewController: UIViewController {
         
         let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "idReading")
         
+//        let allReadings: [UserReading] = DBManager.getAll()
+//        
+//        let allReadingsId = allReadings.map { (object) -> Any in
+//            
+//            return object.value(forKey: "idReading")
+//        }
+        
+        
+        
+//        let collections = [allReadingsIdUser, allReadingsId]
+//        
+//       
+//        let filtering = collections.flatMap { (str: [Any]) -> Sequence in
+//            
+//            
+//            str.filter {
+//                str == "
+//            }
+//        }
+//            
+//            
+//            
+//        }
+     //   let onlyEven = collections.flatMap { () -> [String] in
+//            
+//            $0.filter { $0 == "323"}
+        
+//        self.filteredReadings = (self.allReadings.filter { reading in
+//            
+//            return reading.title!.localizedCaseInsensitiveContains(searchText)
+//        })
+//
+        
         return allReadingsIdUser as! [String]
+
     }
     
     
     func getReadings (readingsIds: [String], user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
         
-        ReadingRequest.getAllReadings(readingsAmount: 5, readingsIds: readingsIds, isReadingIdsToDownload: false) { (success, msg, readings) in
+        ReadingRequest.getAllReadings(readingsAmount: 1, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
             
             if success {
                 
@@ -64,16 +112,16 @@ class ReadingDayViewController: UIViewController {
                         DBManager.addObjc(reading)
                     }
                     
-                    let reading = readings!.first
+                    let readings: [Reading] = DBManager.getAll()
                     
-                    completionHandler(true, "Leituras salvas", reading)
+                    completionHandler(true, "Leituras salvas", readings.first)
                     
                 } else {
                     print ("Sem leituras para baixar.")
+                
+                    let readings : [Reading] = DBManager.getAll()
                     
-                    let reading:Reading = DBManager.getAll().first! as! Reading
-                    
-                    completionHandler(true, "Sem Leituras", reading)
+                    completionHandler(true, "Sem Leituras", readings.first)
                 }
                 
             } else {
@@ -102,11 +150,16 @@ class ReadingDayViewController: UIViewController {
 
     
     override func viewWillAppear(_ animated: Bool) {
+        
         self.setNotification()
+        
         self.getReadings(readingsIds: self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!), user: ApplicationState.sharedInstance.currentUser!) { (success, msg, reading) in
             
             if success {
                 self.readingDay = reading!
+                self.isReadingFavorite = ApplicationState.sharedInstance.currentUser!.readingIsFavorite(id: reading!.id!)
+                
+                
                 self.tableView.reloadData()
             } else {
                 print ("MENSAGEM ERRO: \(msg)")
@@ -127,11 +180,6 @@ class ReadingDayViewController: UIViewController {
         super.viewDidLoad()
         
         self.sendNotification()
-        if self.readingDay?.title == nil {
-            self.readingDay = DBManager.getAll().first
-            
-            self.tableView.reloadData()
-        }
         
         self.configureTableView()
        
@@ -148,24 +196,33 @@ class ReadingDayViewController: UIViewController {
                 content.body = "Leitura do dia está disponível :)"
                 content.categoryIdentifier = "message"
                 
+                let currentDateTime = Date()
+                let userCalendar = Calendar.current
+                let requestedComponents: Set<Calendar.Component> = [
+                    .hour,
+                    .minute]
                 
-              //  let interval = Date().addingTimeInterval(<#T##timeInterval: TimeInterval##TimeInterval#>)
-                let trigger = UNTimeIntervalNotificationTrigger(
-                    timeInterval: 10.0,
-                    repeats: false)
+                let dateTimeComponents = userCalendar.dateComponents(requestedComponents, from: currentDateTime)
+       
+                let hour = dateTimeComponents.hour
+                let minute = dateTimeComponents.minute
                 
+        
+                var dateComponents = DateComponents()
+                dateComponents.hour = hour
+                dateComponents.minute = minute
+                
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
                 
                 let request = UNNotificationRequest(
-                    identifier: "10.second.message",
+                    identifier: "message",
                     content: content,
                     trigger: trigger
                 )
                 
-                
-                UNUserNotificationCenter.current().add(
-                    request, withCompletionHandler: nil)
-                
+                UNUserNotificationCenter.current().add(request, withCompletionHandler:nil)
             }
+            
 
         } else {
                 // Fallback on earlier versions
@@ -232,32 +289,64 @@ class ReadingDayViewController: UIViewController {
         
         cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
         
-        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
-            
-            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
-                $0.title!.localizedCaseInsensitiveContains(self.readingDay!.title!)
-            }
-            
-            if !readingFavorite.isEmpty {
-                cell.likeButton.isSelected = true
-            } else {
-                cell.likeButton.isSelected = false
-            }
-            
-        } else {
-            cell.likeButton.isSelected = false
-        }
+        cell.likeButton.isSelected = self.isReadingFavorite
+        
+        
+//        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
+//            
+//            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
+//                $0.title!.localizedCaseInsensitiveContains(self.readingDay!.title!)
+//            }
+//            
+//            if !readingFavorite.isEmpty {
+//                cell.likeButton.isSelected = true
+//            } else {
+//                cell.likeButton.isSelected = false
+//            }
+//            
+//        } else {
+//            cell.likeButton.isSelected = false
+//        }
         
         return cell
     }
     
     func likeReader (_ sender: UIButton) {
      
-        if sender.isSelected == true {
+        if sender.isSelected {
             ApplicationState.sharedInstance.favoriteReads.append(self.readingDay!)
+            
+            ApplicationState.sharedInstance.currentUser?.setFavoriteReading(id: self.readingDay!.id!, isFavorite: true)
+            
+            UserReadingRequest.updateUserReading(readingId: self.readingDay!.id!, isFavorite: true, alreadyRead: true, completionHandler: { (success, msg) in
+                
+                if success {
+                    print ("FAVORITOU :\(msg)")
+                    
+                } else {
+                    print ("DEU ERRO NO FAVORITO: \(msg)")
+                }
+                
+            })
+            
         } else {
            
-           ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.readingDay!.title}
+           ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {
+                $0.id != self.readingDay!.id
+            }
+            
+            ApplicationState.sharedInstance.currentUser?.setFavoriteReading(id: self.readingDay!.id!, isFavorite: false)
+            
+            UserReadingRequest.updateUserReading(readingId: self.readingDay!.id!, isFavorite: false, alreadyRead: true, completionHandler: { (success, msg) in
+                
+                if success {
+                    
+                    print ("RETIROU FAVORITO :\(msg)")
+                } else {
+                    print ("DEU ERRO NO RETIRAR FAVORITAR: \(msg)")
+                }
+                
+            })
         }
         
     }

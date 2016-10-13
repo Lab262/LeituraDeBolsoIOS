@@ -50,7 +50,6 @@ class Reading: Object {
         
     }
     
-    
     static func getAllSelectIdProperty (propertyName: String) -> [Any] {
         
         let allReadings: [Reading] = DBManager.getAll()

@@ -75,4 +75,71 @@ class User: Object {
         return allReadingsId
     }
     
+    func setAlreadyRead(id: String) {
+        
+        if let userReading = self.getUserReadingById(id: id) {
+            try! Realm().write {
+                userReading.alreadyRead = true
+                self.userReadings.append(userReading)
+                try! Realm().add(self, update: true)
+                
+            }
+        }
+    }
+    
+    func readingIsFavorite (id: String) -> Bool? {
+        
+        if let reading = self.getUserReadingById(id: id) {
+            if reading.isFavorite {
+                return true
+            } else {
+                return false
+            }
+        }
+        return nil
+    }
+    
+    func readingAlreadyRead (id:String) -> Bool? {
+        
+        if let reading = self.getUserReadingById(id: id) {
+            if reading.alreadyRead {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        return nil
+        
+    }
+    
+    func getUserReadingById (id: String) -> UserReading? {
+        
+        var userReadingsById = [UserReading]()
+        userReadingsById = self.userReadings.filter() {
+            $0.idReading!.localizedCaseInsensitiveContains(id)
+        }
+        
+        if !userReadingsById.isEmpty {
+            let userReading = userReadingsById.first
+            return userReading!
+        }
+        
+        return nil
+    }
+    
+    func setFavoriteReading(id: String, isFavorite: Bool) {
+        
+        if let userReading = self.getUserReadingById(id: id) {
+            try! Realm().write {
+                
+                userReading.isFavorite = isFavorite
+                self.userReadings.append(userReading)
+                try! Realm().add(self, update: true)
+                
+            }
+        }
+        
+    }
+    
 }

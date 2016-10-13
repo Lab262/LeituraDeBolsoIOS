@@ -9,7 +9,7 @@
 import UIKit
 import Realm
 import RealmSwift
-
+import UserNotifications
 
 
 class SettingsTableViewController: UITableViewController {
@@ -264,5 +264,54 @@ class SettingsTableViewController: UITableViewController {
         
         self.timeTableLabel.text = DateFormatter.localizedString(from: self.timeTableDatePicker.date, dateStyle: .none, timeStyle: .short)
         
+       self.setLocalNotificationHour(date: self.timeTableDatePicker.date)
+        
+    }
+    
+    func setLocalNotificationHour(date: Date) {
+        
+        if #available(iOS 10.0, *) {
+            
+            let content = UNMutableNotificationContent()
+            content.title = "Leitura nova disponível!"
+            content.subtitle = "Leitura de Bolso"
+            content.body = "Leitura do dia está disponível :)"
+            content.categoryIdentifier = "message"
+            
+            let currentDateTime = date
+            let userCalendar = Calendar.current
+            let requestedComponents: Set<Calendar.Component> = [
+                .hour,
+                .minute]
+            
+            let dateTimeComponents = userCalendar.dateComponents(requestedComponents, from: currentDateTime)
+            
+            let hour = dateTimeComponents.hour
+            let minute = dateTimeComponents.minute
+            
+            
+            var dateComponents = DateComponents()
+            dateComponents.hour = hour
+            dateComponents.minute = minute
+            
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+            
+            let request = UNNotificationRequest(
+                identifier: "message",
+                content: content,
+                trigger: trigger
+            )
+            
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            
+            
+            
+            try! Realm().write(){
+                ApplicationState.sharedInstance.currentUser?.notificationHour = date
+            }
+            DBManager.update(ApplicationState.sharedInstance.currentUser!)
+        }
+        
+
     }
  }

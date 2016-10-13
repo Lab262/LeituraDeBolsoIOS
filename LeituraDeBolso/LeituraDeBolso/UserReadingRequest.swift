@@ -108,7 +108,7 @@ class UserReadingRequest: NSObject {
         }
     }
     
-    static func updateUserReading (readingId: String, isFavorite: Bool, alreadyRead: Bool, completionHandler: @escaping (_ success: Bool, _ msg: String) -> Void) {
+    static func updateUserReading (readingId: String, isFavorite: Bool?, alreadyRead: Bool?, completionHandler: @escaping (_ success: Bool, _ msg: String) -> Void) {
         
         
         var dic = Dictionary <String, AnyObject>()

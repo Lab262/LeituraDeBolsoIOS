@@ -91,6 +91,15 @@ class ReadingRequest: NSObject {
     
     static func parseIdsInQueryWhereParam(readingIds: [String], isReadingIdsToDownload: Bool) -> String {
         
+        
+        var separator: String!
+        
+        
+        if isReadingIdsToDownload {
+            separator = " || "
+        } else {
+            separator = " && "
+        }
         let allIdQuerys = readingIds.map { (readingId) -> String in
             
             var queryWhereString = "this._id "
@@ -101,7 +110,7 @@ class ReadingRequest: NSObject {
             
             return queryWhereString
             
-        }.joined(separator: " && ")
+        }.joined(separator: separator)
         
         return allIdQuerys
         

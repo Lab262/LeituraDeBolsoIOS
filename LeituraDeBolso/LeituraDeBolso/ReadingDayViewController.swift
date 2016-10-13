@@ -10,16 +10,33 @@ import UIKit
 import UserNotifications
 import Realm
 import RealmSwift
+
 class ReadingDayViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
     var readingDay: Reading? = Reading()
     var isReadingFavorite: Bool!
+    
     var arrayImages = Array<String>()
     var allReadings = [Reading]()
-    var isGrantedNotificationAccess = false
-
+    var isGrantedNotificationAccess: Bool? {
+        
+        didSet {
+            
+            try! Realm().write({ 
+                 ApplicationState.sharedInstance.currentUser?.isNotification = self.isGrantedNotificationAccess!
+                
+                
+            })
+                
+//                ApplicationState.sharedInstance.currentUser?.isNotification = self.isGrantedNotificationAccess!
+//            }
+            
+            DBManager.update(ApplicationState.sharedInstance.currentUser!)
+        }
+    }
+    
     func configureTableView () {
         
         self.tableView.estimatedRowHeight = 300
@@ -167,7 +184,7 @@ class ReadingDayViewController: UIViewController {
             
         }
         
-        if ApplicationState.sharedInstance.modeNight! {
+        if ApplicationState.sharedInstance.currentUser!.isModeNight {
             self.setNightMode()
         } else {
             self.setNormalMode()
@@ -179,7 +196,7 @@ class ReadingDayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.sendNotification()
+        //self.sendNotification()
         
         self.configureTableView()
        
@@ -187,7 +204,7 @@ class ReadingDayViewController: UIViewController {
     
     func sendNotification() {
         
-        if isGrantedNotificationAccess {
+        if isGrantedNotificationAccess! {
             if #available(iOS 10.0, *) {
                 
                 let content = UNMutableNotificationContent()
@@ -221,6 +238,11 @@ class ReadingDayViewController: UIViewController {
                 )
                 
                 UNUserNotificationCenter.current().add(request, withCompletionHandler:nil)
+                
+                try! Realm().write(){
+                    ApplicationState.sharedInstance.currentUser?.notificationHour = currentDateTime
+                }
+                DBManager.update(ApplicationState.sharedInstance.currentUser!)
             }
             
 
@@ -237,13 +259,16 @@ class ReadingDayViewController: UIViewController {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
                 
                 self.isGrantedNotificationAccess = granted
+                
                 self.sendNotification()
+                
                 
             }
             
         } else {
             
         }
+        
     }
     
     

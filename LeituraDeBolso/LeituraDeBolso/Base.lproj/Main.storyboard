@@ -28,7 +28,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VmR-rG-TSr">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="headingCell" rowHeight="116" id="70I-te-XXV" customClass="HeadingTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="headingCell" rowHeight="116" id="70I-te-XXV" customClass="HeadingTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="116"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="70I-te-XXV" id="auB-aW-U6g">
@@ -113,7 +113,7 @@
                                             <outlet property="titleLabel" destination="KPG-UT-prK" id="krs-6G-Uel"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="contentCell" rowHeight="377" id="P1v-L8-byG" customClass="ContentTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="contentCell" rowHeight="377" id="P1v-L8-byG" customClass="ContentTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="208" width="375" height="377"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P1v-L8-byG" id="N8o-kN-DDZ">
@@ -152,7 +152,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                             <outlet property="contentReadingLabel" destination="xhl-TC-JrQ" id="J1X-QP-0TW"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="buttonsCell" rowHeight="82" id="XHK-PT-vgt" customClass="ButtonsTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="buttonsCell" rowHeight="82" id="XHK-PT-vgt" customClass="ButtonsTableViewCell" customModule="LeituraDeBolso" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="585" width="375" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XHK-PT-vgt" id="yIs-vv-bMY">
@@ -627,6 +627,9 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                 </view>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oy0-Fv-9FT">
                                                     <color key="onTintColor" red="0.93333333330000001" green="0.37254901959999998" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <connections>
+                                                        <action selector="notificationSelected:" destination="uwY-7Q-OCH" eventType="valueChanged" id="Vo9-f0-BYa"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -923,6 +926,7 @@ tornando mais agradável sua leitura durante a noite.</string>
                         <outlet property="modeNightSwitch" destination="X1V-1h-HVS" id="Wqw-6Y-l2r"/>
                         <outlet property="nightModeLabel" destination="PUn-Ws-daL" id="21M-w7-BP0"/>
                         <outlet property="notificationLabel" destination="k1Q-iA-wWW" id="P2v-Kr-bgz"/>
+                        <outlet property="notificationSwitch" destination="oy0-Fv-9FT" id="gdq-jS-wn6"/>
                         <outlet property="receiveLabel" destination="FmB-xm-pV5" id="Y6l-Kz-zXZ"/>
                         <outlet property="secondLineView" destination="jUL-7D-j2s" id="UWc-of-6BS"/>
                         <outlet property="smallerSizeLabel" destination="aAn-Dk-EkB" id="V23-0a-DDK"/>
@@ -935,7 +939,7 @@ tornando mais agradável sua leitura durante a noite.</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h0l-rJ-Q7V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-668" y="-490.25487256371815"/>
+            <point key="canvasLocation" x="-338" y="-425"/>
         </scene>
     </scenes>
     <resources>

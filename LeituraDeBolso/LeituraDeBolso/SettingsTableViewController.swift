@@ -60,6 +60,11 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var largerSizeLabel: UILabel!
     
     
+    @IBOutlet weak var notificationSwitch: UISwitch!
+    
+    
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         
         
@@ -67,7 +72,7 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewWillLayoutSubviews() {
         
-        if ApplicationState.sharedInstance.modeNight! {
+        if ApplicationState.sharedInstance.currentUser!.isModeNight {
             self.setNightMode()
         } else {
             self.setNormalMode()
@@ -79,33 +84,114 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.trackView.layer.zPosition = -1
-        self.modeNightSwitch.isOn = ApplicationState.sharedInstance.modeNight!
-            
+        self.modeNightSwitch.isOn = ApplicationState.sharedInstance.currentUser!.isModeNight
+        self.notificationSwitch.isOn = ApplicationState.sharedInstance.currentUser!.isNotification
+        self.timeTableDatePicker.date = ApplicationState.sharedInstance.currentUser!.notificationHour
         self.fontSizeSlider.steps = 7
         self.fontSizeSlider.minValue = 1
         self.fontSizeSlider.maxValue = 7
-        self.fontSizeSlider.value = self.dictionarySizeText[ApplicationState.sharedInstance.sizeFontSelected!]!
+        self.fontSizeSlider.value = self.dictionarySizeText[ApplicationState.sharedInstance.currentUser!.sizeFont]!
         self.fontSizeSlider.addTarget(self, action: #selector(changedFontSizeText(_:)), for: .allEvents)
-
+        self.timeTableLabel.text = DateFormatter.localizedString(from: self.timeTableDatePicker.date, dateStyle: .none, timeStyle: .short)
     }
     
     func changedFontSizeText (_ sender: UIButton) {
         
         if self.fontSizeSlider.value == 1 {
-            ApplicationState.sharedInstance.sizeFontSelected = 11
+            
+            try! Realm().write(){
+                ApplicationState.sharedInstance.currentUser?.sizeFont = 11
+            }
+        
         } else if self.fontSizeSlider.value == 2 {
-            ApplicationState.sharedInstance.sizeFontSelected = 12
+            try! Realm().write(){
+                ApplicationState.sharedInstance.currentUser?.sizeFont = 12
+            }
         } else if self.fontSizeSlider.value == 3 {
-            ApplicationState.sharedInstance.sizeFontSelected = 13
+            try! Realm().write(){
+                ApplicationState.sharedInstance.currentUser?.sizeFont = 13
+            }
         } else if self.fontSizeSlider.value == 4 {
-            ApplicationState.sharedInstance.sizeFontSelected = 14
+            try! Realm().write(){
+                ApplicationState.sharedInstance.currentUser?.sizeFont = 14
+            }
         } else if self.fontSizeSlider.value == 5 {
-            ApplicationState.sharedInstance.sizeFontSelected = 15
+            try! Realm().write(){
+                ApplicationState.sharedInstance.currentUser?.sizeFont = 15
+            }
         } else if self.fontSizeSlider.value == 6 {
-            ApplicationState.sharedInstance.sizeFontSelected = 16
+            try! Realm().write(){
+                ApplicationState.sharedInstance.currentUser?.sizeFont = 16
+            }
         } else {
-            ApplicationState.sharedInstance.sizeFontSelected = 17
+            try! Realm().write(){
+                ApplicationState.sharedInstance.currentUser?.sizeFont = 17
+            }
         }
+        DBManager.update(ApplicationState.sharedInstance.currentUser!)
+        
+    }
+    
+    
+    @IBAction func notificationSelected(_ sender: AnyObject) {
+        
+        
+        if self.notificationSwitch.isOn {
+            
+            try! Realm().write(){
+                ApplicationState.sharedInstance.currentUser?.isNotification = true
+            }
+            
+            if #available(iOS 10.0, *) {
+                
+                let content = UNMutableNotificationContent()
+                content.title = "Leitura nova disponível!"
+                content.subtitle = "Leitura de Bolso"
+                content.body = "Leitura do dia está disponível :)"
+                content.categoryIdentifier = "message"
+                
+                let currentDateTime = ApplicationState.sharedInstance.currentUser!.notificationHour
+                let userCalendar = Calendar.current
+                let requestedComponents: Set<Calendar.Component> = [
+                    .hour,
+                    .minute]
+                
+                let dateTimeComponents = userCalendar.dateComponents(requestedComponents, from: currentDateTime)
+                
+                let hour = dateTimeComponents.hour
+                let minute = dateTimeComponents.minute
+                
+                
+                var dateComponents = DateComponents()
+                dateComponents.hour = hour
+                dateComponents.minute = minute
+                
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                
+                let request = UNNotificationRequest(
+                    identifier: "message",
+                    content: content,
+                    trigger: trigger
+                )
+                
+                UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            }
+            
+        } else {
+            
+            try! Realm().write(){
+                ApplicationState.sharedInstance.currentUser?.isNotification = false
+            }
+            
+            DBManager.update(ApplicationState.sharedInstance.currentUser!)
+            if #available(iOS 10.0, *) {
+                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+            } else {
+                // Fallback on earlier versions
+            }
+
+        }
+
         
     }
     
@@ -113,12 +199,20 @@ class SettingsTableViewController: UITableViewController {
         
         if self.modeNightSwitch.isOn {
             
-           ApplicationState.sharedInstance.modeNight = true
+            try! Realm().write(){
+                 ApplicationState.sharedInstance.currentUser?.isModeNight = true
+            }
+            DBManager.update(ApplicationState.sharedInstance.currentUser!)
+        
            self.setNightMode()
             
         } else {
             
-           ApplicationState.sharedInstance.modeNight = false
+            try! Realm().write(){
+                ApplicationState.sharedInstance.currentUser?.isModeNight = false
+            }
+            DBManager.update(ApplicationState.sharedInstance.currentUser!)
+            
             self.setNormalMode()
         }
 

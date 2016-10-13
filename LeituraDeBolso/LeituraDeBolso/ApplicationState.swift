@@ -20,8 +20,6 @@ let TOKEN = ["token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRtYjA3
 
 class ApplicationState: NSObject {
     
-    var modeNight: Bool? = false
-    var sizeFontSelected: CGFloat? = 14
     var allReadings = [Reading]()
     var favoriteReads = [Reading]()
     var unreadReadings = [Reading]()

@@ -19,7 +19,7 @@ class User: Object {
     dynamic var lastSessionTimeInterval:Double = 0
     dynamic var isModeNight: Bool = false
     dynamic var isNotification: Bool = false
-    dynamic var sizeFont: Int = 14
+    dynamic var sizeFont: CGFloat = 14
     dynamic var notificationHour: Date = Date()
     dynamic var readingDayId: Int = 0
     

@@ -130,7 +130,7 @@ class UnreadHistoricalReadingViewController: UIViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: HistoricalReadingTableViewCell.identifier, for: indexPath) as! HistoricalReadingTableViewCell
         
         
-        if ApplicationState.sharedInstance.modeNight! {
+        if ApplicationState.sharedInstance.currentUser!.isModeNight {
             cell.viewLine.alpha = 0.3
         }
         
@@ -148,7 +148,7 @@ class UnreadHistoricalReadingViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         
-        if ApplicationState.sharedInstance.modeNight! {
+        if ApplicationState.sharedInstance.currentUser!.isModeNight {
             self.setNightMode()
         }
     }

@@ -21,21 +21,31 @@ class ContentTableViewCell: UITableViewCell {
         }
     }
     
-    
-     override func layoutSubviews() {
+    override func didMoveToWindow() {
         
-    
+        self.contentReadingLabel.setSizeFont(ApplicationState.sharedInstance.currentUser!.sizeFont)
         
-        self.contentReadingLabel.setSizeFont(ApplicationState.sharedInstance.sizeFontSelected!)
-        
-        if ApplicationState.sharedInstance.modeNight == true {
+        if ApplicationState.sharedInstance.currentUser!.isModeNight {
             self.setNightMode()
         } else {
             self.setNormalMode()
         }
 
-
+        
     }
+    
+//     override func layoutSubviews() {
+//        
+//        self.contentReadingLabel.setSizeFont(ApplicationState.sharedInstance.sizeFontSelected!)
+//        
+//        if ApplicationState.sharedInstance.currentUser!.isModeNight {
+//            self.setNightMode()
+//        } else {
+//            self.setNormalMode()
+//        }
+//
+//
+//    }
 
     
     override func awakeFromNib() {

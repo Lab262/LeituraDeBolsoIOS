@@ -39,7 +39,7 @@ class HistoricalReadingTableViewCell: UITableViewCell {
     
     override func didMoveToWindow() {
         
-        if ApplicationState.sharedInstance.modeNight! {
+        if ApplicationState.sharedInstance.currentUser!.isModeNight {
             self.setNightMode()
         }
       
@@ -54,7 +54,7 @@ class HistoricalReadingTableViewCell: UITableViewCell {
     }
     
     
-    func setNightMode () {
+    func setNightMode() {
         
         self.backgroundColor = UIColor.readingModeNightBackground()
         self.titleLabel.textColor = UIColor.white

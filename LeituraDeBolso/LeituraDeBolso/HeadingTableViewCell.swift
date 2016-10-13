@@ -29,7 +29,7 @@ class HeadingTableViewCell: UITableViewCell {
     
     override func didMoveToWindow() {
         
-        if ApplicationState.sharedInstance.modeNight == true {
+        if ApplicationState.sharedInstance.currentUser!.isModeNight {
             self.setNightMode()
         } else {
             self.setNormalMode()

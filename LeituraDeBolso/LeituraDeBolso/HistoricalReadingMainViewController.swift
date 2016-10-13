@@ -175,7 +175,7 @@ class HistoricalReadingMainViewController: UIViewController {
     
     override func viewWillLayoutSubviews() {
         
-        if ApplicationState.sharedInstance.modeNight! {
+        if ApplicationState.sharedInstance.currentUser!.isModeNight {
             self.setNightMode()
         }
         

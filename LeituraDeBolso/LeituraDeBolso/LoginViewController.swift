@@ -175,6 +175,48 @@ class LoginViewController: UIViewController {
     
     func recoverPassword (_ sender: UIButton) {
         
+        let alertController = UIAlertController(title: "Esqueci a Senha", message: "", preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Enviar", style: .default, handler: {
+            alert -> Void in
+            
+            if alertController.textFields![0].text! != "" {
+                self.view.loadAnimation()
+               
+                
+                UserRequest.forgotPass(email: alertController.textFields![0].text!, completionHandler: { (success, msg) in
+                    if success {
+                        self.view.unload()
+                        print ("DEU SUCESSO: \(msg)")
+                        self.present(ViewUtil.alertControllerWithTitle(_title: "Sucesso!", _withMessage: msg), animated: true, completion: nil)
+                        
+                        
+                    } else {
+                        self.view.unload()
+                        print ("DEU RUIM: \(msg)")
+                        self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: msg), animated: true, completion: nil)
+                    }
+                })
+                
+            }else {
+                self.view.unload()
+                self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: "Email inválido."), animated: true, completion: nil)
+                
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .default, handler: nil)
+        
+        alertController.addTextField { (textField : UITextField!) -> Void in
+            
+            textField.placeholder = "E-mail para recuperar conta."
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
         
     }
     

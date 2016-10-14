@@ -12,7 +12,7 @@ class UnreadHistoricalReadingViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var unreadReadings = Array<Reading>()
+    var unreadReadings = [Reading]()
     
     var selectedIndexPath: IndexPath?
     
@@ -31,14 +31,27 @@ class UnreadHistoricalReadingViewController: UIViewController {
         self.tableView.register(UINib(nibName: "HistoricalReadingTableViewCell", bundle: nil), forCellReuseIdentifier: HistoricalReadingTableViewCell.identifier)
     }
 
+    func getUnreadReads() {
+        
+        let allReadings: [Reading] = DBManager.getAll()
+       
+        if !allReadings.isEmpty {
+            self.unreadReadings = allReadings.filter {
+                ApplicationState.sharedInstance.currentUser!.readingAlreadyRead(id: $0.id!)!
+
+            }
+            self.tableView.reloadData()
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.registerNibs()
         self.configureTableView()
         self.registerObservers()
-        
-        self.unreadReadings = ApplicationState.sharedInstance.unreadReadings
+        self.getUnreadReads()
         
         tableView.reloadData()
        
@@ -89,21 +102,24 @@ class UnreadHistoricalReadingViewController: UIViewController {
         cell.reading = readingArray[indexPath.row]
         cell.likeButton.tag = indexPath.row
         
-        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
-            
-            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
-                $0.title!.localizedCaseInsensitiveContains(readingArray[indexPath.row].title!)
-            }
-            
-            if !readingFavorite.isEmpty {
-                cell.likeButton.isSelected = true
-            } else {
-                cell.likeButton.isSelected = false
-            }
-            
-        } else {
-            cell.likeButton.isSelected = false
-        }
+        
+        cell.likeButton.isSelected = ApplicationState.sharedInstance.currentUser!.readingIsFavorite(id: unreadReadings[indexPath.row].id!)!
+        
+//        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
+//            
+//            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
+//                $0.title!.localizedCaseInsensitiveContains(readingArray[indexPath.row].title!)
+//            }
+//            
+//            if !readingFavorite.isEmpty {
+//                cell.likeButton.isSelected = true
+//            } else {
+//                cell.likeButton.isSelected = false
+//            }
+//            
+//        } else {
+//            cell.likeButton.isSelected = false
+//        }
         
         cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
         
@@ -115,11 +131,38 @@ class UnreadHistoricalReadingViewController: UIViewController {
         
         if sender.isSelected == true {
             
-            ApplicationState.sharedInstance.favoriteReads.append(self.unreadReadings[sender.tag])
+            ApplicationState.sharedInstance.currentUser?.setFavoriteReading(id: self.unreadReadings[sender.tag].id!, isFavorite: true)
+            
+            UserReadingRequest.updateUserReading(readingId: self.unreadReadings[sender.tag].id!, isFavorite: true, alreadyRead: true, completionHandler: { (success, msg) in
+                
+                if success {
+                    
+                    
+                    print ("FAVORITOU :\(msg)")
+                    
+                } else {
+                    print ("DEU ERRO NO FAVORITO: \(msg)")
+                }
+                
+            })
+
         } else {
             
-            ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.unreadReadings[sender.tag].title}
+            ApplicationState.sharedInstance.currentUser?.setFavoriteReading(id: self.unreadReadings[sender.tag].id!, isFavorite: false)
+            
+            UserReadingRequest.updateUserReading(readingId: self.unreadReadings[sender.tag].id!, isFavorite: false, alreadyRead: nil, completionHandler: { (success, msg) in
+                
+                if success {
+                    
+                    print ("RETIROU FAVORITO :\(msg)")
+                } else {
+                    print ("DEU ERRO NO RETIRAR FAVORITAR: \(msg)")
+                }
+                
+            })
+            
         }
+
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
         

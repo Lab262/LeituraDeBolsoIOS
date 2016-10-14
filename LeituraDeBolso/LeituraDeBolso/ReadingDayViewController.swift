@@ -45,6 +45,8 @@ class ReadingDayViewController: UIViewController {
     
     func setAlreadyRead() {
         
+        ApplicationState.sharedInstance.currentUser?.setAlreadyRead(id: (self.readingDay?.id)!)
+        
         UserReadingRequest.updateUserReading(readingId: self.readingDay!.id!, isFavorite: nil, alreadyRead: true, completionHandler: { (success, msg) in
             
             if success {
@@ -170,10 +172,13 @@ class ReadingDayViewController: UIViewController {
         
     }
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNotification()
         //self.sendNotification()
+        self.setAlreadyRead()
         
         self.configureTableView()
        

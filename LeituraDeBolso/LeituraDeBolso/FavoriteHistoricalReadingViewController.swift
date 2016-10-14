@@ -13,7 +13,7 @@ class FavoriteHistoricalReadingViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var favoriteReads: [Reading] = ApplicationState.sharedInstance.favoriteReads
+    var favoriteReads = [Reading]()
     var selectedIndexPath: IndexPath?
     var isFilterArray: Bool = false
     var textSearch: String?
@@ -78,9 +78,23 @@ class FavoriteHistoricalReadingViewController: UIViewController {
         self.tableView.layoutIfNeeded()
         
     }
+    
+    func getFavoriteReads() {
+        
+        let allReadings: [Reading] = DBManager.getAll()
+        
+        if !allReadings.isEmpty {
+            self.favoriteReads = allReadings.filter {
+                ApplicationState.sharedInstance.currentUser!.readingIsFavorite(id: $0.id!)!
+            }
+            self.tableView.reloadData()
+        }
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.getFavoriteReads()
         self.registerNibs()
         self.configureTableView()
         self.registerObservers()
@@ -101,14 +115,24 @@ class FavoriteHistoricalReadingViewController: UIViewController {
     }
     
     func newReading (_ notification: Notification) {
-        self.favoriteReads = ApplicationState.sharedInstance.favoriteReads
-        tableView.reloadData()
-    
+        self.getFavoriteReads()
     }
     
     func likeReader (_ sender: UIButton) {
     
-        ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.favoriteReads[sender.tag].title}
+        
+        ApplicationState.sharedInstance.currentUser?.setFavoriteReading(id: self.favoriteReads[sender.tag].id!, isFavorite: false)
+        
+        UserReadingRequest.updateUserReading(readingId: self.favoriteReads[sender.tag].id!, isFavorite: false, alreadyRead: nil, completionHandler: { (success, msg) in
+            
+            if success {
+                
+                print ("RETIROU FAVORITO :\(msg)")
+            } else {
+                print ("DEU ERRO NO RETIRAR FAVORITAR: \(msg)")
+            }
+            
+        })
         
         NotificationCenter.default.post(name: Notification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
         

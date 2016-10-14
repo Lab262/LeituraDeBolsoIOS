@@ -10,9 +10,10 @@ import UIKit
 import Alamofire
 
 
-let URL_WS_CREATE_USER = "\(URL_WS_LOCAL)users"
+let URL_WS_CREATE_USER = "\(URL_WS_SERVER)users"
 let URL_WS_LOGIN_USER = "\(URL_WS_SERVER)auth/login"
-let URL_WS_FORGOT_PASS = "\(URL_WS_LOCAL)auth/forgotPassword"
+let URL_WS_FORGOT_PASS = "\(URL_WS_SERVER)auth/forgotPassword"
+let URL_WS_LOGIN_FACEBOOK = "\(URL_WS_SERVER)auth/facebook"
 
 
 class UserRequest: NSObject {
@@ -28,7 +29,6 @@ class UserRequest: NSObject {
                 "attributes": dic
             ]
         ]
-        
         
         Alamofire.request(URL_WS_CREATE_USER, method: .post, parameters: body, encoding: JSONEncoding.default).responseJSON { (response: DataResponse<Any>) in
             
@@ -72,6 +72,51 @@ class UserRequest: NSObject {
         
     }
     
+    static func loginUserWithFacebook (id: String, email: String,completionHandler: @escaping (_ sucess: Bool, _ msg: String, _ user: User?) -> Void) {
+        
+        let body = [
+        "email": email,
+            "facebook": [
+                "id": id,
+                "password": "AQWgd$j[QGe]Bh.Ugkf>?B3y696?2$#B2xwfN3hrVhFrE348g\(id)"
+            ]
+        ] as [String : Any]
+        
+        Alamofire.request(URL_WS_LOGIN_FACEBOOK, method: .post, parameters:body, encoding: JSONEncoding.default).responseJSON { (response: DataResponse<Any>) in
+            
+            switch response.result {
+                
+            case .success:
+                
+                let data = response.result.value as! Dictionary<String, AnyObject>
+                
+                switch response.response!.statusCode {
+                    
+                    
+                case 200:
+                    
+                    let userData = data ["user"]
+                    
+                    let user: User = User(data: userData as! Dictionary<String, AnyObject>)
+                    
+                    
+                    user.token = data ["token"] as? String
+                    
+                    completionHandler(true, "Sucesso", user)
+                    
+                default:
+                    completionHandler(false, data["message"] as! String, nil)
+                }
+                
+            case .failure(_):
+                
+                completionHandler(false, "Network erro", nil)
+                
+            }
+        }
+    }
+
+    
     static func loginUser (email: String, pass: String, completionHandler: @escaping (_ sucess: Bool, _ msg: String, _ user: User?) -> Void) {
         
         var dic = Dictionary<String, String>()
@@ -98,8 +143,8 @@ class UserRequest: NSObject {
                     
                     
                     user.token = data ["token"] as? String
-                
-                    completionHandler(true, "Sucesso", user)
+                    
+                    completionHandler(true, data["message"] as! String, user)
                 
                 default:
                     completionHandler(false, data["message"] as! String, nil)

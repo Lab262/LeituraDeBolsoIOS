@@ -210,8 +210,7 @@ class LoginViewController: UIViewController {
     
     func verifyUserExistInDataBase (user: User) -> Bool {
         
-
-        let user: User = DBManager.getByCondition(param: user.email!, value: "email")
+        let user: User = DBManager.getByCondition(param: "email", value: user.email!)
             
         if user.email != nil {
             
@@ -285,21 +284,43 @@ extension LoginViewController {
         
         let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "idReading")
         
+        func getReadingsIdUser (user: User) -> [String] {
+            
+            let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "idReading")
+            
+            let allReadings: [UserReading] = DBManager.getAll()
+            
+            let allReadingsDataBaseId = allReadings.map { (object) -> Any in
+                
+                return object.value(forKey: "idReading")
+            }
+    
+            let answer = zip(allReadingsIdUser as! [String], allReadingsDataBaseId as! [String]).filter() {
+                $0 != $1
+                }.map{$0.0}
+            
+            return answer
+            
+        }
+
+        
         return allReadingsIdUser as! [String]
     }
     
     
     func getReadings (readingsIds: [String], user: User) {
         
-        ReadingRequest.getAllReadings(readingsAmount: 1, readingsIds: readingsIds, isReadingIdsToDownload: false) { (success, msg, readings) in
+        ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
             
             if success {
-                
                 if readings!.count > 0 {
-                    self.createUserReading(user: user, reading: readings!.first!)
+                    
                     for reading in readings! {
+                        self.createUserReading(user: user, reading: reading)
+                        
                         DBManager.addObjc(reading)
                     }
+                      self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                 } else {
                      self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                 }
@@ -318,13 +339,13 @@ extension LoginViewController {
             
             if success {
                 
-                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+//                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                 
                 
             } else {
                 
-                print ("MSG FRACASO: \(msg)")
-                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+//                print ("MSG FRACASO: \(msg)")
+//                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                 
             }
         }
@@ -343,9 +364,9 @@ extension LoginViewController {
             
             if success {
                 
-//                if !self.verifyUserExistInDataBase(user: user!) {
-//                    DBManager.deleteAllDatas()
-//                }
+                if !self.verifyUserExistInDataBase(user: user!) {
+                    DBManager.deleteAllDatas()
+                }
                 
                 self.saveCurrentSessionInTimeInterval(user: user!)
                 

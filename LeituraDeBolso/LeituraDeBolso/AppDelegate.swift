@@ -105,7 +105,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainStoryboard: UIStoryboard?
         
         self.setupBarsAppearance()
-        
+    
         
         if ApplicationState.sharedInstance.currentUser?.token != nil {
             

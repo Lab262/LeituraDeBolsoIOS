@@ -16,24 +16,22 @@ class ReadingDayViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var readingDay: Reading? = Reading()
-    var isReadingFavorite: Bool!
-    
     var arrayImages = Array<String>()
     var allReadings = [Reading]()
     var isGrantedNotificationAccess: Bool? {
         
         didSet {
             
-            try! Realm().write({ 
-                 ApplicationState.sharedInstance.currentUser?.isNotification = self.isGrantedNotificationAccess!
-                
-                
-            })
-                
+//            try! Realm().write({ 
+//                 ApplicationState.sharedInstance.currentUser?.isNotification = self.isGrantedNotificationAccess!
+//                
+//                
+//            })
+            
 //                ApplicationState.sharedInstance.currentUser?.isNotification = self.isGrantedNotificationAccess!
 //            }
             
-            DBManager.update(ApplicationState.sharedInstance.currentUser!)
+          //  DBManager.update(ApplicationState.sharedInstance.currentUser!)
         }
     }
     
@@ -76,49 +74,27 @@ class ReadingDayViewController: UIViewController {
     
     func getReadingsIdUser (user: User) -> [String] {
         
-        let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "idReading")
+        let allUserReading = user.getAllUserReadingIdProperty(propertyName: "idReading")
         
-//        let allReadings: [UserReading] = DBManager.getAll()
-//        
-//        let allReadingsId = allReadings.map { (object) -> Any in
-//            
-//            return object.value(forKey: "idReading")
-//        }
+        let allReadings: [UserReading] = DBManager.getAll()
+        
+        let allReadingsDataBaseId = allReadings.map { (object) -> Any in
+            
+            return object.value(forKey: "idReading")
+        }
         
         
+        let readingsId = zip(allUserReading as! [String], allReadingsDataBaseId as! [String]).filter() {
+            $0 == $1
+            }.map{$0.0}
         
-//        let collections = [allReadingsIdUser, allReadingsId]
-//        
-//       
-//        let filtering = collections.flatMap { (str: [Any]) -> Sequence in
-//            
-//            
-//            str.filter {
-//                str == "
-//            }
-//        }
-//            
-//            
-//            
-//        }
-     //   let onlyEven = collections.flatMap { () -> [String] in
-//            
-//            $0.filter { $0 == "323"}
-        
-//        self.filteredReadings = (self.allReadings.filter { reading in
-//            
-//            return reading.title!.localizedCaseInsensitiveContains(searchText)
-//        })
-//
-        
-        return allReadingsIdUser as! [String]
+        return readingsId
 
     }
     
-    
     func getReadings (readingsIds: [String], user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
         
-        ReadingRequest.getAllReadings(readingsAmount: 1, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
+        ReadingRequest.getAllReadings(readingsAmount: 1, readingsIds: readingsIds, isReadingIdsToDownload: false) { (success, msg, readings) in
             
             if success {
                 
@@ -168,20 +144,21 @@ class ReadingDayViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        self.setNotification()
+        self.tableView.reloadData()
         
-        self.getReadings(readingsIds: self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!), user: ApplicationState.sharedInstance.currentUser!) { (success, msg, reading) in
+        if self.readingDay?.id == nil {
             
-            if success {
-                self.readingDay = reading!
-                self.isReadingFavorite = ApplicationState.sharedInstance.currentUser!.readingIsFavorite(id: reading!.id!)
+            self.getReadings(readingsIds: self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!), user: ApplicationState.sharedInstance.currentUser!) { (success, msg, reading) in
+            
+                if success {
+                    self.readingDay = reading!
                 
-                
-                self.tableView.reloadData()
-            } else {
-                print ("MENSAGEM ERRO: \(msg)")
+                    self.tableView.reloadData()
+                } else {
+                    print ("MENSAGEM ERRO: \(msg)")
+                }
+            
             }
-            
         }
         
         if ApplicationState.sharedInstance.currentUser!.isModeNight {
@@ -195,7 +172,7 @@ class ReadingDayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setNotification()
         //self.sendNotification()
         
         self.configureTableView()
@@ -223,7 +200,6 @@ class ReadingDayViewController: UIViewController {
        
                 let hour = dateTimeComponents.hour
                 let minute = dateTimeComponents.minute
-                
         
                 var dateComponents = DateComponents()
                 dateComponents.hour = hour
@@ -237,12 +213,12 @@ class ReadingDayViewController: UIViewController {
                     trigger: trigger
                 )
                 
-                UNUserNotificationCenter.current().add(request, withCompletionHandler:nil)
-                
-                try! Realm().write(){
-                    ApplicationState.sharedInstance.currentUser?.notificationHour = currentDateTime
-                }
-                DBManager.update(ApplicationState.sharedInstance.currentUser!)
+//                UNUserNotificationCenter.current().add(request, withCompletionHandler:nil)
+//                
+//                try! Realm().write(){
+//                    ApplicationState.sharedInstance.currentUser?.notificationHour = currentDateTime
+//                }
+//                DBManager.update(ApplicationState.sharedInstance.currentUser!)
             }
             
 
@@ -261,8 +237,7 @@ class ReadingDayViewController: UIViewController {
                 self.isGrantedNotificationAccess = granted
                 
                 self.sendNotification()
-                
-                
+
             }
             
         } else {
@@ -300,6 +275,7 @@ class ReadingDayViewController: UIViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ContentTableViewCell.identifier, for: indexPath) as! ContentTableViewCell
     
         cell.reading = self.readingDay
+        
         cell.layoutIfNeeded()
         cell.layoutSubviews()
         
@@ -314,24 +290,8 @@ class ReadingDayViewController: UIViewController {
         
         cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
         
-        cell.likeButton.isSelected = self.isReadingFavorite
-        
-        
-//        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
-//            
-//            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
-//                $0.title!.localizedCaseInsensitiveContains(self.readingDay!.title!)
-//            }
-//            
-//            if !readingFavorite.isEmpty {
-//                cell.likeButton.isSelected = true
-//            } else {
-//                cell.likeButton.isSelected = false
-//            }
-//            
-//        } else {
-//            cell.likeButton.isSelected = false
-//        }
+        cell.likeButton.isSelected = ApplicationState.sharedInstance.currentUser!.readingIsFavorite(id: self.readingDay!.id!)!
+    
         
         return cell
     }
@@ -339,6 +299,7 @@ class ReadingDayViewController: UIViewController {
     func likeReader (_ sender: UIButton) {
      
         if sender.isSelected {
+            
             ApplicationState.sharedInstance.favoriteReads.append(self.readingDay!)
             
             ApplicationState.sharedInstance.currentUser?.setFavoriteReading(id: self.readingDay!.id!, isFavorite: true)

@@ -86,21 +86,23 @@ class AllHistoricalReadingViewController: UIViewController {
         cell.reading = readingArray[indexPath.row]
         cell.likeButton.tag = indexPath.row
         
-        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
-            
-            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
-                $0.title!.localizedCaseInsensitiveContains(readingArray[indexPath.row].title!)
-            }
-            
-            if !readingFavorite.isEmpty {
-                cell.likeButton.isSelected = true
-            } else {
-                cell.likeButton.isSelected = false
-            }
-            
-        } else {
-            cell.likeButton.isSelected = false
-        }
+        cell.likeButton.isSelected = ApplicationState.sharedInstance.currentUser!.readingIsFavorite(id: readingArray[indexPath.row].id!)!
+        
+//        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
+//            
+//            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
+//                $0.title!.localizedCaseInsensitiveContains(readingArray[indexPath.row].title!)
+//            }
+//            
+//            if !readingFavorite.isEmpty {
+//                cell.likeButton.isSelected = true
+//            } else {
+//                cell.likeButton.isSelected = false
+//            }
+//            
+//        } else {
+//            cell.likeButton.isSelected = false
+//        }
         
           cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
     }
@@ -130,10 +132,53 @@ class AllHistoricalReadingViewController: UIViewController {
         
         if sender.isSelected == true {
             
-            ApplicationState.sharedInstance.favoriteReads.append(self.allReadings[sender.tag])
+//            ApplicationState.sharedInstance.favoriteReads.append(self.readingDay!)
+//            
+//            ApplicationState.sharedInstance.currentUser?.setFavoriteReading(id: self.readingDay!.id!, isFavorite: true)
+//            
+//            UserReadingRequest.updateUserReading(readingId: self.readingDay!.id!, isFavorite: true, alreadyRead: true, completionHandler: { (success, msg) in
+//                
+//                if success {
+//                    print ("FAVORITOU :\(msg)")
+//                    
+//                } else {
+//                    print ("DEU ERRO NO FAVORITO: \(msg)")
+//                }
+//                
+//            })
+//
+            
+            ApplicationState.sharedInstance.currentUser?.setFavoriteReading(id: self.allReadings[sender.tag].id!, isFavorite: true)
+            
+            UserReadingRequest.updateUserReading(readingId: self.allReadings[sender.tag].id!, isFavorite: true, alreadyRead: true, completionHandler: { (success, msg) in
+                
+                if success {
+                    
+                    
+                    print ("FAVORITOU :\(msg)")
+                    
+                } else {
+                    print ("DEU ERRO NO FAVORITO: \(msg)")
+                }
+                
+            })
+
+    
         } else {
            
-            ApplicationState.sharedInstance.favoriteReads = ApplicationState.sharedInstance.favoriteReads.filter() {$0.title != self.allReadings[sender.tag].title}
+            
+            ApplicationState.sharedInstance.currentUser?.setFavoriteReading(id: self.allReadings[sender.tag].id!, isFavorite: false)
+            
+            UserReadingRequest.updateUserReading(readingId: self.allReadings[sender.tag].id!, isFavorite: false, alreadyRead: nil, completionHandler: { (success, msg) in
+                
+                if success {
+                    
+                    print ("RETIROU FAVORITO :\(msg)")
+                } else {
+                    print ("DEU ERRO NO RETIRAR FAVORITAR: \(msg)")
+                }
+                
+            })
             
         }
         
@@ -162,8 +207,7 @@ class AllHistoricalReadingViewController: UIViewController {
             
             if let destinationViewController = segue.destination as? ReadingDayViewController {
                 
-                destinationViewController.readingDay = self.allReadings[(selectedIndexPath! as NSIndexPath).row]
-                
+                destinationViewController.readingDay = self.allReadings[selectedIndexPath!.row]
             }
             
         }

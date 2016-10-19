@@ -10,10 +10,10 @@ import UIKit
 import Alamofire
 
 
-let URL_WS_CREATE_USER = "\(URL_WS_LOCAL)users"
-let URL_WS_LOGIN_USER = "\(URL_WS_LOCAL)auth/login"
-let URL_WS_FORGOT_PASS = "\(URL_WS_LOCAL)auth/forgotPassword"
-let URL_WS_LOGIN_FACEBOOK = "\(URL_WS_LOCAL)auth/facebook"
+let URL_WS_CREATE_USER = "\(URL_WS_SERVER)users"
+let URL_WS_LOGIN_USER = "\(URL_WS_SERVER)auth/login"
+let URL_WS_FORGOT_PASS = "\(URL_WS_SERVER)auth/forgotPassword"
+let URL_WS_LOGIN_FACEBOOK = "\(URL_WS_SERVER)auth/facebook"
 
 
 class UserRequest: NSObject {

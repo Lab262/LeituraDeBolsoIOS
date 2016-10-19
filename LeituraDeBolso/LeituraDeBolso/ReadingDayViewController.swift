@@ -127,11 +127,12 @@ class ReadingDayViewController: UIViewController {
     
     func getReadings (readingsIds: [String], user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
         
-        var days = 0
+        var days = 1
         
         if ApplicationState.sharedInstance.currentUser?.lastSessionTimeInterval != 0 {
             days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
         }
+        days = 1
         
         if days != 0 {
             
@@ -181,18 +182,24 @@ class ReadingDayViewController: UIViewController {
 
     func createUserReadingInDataBase (user: User, reading: Reading) {
         
-        let userReading = UserReading()
-        userReading.idReading = reading.id
-        userReading.isShared = false
-        userReading.isFavorite = false
-        userReading.alreadyRead = false
+//        let userReading = UserReading()
+//        userReading.idReading = reading.id
+//        userReading.isShared = false
+//        userReading.isFavorite = false
+//        userReading.alreadyRead = false
+//        
+//        try! Realm().write {
+//            
+//            if !user.userReadings.contains(userReading) {
+//                
+//                
+//                user.userReadings.append(userReading)
+//                DBManager.addObjc(user)
+//            }
+//            
+//        }
         
-        try! Realm().write {
-            user.userReadings.append(userReading)
-        }
         
-        DBManager.addObjc(user)
-
         
     }
     func createUserReading (user: User, reading: Reading) {
@@ -214,8 +221,8 @@ class ReadingDayViewController: UIViewController {
         
         self.tableView.reloadData()
         
-        let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
-        
+        var days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
+        days = 1
         if self.isReadingDay || days != 0 {
             
             self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingsId) in
@@ -234,14 +241,11 @@ class ReadingDayViewController: UIViewController {
                                 
                                 self.readingDay = readingDay!
                         
-                                if (ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: readingDay!.id!))! {
-                                    
-                                    self.setAlreadyRead()
-                                }
-//                                if !(ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: self.readingDay!.id!)!)! {
+//                                if (ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: readingDay!.id!))! {
+//                                    
 //                                    self.setAlreadyRead()
 //                                }
-//                        
+                      
                                 self.tableView.reloadData()
                             }
                         } else {

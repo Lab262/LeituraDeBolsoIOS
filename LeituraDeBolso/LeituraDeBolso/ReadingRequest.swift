@@ -12,9 +12,9 @@ import RealmSwift
 import Realm
 
 
-let URL_WS_GET_ALL_READINGS = "\(URL_WS_LOCAL)readings"
-let URL_WS_GET_WEAKS = "\(URL_WS_LOCAL)"
-let URL_WS_GET_READING_BY_ID = "\(URL_WS_LOCAL)auth/login"
+let URL_WS_GET_ALL_READINGS = "\(URL_WS_SERVER)readings"
+let URL_WS_GET_WEAKS = "\(URL_WS_SERVER)"
+let URL_WS_GET_READING_BY_ID = "\(URL_WS_SERVER)auth/login"
 
 var TOKEN_READING = ["x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imh1YWxseWQuc21hZGlAZ21haWwuY29tIiwiaWQiOiI1N2U5OWJhMWYyYjRmNjAzMDA3ZjU2NTciLCJpYXQiOjE0NzU4NzQ5MDZ9.Ny1WlCtuOkBsO9E3cddGZmjERJg_fxvWDFsB-_g5XSU"]
 

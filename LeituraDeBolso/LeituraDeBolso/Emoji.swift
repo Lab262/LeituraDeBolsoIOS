@@ -13,4 +13,16 @@ class Emoji: Object {
     
     dynamic var cod: String?
 
+    
+    
+    func getEmojiByUniCode () -> String {
+        
+
+        return String(Character(UnicodeScalar(Int(self.cod!)!)!))
+    
+       // return codString
+        
+    }
 }
+
+

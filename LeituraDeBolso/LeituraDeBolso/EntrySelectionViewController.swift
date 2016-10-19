@@ -120,55 +120,84 @@ extension EntrySelectionViewController {
     func getReadingsIdUser (user: User) -> [String] {
         
         let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "idReading")
-            
-        let allReadings: [UserReading] = DBManager.getAll()
-            
+        let allReadings: [Reading] = DBManager.getAll()
         let allReadingsDataBaseId = allReadings.map { (object) -> Any in
-                
+            
             return object.value(forKey: "idReading")
         }
-            
-        let answer = zip(allReadingsIdUser as! [String], allReadingsDataBaseId as! [String]).filter() {
-                $0 != $1
-            }.map{$0.0}
-            
+        
+        let allReadingsId = allReadingsIdUser as! [String]
+        let allDataBaseId = allReadingsDataBaseId as! [String]
+        
+        let answer = allReadingsId.filter{ item in !allDataBaseId.contains(item) }
+        
         return answer
-            
+        
     }
-    
     
     func getReadings (readingsIds: [String], user: User) {
         
         if readingsIds.count > 0 {
-
-            ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
             
+            ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
+                
                 if success {
-                    
-                    
                     if readings!.count > 0 {
-                    
-                        for reading in readings! {
                         
+                        for reading in readings! {
                             DBManager.addObjc(reading)
                         }
-                        self.view.unload()
-                        self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated:    true, completion: nil)
+                        
+                        self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                     } else {
-                        self.view.unload()
                         self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                     }
-                
+                    
                 } else {
-                
-                print ("MSG ERROR: \(msg)")
-                
+                    
+                    print ("MSG ERROR: \(msg)")
+                    
                 }
             }
         } else {
-            self.view.unload()
+            
             self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
         }
     }
+
+//    
+//    func getReadings (readingsIds: [String], user: User) {
+//        
+//        if readingsIds.count > 0 {
+//
+//            ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
+//            
+//                if success {
+//                    
+//                    
+//                    if readings!.count > 0 {
+//                    
+//                        for reading in readings! {
+//                        
+//                            DBManager.addObjc(reading)
+//                        }
+//                        self.view.unload()
+//                        self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated:    true, completion: nil)
+//                    } else {
+//                        self.view.unload()
+//                        self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+//                    }
+//                
+//                } else {
+//                
+//                print ("MSG ERROR: \(msg)")
+//                
+//                }
+//            }
+//        } else {
+//            self.view.unload()
+//            self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+//        }
+//    }
 }
 

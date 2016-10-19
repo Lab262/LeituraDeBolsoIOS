@@ -9,9 +9,9 @@
 import UIKit
 import Alamofire
 
-let URL_WS_USER_READING = "\(URL_WS_LOCAL)users/57f461e8c4e3f46697831a86/readings"
+let URL_WS_USER_READING = "\(URL_WS_SERVER)users/57f461e8c4e3f46697831a86/readings"
 
-let URL_WS_USER_READING_UPDATE = "\(URL_WS_LOCAL)users/57f461e8c4e3f46697831a86/readings/57ec1d762755e3667920b168"
+let URL_WS_USER_READING_UPDATE = "\(URL_WS_SERVER)users/57f461e8c4e3f46697831a86/readings/57ec1d762755e3667920b168"
 
 class UserReadingRequest: NSObject {
     
@@ -32,7 +32,7 @@ class UserReadingRequest: NSObject {
         
         token["x-access-token"] = ApplicationState.sharedInstance.currentUser!.token!
         
-        let url = "\(URL_WS_LOCAL)users/\(ApplicationState.sharedInstance.currentUser!.id!)/readings"
+        let url = "\(URL_WS_SERVER)users/\(ApplicationState.sharedInstance.currentUser!.id!)/readings"
         
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: token).responseJSON { (response: DataResponse<Any>) in
           
@@ -74,7 +74,7 @@ class UserReadingRequest: NSObject {
         
         token ["x-access-token"] = ApplicationState.sharedInstance.currentUser!.token
         
-        let url = "\(URL_WS_LOCAL)users/\(ApplicationState.sharedInstance.currentUser!.id!)/readings/"
+        let url = "\(URL_WS_SERVER)users/\(ApplicationState.sharedInstance.currentUser!.id!)/readings/"
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: token).responseJSON { (response: DataResponse<Any>) in
             
@@ -106,6 +106,7 @@ class UserReadingRequest: NSObject {
                         completionHandler(true, "msg", userReadings)
                     } else {
                         
+                        print ("FAAAAIL")
                         
                     }
                     }
@@ -156,7 +157,7 @@ class UserReadingRequest: NSObject {
             ]
         ]
         
-        let url = "\(URL_WS_LOCAL)users/\(ApplicationState.sharedInstance.currentUser!.id!)/readings/\(readingId)"
+        let url = "\(URL_WS_SERVER)users/\(ApplicationState.sharedInstance.currentUser!.id!)/readings/\(readingId)"
         
         
         var token = Dictionary<String, String>()

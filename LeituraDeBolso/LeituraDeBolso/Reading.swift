@@ -16,7 +16,7 @@ class Reading: Object {
     dynamic var title: String?
     dynamic var author: String?
     let emojis = List<Emoji>()
-    dynamic var duration: String?
+    dynamic var duration: Int = 0
     dynamic var content: String?
     
     
@@ -35,6 +35,8 @@ class Reading: Object {
         if let title = data["title"] as? String { self.title = title }
         
         if let content = data["content"] as? String { self.content = content }
+        
+        if let duration = data["time-to-read-in-minutes"] as? Int { self.duration = duration }
         
         if let author = data["author-name"] as? String { self.author = author }
         

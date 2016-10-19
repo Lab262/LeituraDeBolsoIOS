@@ -33,11 +33,11 @@ class UnreadHistoricalReadingViewController: UIViewController {
 
     func getUnreadReads() {
         
-        let allReadings: [Reading] = DBManager.getAll()
+        let allReadings: [Reading] = DBManager.getAll().reversed()
        
         if !allReadings.isEmpty {
             self.unreadReadings = allReadings.filter {
-                ApplicationState.sharedInstance.currentUser!.readingAlreadyRead(id: $0.id!)!
+                !ApplicationState.sharedInstance.currentUser!.readingAlreadyRead(id: $0.id!)!
 
             }
             self.tableView.reloadData()
@@ -47,13 +47,10 @@ class UnreadHistoricalReadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.getUnreadReads()
         self.registerNibs()
         self.configureTableView()
         self.registerObservers()
-        self.getUnreadReads()
-        
-        tableView.reloadData()
        
         // Do any additional setup after loading the view.
     }
@@ -163,8 +160,9 @@ class UnreadHistoricalReadingViewController: UIViewController {
             
         }
 
-        
-        NotificationCenter.default.post(name: Notification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
+        }
         
     }
 
@@ -209,8 +207,8 @@ class UnreadHistoricalReadingViewController: UIViewController {
             
             if let destinationViewController = segue.destination as? ReadingDayViewController {
                 
-                destinationViewController.readingDay = self.unreadReadings[(selectedIndexPath! as NSIndexPath).row]
-                
+                destinationViewController.readingDay = self.unreadReadings[selectedIndexPath!.row]
+                destinationViewController.isReadingDay = false
             }
             
         }

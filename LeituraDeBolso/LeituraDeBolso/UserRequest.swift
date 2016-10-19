@@ -10,10 +10,10 @@ import UIKit
 import Alamofire
 
 
-let URL_WS_CREATE_USER = "\(URL_WS_SERVER)users"
-let URL_WS_LOGIN_USER = "\(URL_WS_SERVER)auth/login"
-let URL_WS_FORGOT_PASS = "\(URL_WS_SERVER)auth/forgotPassword"
-let URL_WS_LOGIN_FACEBOOK = "\(URL_WS_SERVER)auth/facebook"
+let URL_WS_CREATE_USER = "\(URL_WS_LOCAL)users"
+let URL_WS_LOGIN_USER = "\(URL_WS_LOCAL)auth/login"
+let URL_WS_FORGOT_PASS = "\(URL_WS_LOCAL)auth/forgotPassword"
+let URL_WS_LOGIN_FACEBOOK = "\(URL_WS_LOCAL)auth/facebook"
 
 
 class UserRequest: NSObject {
@@ -51,15 +51,19 @@ class UserRequest: NSObject {
                   
                     user.id = attributes?["-id"] as? String
                
-                    completionHandler(true, data["message"] as! String)
-            
-                case 403:
-                    
-                    completionHandler(false, data["message"] as! String)
+                    completionHandler(true, "Sucesso")
                     
                 default:
                     
-                    completionHandler(false, data["message"] as! String)
+                    var errorMessage: ErrorMessage?
+                    
+                    if let errors = data["errors"] as? Array<Dictionary<String, AnyObject>> {
+                        for error in errors {
+                            errorMessage = ErrorMessage(data: error)
+                        }
+                        
+                        completionHandler(false, errorMessage!.detail!)
+                    }
                 }
                 
             case .failure(_):
@@ -96,17 +100,26 @@ class UserRequest: NSObject {
                 case 200:
                     
                     let userData = data ["user"]
-                    
                     let user: User = User(data: userData as! Dictionary<String, AnyObject>)
-                    
                     
                     user.token = data ["token"] as? String
                     
                     completionHandler(true, "Sucesso", user)
                     
                 default:
-                    completionHandler(false, data["message"] as! String, nil)
+                    
+                    var errorMessage: ErrorMessage?
+                    
+                    if let errors = data["errors"] as? Array<Dictionary<String, AnyObject>> {
+                        
+                        for error in errors {
+                            errorMessage = ErrorMessage(data: error)
+                        }
+                        
+                        completionHandler(false, errorMessage!.detail!, nil)
+                    }
                 }
+                
                 
             case .failure(_):
                 
@@ -115,7 +128,6 @@ class UserRequest: NSObject {
             }
         }
     }
-
     
     static func loginUser (email: String, pass: String, completionHandler: @escaping (_ sucess: Bool, _ msg: String, _ user: User?) -> Void) {
         
@@ -140,14 +152,23 @@ class UserRequest: NSObject {
                     let userData = data ["user"]
                     
                     let user: User = User(data: userData as! Dictionary<String, AnyObject>)
-                    
-                    
+            
                     user.token = data ["token"] as? String
                     
-                    completionHandler(true, data["message"] as! String, user)
+                    completionHandler(true, "Sucesso", user)
                 
                 default:
-                    completionHandler(false, data["message"] as! String, nil)
+                    
+                    var errorMessage: ErrorMessage?
+                    
+                    if let errors = data["errors"] as? Array<Dictionary<String, AnyObject>> {
+                        
+                        for error in errors {
+                            errorMessage = ErrorMessage(data: error)
+                        }
+                        
+                        completionHandler(false, errorMessage!.detail!, nil)
+                    }
                 }
             
             case .failure(_):
@@ -159,7 +180,6 @@ class UserRequest: NSObject {
     }
     
     static func forgotPass (email: String, completionHandler: @escaping (_ sucess: Bool, _ msg: String) -> Void) {
-        
         
         var dic = Dictionary<String, String>()
         
@@ -177,7 +197,7 @@ class UserRequest: NSObject {
                 switch response.response!.statusCode {
                     
                 case 200:
-                    
+                
                     completionHandler(true, data["message"] as! String)
                     
                 case 422:
@@ -186,7 +206,17 @@ class UserRequest: NSObject {
                 
                 default:
                     
-                    completionHandler(false, data["message"] as! String)
+                    var errorMessage: ErrorMessage?
+                    
+                    if let errors = data["errors"] as? Array<Dictionary<String, AnyObject>> {
+                        
+                        for error in errors {
+                            errorMessage = ErrorMessage(data: error)
+                        }
+                        
+                        completionHandler(false, errorMessage!.detail!)
+                    }
+
                 }
                 
             case .failure(_):

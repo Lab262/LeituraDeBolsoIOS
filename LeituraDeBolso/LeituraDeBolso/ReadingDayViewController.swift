@@ -18,22 +18,8 @@ class ReadingDayViewController: UIViewController {
     var readingDay: Reading? = Reading()
     var arrayImages = Array<String>()
     var allReadings = [Reading]()
-    var isGrantedNotificationAccess: Bool? {
-        
-        didSet {
-            
-//            try! Realm().write({ 
-//                 ApplicationState.sharedInstance.currentUser?.isNotification = self.isGrantedNotificationAccess!
-//                
-//                
-//            })
-            
-//                ApplicationState.sharedInstance.currentUser?.isNotification = self.isGrantedNotificationAccess!
-//            }
-            
-          //  DBManager.update(ApplicationState.sharedInstance.currentUser!)
-        }
-    }
+    var isGrantedNotificationAccess: Bool?
+    var isReadingDay = true
     
     func configureTableView () {
         
@@ -74,93 +60,199 @@ class ReadingDayViewController: UIViewController {
         self.tableView.layoutIfNeeded()
     }
     
-    func getReadingsIdUser (user: User) -> [String] {
+    func saveCurrentSessionInTimeInterval (user: User) {
         
-        let allUserReading = user.getAllUserReadingIdProperty(propertyName: "idReading")
+        try! Realm().write {
+            user.lastSessionTimeInterval = NSDate().timeIntervalSince1970
+        }
         
-        let allReadings: [UserReading] = DBManager.getAll()
+        DBManager.update(ApplicationState.sharedInstance.currentUser!)
         
-        let allReadingsDataBaseId = allReadings.map { (object) -> Any in
+    }
+    
+    func getDifferenceDays (user: User) -> Int {
+        
+        let lastSessionDate = Date(timeIntervalSince1970: (user.lastSessionTimeInterval))
+        let lastDateInDays = lastSessionDate.days(from: Date())
+        
+        return lastDateInDays
+    }
+    
+    func getReadingsIdUser (user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: [String]?) -> Void) {
+        
+        UserReadingRequest.getAllUserReading { (success, msg, userReadings) in
             
-            return object.value(forKey: "idReading")
+            if success {
+                
+                let userReadingsRequestIds = userReadings!.map { (object) -> Any in
+                    return object.value(forKey: "idReading")
+                }
+                
+                let allReadings: [UserReading] = DBManager.getAll()
+                
+                let allReadingsDataBaseId = allReadings.map { (object) -> Any in
+                    return object.value(forKey: "idReading")
+                }
+                
+                let readingsId = zip(userReadingsRequestIds as! [String], allReadingsDataBaseId as! [String]).filter() {
+                    $0 == $1
+                    }.map{$0.0}
+                
+                completionHandler(true, "Get Readings Id User Success", readingsId)
+                
+            } else {
+                
+                completionHandler(false, msg, nil)
+
+            }
+            
         }
         
         
-        let readingsId = zip(allUserReading as! [String], allReadingsDataBaseId as! [String]).filter() {
-            $0 == $1
-            }.map{$0.0}
         
-        return readingsId
-
+        //let allUserReading = user.getAllUserReadingIdProperty(propertyName: "idReading")
+        
+//        let allReadings: [UserReading] = DBManager.getAll()
+//        
+//        let allReadingsDataBaseId = allReadings.map { (object) -> Any in
+//            return object.value(forKey: "idReading")
+//        }
+//        
+//        let readingsId = zip(allUserReading as! [String], allReadingsDataBaseId as! [String]).filter() {
+//            $0 == $1
+//            }.map{$0.0}
+        
+       // return readingsId
     }
     
     func getReadings (readingsIds: [String], user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
         
-        ReadingRequest.getAllReadings(readingsAmount: 1, readingsIds: readingsIds, isReadingIdsToDownload: false) { (success, msg, readings) in
+        var days = 0
+        
+        if ApplicationState.sharedInstance.currentUser?.lastSessionTimeInterval != 0 {
+            days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
+        }
+        
+        if days != 0 {
             
-            if success {
-                
-                if readings!.count > 0 {
+            ReadingRequest.getReadingsOfTheWeek(readingsAmount: days) { (success, msg, readings) in
+                if success {
                     
-                    for reading in readings! {
-                        self.createUserReading(user: user, reading: reading)
-                        DBManager.addObjc(reading)
+                    if readings!.count > 0 {
+                        
+                        for reading in readings! {
+                            self.createUserReading(user: user, reading: reading)
+                            DBManager.addObjc(reading)
+                            self.createUserReadingInDataBase(user: user, reading: reading)
+                        }
+                        
+                        self.saveCurrentSessionInTimeInterval(user: ApplicationState.sharedInstance.currentUser!)
+                        
+                        let readings: [Reading] = DBManager.getAll()
+                        
+                        completionHandler(true, "Leituras salvas", readings.last)
+                        
+                    } else {
+                        
+                        print ("Sem leituras para baixar.")
+                        
+                        let readings : [Reading] = DBManager.getAll()
+                        
+                        completionHandler(true, "Sem Leituras", readings.last)
                     }
                     
-                    let readings: [Reading] = DBManager.getAll()
-                    
-                    completionHandler(true, "Leituras salvas", readings.first)
-                    
                 } else {
-                    print ("Sem leituras para baixar.")
-                
+                    print ("JÁ TEM TODAS AS LEITURAS.")
                     let readings : [Reading] = DBManager.getAll()
                     
-                    completionHandler(true, "Sem Leituras", readings.first)
+                    completionHandler(true, "MSG ERROR: \(msg)", readings.first)
                 }
-                
-            } else {
-                
-                let reading:Reading = DBManager.getAll().first! as! Reading
-                
-                completionHandler(true, "MSG ERROR: \(msg)", reading)
-
-                
             }
+            
+        } else {
+            
+            let readings:[Reading] = DBManager.getAll()
+            let reading = readings.last
+            
+            completionHandler(true, "JÁ BAIXOU HOJE.", reading)
+            
         }
     }
-    
+
+    func createUserReadingInDataBase (user: User, reading: Reading) {
+        
+        let userReading = UserReading()
+        userReading.idReading = reading.id
+        userReading.isShared = false
+        userReading.isFavorite = false
+        userReading.alreadyRead = false
+        
+        try! Realm().write {
+            user.userReadings.append(userReading)
+        }
+        
+        DBManager.addObjc(user)
+
+        
+    }
     func createUserReading (user: User, reading: Reading) {
         
         UserReadingRequest.createUserReading(readingId: reading.id!, isFavorite: false, alreadyRead: false) { (success, msg) in
             
             if success {
+               
                 print ("USER READING CRIADO: \(msg)")
             } else {
+                
                 print ("USER READING NÃO CRIADO: \(msg)")
                 
             }
         }
     }
 
-    
     override func viewWillAppear(_ animated: Bool) {
         
         self.tableView.reloadData()
         
-        if self.readingDay?.id == nil {
+        let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
+        
+        if self.isReadingDay || days != 0 {
             
-            self.getReadings(readingsIds: self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!), user: ApplicationState.sharedInstance.currentUser!) { (success, msg, reading) in
-            
-                if success {
-                    self.readingDay = reading!
+            self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingsId) in
                 
-                    self.tableView.reloadData()
+                if success {
+                
+                    self.getReadings(readingsIds: readingsId!, user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingDay) in
+                    
+                        if success {
+                    
+                            if readingDay?.id == nil {
+                                let readings : [Reading] = DBManager.getAll()
+                                self.readingDay = readings.last
+                            
+                            } else {
+                                
+                                self.readingDay = readingDay!
+                        
+                                if (ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: readingDay!.id!))! {
+                                    
+                                    self.setAlreadyRead()
+                                }
+//                                if !(ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: self.readingDay!.id!)!)! {
+//                                    self.setAlreadyRead()
+//                                }
+//                        
+                                self.tableView.reloadData()
+                            }
+                        } else {
+                            print ("MENSAGEM ERRO: \(msg)")
+                        }
+                    })
                 } else {
-                    print ("MENSAGEM ERRO: \(msg)")
+                    print ("GET READINGS ID FAIL")
                 }
-            
-            }
+                
+            })
         }
         
         if ApplicationState.sharedInstance.currentUser!.isModeNight {
@@ -168,17 +260,17 @@ class ReadingDayViewController: UIViewController {
         } else {
             self.setNormalMode()
         }
-        
-        
     }
-    
-   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNotification()
-        //self.sendNotification()
-        self.setAlreadyRead()
+        
+        if self.readingDay?.id != nil {
+            if !ApplicationState.sharedInstance.currentUser!.readingAlreadyRead(id: self.readingDay!.id!)! {
+                self.setAlreadyRead()
+            }
+        }
         
         self.configureTableView()
        
@@ -189,49 +281,68 @@ class ReadingDayViewController: UIViewController {
         if isGrantedNotificationAccess! {
             if #available(iOS 10.0, *) {
                 
-                let content = UNMutableNotificationContent()
-                content.title = "Leitura nova disponível!"
-                content.subtitle = "Leitura de Bolso"
-                content.body = "Leitura do dia está disponível :)"
-                content.categoryIdentifier = "message"
+                DispatchQueue.main.sync {
+                    let realm = try! Realm()
+                    realm.beginWrite()
+                    if ApplicationState.sharedInstance.currentUser!.acceptsNotification == false {
+                        let content = UNMutableNotificationContent()
+                        content.title = "Leitura nova disponível!"
+                        content.body = "Leitura do dia está disponível :)"
+                        content.categoryIdentifier = "message"
                 
-                let currentDateTime = Date()
-                let userCalendar = Calendar.current
-                let requestedComponents: Set<Calendar.Component> = [
-                    .hour,
-                    .minute]
+                        let currentDateTime = Date()
+                        let userCalendar = Calendar.current
+                        let requestedComponents: Set<Calendar.Component> = [
+                            .hour,
+                            .minute]
                 
-                let dateTimeComponents = userCalendar.dateComponents(requestedComponents, from: currentDateTime)
+                        let dateTimeComponents = userCalendar.dateComponents(requestedComponents, from: currentDateTime)
        
-                let hour = dateTimeComponents.hour
-                let minute = dateTimeComponents.minute
+                        let hour = dateTimeComponents.hour
+                        let minute = dateTimeComponents.minute
         
-                var dateComponents = DateComponents()
-                dateComponents.hour = hour
-                dateComponents.minute = minute
+                        var dateComponents = DateComponents()
+                        dateComponents.hour = hour
+                        dateComponents.minute = minute
                 
-                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+                        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
                 
-                let request = UNNotificationRequest(
-                    identifier: "message",
-                    content: content,
-                    trigger: trigger
-                )
+                        let request = UNNotificationRequest(
+                            identifier: "message",
+                            content: content,
+                            trigger: trigger
+                        )
+                        
+                        UNUserNotificationCenter.current().add(request, withCompletionHandler:nil)
                 
-//                UNUserNotificationCenter.current().add(request, withCompletionHandler:nil)
-//                
-//                try! Realm().write(){
-//                    ApplicationState.sharedInstance.currentUser?.notificationHour = currentDateTime
-//                }
-//                DBManager.update(ApplicationState.sharedInstance.currentUser!)
-            }
+                    
+                            ApplicationState.sharedInstance.currentUser?.isNotification = true
+                            ApplicationState.sharedInstance.currentUser?.acceptsNotification = true
+                            ApplicationState.sharedInstance.currentUser?.notificationHour = currentDateTime
+                    
+                            try! Realm().add(ApplicationState.sharedInstance.currentUser!, update: true)
+                
+                                do {
+                                    try realm.commitWrite()
+                        
+                                }
+                                catch (_){
+                        
+                            }
+                    } else {
+                        realm.cancelWrite()
+                    }
+                }
+        
+                }
             
 
         } else {
+            
                 // Fallback on earlier versions
         }
     }
-        
+    
     
     func setNotification() {
         

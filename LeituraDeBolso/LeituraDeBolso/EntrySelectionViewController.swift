@@ -25,9 +25,8 @@ class EntrySelectionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func saveCurrentSessionInTimeInterval (user: User) {
+    func saveCurrentUser (user: User) {
         
-        user.lastSessionTimeInterval = NSDate().timeIntervalSince1970
         ApplicationState.sharedInstance.currentUser = user
         DBManager.update(ApplicationState.sharedInstance.currentUser!)
         
@@ -90,11 +89,13 @@ class EntrySelectionViewController: UIViewController {
                         
                         if success {
                             self.view.unload()
+                            
+                            
                             if !self.verifyUserExistInDataBase(user: user!) {
                                 DBManager.deleteAllDatas()
                             }
                             
-                            self.saveCurrentSessionInTimeInterval(user: user!)
+                            self.saveCurrentUser(user: user!)
                             
                             self.getReadings(readingsIds: self.getReadingsIdUser(user: user!), user: user!)
                             
@@ -138,29 +139,36 @@ extension EntrySelectionViewController {
     
     func getReadings (readingsIds: [String], user: User) {
         
-        ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
+        if readingsIds.count > 0 {
+
+            ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
             
-            if success {
-                if readings!.count > 0 {
+                if success {
                     
-                    for reading in readings! {
+                    
+                    if readings!.count > 0 {
+                    
+                        for reading in readings! {
                         
-                        DBManager.addObjc(reading)
+                            DBManager.addObjc(reading)
+                        }
+                        self.view.unload()
+                        self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated:    true, completion: nil)
+                    } else {
+                        self.view.unload()
+                        self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                     }
-                    self.view.unload()
-                    self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
-                } else {
-                    self.view.unload()
-                    self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
-                }
                 
-            } else {
+                } else {
                 
                 print ("MSG ERROR: \(msg)")
                 
+                }
             }
+        } else {
+            self.view.unload()
+            self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
         }
     }
-    
 }
 

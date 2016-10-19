@@ -16,6 +16,7 @@ class SettingsTableViewController: UITableViewController {
 
     
     fileprivate var showDateVisible = false
+    fileprivate var showNotificationHour = false
     
     @IBOutlet weak var firstLineView: UIView!
     
@@ -67,7 +68,18 @@ class SettingsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        
+        self.trackView.layer.zPosition = -1
+        self.modeNightSwitch.isOn = ApplicationState.sharedInstance.currentUser!.isModeNight
+        self.notificationSwitch.isOn = ApplicationState.sharedInstance.currentUser!.isNotification
+        self.showNotificationHour = self.notificationSwitch.isOn
+        self.timeTableDatePicker.date = ApplicationState.sharedInstance.currentUser!.notificationHour
+        self.fontSizeSlider.steps = 7
+        self.fontSizeSlider.minValue = 1
+        self.fontSizeSlider.maxValue = 7
+        self.fontSizeSlider.value = self.dictionarySizeText[ApplicationState.sharedInstance.currentUser!.sizeFont]!
+        self.fontSizeSlider.addTarget(self, action: #selector(changedFontSizeText(_:)), for: .allEvents)
+        self.timeTableLabel.text = DateFormatter.localizedString(from: self.timeTableDatePicker.date, dateStyle: .none, timeStyle: .short)
+
     }
     
     override func viewWillLayoutSubviews() {
@@ -78,21 +90,24 @@ class SettingsTableViewController: UITableViewController {
             self.setNormalMode()
         }
         
+        
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.trackView.layer.zPosition = -1
-        self.modeNightSwitch.isOn = ApplicationState.sharedInstance.currentUser!.isModeNight
-        self.notificationSwitch.isOn = ApplicationState.sharedInstance.currentUser!.isNotification
-        self.timeTableDatePicker.date = ApplicationState.sharedInstance.currentUser!.notificationHour
-        self.fontSizeSlider.steps = 7
-        self.fontSizeSlider.minValue = 1
-        self.fontSizeSlider.maxValue = 7
-        self.fontSizeSlider.value = self.dictionarySizeText[ApplicationState.sharedInstance.currentUser!.sizeFont]!
-        self.fontSizeSlider.addTarget(self, action: #selector(changedFontSizeText(_:)), for: .allEvents)
-        self.timeTableLabel.text = DateFormatter.localizedString(from: self.timeTableDatePicker.date, dateStyle: .none, timeStyle: .short)
+//        self.trackView.layer.zPosition = -1
+//        self.modeNightSwitch.isOn = ApplicationState.sharedInstance.currentUser!.isModeNight
+//        self.notificationSwitch.isOn = ApplicationState.sharedInstance.currentUser!.isNotification
+//        
+//        self.timeTableDatePicker.date = ApplicationState.sharedInstance.currentUser!.notificationHour
+//        self.fontSizeSlider.steps = 7
+//        self.fontSizeSlider.minValue = 1
+//        self.fontSizeSlider.maxValue = 7
+//        self.fontSizeSlider.value = self.dictionarySizeText[ApplicationState.sharedInstance.currentUser!.sizeFont]!
+//        self.fontSizeSlider.addTarget(self, action: #selector(changedFontSizeText(_:)), for: .allEvents)
+//        self.timeTableLabel.text = DateFormatter.localizedString(from: self.timeTableDatePicker.date, dateStyle: .none, timeStyle: .short)
     }
     
     func changedFontSizeText (_ sender: UIButton) {
@@ -146,7 +161,6 @@ class SettingsTableViewController: UITableViewController {
                 
                 let content = UNMutableNotificationContent()
                 content.title = "Leitura nova disponível!"
-                content.subtitle = "Leitura de Bolso"
                 content.body = "Leitura do dia está disponível :)"
                 content.categoryIdentifier = "message"
                 
@@ -176,6 +190,9 @@ class SettingsTableViewController: UITableViewController {
                 
                 UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
             }
+            self.showNotificationHour = true
+            tableView.beginUpdates()
+            tableView.endUpdates()
             
         } else {
             
@@ -185,10 +202,14 @@ class SettingsTableViewController: UITableViewController {
             
             DBManager.update(ApplicationState.sharedInstance.currentUser!)
             if #available(iOS 10.0, *) {
-                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             } else {
                 // Fallback on earlier versions
             }
+            
+            self.showNotificationHour = false
+            tableView.beginUpdates()
+            tableView.endUpdates()
 
         }
 
@@ -284,10 +305,7 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func logout(_ sender: AnyObject) {
         
-        
-//        try! Realm().write(){
-//            
-//        }
+
         
         try! Realm().write(){
              ApplicationState.sharedInstance.currentUser?.token = nil
@@ -334,10 +352,18 @@ class SettingsTableViewController: UITableViewController {
         tableView.endUpdates()
     }
     
+    fileprivate func toogleNotificationHour () {
+        
+        self.showDateVisible = !self.showDateVisible
+        
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        if (indexPath as NSIndexPath).row == 1 {
+        if indexPath.row == 1 {
             self.toogleDatePicker()
             
         }
@@ -346,7 +372,9 @@ class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if !self.showDateVisible && (indexPath as NSIndexPath).row == 2 {
+        if !self.showNotificationHour && indexPath.row == 1 {
+            return 0
+        } else if !self.showDateVisible && indexPath.row == 2 {
             return 0
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
@@ -397,8 +425,6 @@ class SettingsTableViewController: UITableViewController {
             )
             
             UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
-            
-            
             
             try! Realm().write(){
                 ApplicationState.sharedInstance.currentUser?.notificationHour = date

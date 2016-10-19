@@ -29,7 +29,6 @@ class UserReading: Object {
         return "idReading"
     }
     
-    
     func setDataFromWS(data: (Dictionary<String, AnyObject>)) {
         
         

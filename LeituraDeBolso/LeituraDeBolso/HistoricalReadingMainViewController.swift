@@ -46,8 +46,11 @@ class HistoricalReadingMainViewController: UIViewController {
     var rightButtonItem: UIBarButtonItem?
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
         self.segmentSelected = 0
+        
         self.leftButtonItem = UIBarButtonItem(image: UIImage(named: "button_read"), style: .done, target: self, action: #selector(popoverView(_:)))
         
         self.rightButtonItem = UIBarButtonItem(image: UIImage(named:"button_search"), style: .done, target: self, action: #selector(searchReading(_:)))
@@ -255,6 +258,7 @@ extension HistoricalReadingMainViewController: SegmentControlPageDelegate {
         switch viewIndex {
         case 0:
             showAllHistorical()
+            
         self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
             
             self.favoriteReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)

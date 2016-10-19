@@ -13,11 +13,11 @@ class AllHistoricalReadingViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var allReadings: [Reading] = DBManager.getAll()
+    var allReadings: [Reading] = DBManager.getAll().reversed()
     var selectedIndexPath: IndexPath?
     var isFilterArray: Bool = false
     var textSearch: String?
-    var filteredReadings = Array<Reading>()
+    var filteredReadings = [Reading]()
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -84,6 +84,7 @@ class AllHistoricalReadingViewController: UIViewController {
         let cell = cell as! HistoricalReadingTableViewCell
         
         cell.reading = readingArray[indexPath.row]
+        
         cell.likeButton.tag = indexPath.row
         
         cell.likeButton.isSelected = ApplicationState.sharedInstance.currentUser!.readingIsFavorite(id: readingArray[indexPath.row].id!)!
@@ -132,21 +133,6 @@ class AllHistoricalReadingViewController: UIViewController {
         
         if sender.isSelected == true {
             
-//            ApplicationState.sharedInstance.favoriteReads.append(self.readingDay!)
-//            
-//            ApplicationState.sharedInstance.currentUser?.setFavoriteReading(id: self.readingDay!.id!, isFavorite: true)
-//            
-//            UserReadingRequest.updateUserReading(readingId: self.readingDay!.id!, isFavorite: true, alreadyRead: true, completionHandler: { (success, msg) in
-//                
-//                if success {
-//                    print ("FAVORITOU :\(msg)")
-//                    
-//                } else {
-//                    print ("DEU ERRO NO FAVORITO: \(msg)")
-//                }
-//                
-//            })
-//
             
             ApplicationState.sharedInstance.currentUser?.setFavoriteReading(id: self.allReadings[sender.tag].id!, isFavorite: true)
             
@@ -182,7 +168,9 @@ class AllHistoricalReadingViewController: UIViewController {
             
         }
         
-        NotificationCenter.default.post(name: Notification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
+        }
         
     }
 
@@ -208,6 +196,7 @@ class AllHistoricalReadingViewController: UIViewController {
             if let destinationViewController = segue.destination as? ReadingDayViewController {
                 
                 destinationViewController.readingDay = self.allReadings[selectedIndexPath!.row]
+                destinationViewController.isReadingDay = false
             }
             
         }

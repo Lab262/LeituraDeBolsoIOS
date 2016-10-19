@@ -93,6 +93,7 @@ class LoginViewController: UIViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.identifier, for: indexPath) as! ButtonTableViewCell
 
+        cell.button.removeTarget(nil, action: nil, for: .allEvents)
         cell.button.addTarget(self, action: #selector(recoverPassword(_:)), for: .touchUpInside)
         
         cell.button.titleLabel?.font = UIFont(name: "Comfortaa", size: 15)
@@ -110,6 +111,7 @@ class LoginViewController: UIViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.identifier, for: indexPath) as! ButtonTableViewCell
         
+        cell.button.removeTarget(nil, action: nil, for: .allEvents)
         cell.button.addTarget(self, action: #selector(loginUser(_:)), for: .touchUpInside)
         cell.button.titleLabel?.font = UIFont(name: "Quicksand-Bold", size: 20)
         cell.button.backgroundColor = UIColor.colorWithHexString("EE5F66")
@@ -185,6 +187,7 @@ class LoginViewController: UIViewController {
                
                 
                 UserRequest.forgotPass(email: alertController.textFields![0].text!, completionHandler: { (success, msg) in
+                    
                     if success {
                         self.view.unload()
                         print ("DEU SUCESSO: \(msg)")
@@ -242,10 +245,11 @@ class LoginViewController: UIViewController {
         
     }
         
-    func saveCurrentSessionInTimeInterval (user: User) {
-    
-        user.lastSessionTimeInterval = NSDate().timeIntervalSince1970
+    func saveCurrentUser (user: User) {
+
+        
         ApplicationState.sharedInstance.currentUser = user
+        
         DBManager.update(ApplicationState.sharedInstance.currentUser!)
         
     }
@@ -325,53 +329,53 @@ extension LoginViewController {
     func getReadingsIdUser (user: User) -> [String] {
         
         let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "idReading")
-        
-        func getReadingsIdUser (user: User) -> [String] {
             
-            let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "idReading")
+        let allReadings: [Reading] = DBManager.getAll()
             
-            let allReadings: [UserReading] = DBManager.getAll()
-            
-            let allReadingsDataBaseId = allReadings.map { (object) -> Any in
+        let allReadingsDataBaseId = allReadings.map { (object) -> Any in
                 
-                return object.value(forKey: "idReading")
-            }
+            return object.value(forKey: "idReading")
+        }
     
-            let answer = zip(allReadingsIdUser as! [String], allReadingsDataBaseId as! [String]).filter() {
-                $0 != $1
-                }.map{$0.0}
+        let allReadingsId = allReadingsIdUser as! [String]
+        let allDataBaseId = allReadingsDataBaseId as! [String]
+        
+        let answer = allReadingsId.filter{ item in !allDataBaseId.contains(item) }
+        
             
             return answer
             
         }
 
-        
-        return allReadingsIdUser as! [String]
-    }
     
     
     func getReadings (readingsIds: [String], user: User) {
         
-        ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
+        if readingsIds.count > 0 {
             
-            if success {
-                if readings!.count > 0 {
-                    
-                    for reading in readings! {
-                        self.createUserReading(user: user, reading: reading)
+            ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
+                
+                if success {
+                    if readings!.count > 0 {
                         
-                        DBManager.addObjc(reading)
+                        for reading in readings! {
+                            DBManager.addObjc(reading)
+                        }
+                        
+                        self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+                    } else {
+                        self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                     }
-                      self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+                    
                 } else {
-                     self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+                    
+                    print ("MSG ERROR: \(msg)")
+                    
                 }
-                
-            } else {
-                
-                print ("MSG ERROR: \(msg)")
-                
             }
+        } else {
+            
+            self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
         }
     }
     
@@ -380,6 +384,8 @@ extension LoginViewController {
         UserReadingRequest.createUserReading(readingId: reading.id!, isFavorite: false, alreadyRead: false) { (success, msg) in
             
             if success {
+                
+                
                 
 //                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                 
@@ -410,12 +416,9 @@ extension LoginViewController {
                     DBManager.deleteAllDatas()
                 }
                 
-                self.saveCurrentSessionInTimeInterval(user: user!)
-                
+                self.saveCurrentUser(user: user!)
                 self.getReadings(readingsIds: self.getReadingsIdUser(user: user!), user: user!)
-                
             
-                
                 print ("MSG SUCESSO: \(msg)")
                 
             } else {

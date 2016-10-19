@@ -81,7 +81,7 @@ class FavoriteHistoricalReadingViewController: UIViewController {
     
     func getFavoriteReads() {
         
-        let allReadings: [Reading] = DBManager.getAll()
+        let allReadings: [Reading] = DBManager.getAll().reversed()
         
         if !allReadings.isEmpty {
             self.favoriteReads = allReadings.filter {
@@ -134,7 +134,9 @@ class FavoriteHistoricalReadingViewController: UIViewController {
             
         })
         
-        NotificationCenter.default.post(name: Notification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: KEY_NOTIFICATION_NEW_FAVORITE), object: nil)
+        }
         
     }
 
@@ -169,6 +171,7 @@ class FavoriteHistoricalReadingViewController: UIViewController {
             if let destinationViewController = segue.destination as? ReadingDayViewController {
                 
                 destinationViewController.readingDay = self.favoriteReads[(selectedIndexPath! as NSIndexPath).row]
+                destinationViewController.isReadingDay = false
                 
             }
             

@@ -20,6 +20,7 @@
 		D417027F1DA4A12C00A89DCB /* UserReadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D417027E1DA4A12C00A89DCB /* UserReadingTests.swift */; };
 		D41702811DA592CE00A89DCB /* String+AllowedCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41702801DA592CE00A89DCB /* String+AllowedCharacters.swift */; };
 		D41702831DA5986800A89DCB /* Dictionary+HttpParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41702821DA5986800A89DCB /* Dictionary+HttpParameters.swift */; };
+		D41872D61DB5366D00C24103 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41872D51DB5366D00C24103 /* ErrorMessage.swift */; };
 		D438F78E1D94A15900F38109 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438F78D1D94A15900F38109 /* User.swift */; };
 		D438F7911D95B32500F38109 /* UserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438F7901D95B32500F38109 /* UserRequest.swift */; };
 		D438F7931D95B37900F38109 /* UserRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438F7921D95B37900F38109 /* UserRequestTests.swift */; };
@@ -275,6 +276,7 @@
 		D417027E1DA4A12C00A89DCB /* UserReadingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserReadingTests.swift; sourceTree = "<group>"; };
 		D41702801DA592CE00A89DCB /* String+AllowedCharacters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+AllowedCharacters.swift"; sourceTree = "<group>"; };
 		D41702821DA5986800A89DCB /* Dictionary+HttpParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+HttpParameters.swift"; sourceTree = "<group>"; };
+		D41872D51DB5366D00C24103 /* ErrorMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		D438F78D1D94A15900F38109 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D438F7901D95B32500F38109 /* UserRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRequest.swift; sourceTree = "<group>"; };
 		D438F7921D95B37900F38109 /* UserRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRequestTests.swift; sourceTree = "<group>"; };
@@ -862,6 +864,7 @@
 				D438F78D1D94A15900F38109 /* User.swift */,
 				D4D0BFB51D9B73AE00A24A60 /* Emoji.swift */,
 				D4C64D0B1DA7581F004B21F0 /* UserReading.swift */,
+				D41872D51DB5366D00C24103 /* ErrorMessage.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1351,6 +1354,7 @@
 				D448B39E1D6E8EA500F3DF51 /* AppDelegate.swift in Sources */,
 				D4944C291D84FAB300C4FC92 /* ViewUtil.swift in Sources */,
 				D4944C2B1D85009100C4FC92 /* StepSlider.swift in Sources */,
+				D41872D61DB5366D00C24103 /* ErrorMessage.swift in Sources */,
 				D40752B81D828F820093F0A0 /* CreateAccountViewController.swift in Sources */,
 				D4DE565A1D9AFF4A00146E47 /* UserReadingRequest.swift in Sources */,
 				D4D0BFB91D9B746B00A24A60 /* DBManager.swift in Sources */,

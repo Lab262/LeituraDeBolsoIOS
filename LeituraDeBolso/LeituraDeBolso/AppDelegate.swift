@@ -77,28 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    
-    func requestReadingDay (user: User) {
-        
-//        let differenceDay = self.getDifferenceDays(user: user)
-//        
-//        let readingIds = Reading.getAllSelectIdProperty(propertyName: "id")
-//        
-//        ReadingRequest.getAllReadings(readingsAmount: differenceDay, readingsIds: readingIds as! [String], isReadingIdsToDownload: true,completionHandler: { (success, msg, readings) in
-//            
-//            if success {
-//                
-//            } else {
-//                
-//            }
-//        })
-//        
-//        
-//        try! Realm().write(){
-//            user.lastSessionTimeInterval = NSDate().timeIntervalSince1970
-//        }
-//       
-    }
+
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -111,8 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
              mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             
-            self.requestReadingDay(user: ApplicationState.sharedInstance.currentUser!)
-            
+    
         } else {
             
              mainStoryboard = UIStoryboard(name: "Login", bundle: nil)

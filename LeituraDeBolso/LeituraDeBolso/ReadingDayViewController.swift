@@ -37,10 +37,39 @@ class ReadingDayViewController: UIViewController {
             
             if success {
                 print ("LEU LEITURA: \(msg)")
+                self.updateBadgeNumber(badgeCount: self.getReadingsUnreadCount())
+                
             } else {
                 print ("DEU ERRO NA READING LEITURA: \(msg)")
             }
         })
+    }
+    
+    func updateBadgeNumber(badgeCount: Int) {
+        
+        UIApplication.shared.applicationIconBadgeNumber = badgeCount
+    }
+    
+    
+    func getReadingsUnreadCount () -> Int {
+        
+        let allReadings: [Reading] = DBManager.getAll().reversed()
+        var readingsUnread = [Reading]()
+        
+        if !allReadings.isEmpty {
+            readingsUnread = allReadings.filter {
+                !ApplicationState.sharedInstance.currentUser!.readingAlreadyRead(id: $0.id!)!
+            }
+        }
+        
+        return readingsUnread.count
+    }
+    
+    func setupBadgeNumberPermissions() {
+        
+        let notificationSettings: UIUserNotificationSettings = UIUserNotificationSettings(types: .badge, categories: nil)
+        
+        UIApplication.shared.registerUserNotificationSettings(notificationSettings)
     }
     
     func setNightMode() {
@@ -219,7 +248,9 @@ class ReadingDayViewController: UIViewController {
         
         self.tableView.reloadData()
         
-      let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
+        self.updateBadgeNumber(badgeCount: self.getReadingsUnreadCount())
+        
+        let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
         
         if days != 0 {
             self.view.loadAnimation()
@@ -276,6 +307,7 @@ class ReadingDayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNotification()
+       // self.setupBadgeNumberPermissions()
         
         if self.readingDay?.id != nil {
             if !ApplicationState.sharedInstance.currentUser!.readingAlreadyRead(id: self.readingDay!.id!)! {

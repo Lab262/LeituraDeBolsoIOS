@@ -48,4 +48,18 @@ extension Date {
         if seconds(from: date) > 0 { return "\(seconds(from: date))s" }
         return ""
     }
+    
+    func isLeapYear(year: Int) -> Bool {
+        let isLeapYear = ((year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0))
+        
+        return isLeapYear
+    }
+    
+//    func isLeapYear(date: Date = Date()) -> Bool {
+//        
+//        let calendar = Calendar.current
+//        let year = calendar.component(.year, from: date)
+//        
+//        return isLeapYear(year: year)
+//    }
 }

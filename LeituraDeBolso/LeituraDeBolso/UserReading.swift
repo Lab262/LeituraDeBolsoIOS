@@ -32,15 +32,15 @@ class UserReading: Object {
     func setDataFromWS(data: (Dictionary<String, AnyObject>)) {
         
         
-        if let idReading = data ["readingId"] as? String {
+        if let idReading = data ["reading-id"] as? String {
             self.idReading = idReading
         }
         
-        if let isFavorite = data ["isFavorite"] as? Bool {
+        if let isFavorite = data ["is-favorite"] as? Bool {
             self.isFavorite = isFavorite
         }
         
-        if let alreadyRead = data ["alreadyRead"] as? Bool {
+        if let alreadyRead = data ["already-read"] as? Bool {
             self.alreadyRead = alreadyRead
         }
 

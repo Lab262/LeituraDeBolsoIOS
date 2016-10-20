@@ -13,7 +13,7 @@ import Realm
 
 
 let URL_WS_GET_ALL_READINGS = "\(URL_WS_SERVER)readings"
-let URL_WS_GET_WEAKS = "\(URL_WS_SERVER)"
+let URL_WS_GET_DAY = "\(URL_WS_SERVER)"
 let URL_WS_GET_READING_BY_ID = "\(URL_WS_SERVER)auth/login"
 
 var TOKEN_READING = ["x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imh1YWxseWQuc21hZGlAZ21haWwuY29tIiwiaWQiOiI1N2U5OWJhMWYyYjRmNjAzMDA3ZjU2NTciLCJpYXQiOjE0NzU4NzQ5MDZ9.Ny1WlCtuOkBsO9E3cddGZmjERJg_fxvWDFsB-_g5XSU"]
@@ -23,7 +23,7 @@ class ReadingRequest: NSObject {
     
     
     
-    static func getReadingsOfTheWeek (readingsAmount: Int, completionHandler: @escaping (_ success: Bool, _ msg: String, _ reading: [Reading]?) -> Void) {
+    static func getReadingsOfTheDay (readingsAmount: Int, completionHandler: @escaping (_ success: Bool, _ msg: String, _ reading: [Reading]?) -> Void) {
         
         var allReadings = [Reading]()
         
@@ -33,8 +33,7 @@ class ReadingRequest: NSObject {
         
         
       
-        let url = URL_WS_GET_WEAKS + "users/" + ApplicationState.sharedInstance.currentUser!.id! + "/readingsOfTheWeek/" + "?" + urlParams.stringFromHttpParameters()
-        
+        let url = URL_WS_GET_DAY + "users/" + ApplicationState.sharedInstance.currentUser!.id! + "/readingsOfTheDay/" + "?" + urlParams.stringFromHttpParameters()
         
         print (" URL DOWNLOAD: \(url)")
         

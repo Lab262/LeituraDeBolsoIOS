@@ -51,7 +51,7 @@ class UserRequest: NSObject {
                   
                     user.id = attributes?["-id"] as? String
                
-                    completionHandler(true, "Sucesso")
+                    completionHandler(true, "Um email de confirmação foi enviado para o email cadastrado. ")
                     
                 default:
                     

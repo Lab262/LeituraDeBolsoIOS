@@ -50,7 +50,7 @@ class UserReadingRequest: NSObject {
                             print ("MESSAGE: \(msg)")
                         }
                     
-                        completionHandler(true, data["message"] as! String)
+                        completionHandler(true, "SUCESSO READING DAY REQUEST")
                     
                     case 403:
                 
@@ -68,13 +68,13 @@ class UserReadingRequest: NSObject {
         }
     }
     
-    static func getAllUserReading (completionHandler: @escaping (_ success: Bool, _ msg: String, _ userReadings: [UserReading]?) -> Void) {
+    static func getAllUserReading (user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ userReadings: [UserReading]?) -> Void) {
         
         var token = Dictionary<String, String>()
         
-        token ["x-access-token"] = ApplicationState.sharedInstance.currentUser!.token
+        token ["x-access-token"] = user.token
         
-        let url = "\(URL_WS_SERVER)users/\(ApplicationState.sharedInstance.currentUser!.id!)/readings/"
+        let url = "\(URL_WS_SERVER)users/\(user.id!)/readings/"
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: token).responseJSON { (response: DataResponse<Any>) in
             
@@ -82,7 +82,7 @@ class UserReadingRequest: NSObject {
                 
             case .success:
                 
-                let dataResponse = response.result.value as! Dictionary<String, AnyObject>
+                let data = response.result.value as! Dictionary<String, AnyObject>
                 
                 switch response.response!.statusCode {
                     
@@ -90,33 +90,27 @@ class UserReadingRequest: NSObject {
                     
                     var userReadings = [UserReading]()
                     
-                    if let data = dataResponse ["data"] as? Dictionary<String, AnyObject> {
+                    if let listDictonary = data["data"] as? Array<Dictionary<String, AnyObject>> {
                         
-                    
-                    if let attributes = data["attributes"] as? Dictionary<String, AnyObject> {
-                        
-                        if let userReadingsData = attributes["readings"] as? Array<Dictionary<String, AnyObject>> {
+                        for dic in listDictonary {
                             
-                            for userReading in userReadingsData {
-                                let userReadingObject = UserReading(data: userReading)
-                                userReadings.append(userReadingObject)
-                            }
+                            let attributes = dic["attributes"] as? Dictionary<String, AnyObject>
+                            
+                            let userReading = UserReading(data: attributes!)
+                            
+                            userReadings.append(userReading)
+                            
                         }
                         
-                        completionHandler(true, "msg", userReadings)
-                    } else {
-                        
-                        print ("FAAAAIL")
+                        completionHandler(true, "Sucesso", userReadings)
                         
                     }
-                    }
-       
-                    
+                
                 default:
          
                     var errorMessage: ErrorMessage?
                     
-                    if let errors = dataResponse["errors"] as? Array<Dictionary<String, AnyObject>> {
+                    if let errors = data["errors"] as? Array<Dictionary<String, AnyObject>> {
                         
                         for error in errors {
                             errorMessage = ErrorMessage(data: error)

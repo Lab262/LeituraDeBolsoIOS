@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Realm
+import RealmSwift
 
 let KEY_EMAIL = "email"
 let KEY_PASS = "pass"
@@ -247,9 +249,7 @@ class LoginViewController: UIViewController {
         
     func saveCurrentUser (user: User) {
 
-        
         ApplicationState.sharedInstance.currentUser = user
-        
         DBManager.update(ApplicationState.sharedInstance.currentUser!)
         
     }
@@ -356,6 +356,7 @@ extension LoginViewController {
             ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
                 
                 if success {
+                    self.view.unload()
                     if readings!.count > 0 {
                         
                         for reading in readings! {
@@ -363,12 +364,15 @@ extension LoginViewController {
                         }
                         
                         self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+                        
                     } else {
+                        self.view.unload()
                         self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                     }
                     
                 } else {
                     
+                    self.view.unload()
                     print ("MSG ERROR: \(msg)")
                     
                 }
@@ -378,27 +382,7 @@ extension LoginViewController {
             self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
         }
     }
-    
-    func createUserReading (user: User, reading: Reading) {
-        
-        UserReadingRequest.createUserReading(readingId: reading.id!, isFavorite: false, alreadyRead: false) { (success, msg) in
-            
-            if success {
-                
-                
-                
-//                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
-                
-                
-            } else {
-                
-//                print ("MSG FRACASO: \(msg)")
-//                self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
-                
-            }
-        }
-    }
-    
+
     func loginUser (_ sender: UIButton) {
         
         if let msgError = self.verifyInformations() {
@@ -408,6 +392,8 @@ extension LoginViewController {
             return
         }
         
+        self.view.loadAnimation()
+        
         UserRequest.loginUser(email: dictionaryTextFields[KEY_EMAIL]!, pass: dictionaryTextFields[KEY_PASS]!) { (success, msg, user) in
             
             if success {
@@ -416,15 +402,29 @@ extension LoginViewController {
                     DBManager.deleteAllDatas()
                 }
                 
-                self.saveCurrentUser(user: user!)
-                self.getReadings(readingsIds: self.getReadingsIdUser(user: user!), user: user!)
-            
-                print ("MSG SUCESSO: \(msg)")
-                
+                UserReadingRequest.getAllUserReading(user: user!, completionHandler: { (success, msg, userReadings) in
+                    
+                    if success {
+                        
+                        if userReadings!.count > 0 {
+                            
+                            for userReading in userReadings! {
+                                try! Realm().write {                                            user?.userReadings.append(userReading)
+                                }
+                            }
+                        }
+                    
+                        self.saveCurrentUser(user: user!)
+                        DBManager.addObjc(user!)
+                        
+                        self.getReadings(readingsIds: self.getReadingsIdUser(user: user!), user: user!)
+                        
+                        print ("MSG SUCESSO: \(msg)")
+                    }
+                })
             } else {
-                
+                self.view.unload()
                 self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: msg), animated: true, completion: nil)
-                
             }
         }
     }

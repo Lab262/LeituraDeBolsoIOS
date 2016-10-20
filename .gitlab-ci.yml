@@ -1,0 +1,17 @@
+beta:
+  type: deploy
+  script:
+  - fastlane beta
+  only:
+  - Developer
+  tags:
+  - ios_10, xcode_8 
+
+release:
+  type: deploy
+  script:
+  - fastlane release
+  only:
+  - master
+  tags:
+  - ios_10, xcode_8 

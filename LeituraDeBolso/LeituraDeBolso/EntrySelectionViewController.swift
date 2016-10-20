@@ -9,6 +9,8 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Realm
+import RealmSwift
 
 class EntrySelectionViewController: UIViewController {
 
@@ -88,23 +90,34 @@ class EntrySelectionViewController: UIViewController {
                     UserRequest.loginUserWithFacebook(id: data["id"] as! String, email: data["email"] as! String, completionHandler: { (success, msg, user) in
                         
                         if success {
-                            self.view.unload()
-                            
-                            
                             if !self.verifyUserExistInDataBase(user: user!) {
                                 DBManager.deleteAllDatas()
                             }
                             
-                            self.saveCurrentUser(user: user!)
-                            
-                            self.getReadings(readingsIds: self.getReadingsIdUser(user: user!), user: user!)
-                            
+                            UserReadingRequest.getAllUserReading(user: user!, completionHandler: { (success, msg, userReadings) in
+                                
+                                if success {
+                                    
+                                    if userReadings!.count > 0 {
+                                        
+                                        for userReading in userReadings! {
+                                            try! Realm().write {                                            user?.userReadings.append(userReading)
+                                            }
+                                        }
+                                    }
+                                    
+                                    self.saveCurrentUser(user: user!)
+                                    DBManager.addObjc(user!)
+                                    
+                                    self.getReadings(readingsIds: self.getReadingsIdUser(user: user!), user: user!)
+                                    
+                                    print ("MSG SUCESSO: \(msg)")
+                                }
+                            })
                         } else {
-                            
                             self.view.unload()
                             self.present(ViewUtil.alertControllerWithTitle(_title: "Erro", _withMessage: msg), animated: true, completion: nil)
-                        }
-                    })
+                        }                    })
                     
                 }
             })
@@ -142,6 +155,7 @@ extension EntrySelectionViewController {
             ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
                 
                 if success {
+                    self.view.unload()
                     if readings!.count > 0 {
                         
                         for reading in readings! {
@@ -149,12 +163,15 @@ extension EntrySelectionViewController {
                         }
                         
                         self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
+                        
                     } else {
+                        self.view.unload()
                         self.present(ViewUtil.viewControllerFromStoryboardWithIdentifier("Main")!, animated: true, completion: nil)
                     }
                     
                 } else {
                     
+                    self.view.unload()
                     print ("MSG ERROR: \(msg)")
                     
                 }

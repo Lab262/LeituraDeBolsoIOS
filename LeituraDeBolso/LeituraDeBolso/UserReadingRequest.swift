@@ -54,10 +54,10 @@ class UserReadingRequest: NSObject {
                     
                     case 403:
                 
-                    completionHandler(false, data["message"] as! String)
+                        completionHandler(false, "Usuario nao encontrado")
                     
                     default:
-                        completionHandler(false, data["message"] as! String)
+                        completionHandler(false, "Erro")
                     }
                 
             case .failure(_):
@@ -138,7 +138,6 @@ class UserReadingRequest: NSObject {
             dic["is_favorite"] = isFavorite as AnyObject?
         }
         
-        dic["readingId"] = readingId as AnyObject
         
         if alreadyRead != nil {
             dic["already_read"] = alreadyRead as AnyObject?

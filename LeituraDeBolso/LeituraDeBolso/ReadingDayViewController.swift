@@ -134,22 +134,6 @@ class ReadingDayViewController: UIViewController {
             }
             
         }
-        
-        
-        
-        //let allUserReading = user.getAllUserReadingIdProperty(propertyName: "idReading")
-        
-//        let allReadings: [UserReading] = DBManager.getAll()
-//        
-//        let allReadingsDataBaseId = allReadings.map { (object) -> Any in
-//            return object.value(forKey: "idReading")
-//        }
-//        
-//        let readingsId = zip(allUserReading as! [String], allReadingsDataBaseId as! [String]).filter() {
-//            $0 == $1
-//            }.map{$0.0}
-        
-       // return readingsId
     }
     
     func getReadings (readingsIds: [String], user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
@@ -237,7 +221,7 @@ class ReadingDayViewController: UIViewController {
         
       let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
         
-        if self.isReadingDay && days != 0 {
+        if days != 0 {
             self.view.loadAnimation()
             self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingsId) in
                 
@@ -257,7 +241,7 @@ class ReadingDayViewController: UIViewController {
                                 
                                 self.readingDay = readingDay!
                         
-                                if (ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: readingDay!.id!))! {
+                                if !(ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: readingDay!.id!))! {
                                     
                                     self.setAlreadyRead()
                                 }
@@ -275,7 +259,7 @@ class ReadingDayViewController: UIViewController {
                 }
                 
             })
-        } else {
+        } else if self.isReadingDay {
             
             self.view.unload()
             let readings : [Reading] = DBManager.getAll()
@@ -511,25 +495,3 @@ extension ReadingDayViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
-
-
-//
-//            if let userReadings = ApplicationState.sharedInstance.currentUser?.readings {
-//
-//                var userReadingsIds = [String]()
-//
-//                for reading in userReadings {
-//                    userReadingsIds.append(reading.id!)
-//                }
-//
-//                ReadingRequest.getAllReadings(readingsAmount: 10, readingsToIgnore: userReadingsIds, completionHandler: { (success, msg, readings) in
-//
-//                    self.allReadings = readings
-//                    self.readingDay = self.allReadings.last
-//                    self.tableView.reloadData()
-//                })
-//
-//            }
-//
-//
-//        }

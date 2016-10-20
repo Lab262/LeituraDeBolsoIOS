@@ -91,7 +91,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="fpY-Ya-BNq" firstAttribute="leading" secondItem="8Jk-I9-gw2" secondAttribute="leadingMargin" constant="17" id="40u-1g-48Y"/>
-                    <constraint firstItem="h75-EI-D9c" firstAttribute="top" secondItem="cxl-mE-3C3" secondAttribute="top" id="ESc-2i-DpN"/>
+                    <constraint firstItem="h75-EI-D9c" firstAttribute="top" secondItem="cxl-mE-3C3" secondAttribute="top" constant="-3" id="ESc-2i-DpN"/>
                     <constraint firstItem="VK7-bC-3dr" firstAttribute="centerX" secondItem="8Jk-I9-gw2" secondAttribute="centerX" multiplier="1.85" id="F3x-JU-Bzx"/>
                     <constraint firstItem="fpY-Ya-BNq" firstAttribute="centerX" secondItem="8Jk-I9-gw2" secondAttribute="centerX" multiplier="0.2" id="FDe-cO-EO3"/>
                     <constraint firstItem="Ezq-hz-8tk" firstAttribute="top" secondItem="cxl-mE-3C3" secondAttribute="bottom" constant="10" id="Fug-OD-xa8"/>

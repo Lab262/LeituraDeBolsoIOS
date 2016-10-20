@@ -5,7 +5,7 @@ beta:
   only:
   - Developer
   tags:
-  - ios_10, xcode_8 
+  - ios_10 
 
 release:
   type: deploy
@@ -14,4 +14,4 @@ release:
   only:
   - master
   tags:
-  - ios_10, xcode_8 
+  - ios_10 

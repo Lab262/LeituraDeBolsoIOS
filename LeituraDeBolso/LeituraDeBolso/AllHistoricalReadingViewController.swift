@@ -89,23 +89,9 @@ class AllHistoricalReadingViewController: UIViewController {
         
         cell.likeButton.isSelected = ApplicationState.sharedInstance.currentUser!.readingIsFavorite(id: readingArray[indexPath.row].id!)!
         
-//        if !ApplicationState.sharedInstance.favoriteReads.isEmpty {
-//            
-//            let readingFavorite = ApplicationState.sharedInstance.favoriteReads.filter() {
-//                $0.title!.localizedCaseInsensitiveContains(readingArray[indexPath.row].title!)
-//            }
-//            
-//            if !readingFavorite.isEmpty {
-//                cell.likeButton.isSelected = true
-//            } else {
-//                cell.likeButton.isSelected = false
-//            }
-//            
-//        } else {
-//            cell.likeButton.isSelected = false
-//        }
+        cell.iconAlertImage.isHidden = ApplicationState.sharedInstance.currentUser!.readingAlreadyRead(id: readingArray[indexPath.row].id!)!
         
-          cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
+        cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
     }
     
     func generateHistoricalReadingCell (_ tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {

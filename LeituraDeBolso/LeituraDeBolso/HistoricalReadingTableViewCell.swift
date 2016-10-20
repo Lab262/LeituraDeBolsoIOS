@@ -35,6 +35,9 @@ class HistoricalReadingTableViewCell: UITableViewCell {
 
     @IBOutlet weak var authorLabel: UILabel!
     
+    @IBOutlet weak var iconAlertImage: UIImageView!
+    
+    
     
     
     override func didMoveToWindow() {

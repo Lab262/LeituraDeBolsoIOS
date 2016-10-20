@@ -58,6 +58,7 @@ class FavoriteHistoricalReadingViewController: UIViewController {
         cell.likeButton.tag = indexPath.row
         
         cell.likeButton.isSelected = true
+        cell.iconAlertImage.isHidden = ApplicationState.sharedInstance.currentUser!.readingAlreadyRead(id: readingArray[indexPath.row].id!)!
         
         cell.likeButton.addTarget(self, action: #selector(likeReader(_:)), for: .touchUpInside)
         

@@ -225,6 +225,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="750"/>
                     <connections>
+                        <outlet property="historicalIcon" destination="C2h-dD-nuT" id="4Wb-KV-WJa"/>
                         <outlet property="tableView" destination="VmR-rG-TSr" id="wXI-4G-MAT"/>
                     </connections>
                 </viewController>

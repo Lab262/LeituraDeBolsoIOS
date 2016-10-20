@@ -21,6 +21,8 @@ class ReadingDayViewController: UIViewController {
     var isGrantedNotificationAccess: Bool?
     var isReadingDay = true
     
+    @IBOutlet weak var historicalIcon: UIBarButtonItem!
+    
     func configureTableView () {
         
         self.tableView.estimatedRowHeight = 300
@@ -37,12 +39,23 @@ class ReadingDayViewController: UIViewController {
             
             if success {
                 print ("LEU LEITURA: \(msg)")
-                self.updateBadgeNumber(badgeCount: self.getReadingsUnreadCount())
+                let readingsUnreadCount = self.getReadingsUnreadCount()
+                self.updateBadgeNumber(badgeCount: readingsUnreadCount)
+                self.updateIconHistorical(unreadsCount: readingsUnreadCount)
                 
             } else {
                 print ("DEU ERRO NA READING LEITURA: \(msg)")
             }
         })
+    }
+    
+    func updateIconHistorical (unreadsCount: Int) {
+        
+        if unreadsCount > 0 {
+            self.historicalIcon.image = UIImage(named:"button_historicNotified")
+        } else {
+            self.historicalIcon.image = UIImage(named: "button_historic")
+        }
     }
     
     func updateBadgeNumber(badgeCount: Int) {
@@ -61,6 +74,7 @@ class ReadingDayViewController: UIViewController {
                 !ApplicationState.sharedInstance.currentUser!.readingAlreadyRead(id: $0.id!)!
             }
         }
+        
         
         return readingsUnread.count
     }
@@ -248,7 +262,10 @@ class ReadingDayViewController: UIViewController {
         
         self.tableView.reloadData()
         
-        self.updateBadgeNumber(badgeCount: self.getReadingsUnreadCount())
+        let readingsUnreadCount = self.getReadingsUnreadCount()
+        self.updateBadgeNumber(badgeCount: readingsUnreadCount)
+        self.updateIconHistorical(unreadsCount: readingsUnreadCount)
+        
         
         let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
         

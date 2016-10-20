@@ -208,6 +208,10 @@ class SettingsTableViewController: UITableViewController {
             }
             
             self.showNotificationHour = false
+            if self.showDateVisible {
+                self.showDateVisible = false
+            }
+           
             tableView.beginUpdates()
             tableView.endUpdates()
 

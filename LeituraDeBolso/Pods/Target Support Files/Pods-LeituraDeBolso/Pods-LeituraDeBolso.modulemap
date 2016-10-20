@@ -1,0 +1,6 @@
+framework module Pods_LeituraDeBolso {
+  umbrella header "Pods-LeituraDeBolso-umbrella.h"
+
+  export *
+  module * { export * }
+}

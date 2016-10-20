@@ -1,17 +1,12 @@
+stages:
+  - beta
+
 beta:
   type: deploy
+  stage: beta
   script:
   - fastlane beta
   only:
   - Developer
-  tags:
-  - ios_10 
-
-release:
-  type: deploy
-  script:
-  - fastlane release
-  only:
-  - master
   tags:
   - ios_10 

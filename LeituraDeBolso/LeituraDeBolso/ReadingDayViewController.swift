@@ -147,6 +147,28 @@ class ReadingDayViewController: UIViewController {
        
     }
     
+    func getReadingsIdUser (user: User) -> [String] {
+        
+        let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "idReading")
+        
+        let allReadings: [Reading] = DBManager.getAll()
+        
+        let allReadingsDataBaseId = allReadings.map { (object) -> Any in
+            
+            return object.value(forKey: "idReading")
+        }
+        
+        let allReadingsId = allReadingsIdUser as! [String]
+        let allDataBaseId = allReadingsDataBaseId as! [String]
+        
+        let answer = allReadingsId.filter{
+            item in !allDataBaseId.contains(item)
+        }
+        
+        return answer
+    }
+
+    
     func getReadingsIdUser (user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: [String]?) -> Void) {
         
         
@@ -167,6 +189,7 @@ class ReadingDayViewController: UIViewController {
                 let readingsId = zip(userReadingsRequestIds as! [String], allReadingsDataBaseId as! [String]).filter() {
                     $0 == $1
                     }.map{$0.0}
+                
                 
                 completionHandler(true, "Get Readings Id User Success", readingsId)
                 
@@ -266,52 +289,70 @@ class ReadingDayViewController: UIViewController {
         self.updateBadgeNumber(badgeCount: readingsUnreadCount)
         self.updateIconHistorical(unreadsCount: readingsUnreadCount)
         
+        if Reachability().isInternetAvailable() {
+            
+            let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
         
-        let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
-        
-        if days != 0 {
-            self.view.loadAnimation()
-            self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingsId) in
+            if days != 0 {
+            
+                self.view.loadAnimation()
+                self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingsId) in
                 
-                if success {
-                    self.getReadings(readingsIds: readingsId!, user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingDay) in
+                
+                    if success {
+                        self.getReadings(readingsIds: readingsId!, user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingDay) in
                     
-                        if success {
+                            if success {
                             
-                            self.view.unload()
+                                self.view.unload()
                             
-                            if readingDay?.id == nil {
+                                if readingDay?.id == nil {
+                                    let readings : [Reading] = DBManager.getAll()
+                                    self.readingDay = readings.last
+                            
+                                } else {
+                                
+                                    self.readingDay = readingDay!
+                        
+                                    if !(ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: readingDay!.id!))! {
+                                    
+                                        self.setAlreadyRead()
+                                    }
+                                    self.view.unload()
+                                    self.tableView.reloadData()
+                                }
+                            } else {
+                            
+                                self.view.unload()
                                 let readings : [Reading] = DBManager.getAll()
                                 self.readingDay = readings.last
-                            
-                            } else {
-                                self.view.unload()
-                                
-                                self.readingDay = readingDay!
-                        
-                                if !(ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: readingDay!.id!))! {
-                                    
-                                    self.setAlreadyRead()
-                                }
-                                self.view.unload()
                                 self.tableView.reloadData()
+
                             }
-                        }
-                    })
-                } else {
-                    self.view.unload()
-                    let readings : [Reading] = DBManager.getAll()
-                    self.readingDay = readings.last
+                        })
+                    } else {
+                        self.view.unload()
+                        let readings : [Reading] = DBManager.getAll()
+                        self.readingDay = readings.last
+                        self.tableView.reloadData()
                     
-                    print ("GET READINGS ID FAIL")
-                }
+                        print ("GET READINGS ID FAIL")
+                    }
                 
-            })
-        } else if self.isReadingDay {
+                })
+            } else if self.isReadingDay {
             
-            self.view.unload()
-            let readings : [Reading] = DBManager.getAll()
-            self.readingDay = readings.last
+                self.view.unload()
+                let readings : [Reading] = DBManager.getAll()
+                self.readingDay = readings.last
+            }
+        } else {
+            
+            if self.isReadingDay {
+                let readings : [Reading] = DBManager.getAll()
+                self.readingDay = readings.last
+            }
+           
         }
         
         if ApplicationState.sharedInstance.currentUser!.isModeNight {

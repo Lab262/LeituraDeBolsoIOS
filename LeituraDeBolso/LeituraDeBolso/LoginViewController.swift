@@ -55,7 +55,6 @@ class LoginViewController: UIViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ImageLogoTableViewCell.identifier, for: indexPath) as! ImageLogoTableViewCell
         
-        cell.titleLabel.text = "Log in"
         
         return cell
     }
@@ -98,7 +97,7 @@ class LoginViewController: UIViewController {
         cell.button.removeTarget(nil, action: nil, for: .allEvents)
         cell.button.addTarget(self, action: #selector(recoverPassword(_:)), for: .touchUpInside)
         
-        cell.button.titleLabel?.font = UIFont(name: "Comfortaa", size: 15)
+        cell.button.titleLabel?.font = UIFont(name: "Comfortaa", size: 18)
         
         cell.button.setTitle("Esqueci a senha", for: UIControlState())
         
@@ -334,20 +333,18 @@ extension LoginViewController {
             
         let allReadingsDataBaseId = allReadings.map { (object) -> Any in
                 
-            return object.value(forKey: "idReading")
+            return object.value(forKey: "id")
         }
     
         let allReadingsId = allReadingsIdUser as! [String]
         let allDataBaseId = allReadingsDataBaseId as! [String]
         
-        let answer = allReadingsId.filter{ item in !allDataBaseId.contains(item) }
+        let answer = allReadingsId.filter{
+                item in !allDataBaseId.contains(item)
+            }
         
-            
-            return answer
-            
-        }
-
-    
+        return answer
+    }
     
     func getReadings (readingsIds: [String], user: User) {
         

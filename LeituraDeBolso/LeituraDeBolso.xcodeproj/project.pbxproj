@@ -44,6 +44,7 @@
 		D4A8E88F1D776ED3003F6854 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E88E1D776ED3003F6854 /* SettingsTableViewController.swift */; };
 		D4A8E8911D7797A7003F6854 /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E8901D7797A7003F6854 /* ApplicationState.swift */; };
 		D4A8E8931D779D86003F6854 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8E8921D779D86003F6854 /* UIView+Animations.swift */; };
+		D4ACE7E01DB992EA00DDB93F /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ACE7DF1DB992EA00DDB93F /* Reachability.swift */; };
 		D4BB0BC91D767ACD00A6AC03 /* loadingGiff1.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BB0B691D767ACC00A6AC03 /* loadingGiff1.png */; };
 		D4BB0BCA1D767ACD00A6AC03 /* loadingGiff2.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BB0B6A1D767ACC00A6AC03 /* loadingGiff2.png */; };
 		D4BB0BCB1D767ACD00A6AC03 /* loadingGiff3.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BB0B6B1D767ACC00A6AC03 /* loadingGiff3.png */; };
@@ -306,6 +307,7 @@
 		D4A8E88E1D776ED3003F6854 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		D4A8E8901D7797A7003F6854 /* ApplicationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
 		D4A8E8921D779D86003F6854 /* UIView+Animations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
+		D4ACE7DF1DB992EA00DDB93F /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		D4BB0B691D767ACC00A6AC03 /* loadingGiff1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingGiff1.png; sourceTree = "<group>"; };
 		D4BB0B6A1D767ACC00A6AC03 /* loadingGiff2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingGiff2.png; sourceTree = "<group>"; };
 		D4BB0B6B1D767ACC00A6AC03 /* loadingGiff3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingGiff3.png; sourceTree = "<group>"; };
@@ -630,6 +632,7 @@
 				D448B3A91D6E8EA500F3DF51 /* LaunchScreen.storyboard */,
 				D448B3AC1D6E8EA500F3DF51 /* Info.plist */,
 				D448B3A41D6E8EA500F3DF51 /* LeituraDeBolso.xcdatamodeld */,
+				D4ACE7DF1DB992EA00DDB93F /* Reachability.swift */,
 			);
 			path = LeituraDeBolso;
 			sourceTree = "<group>";
@@ -1428,6 +1431,7 @@
 				D4CADAE51D76158B005FE3DC /* HistoricalReadingTableViewCell.swift in Sources */,
 				D4E8CA361D73EF9500C82F0A /* ContentTableViewCell.swift in Sources */,
 				D4E8CA581D752B8200C82F0A /* UIColorExtension.swift in Sources */,
+				D4ACE7E01DB992EA00DDB93F /* Reachability.swift in Sources */,
 				D4CADAE11D7608F6005FE3DC /* NSUserDefaults+UIColor.swift in Sources */,
 				D40752C61D83696D0093F0A0 /* TextFieldTableViewCell.swift in Sources */,
 				D4CADAD71D75C9B6005FE3DC /* AllHistoricalReadingViewController.swift in Sources */,

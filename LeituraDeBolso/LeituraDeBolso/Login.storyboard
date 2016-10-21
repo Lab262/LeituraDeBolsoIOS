@@ -74,10 +74,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpu-dB-yEH" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
                                 <color key="backgroundColor" red="0.38823529411764707" green="0.14901960784313725" blue="0.52549019607843139" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="256" id="Vti-VZ-AHE"/>
-                                    <constraint firstAttribute="height" constant="50" id="Xl7-Wc-xe9"/>
-                                </constraints>
                                 <connections>
                                     <segue destination="f0J-dt-obS" kind="show" id="IJv-KD-pUN"/>
                                 </connections>
@@ -105,7 +101,7 @@
                                     <action selector="loginWithFacebook:" destination="SYN-SO-o9u" eventType="touchUpInside" id="q7N-hg-Zws"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UDx-oy-AWJ">
+                            <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UDx-oy-AWJ">
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_facebook" translatesAutoresizingMaskIntoConstraints="NO" id="g7g-zO-Aix">
                                         <constraints>
@@ -118,7 +114,7 @@
                                             <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                             <bool key="isElement" value="NO"/>
                                         </accessibility>
-                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Quicksand-Bold" family="Quicksand" pointSize="15"/>
                                         <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -143,8 +139,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.85882352939999995" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="hpu-dB-yEH" firstAttribute="height" secondItem="i7p-3E-FFI" secondAttribute="height" id="ADW-eo-W98"/>
                             <constraint firstItem="rWn-vE-A9K" firstAttribute="centerY" secondItem="WMn-l3-IfL" secondAttribute="centerY" multiplier="0.32" id="Dt5-eD-3vV"/>
                             <constraint firstItem="qiQ-fa-8i1" firstAttribute="centerY" secondItem="hpu-dB-yEH" secondAttribute="centerY" id="EAm-JB-ryq"/>
+                            <constraint firstItem="hpu-dB-yEH" firstAttribute="width" secondItem="i7p-3E-FFI" secondAttribute="width" id="Ebr-lb-wKG"/>
                             <constraint firstItem="qiQ-fa-8i1" firstAttribute="centerX" secondItem="hpu-dB-yEH" secondAttribute="centerX" id="Fdj-KY-rqP"/>
                             <constraint firstItem="cON-ZT-ipJ" firstAttribute="top" secondItem="rWn-vE-A9K" secondAttribute="bottom" constant="26" id="LMD-Sb-3fH"/>
                             <constraint firstItem="hpu-dB-yEH" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="URp-TT-Rpf"/>

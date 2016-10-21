@@ -180,17 +180,20 @@ class ReadingDayViewController: UIViewController {
                     return object.value(forKey: "idReading")
                 }
                 
-                let allReadings: [UserReading] = DBManager.getAll()
+                let allReadings: [Reading] = DBManager.getAll()
                 
                 let allReadingsDataBaseId = allReadings.map { (object) -> Any in
-                    return object.value(forKey: "idReading")
+                    return object.value(forKey: "id")
                 }
                 
-                let readingsId = zip(userReadingsRequestIds as! [String], allReadingsDataBaseId as! [String]).filter() {
-                    $0 == $1
-                    }.map{$0.0}
+
+                let allReadingsId = userReadingsRequestIds as! [String]
+                let allDataBaseId = allReadingsDataBaseId as! [String]
                 
-                
+                let readingsId = allReadingsId.filter{
+                    item in !allDataBaseId.contains(item)
+                }
+            
                 completionHandler(true, "Get Readings Id User Success", readingsId)
                 
             } else {
@@ -201,8 +204,42 @@ class ReadingDayViewController: UIViewController {
             
         }
     }
+//    
+//    func getReadings (readingsIds: [String], user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
+//        
+//        if readingsIds.count > 0 {
+//            
+//            ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
+//                
+//                if success {
+//                    self.view.unload()
+//                    if readings!.count > 0 {
+//                        
+//                        for reading in readings! {
+//                            DBManager.addObjc(reading)
+//                        }
+//                        
+//                        
+//                    } else {
+//                        
+//                        
+//                    }
+//                    
+//                } else {
+//                    
+//                    
+//                    print ("MSG ERROR: \(msg)")
+//                    
+//                }
+//            }
+//        } else {
+//            
+//            print ("READINGS IDS VAZIO")
+//        }
+//    }
+
     
-    func getReadings (readingsIds: [String], user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
+    func getReadingOfTheDay (user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
         
         let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
         
@@ -300,7 +337,9 @@ class ReadingDayViewController: UIViewController {
                 
                 
                     if success {
-                        self.getReadings(readingsIds: readingsId!, user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingDay) in
+                        
+                        
+                        self.getReadingOfTheDay(user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingDay) in
                     
                             if success {
                             
@@ -466,9 +505,7 @@ class ReadingDayViewController: UIViewController {
     
     func shareReading(_ sender: UIButton) {
         
-    
         let activity = UIActivityViewController(activityItems: ["\(self.readingDay!.title!) \(self.readingDay!.content!)"], applicationActivities: nil)
-        
         
         let excludeActivities = [UIActivityType.postToFacebook, UIActivityType.postToTwitter, UIActivityType.message, UIActivityType.mail]
         

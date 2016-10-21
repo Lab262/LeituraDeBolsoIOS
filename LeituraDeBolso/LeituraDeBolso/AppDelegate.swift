@@ -12,6 +12,8 @@ import Realm
 import RealmSwift
 import FBSDKCoreKit
 import UserNotifications
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -77,29 +79,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
 
-
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func setInitialViewController() {
         
         let mainStoryboard: UIStoryboard?
         
-        self.setupBarsAppearance()
-    
-        
         if ApplicationState.sharedInstance.currentUser?.token != nil {
             
-             mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             
-    
+            mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            
         } else {
             
-             mainStoryboard = UIStoryboard(name: "Login", bundle: nil)
+            mainStoryboard = UIStoryboard(name: "Login", bundle: nil)
         }
         
         self.navigationController = mainStoryboard?.instantiateViewController(withIdentifier: "navigation")
         
-
         self.window!.rootViewController = navigationController
+        
+    }
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        Fabric.with([Crashlytics.self])
+        Crashlytics.sharedInstance().crash()
+        
+        self.setupBarsAppearance()
+        
+        self.setInitialViewController()
         
         self.launchScreenAnimation()
 

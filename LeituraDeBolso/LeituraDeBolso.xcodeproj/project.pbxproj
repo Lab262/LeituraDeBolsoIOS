@@ -1020,6 +1020,7 @@
 				D448B3981D6E8EA500F3DF51 /* Resources */,
 				52F0202CE661F4625B1162E6 /* [CP] Embed Pods Frameworks */,
 				AA37292F6334A842B2E0878D /* [CP] Copy Pods Resources */,
+				D4ACE7E11DBA91AE00DDB93F /* Fabric */,
 			);
 			buildRules = (
 			);
@@ -1386,6 +1387,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LeituraDeBolsoTests/Pods-LeituraDeBolsoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		D4ACE7E11DBA91AE00DDB93F /* Fabric */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Fabric;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 2e1985f6065c4886c2f4320a20fb61e3c4323688 d2624afd5979642eef8ae5ce2ae3ee1eb86983da95e3c602e865668bb7b4bf8b";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1582,6 +1597,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 10;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = R6AP92RETV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

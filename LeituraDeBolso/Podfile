@@ -5,6 +5,8 @@ use_frameworks!
 target 'LeituraDeBolso' do
   pod 'Alamofire', '~> 4.0’
   pod 'RealmSwift', '~> 2.0.0'
+  pod 'Fabric'
+  pod 'Crashlytics'
 end
 
 target 'LeituraDeBolsoTests' do

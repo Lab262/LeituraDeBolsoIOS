@@ -66,7 +66,7 @@ class ReadingDayViewController: UIViewController {
     
     func getReadingsUnreadCount () -> Int {
         
-        let allReadings: [Reading] = DBManager.getAll().reversed()
+        let allReadings: [Reading] = DBManager.getAll()
         var readingsUnread = [Reading]()
         
         if !allReadings.isEmpty {
@@ -204,39 +204,42 @@ class ReadingDayViewController: UIViewController {
             
         }
     }
-//    
-//    func getReadings (readingsIds: [String], user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
-//        
-//        if readingsIds.count > 0 {
-//            
-//            ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
-//                
-//                if success {
-//                    self.view.unload()
-//                    if readings!.count > 0 {
-//                        
-//                        for reading in readings! {
-//                            DBManager.addObjc(reading)
-//                        }
-//                        
-//                        
-//                    } else {
-//                        
-//                        
-//                    }
-//                    
-//                } else {
-//                    
-//                    
-//                    print ("MSG ERROR: \(msg)")
-//                    
-//                }
-//            }
-//        } else {
-//            
-//            print ("READINGS IDS VAZIO")
-//        }
-//    }
+    
+    func getReadings (readingsIds: [String], user: User, completionHandler: @escaping (_ success: Bool, _ msg: String) -> Void) {
+        
+        if readingsIds.count > 0 {
+            
+            ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
+                
+                if success {
+                    self.view.unload()
+                    if readings!.count > 0 {
+                        
+                        for reading in readings! {
+                            DBManager.addObjc(reading)
+                        }
+                        
+                        completionHandler(true, "Get Readings sucesso")
+                    
+                    } else {
+                        
+                        completionHandler(true, "Sem user readings pra baixar")
+                        
+                        
+                    }
+                    
+                } else {
+  
+                     completionHandler(true, "Erro de conexão")
+                    
+                }
+            }
+        } else {
+            
+            completionHandler(true, "Não há ids diferentes.")
+
+        }
+    }
 
     
     func getReadingOfTheDay (user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
@@ -250,9 +253,9 @@ class ReadingDayViewController: UIViewController {
                         
                         for reading in readings! {
                             
-                            self.createUserReading(user: user, reading: reading)
+                            self.createUserReading(user: user, idReading: reading.id!)
                             
-                            self.createUserReadingInDataBase(user: user, reading: reading)
+                            self.createUserReadingInDataBase(user: user, idReading: reading.id!)
                             
                             DBManager.addObjc(reading)
                         }
@@ -280,32 +283,36 @@ class ReadingDayViewController: UIViewController {
                     print ("SEM SUCESSO")
                     let readings : [Reading] = DBManager.getAll()
                     
-                    completionHandler(true, "MSG ERROR: \(msg)", readings.first)
+                    completionHandler(true, "MSG ERROR: \(msg)", readings.last)
                 }
             }
             
         }
     
 
-    func createUserReadingInDataBase (user: User, reading: Reading) {
+    func createUserReadingInDataBase (user: User, idReading: String) {
         
         let userReading = UserReading()
-        userReading.idReading = reading.id
+        userReading.idReading = idReading
         userReading.isShared = false
         userReading.isFavorite = false
         userReading.alreadyRead = false
         
         try! Realm().write {
-        
             user.userReadings.append(userReading)
         }
         
         DBManager.addObjc(user)
     }
     
-    func createUserReading (user: User, reading: Reading) {
+    func getLastReadingInDataBase() {
+        let readings : [Reading] = DBManager.getAll()
+        self.readingDay = readings.last
+    }
+    
+    func createUserReading (user: User, idReading: String) {
         
-        UserReadingRequest.createUserReading(readingId: reading.id!, isFavorite: false, alreadyRead: false) { (success, msg) in
+        UserReadingRequest.createUserReading(readingId: idReading, isFavorite: false, alreadyRead: false) { (success, msg) in
             
             if success {
                
@@ -318,81 +325,117 @@ class ReadingDayViewController: UIViewController {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    func saveUserReadings(readingsIds: [String]) {
         
-        self.tableView.reloadData()
+        for readingId in readingsIds {
+            self.createUserReading(user: ApplicationState.sharedInstance.currentUser!, idReading: readingId)
+            self.createUserReadingInDataBase(user: ApplicationState.sharedInstance.currentUser!, idReading: readingId)
+        }
         
+    }
+    
+    func getReadingOfTheDayByDaysCount(user: User, days: Int, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void)  {
+        
+        ReadingRequest.getReadingsOfTheDay(readingsAmount: days) { (success, msg, readings) in
+            if success {
+                if readings!.count > 0 {
+                    for reading in readings! {
+                        self.createUserReading(user: user, idReading: reading.id!)
+                        self.createUserReadingInDataBase(user: user, idReading: reading.id!)
+                        DBManager.addObjc(reading)
+                    }
+                    
+                    let readings: [Reading] = DBManager.getAll()
+                    
+                    self.saveCurrentSessionInTimeInterval(user: ApplicationState.sharedInstance.currentUser!)
+                    
+                    completionHandler(true, "Leituras salvas", readings.last)
+                    
+                } else {
+                    
+                    print ("Sem leituras para baixar.")
+                    
+                    let readings : [Reading] = DBManager.getAll()
+                    
+                    self.saveCurrentSessionInTimeInterval(user: ApplicationState.sharedInstance.currentUser!)
+                    
+                    completionHandler(true, "Sem Leituras", readings.last)
+                }
+                
+            } else {
+                
+                print ("SEM SUCESSO")
+                let readings : [Reading] = DBManager.getAll()
+                
+                completionHandler(true, "MSG ERROR: \(msg)", readings.last)
+            }
+        }
+    }
+    
+    func updateBadgesAndIcon() {
         let readingsUnreadCount = self.getReadingsUnreadCount()
         self.updateBadgeNumber(badgeCount: readingsUnreadCount)
         self.updateIconHistorical(unreadsCount: readingsUnreadCount)
+    }
+    
+    func getReading(){
         
         if Reachability().isInternetAvailable() {
-            
-            let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
-        
-            if days != 0 {
-            
+            if isReadingDay {
                 self.view.loadAnimation()
-                self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingsId) in
+            }
+            self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingsId) in
                 
-                
-                    if success {
-                        
-                        
-                        self.getReadingOfTheDay(user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingDay) in
-                    
-                            if success {
-                            
-                                self.view.unload()
-                            
-                                if readingDay?.id == nil {
-                                    let readings : [Reading] = DBManager.getAll()
-                                    self.readingDay = readings.last
-                            
-                                } else {
-                                
-                                    self.readingDay = readingDay!
-                        
-                                    if !(ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: readingDay!.id!))! {
-                                    
-                                        self.setAlreadyRead()
-                                    }
-                                    self.view.unload()
-                                    self.tableView.reloadData()
-                                }
-                            } else {
-                            
-                                self.view.unload()
-                                let readings : [Reading] = DBManager.getAll()
-                                self.readingDay = readings.last
-                                self.tableView.reloadData()
-
-                            }
-                        })
+                if success {
+                    if readingsId!.count > 0 {
+                        self.saveUserReadings(readingsIds: readingsId!)
                     } else {
-                        self.view.unload()
-                        let readings : [Reading] = DBManager.getAll()
-                        self.readingDay = readings.last
-                        self.tableView.reloadData()
-                    
-                        print ("GET READINGS ID FAIL")
+                        let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
+                        
+                        if days != 0 {
+                            self.getReadingOfTheDayByDaysCount(user: ApplicationState.sharedInstance.currentUser!, days: days, completionHandler: { (success, msg, readingDay) in
+                                
+                                if success {
+                                    
+                                    if self.isReadingDay {
+                                        self.view.unload()
+                                        self.readingDay = readingDay!
+                                        
+                                        if !(ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: readingDay!.id!))! {
+                                            
+                                            self.setAlreadyRead()
+                                        }
+                                        self.tableView.reloadData()
+                                    }
+                                }
+                            })
+                        } else {
+                            if self.isReadingDay {
+                                self.view.unload()
+                                self.getLastReadingInDataBase()
+                                self.tableView.reloadData()
+                            }
+                        }
                     }
-                
-                })
-            } else if self.isReadingDay {
-            
-                self.view.unload()
-                let readings : [Reading] = DBManager.getAll()
-                self.readingDay = readings.last
-            }
+                } else {
+                    if self.isReadingDay {
+                        self.view.unload()
+                        self.getLastReadingInDataBase()
+                        self.tableView.reloadData()
+                    }
+                }
+            })
         } else {
-            
-            if self.isReadingDay {
-                let readings : [Reading] = DBManager.getAll()
-                self.readingDay = readings.last
-            }
-           
+            self.getLastReadingInDataBase()
+            self.tableView.reloadData()
         }
+  
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.updateBadgesAndIcon()
+        self.getReading()
         
         if ApplicationState.sharedInstance.currentUser!.isModeNight {
             self.setNightMode()

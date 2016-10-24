@@ -35,6 +35,7 @@ platform :ios do
     increment_build_number
     gym(scheme: "LeituraDeBolso",include_bitcode: false, clean: true)
     pilot(skip_waiting_for_build_processing: true)
+    slack(message: 'Successfully distributed a new beta build', slack_url: "https://hooks.slack.com/services/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")
 
     # sh "your_script.sh"
     # You can also use other beta testing services here (run `fastlane actions`)
@@ -47,6 +48,7 @@ platform :ios do
     # snapshot
     gym(scheme: "LeituraDeBolso", use_legacy_build_api: true) # Build your app - more options available
     deliver(force: true)
+    slack(message: 'Successfully released a new App Store build', slack_url: "https://hooks.slack.com/services/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")
     # frameit
   end
 

@@ -2,7 +2,6 @@ app_identifier "com.lab262.leituraDeBolso" # The bundle identifier of your app
 apple_id "huallyd@gmail.com" # Your Apple email address
 
 team_id "R6AP92RETV"  # Developer Portal Team ID
-
 itc_team_name "Huallyd Smadi"
 # you can even provide different app identifiers, Apple IDs and team names per lane:
 # More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md

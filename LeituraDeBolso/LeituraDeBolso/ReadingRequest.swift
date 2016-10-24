@@ -66,9 +66,6 @@ class ReadingRequest: NSObject {
                         
                         completionHandler(true, "Sucesso", allReadings)
                         
-                    } else {
-                        
-                        completionHandler(false, data["message"] as! String, nil)
                     }
                     
                 default:
@@ -89,9 +86,6 @@ class ReadingRequest: NSObject {
             case .failure(_):
                 
                 completionHandler(false, "NETWORK ERROR", nil)
-                
-                break
-                
             }
             
         }

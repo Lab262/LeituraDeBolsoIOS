@@ -15,9 +15,7 @@ class HeadingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var emojiOneLabel: UILabel!
-    @IBOutlet weak var emojiTwoLabel: UILabel!
-    @IBOutlet weak var emojiThreeLabel: UILabel!
+   
     
     
     var reading: Reading? {
@@ -70,23 +68,6 @@ class HeadingTableViewCell: UITableViewCell {
         self.titleLabel.text = self.reading?.title
         self.timeLabel.text = ("\(self.reading!.duration.description) min")
         
-        if self.reading?.emojis.count == 1 {
-            self.emojiOneLabel.text = self.reading?.emojis[0].getEmojiByUniCode()
-            self.emojiTwoLabel.text = ""
-            self.emojiThreeLabel.text = ""
-        } else if self.reading?.emojis.count == 2 {
-            self.emojiOneLabel.text = self.reading?.emojis[0].getEmojiByUniCode()
-            self.emojiTwoLabel.text = self.reading?.emojis[1].getEmojiByUniCode()
-            self.emojiThreeLabel.text = ""
-        } else if self.reading?.emojis.count == 3 {
-            self.emojiOneLabel.text = self.reading?.emojis[0].getEmojiByUniCode()
-            self.emojiTwoLabel.text = self.reading?.emojis[1].getEmojiByUniCode()
-            self.emojiThreeLabel.text = self.reading?.emojis[2].getEmojiByUniCode()
-        } else {
-            self.emojiOneLabel.text = ""
-            self.emojiTwoLabel.text = ""
-            self.emojiThreeLabel.text = ""
-        }
         
     }
 

@@ -16,7 +16,10 @@ import Fabric
 import Crashlytics
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+
 
     var window: UIWindow?
     var maskBgView = UIView()

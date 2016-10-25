@@ -25,9 +25,9 @@ class UserReading: Object {
         self.setDataFromWS(data: data)
     }
     
-    override static func primaryKey() -> String? {
-        return "idReading"
-    }
+//    override static func primaryKey() -> String? {
+//        return "idReading"
+//    }
     
     func setDataFromWS(data: (Dictionary<String, AnyObject>)) {
         

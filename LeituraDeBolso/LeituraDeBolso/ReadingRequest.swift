@@ -97,7 +97,7 @@ class ReadingRequest: NSObject {
         var allReadings = [Reading]()
 
         var urlParams = [
-            "skip":"0",
+            "page":"0",
             "limit":String(readingsAmount)]
 
         if readingsIds.count > 0 {

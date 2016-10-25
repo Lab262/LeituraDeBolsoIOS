@@ -26,12 +26,7 @@ class HistoricalReadingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var viewLine: UIView!
     
-    
-    @IBOutlet weak var emojiOneLabel: UILabel!
-    
-    @IBOutlet weak var emojiTwoLabel: UILabel!
-    
-    @IBOutlet weak var emojiThreeLabel: UILabel!
+
 
     @IBOutlet weak var authorLabel: UILabel!
     
@@ -70,24 +65,6 @@ class HistoricalReadingTableViewCell: UITableViewCell {
         self.titleLabel.text = self.reading?.title
         self.authorLabel.text = self.reading?.author
         
-        if self.reading?.emojis.count == 1 {
-            self.emojiOneLabel.text = self.reading?.emojis[0].getEmojiByUniCode()
-            self.emojiTwoLabel.text = ""
-            self.emojiThreeLabel.text = ""
-        } else if self.reading?.emojis.count == 2 {
-            self.emojiOneLabel.text = self.reading?.emojis[0].getEmojiByUniCode()
-            self.emojiTwoLabel.text = self.reading?.emojis[1].getEmojiByUniCode()
-            self.emojiThreeLabel.text = ""
-        } else if self.reading?.emojis.count == 3 {
-            self.emojiOneLabel.text = self.reading?.emojis[0].getEmojiByUniCode()
-            self.emojiTwoLabel.text = self.reading?.emojis[1].getEmojiByUniCode()
-            self.emojiThreeLabel.text = self.reading?.emojis[2].getEmojiByUniCode()
-        } else {
-            self.emojiOneLabel.text = ""
-            self.emojiTwoLabel.text = ""
-            self.emojiThreeLabel.text = ""
-        }
-
         
     }
     

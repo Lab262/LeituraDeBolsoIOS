@@ -136,7 +136,7 @@ extension EntrySelectionViewController {
         let allReadings: [Reading] = DBManager.getAll()
         let allReadingsDataBaseId = allReadings.map { (object) -> Any in
             
-            return object.value(forKey: "idReading")
+            return object.value(forKey: "id")
         }
         
         let allReadingsId = allReadingsIdUser as! [String]

@@ -58,7 +58,7 @@ class Reading: Object {
         
         let allReadingsId = allReadings.map { (object) -> Any in
             
-            return object.value(forKey: propertyName)
+            return object.value(forKey: propertyName) as Any
             
         }
         return allReadingsId

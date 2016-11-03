@@ -65,7 +65,7 @@ class User: Object {
         
         let allReadingsId = allReadings.map { (object) -> Any in
             
-            return object.value(forKey: propertyName)
+            return object.value(forKey: propertyName) as Any
         }
         return allReadingsId
     }
@@ -97,6 +97,7 @@ class User: Object {
     func readingAlreadyRead (id:String) -> Bool? {
         
         if let reading = self.getUserReadingById(id: id) {
+            
             if reading.alreadyRead {
                 return true
             } else {
@@ -104,23 +105,60 @@ class User: Object {
             }
         }
         
-        return nil
-        
+        return false
     }
+    
+    func createUserReading (idReading: String) {
+        
+        UserReadingRequest.createUserReading(readingId: idReading, isFavorite: false, alreadyRead: false) { (success, msg) in
+            
+            if success {
+                print ("USER READING CRIADO: \(msg)")
+            } else {
+                print ("USER READING NÃO CRIADO: \(msg)")
+                
+            }
+        }
+    }
+
+    func createUserReadingInDataBase (idReading: String) {
+        
+        let userReading = UserReading()
+        userReading.idReading = idReading
+        userReading.isShared = false
+        userReading.isFavorite = false
+        userReading.alreadyRead = false
+        
+        try! Realm().write {
+            self.userReadings.append(userReading)
+        }
+        
+        DBManager.addObjc(self)
+    }
+    
     
     func getUserReadingById (id: String) -> UserReading? {
         
         var userReadingsById = [UserReading]()
+        
+        
         userReadingsById = self.userReadings.filter() {
+            
             $0.idReading!.localizedCaseInsensitiveContains(id)
         }
         
         if !userReadingsById.isEmpty {
             let userReading = userReadingsById.first
             return userReading!
+        } else {
+            
+            self.createUserReadingInDataBase(idReading: id)
+            self.createUserReading(idReading: id)
+            
+            return getUserReadingById(id: id)
+
         }
         
-        return nil
     }
     
     func setFavoriteReading(id: String, isFavorite: Bool) {

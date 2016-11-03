@@ -333,7 +333,7 @@ extension LoginViewController {
             
         let allReadingsDataBaseId = allReadings.map { (object) -> Any in
                 
-            return object.value(forKey: "id")
+            return object.value(forKey: "id") as Any
         }
     
         let allReadingsId = allReadingsIdUser as! [String]

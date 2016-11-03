@@ -83,7 +83,7 @@ class EntrySelectionViewController: UIViewController {
                 
                 if (error == nil) {
                     
-                    print(result)
+                    print(result as Any)
                     
                     let data:[String:AnyObject] = result as! [String : AnyObject]
            
@@ -136,7 +136,7 @@ extension EntrySelectionViewController {
         let allReadings: [Reading] = DBManager.getAll()
         let allReadingsDataBaseId = allReadings.map { (object) -> Any in
             
-            return object.value(forKey: "id")
+            return object.value(forKey: "id")!
         }
         
         let allReadingsId = allReadingsIdUser as! [String]

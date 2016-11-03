@@ -67,10 +67,12 @@ class ReadingDayViewController: UIViewController {
     func getReadingsUnreadCount () -> Int {
         
         let allReadings: [Reading] = DBManager.getAll()
+        
         var readingsUnread = [Reading]()
         
         if !allReadings.isEmpty {
             readingsUnread = allReadings.filter {
+                
                 !ApplicationState.sharedInstance.currentUser!.readingAlreadyRead(id: $0.id!)!
             }
         }
@@ -78,6 +80,7 @@ class ReadingDayViewController: UIViewController {
         
         return readingsUnread.count
     }
+    
     
     func setupBadgeNumberPermissions() {
         
@@ -155,7 +158,7 @@ class ReadingDayViewController: UIViewController {
         
         let allReadingsDataBaseId = allReadings.map { (object) -> Any in
             
-            return object.value(forKey: "idReading")
+            return object.value(forKey: "idReading") as Any
         }
         
         let allReadingsId = allReadingsIdUser as! [String]
@@ -198,7 +201,7 @@ class ReadingDayViewController: UIViewController {
                 
                 let allReadingsDataBaseId = allReadings.map { (object) -> Any in
                     
-                    return object.value(forKey: "id")
+                    return object.value(forKey: "id") as Any
                 }
                 
                 let allReadingsId = allReadingsIdUser as! [String]
@@ -261,9 +264,8 @@ class ReadingDayViewController: UIViewController {
                         
                         for reading in readings! {
                             
-                            self.createUserReading(user: user, idReading: reading.id!)
-                            
-                            self.createUserReadingInDataBase(user: user, idReading: reading.id!)
+                            user.createUserReadingInDataBase(idReading: reading.id!)
+                            user.createUserReading(idReading: reading.id!)
                             
                             DBManager.addObjc(reading)
                         }
@@ -298,53 +300,49 @@ class ReadingDayViewController: UIViewController {
         }
     
 
-    func createUserReadingInDataBase (user: User, idReading: String) {
-        
-        let userReading = UserReading()
-        userReading.idReading = idReading
-        userReading.isShared = false
-        userReading.isFavorite = false
-        userReading.alreadyRead = false
-        
-        
-        // Updating book with id = 1
-        
-        
-        try! Realm().write {
-            user.userReadings.append(userReading)
-        }
-        
-        DBManager.addObjc(user)
-    }
+//    func createUserReadingInDataBase (user: User, idReading: String) {
+//        
+//        let userReading = UserReading()
+//        userReading.idReading = idReading
+//        userReading.isShared = false
+//        userReading.isFavorite = false
+//        userReading.alreadyRead = false
+//        
+//        try! Realm().write {
+//            user.userReadings.append(userReading)
+//        }
+//        
+//        DBManager.addObjc(user)
+//    }
     
     func getLastReadingInDataBase() {
         let readings : [Reading] = DBManager.getAll()
         self.readingDay = readings.last
     }
     
-    func createUserReading (user: User, idReading: String) {
-        
-        UserReadingRequest.createUserReading(readingId: idReading, isFavorite: false, alreadyRead: false) { (success, msg) in
-            
-            if success {
-               
-                print ("USER READING CRIADO: \(msg)")
-            } else {
-                
-                print ("USER READING NÃO CRIADO: \(msg)")
-                
-            }
-        }
-    }
+//    func createUserReading (user: User, idReading: String) {
+//        
+//        UserReadingRequest.createUserReading(readingId: idReading, isFavorite: false, alreadyRead: false) { (success, msg) in
+//            
+//            if success {
+//               
+//                print ("USER READING CRIADO: \(msg)")
+//            } else {
+//                
+//                print ("USER READING NÃO CRIADO: \(msg)")
+//                
+//            }
+//        }
+//    }
 
-    func saveUserReadings(readingsIds: [String]) {
-        
-        for readingId in readingsIds {
-            self.createUserReading(user: ApplicationState.sharedInstance.currentUser!, idReading: readingId)
-            self.createUserReadingInDataBase(user: ApplicationState.sharedInstance.currentUser!, idReading: readingId)
-        }
-        
-    }
+//    func saveUserReadings(readingsIds: [String]) {
+//        
+//        for readingId in readingsIds {
+//            self.createUserReading(user: ApplicationState.sharedInstance.currentUser!, idReading: readingId)
+//            self.createUserReadingInDataBase(user: ApplicationState.sharedInstance.currentUser!, idReading: readingId)
+//        }
+//        
+//    }
     
     func getReadingOfTheDayByDaysCount(user: User, days: Int, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void)  {
         
@@ -352,8 +350,8 @@ class ReadingDayViewController: UIViewController {
             if success {
                 if readings!.count > 0 {
                     for reading in readings! {
-                        self.createUserReading(user: user, idReading: reading.id!)
-                        self.createUserReadingInDataBase(user: user, idReading: reading.id!)
+                        user.createUserReading(idReading: reading.id!)
+                        user.createUserReadingInDataBase(idReading: reading.id!)
                         DBManager.addObjc(reading)
                     }
                     
@@ -408,11 +406,7 @@ class ReadingDayViewController: UIViewController {
                             
                                     self.setAlreadyRead()
                                 }
-                                self.tableView.reloadData()
-                            } else {
-                                self.tableView.reloadData()
                             }
-                        
                         }
                     }
                 })
@@ -420,11 +414,12 @@ class ReadingDayViewController: UIViewController {
                 if self.isReadingDay {
                     self.view.unload()
                     self.getLastReadingInDataBase()
-                    self.tableView.reloadData()
                 }
+            
             }
         
-        }
+        self.tableView.reloadData()
+    }
     
     func getReading() {
         
@@ -466,6 +461,7 @@ class ReadingDayViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         self.updateBadgesAndIcon()
+        
         self.getReading()
         
         if ApplicationState.sharedInstance.currentUser!.isModeNight {

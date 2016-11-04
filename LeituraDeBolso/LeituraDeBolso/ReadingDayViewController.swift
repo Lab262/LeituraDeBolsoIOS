@@ -405,6 +405,7 @@ class ReadingDayViewController: UIViewController {
                                 if !(ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: readingDay!.id!))! {
                             
                                     self.setAlreadyRead()
+                                    self.tableView.reloadData()
                                 }
                             }
                         }

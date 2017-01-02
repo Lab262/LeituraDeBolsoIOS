@@ -20,6 +20,7 @@ class ReadingDayViewController: UIViewController {
     var allReadings = [Reading]()
     var isGrantedNotificationAccess: Bool?
     var isReadingDay = true
+    var daysAway: Int?
     
     @IBOutlet weak var historicalIcon: UIBarButtonItem!
     
@@ -98,7 +99,7 @@ class ReadingDayViewController: UIViewController {
         self.tableView.layoutIfNeeded()
     }
     
-    func setNormalMode () {
+    func setNormalMode() {
         
         self.view.backgroundColor = UIColor.white
         self.tableView.backgroundColor = UIColor.white
@@ -106,14 +107,13 @@ class ReadingDayViewController: UIViewController {
         self.tableView.layoutIfNeeded()
     }
     
-    func saveCurrentSessionInTimeInterval (user: User) {
+    func saveCurrentSessionInTimeInterval() {
         
         try! Realm().write {
-            user.lastSessionTimeInterval = NSDate().timeIntervalSince1970
+            ApplicationState.sharedInstance.currentUser!.lastSessionTimeInterval = NSDate().timeIntervalSince1970
         }
         
         DBManager.update(ApplicationState.sharedInstance.currentUser!)
-        
     }
     
     func getDifferenceDays (user: User) -> Int {
@@ -253,52 +253,55 @@ class ReadingDayViewController: UIViewController {
     }
 
     
-    func getReadingOfTheDay (user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
-        
-        let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
-        
-        ReadingRequest.getReadingsOfTheDay(readingsAmount: days) { (success, msg, readings) in
-                if success {
-                    
-                    if readings!.count > 0 {
-                        
-                        for reading in readings! {
-                            
-                            user.createUserReadingInDataBase(idReading: reading.id!)
-                            user.createUserReading(idReading: reading.id!)
-                            
-                            DBManager.addObjc(reading)
-                        }
-                        
-                        
-                        self.saveCurrentSessionInTimeInterval(user: ApplicationState.sharedInstance.currentUser!)
-                        
-                        let readings: [Reading] = DBManager.getAll()
-                        
-                        completionHandler(true, "Leituras salvas", readings.last)
-                        
-                    } else {
-                        
-                        print ("Sem leituras para baixar.")
-                        
-                        let readings : [Reading] = DBManager.getAll()
-                        
-                        self.saveCurrentSessionInTimeInterval(user: ApplicationState.sharedInstance.currentUser!)
-                        
-                        completionHandler(true, "Sem Leituras", readings.last)
-                    }
-                    
-                } else {
-                    
-                    print ("SEM SUCESSO")
-                    let readings : [Reading] = DBManager.getAll()
-                    
-                    completionHandler(true, "MSG ERROR: \(msg)", readings.last)
-                }
-            }
-            
-        }
-    
+//    func getReadingOfTheDay (user: User, completionHandler: @escaping (_ success: Bool, _ msg: String, _ readingDay: Reading?) -> Void) {
+//        
+//        let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
+//        
+//        ReadingRequest.getReadingsOfTheDay(readingsAmount: days) { (success, msg, readings) in
+//                if success {
+//                    
+//                    if readings!.count > 0 {
+//                        
+//                        for reading in readings! {
+//                            
+//                            user.createUserReadingInDataBase(idReading: reading.id!)
+//                            user.createUserReading(idReading: reading.id!)
+//                            
+//                            DBManager.addObjc(reading)
+//                        }
+//                        
+//                        
+//                        self.saveCurrentSessionInTimeInterval()
+//                        let readings: [Reading] = DBManager.getAll()
+//                        
+//                        completionHandler(true, "Leituras salvas", readings.last)
+//                        
+//                    } else {
+//                        
+//                        print ("Sem leituras para baixar.")
+//                        
+//                        let readings : [Reading] = DBManager.getAll()
+//                        
+//                        self.saveCurrentSessionInTimeInterval()
+//                        
+//                        completionHandler(true, "Sem Leituras", readings.last)
+//                    }
+//                    
+//                } else {
+//                    
+//                    if msg != NETWORK_ERROR {
+//                        self.saveCurrentSessionInTimeInterval()
+//                    }
+//                    
+//                    print ("SEM SUCESSO")
+//                    let readings : [Reading] = DBManager.getAll()
+//                    
+//                    completionHandler(true, "MSG ERROR: \(msg)", readings.last)
+//                }
+//            }
+//            
+//        }
+//    
 
 //    func createUserReadingInDataBase (user: User, idReading: String) {
 //        
@@ -357,7 +360,7 @@ class ReadingDayViewController: UIViewController {
                     
                     let readings: [Reading] = DBManager.getAll()
                     
-                    self.saveCurrentSessionInTimeInterval(user: ApplicationState.sharedInstance.currentUser!)
+                    self.saveCurrentSessionInTimeInterval()
                     
                     completionHandler(true, "Leituras salvas", readings.last)
                     
@@ -367,12 +370,17 @@ class ReadingDayViewController: UIViewController {
                     
                     let readings : [Reading] = DBManager.getAll()
                     
-                    self.saveCurrentSessionInTimeInterval(user: ApplicationState.sharedInstance.currentUser!)
+                    self.saveCurrentSessionInTimeInterval()
+                    //self.saveCurrentSessionInTimeInterval(user: ApplicationState.sharedInstance.currentUser!)
                     
                     completionHandler(true, "Sem Leituras", readings.last)
                 }
                 
             } else {
+                
+                if msg != NETWORK_ERROR {
+                    self.saveCurrentSessionInTimeInterval()
+                }
                 
                 print ("SEM SUCESSO")
                 let readings : [Reading] = DBManager.getAll()
@@ -390,10 +398,10 @@ class ReadingDayViewController: UIViewController {
     
     func getReadingDay() {
         
-        let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
-        
-        if days != 0 {
-            self.getReadingOfTheDayByDaysCount(user: ApplicationState.sharedInstance.currentUser!, days: days, completionHandler: { (success, msg, readingDay) in
+//        let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
+//        
+//        if days != 0 {
+            self.getReadingOfTheDayByDaysCount(user: ApplicationState.sharedInstance.currentUser!, days: self.daysAway!, completionHandler: { (success, msg, readingDay) in
                 
                 if success {
                     
@@ -405,29 +413,33 @@ class ReadingDayViewController: UIViewController {
                                 if !(ApplicationState.sharedInstance.currentUser?.readingAlreadyRead(id: readingDay!.id!))! {
                             
                                     self.setAlreadyRead()
-                                    self.tableView.reloadData()
                                 }
+                                
+                                self.tableView.reloadData()
                             }
                         }
                     }
                 })
-            } else {
-                if self.isReadingDay {
-                    self.view.unload()
-                    self.getLastReadingInDataBase()
-                }
-            
-            }
+//            } else {
+//                if self.isReadingDay {
+//                    self.view.unload()
+//                    self.getLastReadingInDataBase()
+//                }
+//            
+//            }
         
         self.tableView.reloadData()
     }
     
     func getReading() {
         
-        if Reachability().isInternetAvailable() {
+        let days = self.getDifferenceDays(user: ApplicationState.sharedInstance.currentUser!)
+        
+        if Reachability().isInternetAvailable() && days != 0 {
             if isReadingDay {
                 self.view.loadAnimation()
             }
+            self.daysAway = days
             self.getReadingsIdUser(user: ApplicationState.sharedInstance.currentUser!, completionHandler: { (success, msg, readingsId) in
                 
                 if success {
@@ -453,9 +465,12 @@ class ReadingDayViewController: UIViewController {
                 }
             })
         } else {
-            self.getLastReadingInDataBase()
+            if readingDay?.title == nil {
+                self.getLastReadingInDataBase()
+            }
             self.tableView.reloadData()
         }
+        
   
     }
 

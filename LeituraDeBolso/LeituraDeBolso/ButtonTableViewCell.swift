@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ButtonTableViewCell: UITableViewCell {
     
     static let identifier = "buttonCell"
@@ -25,5 +26,6 @@ class ButtonTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
     
 }

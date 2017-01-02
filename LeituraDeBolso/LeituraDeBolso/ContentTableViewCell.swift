@@ -36,13 +36,14 @@ class ContentTableViewCell: UITableViewCell {
      override func layoutSubviews() {
         
         self.contentReadingLabel.setSizeFont(ApplicationState.sharedInstance.currentUser!.sizeFont)
+        //self.contentReadingLabel.textAlignment = .justified
         
     }
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.contentReadingLabel.textAlignment = .justified
    
     }
 

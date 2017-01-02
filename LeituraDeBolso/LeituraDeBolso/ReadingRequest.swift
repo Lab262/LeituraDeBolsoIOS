@@ -85,7 +85,7 @@ class ReadingRequest: NSObject {
                 
             case .failure(_):
                 
-                completionHandler(false, "NETWORK ERROR", nil)
+                completionHandler(false, NETWORK_ERROR, nil)
             }
             
         }

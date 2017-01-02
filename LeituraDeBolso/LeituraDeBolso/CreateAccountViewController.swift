@@ -216,7 +216,7 @@ class CreateAccountViewController: UIViewController {
     
     func setupKeyBoardDismiss(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-        
+         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillHide(_:)),
                                                name: NSNotification.Name.UIKeyboardWillHide,object: nil)

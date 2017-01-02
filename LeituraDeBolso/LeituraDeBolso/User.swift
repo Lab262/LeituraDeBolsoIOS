@@ -16,6 +16,7 @@ class User: Object {
     dynamic var email: String?
     let userReadings = List<UserReading>()
     dynamic var token: String?
+
     dynamic var lastSessionTimeInterval:Double = 0
     dynamic var isModeNight: Bool = false
     dynamic var isNotification: Bool = false
@@ -140,7 +141,6 @@ class User: Object {
     func getUserReadingById (id: String) -> UserReading? {
         
         var userReadingsById = [UserReading]()
-        
         
         userReadingsById = self.userReadings.filter() {
             

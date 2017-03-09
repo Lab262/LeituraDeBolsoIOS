@@ -36,6 +36,7 @@ class ContentTableViewCell: UITableViewCell {
      override func layoutSubviews() {
         
         self.contentReadingLabel.setSizeFont(ApplicationState.sharedInstance.currentUser!.sizeFont)
+        
         //self.contentReadingLabel.textAlignment = .justified
         
     }
@@ -43,14 +44,19 @@ class ContentTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentReadingLabel.textAlignment = .justified
+        
    
     }
 
     func updateUI () {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 10
         
+        let attrString = NSMutableAttributedString(string: reading!.content!)
+        attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+        contentReadingLabel.attributedText = attrString
         self.authorReadingLabel.text = reading?.author
-        self.contentReadingLabel.text = reading?.content
+        //self.contentReadingLabel.text = reading?.content
     }
     
     func setNightMode () {

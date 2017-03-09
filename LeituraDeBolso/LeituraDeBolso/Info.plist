@@ -75,6 +75,14 @@
 		<string>Comfortaa_Bold.ttf</string>
 		<string>ABeeZee-Italic.otf</string>
 		<string>ABeeZee-Regular.otf</string>
+        <string>Merriweather Light.ttf</string>
+        <string>Merriweather UltraBold.ttf</string>
+        <string>Merriweather-Regular.ttf</string>
+        <string>Merriweather-Bold.ttf</string>
+        <string>Merriweather-BoldIt.ttf</string>
+        <string>Merriweather-Italic.ttf</string>
+        <string>Merriweather-LightIt.ttf</string>
+        <string>Merriweather-UltraBdlt.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

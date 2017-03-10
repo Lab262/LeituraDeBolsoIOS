@@ -41,11 +41,10 @@ class ApplicationState: NSObject {
     }()
     
     
+    
     private init(singleton: Bool) {
         super.init()
         
         self.currentUser = DBManager.getAll().first
-        
     }
-
 }

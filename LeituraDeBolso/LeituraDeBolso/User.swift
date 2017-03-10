@@ -30,12 +30,16 @@ class User: Object {
         return "id"
     }
     
+    
+    
     convenience init(data: (Dictionary<String, AnyObject>)) {
         self.init()
         
         print(data)
+        self.setBaseFontSize()
         self.setDataFromWS(data: data)
     }
+    
     
     func setDataFromWS(data: (Dictionary<String, AnyObject>)) {
         
@@ -47,6 +51,18 @@ class User: Object {
         
     }
     
+    func setBaseFontSize(){
+        let proportion = UIView.heightScaleProportion()
+        
+        if proportion == 1 {
+            sizeFont = 17
+        } else if proportion < 1 {
+            sizeFont = 15
+        } else {
+            sizeFont = 19
+        }
+        
+    }
     
     func getAsDictionaryForWS() -> Dictionary<String, String> {
         

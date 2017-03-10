@@ -23,23 +23,29 @@ class ContentTableViewCell: UITableViewCell {
     
     override func didMoveToWindow() {
         
-        
         if ApplicationState.sharedInstance.currentUser!.isModeNight {
             self.setNightMode()
         } else {
             self.setNormalMode()
         }
-
-        
     }
     
      override func layoutSubviews() {
-        
         self.contentReadingLabel.setSizeFont(ApplicationState.sharedInstance.currentUser!.sizeFont)
-        
-        //self.contentReadingLabel.textAlignment = .justified
-        
-    }
+      
+     }
+    
+//    func setBaseFontSize(){
+//        let proportion = UIView.heightScaleProportion()
+//        
+//        if proportion == 1 {
+//            sizeBaseLabel = 17
+//        } else if proportion < 1 {
+//            sizeBaseLabel = 15
+//        } else {
+//            sizeBaseLabel = 19
+//        }
+//    }
     
     
     override func awakeFromNib() {

@@ -56,7 +56,9 @@ class HistoricalReadingMainViewController: UIViewController {
         self.rightButtonItem = UIBarButtonItem(image: UIImage(named:"button_search"), style: .done, target: self, action: #selector(searchReading(_:)))
         
         
-        self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
+    self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
+        
+        self.allReadingsButton.titleLabel?.font = UIFont(name: "Comfortaa-Bold", size: 16)
         
         self.favoriteReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
         
@@ -102,6 +104,7 @@ class HistoricalReadingMainViewController: UIViewController {
     
         searchField?.backgroundColor = UIColor.colorWithHexString("370653")
         searchField?.textColor = UIColor.readingBlueColor()
+        searchField?.font = UIFont(name: "Comfortaa", size: 15)
         searchField?.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Buscar", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.colorWithHexString("1CDBAD")])
         searchBarButton.isEnabled = true
         
@@ -261,9 +264,17 @@ extension HistoricalReadingMainViewController: SegmentControlPageDelegate {
             
         self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
             
+            self.allReadingsButton.titleLabel?.font = UIFont(name: "Comfortaa-Bold", size: 16)
+            
             self.favoriteReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
             
+            self.favoriteReadingsButton.titleLabel?.font = UIFont(name: "Comfortaa", size: 14)
+            
+            
             self.unreadReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+            
+            self.unreadReadingsButton.titleLabel?.font = UIFont(name: "Comfortaa", size: 14)
+            
             self.segmentSelected = 0
 //            self.allReadingsButton.isSelected = true
 //            self.favoriteReadingsButton.isSelected = false
@@ -279,21 +290,36 @@ extension HistoricalReadingMainViewController: SegmentControlPageDelegate {
 //            self.unreadReadingsButton.isSelected = false
         self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
             
+            self.allReadingsButton.titleLabel?.font = UIFont(name: "Comfortaa", size: 14)
+            
+            self.favoriteReadingsButton.titleLabel?.font = UIFont(name: "Comfortaa-Bold", size: 16)
+            
             self.favoriteReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
+        
             
             self.unreadReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+            
+            self.unreadReadingsButton.titleLabel?.font = UIFont(name: "Comfortaa", size: 14)
+            
             break
         case 2:
             showUnreadHistorical()
             self.segmentSelected = 2
-//            self.allReadingsButton.isSelected = false
-//            self.favoriteReadingsButton.isSelected = false
-//            self.unreadReadingsButton.isSelected = true
-        self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+
+            self.allReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+            
+            self.allReadingsButton.titleLabel?.font = UIFont(name: "Comfortaa", size: 14)
             
             self.favoriteReadingsButton.setTitleColor(UIColor.colorWithHexString("9B9B9B"), for: .normal)
+            
+            self.favoriteReadingsButton.titleLabel?.font = UIFont(name: "Comfortaa", size: 14)
+            
+            
+            self.unreadReadingsButton.titleLabel?.font = UIFont(name: "Comfortaa-Bold", size: 16)
            
             self.unreadReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
+            
+            
             
             break
             
@@ -301,7 +327,6 @@ extension HistoricalReadingMainViewController: SegmentControlPageDelegate {
             
         }
     }
-    
 }
 
 extension HistoricalReadingMainViewController: UISearchControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {

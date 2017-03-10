@@ -17,6 +17,7 @@ class SettingsTableViewController: UITableViewController {
     
     fileprivate var showDateVisible = false
     fileprivate var showNotificationHour = false
+    fileprivate var sizeBaseLabel: CGFloat = 17.0
     
     @IBOutlet weak var firstLineView: UIView!
     
@@ -27,9 +28,8 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var fourthLineView: UIView!
     
     @IBOutlet weak var fifthLineView: UIView!
-    
    
-    fileprivate var dictionarySizeText: Dictionary <CGFloat, Float> = [11.0: 1, 12.0: 2, 13.0: 3, 14.0: 4, 15.0: 5,  16.0: 6, 17.0: 7]
+    fileprivate var dictionarySizeText: Dictionary <CGFloat, Float>?
     
     @IBOutlet weak var timeTableLabel: UILabel!
     
@@ -67,7 +67,7 @@ class SettingsTableViewController: UITableViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.setBaseFontSize()
         self.trackView.layer.zPosition = -1
         self.modeNightSwitch.isOn = ApplicationState.sharedInstance.currentUser!.isModeNight
         self.notificationSwitch.isOn = ApplicationState.sharedInstance.currentUser!.isNotification
@@ -76,10 +76,27 @@ class SettingsTableViewController: UITableViewController {
         self.fontSizeSlider.steps = 7
         self.fontSizeSlider.minValue = 1
         self.fontSizeSlider.maxValue = 7
-        self.fontSizeSlider.value = self.dictionarySizeText[ApplicationState.sharedInstance.currentUser!.sizeFont]!
+        
+        self.fontSizeSlider.value = self.dictionarySizeText![ApplicationState.sharedInstance.currentUser!.sizeFont]!
         self.fontSizeSlider.addTarget(self, action: #selector(changedFontSizeText(_:)), for: .allEvents)
         self.timeTableLabel.text = DateFormatter.localizedString(from: self.timeTableDatePicker.date, dateStyle: .none, timeStyle: .short)
 
+    }
+    
+    
+    func setBaseFontSize(){
+//        
+//        let proportion = UIView.heightScaleProportion()
+//            
+//        if proportion == 1 {
+//            sizeBaseLabel = 17
+//        } else if proportion < 1 {
+//            sizeBaseLabel = 15
+//        } else {
+//            sizeBaseLabel = 19
+//        }
+        
+        dictionarySizeText = [sizeBaseLabel-3: 1, sizeBaseLabel-2: 2, sizeBaseLabel-1: 3, sizeBaseLabel: 4, sizeBaseLabel+1: 5,  sizeBaseLabel+2: 6, sizeBaseLabel+3: 7]
     }
     
     override func viewWillLayoutSubviews() {
@@ -115,32 +132,31 @@ class SettingsTableViewController: UITableViewController {
         if self.fontSizeSlider.value == 1 {
             
             try! Realm().write(){
-                ApplicationState.sharedInstance.currentUser?.sizeFont = 11
+                ApplicationState.sharedInstance.currentUser?.sizeFont = sizeBaseLabel - 3
             }
-        
         } else if self.fontSizeSlider.value == 2 {
             try! Realm().write(){
-                ApplicationState.sharedInstance.currentUser?.sizeFont = 12
+                ApplicationState.sharedInstance.currentUser?.sizeFont = sizeBaseLabel - 2
             }
         } else if self.fontSizeSlider.value == 3 {
             try! Realm().write(){
-                ApplicationState.sharedInstance.currentUser?.sizeFont = 13
+                ApplicationState.sharedInstance.currentUser?.sizeFont = sizeBaseLabel - 1
             }
         } else if self.fontSizeSlider.value == 4 {
             try! Realm().write(){
-                ApplicationState.sharedInstance.currentUser?.sizeFont = 14
+                ApplicationState.sharedInstance.currentUser?.sizeFont = sizeBaseLabel
             }
         } else if self.fontSizeSlider.value == 5 {
             try! Realm().write(){
-                ApplicationState.sharedInstance.currentUser?.sizeFont = 15
+                ApplicationState.sharedInstance.currentUser?.sizeFont = sizeBaseLabel + 1
             }
         } else if self.fontSizeSlider.value == 6 {
             try! Realm().write(){
-                ApplicationState.sharedInstance.currentUser?.sizeFont = 16
+                ApplicationState.sharedInstance.currentUser?.sizeFont = sizeBaseLabel + 2
             }
         } else {
             try! Realm().write(){
-                ApplicationState.sharedInstance.currentUser?.sizeFont = 17
+                ApplicationState.sharedInstance.currentUser?.sizeFont = sizeBaseLabel + 3
             }
         }
         DBManager.update(ApplicationState.sharedInstance.currentUser!)

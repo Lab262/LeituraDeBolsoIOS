@@ -39,6 +39,7 @@ class HeadingTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        
 //        if ApplicationState.sharedInstance.modeNight == true {
 //            self.setNightMode()
 //        } else {
@@ -65,7 +66,7 @@ class HeadingTableViewCell: UITableViewCell {
 
     func updateUI () {
         
-        self.titleLabel.text = self.reading?.title
+        self.titleLabel.attributedText = self.reading?.title?.with(characterSpacing: 1.0)
         self.timeLabel.text = ("\(self.reading!.duration.description) min")
         
         

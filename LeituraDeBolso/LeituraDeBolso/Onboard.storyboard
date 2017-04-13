@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tol-8M-rd2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Main Onboard View Controller-->
         <scene sceneID="EvS-L7-euA">
             <objects>
-                <viewController id="tol-8M-rd2" customClass="MainOnboardViewController" customModule="LeituraDeBolso" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="navigation" id="tol-8M-rd2" customClass="MainOnboardViewController" customModule="LeituraDeBolso" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ey0-ah-doe"/>
                         <viewControllerLayoutGuide type="bottom" id="5nc-tx-2aJ"/>
@@ -22,17 +22,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qp6-dR-0WH">
-                                <rect key="frame" x="0.0" y="91" width="375" height="500"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3IA-WM-ZAL">
+                                <rect key="frame" x="329" y="28" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="skipOnboard:" destination="tol-8M-rd2" eventType="touchUpInside" id="fzv-Vf-9SJ"/>
+                                </connections>
+                            </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qp6-dR-0WH">
+                                <rect key="frame" x="0.0" y="83.5" width="375" height="500"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="7q9-dQ-6dt"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="8Le-bw-Pob" kind="embed" id="frS-Z4-VwZ"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1De-V2-vd5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1De-V2-vd5">
                                 <rect key="frame" x="171" y="599" width="32" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Next"/>
+                                <connections>
+                                    <action selector="nextViewOnboard:" destination="tol-8M-rd2" eventType="touchUpInside" id="lk8-0k-uSe"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3Nj-6U-fCb">
                                 <rect key="frame" x="0.0" y="637" width="375" height="30"/>
@@ -40,30 +51,50 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDe-0D-r59">
                                         <rect key="frame" x="0.0" y="0.0" width="118.5" height="30"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="showFirstView:" destination="tol-8M-rd2" eventType="touchUpInside" id="KPn-Nw-HPn"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sa7-pz-3FN">
                                         <rect key="frame" x="128.5" y="0.0" width="118" height="30"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="showSecondView:" destination="tol-8M-rd2" eventType="touchUpInside" id="RBn-ov-gcI"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i2k-dc-ljd">
                                         <rect key="frame" x="256.5" y="0.0" width="118.5" height="30"/>
                                         <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="showThirdView:" destination="tol-8M-rd2" eventType="touchUpInside" id="Osh-n9-IJV"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3IA-WM-ZAL">
-                                <rect key="frame" x="329" y="28" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="3IA-WM-ZAL" firstAttribute="top" secondItem="Ey0-ah-doe" secondAttribute="bottom" constant="8" id="1Mz-5o-Em9"/>
+                            <constraint firstItem="1De-V2-vd5" firstAttribute="centerX" secondItem="Qp6-dR-0WH" secondAttribute="centerX" id="6Ea-Ew-mfp"/>
+                            <constraint firstItem="5nc-tx-2aJ" firstAttribute="top" secondItem="3Nj-6U-fCb" secondAttribute="bottom" id="Mel-tp-NWe"/>
+                            <constraint firstAttribute="trailing" secondItem="3Nj-6U-fCb" secondAttribute="trailing" id="PTn-fq-RWt"/>
+                            <constraint firstAttribute="trailing" secondItem="3IA-WM-ZAL" secondAttribute="trailing" id="UMH-jO-jY5"/>
+                            <constraint firstAttribute="trailing" secondItem="Qp6-dR-0WH" secondAttribute="trailing" id="VDp-wS-XDl"/>
                             <constraint firstItem="5nc-tx-2aJ" firstAttribute="top" secondItem="3Nj-6U-fCb" secondAttribute="bottom" id="XHu-N7-J6d"/>
+                            <constraint firstItem="Qp6-dR-0WH" firstAttribute="centerY" secondItem="Cnm-k6-iTo" secondAttribute="centerY" id="Y6p-cv-0wn"/>
                             <constraint firstAttribute="trailing" secondItem="3Nj-6U-fCb" secondAttribute="trailing" id="aAc-4C-4UW"/>
+                            <constraint firstItem="3Nj-6U-fCb" firstAttribute="leading" secondItem="Cnm-k6-iTo" secondAttribute="leading" id="j4k-V6-sbf"/>
+                            <constraint firstItem="Qp6-dR-0WH" firstAttribute="centerX" secondItem="Cnm-k6-iTo" secondAttribute="centerX" id="jBu-eO-af9"/>
                             <constraint firstItem="3Nj-6U-fCb" firstAttribute="leading" secondItem="Cnm-k6-iTo" secondAttribute="leading" id="jgn-lR-eDf"/>
+                            <constraint firstItem="1De-V2-vd5" firstAttribute="top" secondItem="Qp6-dR-0WH" secondAttribute="bottom" constant="15.5" id="qkZ-2y-RzH"/>
+                            <constraint firstItem="Qp6-dR-0WH" firstAttribute="leading" secondItem="Cnm-k6-iTo" secondAttribute="leading" id="xnz-GD-01H"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="firstIndicatorButton" destination="PDe-0D-r59" id="nMQ-Vs-Y54"/>
+                        <outlet property="secondIndicatorButton" destination="Sa7-pz-3FN" id="JhM-E1-zKy"/>
+                        <outlet property="thirdIndicatorButton" destination="i2k-dc-ljd" id="6DH-ly-yxd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ce6-xU-u2T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -73,6 +104,10 @@
         <scene sceneID="30F-TC-NJd">
             <objects>
                 <viewController id="8Le-bw-Pob" customClass="OnboardViewController" customModule="LeituraDeBolso" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BLu-1E-pnI"/>
+                        <viewControllerLayoutGuide type="bottom" id="tHs-BI-2is"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="j2P-iL-P60">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,7 +115,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nyg-uP-dNp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vkb-Xh-9nN">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vkb-Xh-9nN">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbu-as-vro" userLabel="ContentView">
@@ -186,6 +221,9 @@
                                             <constraint firstItem="mbu-as-vro" firstAttribute="top" secondItem="Vkb-Xh-9nN" secondAttribute="top" id="pCA-zL-lk1"/>
                                             <constraint firstItem="mbu-as-vro" firstAttribute="leading" secondItem="Vkb-Xh-9nN" secondAttribute="leading" id="vkj-XM-jrV"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="8Le-bw-Pob" id="RGl-9W-bXA"/>
+                                        </connections>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -207,6 +245,9 @@
                             <constraint firstAttribute="bottom" secondItem="Nyg-uP-dNp" secondAttribute="bottom" id="flD-Oq-iIx"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="scrollView" destination="Vkb-Xh-9nN" id="Px7-0r-Gsz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vqC-gf-Ecu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

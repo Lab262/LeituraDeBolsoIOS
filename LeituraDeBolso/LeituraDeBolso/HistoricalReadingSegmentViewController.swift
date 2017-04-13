@@ -60,7 +60,6 @@ extension HistoricalReadingSegmentViewController: UIScrollViewDelegate {
 extension HistoricalReadingSegmentViewController: SegmentControlButtonDelegate {
     
     func segmentSelected(_ viewIndex: Int) {
-        
         var rectToScroll = self.view.frame
         rectToScroll.origin.x = self.view.frame.width * CGFloat(viewIndex)
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: UIViewAnimationOptions(), animations: {

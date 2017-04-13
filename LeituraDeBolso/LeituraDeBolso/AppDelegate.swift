@@ -89,11 +89,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if ApplicationState.sharedInstance.currentUser?.token != nil {
             
             
-            mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            mainStoryboard = UIStoryboard(name: "Onboard", bundle: nil)
             
         } else {
             
-            mainStoryboard = UIStoryboard(name: "Login", bundle: nil)
+            mainStoryboard = UIStoryboard(name: "Onboard", bundle: nil)
         }
         
         self.navigationController = mainStoryboard?.instantiateViewController(withIdentifier: "navigation")

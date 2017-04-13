@@ -20,10 +20,10 @@ class AllHistoricalReadingViewController: UIViewController {
     var filteredReadings = [Reading]()
     
     override func viewWillAppear(_ animated: Bool) {
-        
-   
+        if let indexPathRow = tableView.indexPathForSelectedRow {
+            self.tableView.deselectRow(at: indexPathRow, animated: true)
+        }
     }
-    
     
     func configureTableView () {
         

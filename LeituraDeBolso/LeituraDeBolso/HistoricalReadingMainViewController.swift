@@ -319,8 +319,6 @@ extension HistoricalReadingMainViewController: SegmentControlPageDelegate {
            
             self.unreadReadingsButton.setTitleColor(UIColor.colorWithHexString("EE5F66"), for: .normal)
             
-            
-            
             break
             
         default: break

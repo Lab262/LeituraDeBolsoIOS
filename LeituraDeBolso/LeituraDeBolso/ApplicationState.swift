@@ -35,16 +35,28 @@ class ApplicationState: NSObject {
     var unreadReadings = [Reading]()
     var currentUser: User?
     
+    private let userDefaultsFirstTimeKey = "isFirstTime"
+    
     static let sharedInstance : ApplicationState = {
         let instance = ApplicationState(singleton: true)
         return instance
     }()
     
     
-    
     private init(singleton: Bool) {
         super.init()
         
         self.currentUser = DBManager.getAll().first
+    }
+    
+    func isFirstTime() -> Bool {
+        if let _ = UserDefaults.standard.object(forKey: userDefaultsFirstTimeKey) as? Bool {
+            return false
+        }
+        return true
+    }
+    
+    func setAfterFirstTime() {
+         UserDefaults.standard.set(false, forKey: userDefaultsFirstTimeKey)
     }
 }

@@ -18,8 +18,6 @@ import Crashlytics
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-
 
     var window: UIWindow?
     var maskBgView = UIView()
@@ -31,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isGrantedNotificationAccess:Bool = false
 
 
-    
     func getDifferenceDays (user: User) -> Int {
         
         let lastSessionDate = Date(timeIntervalSince1970: (user.lastSessionTimeInterval))
@@ -81,22 +78,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.launchScreenImageView.layer.add(animation, forKey: "animation")
         
     }
-
-    func setInitialViewController() {
+    
+    func getInitialStoryBoard() -> UIStoryboard {
         
         let mainStoryboard: UIStoryboard?
         
-        if ApplicationState.sharedInstance.currentUser?.token != nil {
-            
+        if ApplicationState.sharedInstance.isFirstTime() {
             
             mainStoryboard = UIStoryboard(name: "Onboard", bundle: nil)
+            
+            ApplicationState.sharedInstance.setAfterFirstTime()
+            
+        } else if ApplicationState.sharedInstance.currentUser?.token != nil {
+            
+            mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             
         } else {
             
-            mainStoryboard = UIStoryboard(name: "Onboard", bundle: nil)
+            mainStoryboard = UIStoryboard(name: "Login", bundle: nil)
         }
         
-        self.navigationController = mainStoryboard?.instantiateViewController(withIdentifier: "navigation")
+        return mainStoryboard!
+    }
+
+    func setInitialViewController() {
+        
+        let mainStoryboard = getInitialStoryBoard()
+        
+        self.navigationController = mainStoryboard.instantiateViewController(withIdentifier: "navigation")
         
         self.window!.rootViewController = navigationController
         
@@ -105,9 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Fabric.with([Crashlytics.self])
         
-        
         self.setupBarsAppearance()
-        
         self.setInitialViewController()
         
         self.launchScreenAnimation()

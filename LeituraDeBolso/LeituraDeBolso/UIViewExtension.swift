@@ -56,9 +56,13 @@ extension UIView {
             })
         }
     }
+    
+    func getConstantHeight() -> CGFloat{
+        return UIScreen.main.bounds.size.height/667
+    }
 }
 
-    
+
 //    func loadAnimation (_ duration: TimeInterval = 0.5) {
 //        if let _ = viewWithTag(10) {
 //            //View is already loading

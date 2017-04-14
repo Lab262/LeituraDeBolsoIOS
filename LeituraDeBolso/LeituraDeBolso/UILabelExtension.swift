@@ -13,4 +13,8 @@ extension UILabel {
         self.font =  UIFont(name: self.font.fontName, size: sizeFont)!
         self.sizeToFit()
     }
+    
+    func setDynamicFont() {
+        self.font = UIFont(name: self.font.fontName, size: self.getConstantHeight()*self.font.pointSize)!
+    }
 }

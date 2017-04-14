@@ -13,12 +13,24 @@ class OnboardViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     var previousPage: Int = 0
     var segmentControlPageDelegate : SegmentControlPageDelegate?
-
+    
+    @IBOutlet var labels: [UILabel]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setDynamicSizeFonts()
     }
+    
+    func setDynamicSizeFonts(){
+        labels.forEach {
+            $0.setDynamicFont()
+        }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
 }
 
 //Pragma MARK: - UIScrollViewDelegate

@@ -13,6 +13,8 @@ class HistoricalReadingTableViewCell: UITableViewCell {
     
     static let identifier = "historicalCell"
     
+    static let cellHeight: CGFloat = 86.0
+    
     var reading: Reading? {
         didSet {
             updateUI()

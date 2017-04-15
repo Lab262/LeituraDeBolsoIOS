@@ -16,7 +16,7 @@ class HeadingTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
    
-    
+    static let cellHeight: CGFloat = 116.0
     
     var reading: Reading? {
         didSet {

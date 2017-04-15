@@ -6,8 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,16 +24,15 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreenFrames1.png" translatesAutoresizingMaskIntoConstraints="NO" id="pHM-I2-fCt">
                                 <rect key="frame" x="111" y="257" width="153" height="153"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="pHM-I2-fCt" secondAttribute="height" multiplier="1:1" id="ESP-v2-5MC"/>
+                                    <constraint firstAttribute="width" constant="153" id="Epd-Lt-aMF"/>
+                                    <constraint firstAttribute="height" constant="153" id="fMf-wf-GHX"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.1058823529" green="0.85882352939999995" blue="0.67843137249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="pHM-I2-fCt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="8Rv-zl-oFJ"/>
-                            <constraint firstItem="pHM-I2-fCt" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="95" id="El9-Fi-SGq"/>
                             <constraint firstItem="pHM-I2-fCt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="jY1-de-Xxm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="pHM-I2-fCt" secondAttribute="trailing" constant="95" id="rwZ-sQ-a7B"/>
                         </constraints>
                     </view>
                 </viewController>

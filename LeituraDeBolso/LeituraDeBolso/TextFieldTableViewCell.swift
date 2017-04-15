@@ -20,8 +20,7 @@ class TextFieldTableViewCell: UITableViewCell {
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var textField: UITextField!
     
-    @IBOutlet weak var containerView: RoundedButton!
-    static let cellHeight: CGFloat = 70
+    static let cellHeight: CGFloat = 75
     
     var completionText: ((String) -> Void)!
     

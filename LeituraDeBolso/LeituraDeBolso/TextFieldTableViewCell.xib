@@ -24,7 +24,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="667-lg-QSk" customClass="RoundedButton" customModule="LeituraDeBolso" customModuleProvider="target">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="667-lg-QSk" customClass="RoundedView" customModule="LeituraDeBolso" customModuleProvider="target">
                         <rect key="frame" x="12" y="10.5" width="350" height="54"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8FW-5n-ChN">
@@ -47,13 +47,13 @@
                             <constraint firstItem="uai-KJ-3O6" firstAttribute="centerX" secondItem="667-lg-QSk" secondAttribute="centerX" id="1IS-v6-caB"/>
                             <constraint firstAttribute="bottom" secondItem="uai-KJ-3O6" secondAttribute="bottom" constant="17" id="77g-yD-AxW"/>
                             <constraint firstItem="uai-KJ-3O6" firstAttribute="leading" secondItem="667-lg-QSk" secondAttribute="leading" constant="20" id="97l-Xy-qTG"/>
-                            <constraint firstAttribute="height" constant="54" id="L6P-AI-cMn"/>
                             <constraint firstItem="8FW-5n-ChN" firstAttribute="leading" secondItem="uai-KJ-3O6" secondAttribute="trailing" constant="8" id="N59-fn-9KQ"/>
                             <constraint firstItem="uai-KJ-3O6" firstAttribute="top" secondItem="667-lg-QSk" secondAttribute="top" constant="17" id="U8N-yH-oab"/>
                             <constraint firstItem="8FW-5n-ChN" firstAttribute="top" secondItem="667-lg-QSk" secondAttribute="top" constant="12" id="gmG-xX-8oC"/>
                             <constraint firstAttribute="trailing" secondItem="8FW-5n-ChN" secondAttribute="trailing" constant="7" id="mNZ-re-nP0"/>
                             <constraint firstAttribute="bottom" secondItem="8FW-5n-ChN" secondAttribute="bottom" constant="12" id="n5u-ou-0Lv"/>
                             <constraint firstItem="uai-KJ-3O6" firstAttribute="centerY" secondItem="8FW-5n-ChN" secondAttribute="centerY" id="o3R-ii-eyZ"/>
+                            <constraint firstAttribute="height" constant="54" id="zym-JU-laq"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -68,8 +68,7 @@
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="667-lg-QSk" secondAttribute="trailing" constant="5" id="GTp-MI-ibY"/>
                     <constraint firstItem="667-lg-QSk" firstAttribute="leading" secondItem="ZmJ-qi-3qo" secondAttribute="leadingMargin" constant="4" id="Hd7-Xl-G05"/>
-                    <constraint firstItem="667-lg-QSk" firstAttribute="centerY" secondItem="ZmJ-qi-3qo" secondAttribute="centerY" id="sYk-wO-7oY"/>
-                    <constraint firstItem="667-lg-QSk" firstAttribute="centerX" secondItem="ZmJ-qi-3qo" secondAttribute="centerX" constant="-0.5" id="wkP-e9-Y8o"/>
+                    <constraint firstItem="667-lg-QSk" firstAttribute="centerY" secondItem="ZmJ-qi-3qo" secondAttribute="centerY" id="XLq-UL-qIs"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

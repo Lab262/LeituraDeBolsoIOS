@@ -170,7 +170,8 @@ class CreateAccountViewController: UIViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
         
-        
+        cell.iconHeightConstraint.constant = 31
+        cell.iconWidthConstraint.constant = 23
         
         cell.textField.isSecureTextEntry = true
         cell.iconImage.image = UIImage(named: "icon_pass")
@@ -189,8 +190,8 @@ class CreateAccountViewController: UIViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier, for: indexPath) as! TextFieldTableViewCell
         
         
-        //cell.iconHeightConstraint.constant = 31
-        //cell.iconWidthConstraint.constant = 23
+        cell.iconHeightConstraint.constant = 31
+        cell.iconWidthConstraint.constant = 23
         cell.textField.isSecureTextEntry = true
         cell.iconImage.image = UIImage(named: "icon_pass")
         cell.textField.placeholder = "Confirmar Senha"

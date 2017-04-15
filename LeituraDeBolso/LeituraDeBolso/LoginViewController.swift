@@ -305,9 +305,9 @@ extension LoginViewController: UITableViewDelegate {
         case 0:
             return 240
         case 1, 2:
-            return 70
+            return TextFieldTableViewCell.cellHeight * UIView.heightScaleProportion()
         case 3, 4:
-            return 75
+            return ButtonTableViewCell.cellHeight * UIView.heightScaleProportion()
         default:
             return 0
         }

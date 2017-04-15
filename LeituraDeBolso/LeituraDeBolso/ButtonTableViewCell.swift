@@ -15,7 +15,7 @@ class ButtonTableViewCell: UITableViewCell {
     
     @IBOutlet weak var button: UIButton!
     
-    static let cellHeight: CGFloat = 74.5
+    static let cellHeight: CGFloat = 75
 
     override func awakeFromNib() {
         super.awakeFromNib()

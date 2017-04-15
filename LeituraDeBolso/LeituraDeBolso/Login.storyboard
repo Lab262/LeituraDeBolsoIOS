@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LXs-Sv-hpL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="LXs-Sv-hpL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -110,7 +110,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UDx-oy-AWJ">
-                                <rect key="frame" x="100.5" y="424" width="175.5" height="26"/>
+                                <rect key="frame" x="101" y="424" width="175.5" height="26"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_facebook" translatesAutoresizingMaskIntoConstraints="NO" id="g7g-zO-Aix">
                                         <rect key="frame" x="0.0" y="0.0" width="13" height="26"/>
@@ -166,7 +166,6 @@
                             <constraint firstItem="UDx-oy-AWJ" firstAttribute="centerY" secondItem="BdP-Si-H5a" secondAttribute="centerY" id="bht-PU-ygn"/>
                             <constraint firstItem="i7p-3E-FFI" firstAttribute="centerY" secondItem="WMn-l3-IfL" secondAttribute="centerY" multiplier="1.1" id="c4R-HA-0Pd"/>
                             <constraint firstItem="i7p-3E-FFI" firstAttribute="leading" secondItem="WMn-l3-IfL" secondAttribute="leadingMargin" constant="43" id="ceV-0M-fPT"/>
-                            <constraint firstItem="i7p-3E-FFI" firstAttribute="centerX" secondItem="WMn-l3-IfL" secondAttribute="centerX" id="dIC-oo-wOF"/>
                             <constraint firstItem="cON-ZT-ipJ" firstAttribute="centerX" secondItem="rWn-vE-A9K" secondAttribute="centerX" id="ffX-Y2-0wP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="i7p-3E-FFI" secondAttribute="trailing" constant="43.5" id="jjy-zF-kXR"/>
                             <constraint firstItem="i7p-3E-FFI" firstAttribute="top" secondItem="hpu-dB-yEH" secondAttribute="bottom" constant="20" id="l6Q-XK-n11"/>
@@ -180,6 +179,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZnH-Yf-hSE"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outletCollection property="titleLabels" destination="qiQ-fa-8i1" collectionClass="NSMutableArray" id="6Ve-qU-Bf7"/>
+                        <outletCollection property="titleLabels" destination="cpR-3v-UWc" collectionClass="NSMutableArray" id="4fE-N1-t9d"/>
+                        <outletCollection property="titleLabels" destination="j8V-tT-5sg" collectionClass="NSMutableArray" id="14M-Uc-XUV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g9f-3g-UR8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -236,7 +240,7 @@
             <objects>
                 <navigationController storyboardIdentifier="navigation" automaticallyAdjustsScrollViewInsets="NO" id="LXs-Sv-hpL" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r3a-Eb-YfE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="r3a-Eb-YfE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

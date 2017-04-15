@@ -15,6 +15,7 @@ class ButtonsTableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     
+    static let cellHeight: CGFloat = 75
     
     override func didMoveToWindow() {
         if ApplicationState.sharedInstance.currentUser!.isModeNight {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		77B55EFB01CA89CA7BE0A36B /* Pods_LeituraDeBolsoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 139026A656302D1338D1947E /* Pods_LeituraDeBolsoTests.framework */; };
 		804F44BC3978BB3849259494 /* Pods_LeituraDeBolso.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49636DF9B6CB41B43E992D79 /* Pods_LeituraDeBolso.framework */; };
+		D406387A1EA1B6C300841DEA /* UIView+IBInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40638791EA1B6C300841DEA /* UIView+IBInspector.swift */; };
 		D40752B81D828F820093F0A0 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752B71D828F820093F0A0 /* CreateAccountViewController.swift */; };
 		D40752BA1D8293FC0093F0A0 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752B91D8293FC0093F0A0 /* RoundedView.swift */; };
 		D40752BC1D8299DF0093F0A0 /* EntrySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40752BB1D8299DF0093F0A0 /* EntrySelectionViewController.swift */; };
@@ -281,6 +282,7 @@
 		49636DF9B6CB41B43E992D79 /* Pods_LeituraDeBolso.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeituraDeBolso.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7594447B2CCC3F7036912B15 /* Pods-LeituraDeBolso.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeituraDeBolso.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeituraDeBolso/Pods-LeituraDeBolso.release.xcconfig"; sourceTree = "<group>"; };
 		C44BEB226C1D8EE71C26D5EF /* Pods-LeituraDeBolsoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeituraDeBolsoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeituraDeBolsoTests/Pods-LeituraDeBolsoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D40638791EA1B6C300841DEA /* UIView+IBInspector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+IBInspector.swift"; sourceTree = "<group>"; };
 		D40752B71D828F820093F0A0 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		D40752B91D8293FC0093F0A0 /* RoundedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		D40752BB1D8299DF0093F0A0 /* EntrySelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntrySelectionViewController.swift; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 		D448B3C41D6E9B6800F3DF51 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D40638791EA1B6C300841DEA /* UIView+IBInspector.swift */,
 				D448B3C51D6E9B9400F3DF51 /* RoundedButton.swift */,
 				D40752B91D8293FC0093F0A0 /* RoundedView.swift */,
 				D4A8E8921D779D86003F6854 /* UIView+Animations.swift */,
@@ -1507,6 +1510,7 @@
 				D4E8CA2D1D73EC0300C82F0A /* ReadingDayViewController.swift in Sources */,
 				D4D0BFB61D9B73AE00A24A60 /* Emoji.swift in Sources */,
 				D494B3B71D86435900A9B571 /* ArrayExtension.swift in Sources */,
+				D406387A1EA1B6C300841DEA /* UIView+IBInspector.swift in Sources */,
 				D4E8CA381D73F08800C82F0A /* ButtonsTableViewCell.swift in Sources */,
 				D410CBC71D93758D00FAD01F /* SegueFromLeft.swift in Sources */,
 				D40752C91D837AAA0093F0A0 /* ButtonTableViewCell.swift in Sources */,

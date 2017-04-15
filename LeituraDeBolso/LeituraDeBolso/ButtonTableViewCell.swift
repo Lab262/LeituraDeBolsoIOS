@@ -15,10 +15,15 @@ class ButtonTableViewCell: UITableViewCell {
     
     @IBOutlet weak var button: UIButton!
     
+    static let cellHeight: CGFloat = 74.5
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        setDynamicSizeFonts()
         // Initialization code
+    }
+    func setDynamicSizeFonts(){
+        button.titleLabel?.setDynamicFont()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

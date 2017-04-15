@@ -18,3 +18,11 @@ extension UILabel {
         self.font = UIFont(name: self.font.fontName, size: self.getConstantHeight()*self.font.pointSize)!
     }
 }
+
+extension UITextField {
+    
+    func setDynamicFont() {
+        self.font = UIFont(name: self.font!.fontName, size: self.getConstantHeight()*self.font!.pointSize)!
+    }
+}
+

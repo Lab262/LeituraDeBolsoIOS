@@ -13,13 +13,25 @@ import Realm
 import RealmSwift
 
 class EntrySelectionViewController: UIViewController {
+    
+    @IBOutlet var titleLabels: [UILabel]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        setDynamicSizeFonts()
+        configureNavigation()
+    }
+    
+    func configureNavigation() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    func setDynamicSizeFonts(){
+        titleLabels.forEach {
+            $0.setDynamicFont()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -128,8 +140,6 @@ class EntrySelectionViewController: UIViewController {
 //MARK: - Requests
 
 extension EntrySelectionViewController {
-    
-    
     func getReadingsIdUser (user: User) -> [String] {
         
         let allReadingsIdUser = user.getAllUserReadingIdProperty(propertyName: "idReading")
@@ -149,9 +159,7 @@ extension EntrySelectionViewController {
     }
     
     func getReadings (readingsIds: [String], user: User) {
-        
         if readingsIds.count > 0 {
-            
             ReadingRequest.getAllReadings(readingsAmount: user.userReadings.count, readingsIds: readingsIds, isReadingIdsToDownload: true) { (success, msg, readings) in
                 
                 if success {

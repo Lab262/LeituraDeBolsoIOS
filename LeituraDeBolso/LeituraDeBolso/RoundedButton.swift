@@ -10,10 +10,9 @@ import UIKit
 
 class RoundedButton: UIButton {
 
-  
+
     override func willMove(toWindow newWindow: UIWindow?) {
-        
-        self.layoutIfNeeded()
+       // self.layoutIfNeeded()
         self.layer.cornerRadius = self.bounds.height/2
 
         self.clipsToBounds = true

@@ -13,9 +13,9 @@ class RoundedView: UIView {
     
 
     override func willMove(toWindow newWindow: UIWindow?) {
-        
-        self.layer.masksToBounds = true
+
         self.layer.cornerRadius = self.frame.height/2
+        //self.layer.masksToBounds = true
     }
 
 }

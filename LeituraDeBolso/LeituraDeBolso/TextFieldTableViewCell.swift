@@ -10,6 +10,8 @@ import UIKit
 
 
 class TextFieldTableViewCell: UITableViewCell {
+    
+    
  
     @IBOutlet weak var iconHeightConstraint: NSLayoutConstraint!
     
@@ -18,19 +20,23 @@ class TextFieldTableViewCell: UITableViewCell {
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var textField: UITextField!
     
+    @IBOutlet weak var containerView: RoundedButton!
+    static let cellHeight: CGFloat = 70
+    
     var completionText: ((String) -> Void)!
     
     static let identifier = "textFieldCell"
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         self.textField.delegate = self
-        
+        setDynamicSizeFonts()
         setupObserver()
     }
-
     
+    func setDynamicSizeFonts(){
+        textField.setDynamicFont()
+    }
     
     //MARK: Setup dos observers
     func setupObserver(){

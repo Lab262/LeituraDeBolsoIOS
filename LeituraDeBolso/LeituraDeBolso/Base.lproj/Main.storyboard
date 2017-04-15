@@ -229,6 +229,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J30-6K-Oue">
                                 <rect key="frame" x="0.0" y="109" width="375" height="509"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="HIQ-jQ-GpI" kind="embed" id="DiJ-Zx-eix"/>
                                 </connections>
@@ -408,6 +409,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                 <subviews>
                                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g6F-SD-O4p" userLabel="ALL">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <connections>
                                                             <segue destination="Nya-uy-bNS" kind="embed" id="8of-nu-skW"/>
                                                         </connections>
@@ -425,7 +427,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                         </connections>
                                                     </containerView>
                                                 </subviews>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="KzY-yC-wM5" firstAttribute="height" secondItem="g6F-SD-O4p" secondAttribute="height" id="1TV-jP-K7X"/>
                                                     <constraint firstItem="KzY-yC-wM5" firstAttribute="leading" secondItem="g6F-SD-O4p" secondAttribute="trailing" id="329-cT-IRQ"/>
@@ -443,6 +445,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Er5-Ce-OI6" firstAttribute="leading" secondItem="KPT-lB-cIf" secondAttribute="leading" id="0Iu-tv-u7h"/>
                                             <constraint firstAttribute="trailing" secondItem="Er5-Ce-OI6" secondAttribute="trailing" id="Bzj-ds-Afw"/>
@@ -452,7 +455,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                         </constraints>
                                     </scrollView>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="KPT-lB-cIf" firstAttribute="centerX" secondItem="CU3-x8-Pc0" secondAttribute="centerX" id="7Zt-zl-EyN"/>
                                     <constraint firstItem="KPT-lB-cIf" firstAttribute="top" secondItem="CU3-x8-Pc0" secondAttribute="top" id="9im-qv-PAe"/>
@@ -464,7 +467,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CU3-x8-Pc0" firstAttribute="height" secondItem="YbW-q2-Zri" secondAttribute="height" id="55T-hV-0tS"/>
                             <constraint firstItem="CU3-x8-Pc0" firstAttribute="width" secondItem="YbW-q2-Zri" secondAttribute="width" id="AzR-OU-oxN"/>
@@ -494,7 +497,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JZC-tP-Wb7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Nya-uy-bNS" id="tnz-yI-ENK"/>
@@ -502,7 +505,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="JZC-tP-Wb7" firstAttribute="centerY" secondItem="HPf-h3-Obm" secondAttribute="centerY" id="TF9-JS-W7W"/>
                             <constraint firstItem="JZC-tP-Wb7" firstAttribute="width" secondItem="HPf-h3-Obm" secondAttribute="width" id="r5O-iZ-pAH"/>
@@ -533,7 +536,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="93" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ClH-NV-rKp">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="GfE-SS-atA" id="qJI-HE-va3"/>
                                     <outlet property="delegate" destination="GfE-SS-atA" id="8G7-3F-BHN"/>
@@ -571,7 +574,7 @@ The legendary Rocky Mountains stretch from old Mexico up through the United Stat
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="93" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="H6M-yJ-X2B">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="509"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="JSD-02-TH2" id="Mx4-a6-B24"/>
                                     <outlet property="delegate" destination="JSD-02-TH2" id="VgD-3l-NHJ"/>
@@ -814,13 +817,13 @@ tornando mais agradável sua leitura durante a noite.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="6" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tamanho do Texto" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4J-U7-rFv">
-                                                    <rect key="frame" x="42" y="25" width="140" height="20"/>
+                                                    <rect key="frame" x="42" y="25" width="140" height="19"/>
                                                     <fontDescription key="fontDescription" name="Comfortaa" family="Comfortaa" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="czL-v6-kOf" customClass="StepSlider" customModule="LeituraDeBolso" customModuleProvider="target">
-                                                    <rect key="frame" x="21.5" y="69" width="332" height="31"/>
+                                                    <rect key="frame" x="21.5" y="68" width="332" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="NJp-m0-Duk"/>
                                                     </constraints>
@@ -841,20 +844,20 @@ tornando mais agradável sua leitura durante a noite.</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </slider>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y4x-xG-84V">
-                                                    <rect key="frame" x="37.5" y="84" width="300" height="1"/>
+                                                    <rect key="frame" x="37.5" y="83" width="300" height="1"/>
                                                     <color key="backgroundColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="lOt-of-LMf"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="8" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7n7-bc-kaH">
-                                                    <rect key="frame" x="331.5" y="46" width="15.5" height="29"/>
+                                                    <rect key="frame" x="331.5" y="45" width="15.5" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="7" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAn-Dk-EkB">
-                                                    <rect key="frame" x="33" y="57" width="8.5" height="14.5"/>
+                                                    <rect key="frame" x="33" y="56" width="8.5" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

@@ -91,11 +91,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else if ApplicationState.sharedInstance.currentUser?.token != nil {
             
-            mainStoryboard = UIStoryboard(name: "Onboard", bundle: nil)
+            mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
             
         } else {
             
-            mainStoryboard = UIStoryboard(name: "Onboard", bundle: nil)
+            mainStoryboard = UIStoryboard(name: "Login", bundle: nil)
         }
         
         return mainStoryboard!
